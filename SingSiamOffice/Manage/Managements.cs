@@ -120,10 +120,10 @@ namespace SingSiamOffice.Manage
         }
         private decimal? CalculateAmountFee(decimal? amount, int latedate,decimal ratetax)
         {
-            var a = (amount * ratetax);
+            var percentage = ((decimal)amount * ratetax)/ 100;
+            var a = (percentage * latedate);
             var b = (a / 30);
-            var data = latedate * b;
-            var result = RoundToNearest((decimal)data);
+            var result = RoundToNearest((decimal)b);
             return result;
         }
         public async Task<List<Guarantor>> GetGurantorbyPromiseId(int promise_id)
