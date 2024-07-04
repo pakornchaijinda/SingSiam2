@@ -93,18 +93,18 @@ namespace SingSiamOffice.Manage
 
             return data;
         }
-        public async Task<List<Receiptdesc>> GetReceipttran(int peroidtran_id,int? receiptdescId = 0) 
+        public async Task<List<Receiptdesc>> GetReceipttran(int peroidtran_id,string type) 
         {
             int receiptran_id = 0;
             List<Receiptdesc> lst_receiptdesc = new List<Receiptdesc>();
-            if (receiptdescId == 0)
+            if (type != "D")
             {
                 receiptran_id = db.Receiptdescs.AsNoTracking().Where(s => s.PeriodtranId == peroidtran_id).FirstOrDefault().ReceipttranId;
                 lst_receiptdesc = db.Receiptdescs.AsNoTracking().Include(s => s.Promise).ThenInclude(s => s.Product).Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Receipttran).Include(s => s.Periodtran).Where(s => s.ReceipttranId == receiptran_id).ToList();
             }
             else 
             {
-                lst_receiptdesc = db.Receiptdescs.AsNoTracking().Include(s => s.Promise).ThenInclude(s => s.Product).Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Receipttran).Include(s => s.Periodtran).Where(s => s.ReceipttranId == receiptdescId).ToList();
+                lst_receiptdesc = db.Receiptdescs.AsNoTracking().Include(s => s.Promise).ThenInclude(s => s.Product).Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Receipttran).Include(s => s.Periodtran).Where(s => s.ReceipttranId == peroidtran_id).ToList();
             }
             
             foreach(var items in lst_receiptdesc) 

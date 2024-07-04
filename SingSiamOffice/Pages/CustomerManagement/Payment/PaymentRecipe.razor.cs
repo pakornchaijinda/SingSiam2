@@ -13,6 +13,8 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
         IJSRuntime JSRuntime { get; set; }
         [Parameter]
         public int peroidtran_id { get; set; }
+        [Parameter]
+        public string type { get; set; }
         [Inject]
         Manage.Managements Manage { get; set; }
         [Inject]
@@ -33,7 +35,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
         }
         protected override async void OnInitialized()
         {
-            lst_receiptdescs = await Manage.GetReceipttran(peroidtran_id);
+            lst_receiptdescs = await Manage.GetReceipttran(peroidtran_id,type);
             receipttran = lst_receiptdescs.Select(s => s.Receipttran).FirstOrDefault();
             receipt.daypaid = receipttran.Tdate;
             receipt.receipt_no = receipttran.Receiptno;
