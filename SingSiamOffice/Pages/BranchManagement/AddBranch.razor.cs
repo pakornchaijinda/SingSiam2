@@ -138,11 +138,35 @@ namespace SingSiamOffice.Pages.BranchManagement
         public async Task<bool> Save(Branch b_add)
         {
 
+            Province province_add = db.Provinces.Where(s => s.ProvinceName == b_add.Province).FirstOrDefault();
             try
             {
                 b_add.CreateAt = DateTime.Now;
+                b_add.ProvinceId = province_add.Id;
                 db.Branches.Add(b_add);
                 await db.SaveChangesAsync();
+
+                RunningNo running = new RunningNo();
+                running.Type = "promiseno";
+                running.CurrentNo = "1";
+                running.NextNo = "1";
+                running.BranchId = b_add.Id;
+                await db.SaveChangesAsync();
+
+                RunningNo running2 = new RunningNo();
+                running.Type = "refcode";
+                running.CurrentNo = "1";
+                running.NextNo = "1";
+                running.BranchId = b_add.Id;
+                await db.SaveChangesAsync();
+
+                RunningNo running3 = new RunningNo();
+                running.Type = "receipt";
+                running.CurrentNo = "1";
+                running.NextNo = "1";
+                running.BranchId = b_add.Id;
+                await db.SaveChangesAsync();
+
                 return true;
             }
             catch
@@ -151,6 +175,7 @@ namespace SingSiamOffice.Pages.BranchManagement
             }
 
         }
+        Branch new_b = new Branch();
 
         private async Task submit()
         {
