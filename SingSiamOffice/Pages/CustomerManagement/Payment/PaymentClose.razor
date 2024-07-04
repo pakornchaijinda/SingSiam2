@@ -1,9 +1,9 @@
-﻿@page "/paymentrecipe/{peroidtran_id:int}"
+﻿@page "/paymentclose/{peroidtran_id:int}"
 @* <h3>PaymentRecipe</h3> *@
 
 
 <style>
- 
+
     .receipt {
         padding: 3mm;
         width: 80mm;
@@ -280,24 +280,25 @@
             border-width: 36px;
             margin-top: -36px;
         }
-        .line{
-            text-decoration:dashed;
-        }
+
+    .line {
+        text-decoration: dashed;
+    }
 </style>
 
 
 <!-- START RECEIPT -->
 <div id="printableArea" class="receipt">
-   @*  <img class="watermark" src="https://www.dropbox.com/s/mmf6y9rpibwy9tk/bronyhouse-logo-sm.svg?raw=1">
+    @*  <img class="watermark" src="https://www.dropbox.com/s/mmf6y9rpibwy9tk/bronyhouse-logo-sm.svg?raw=1">
     <div class="orderNo">
-        Parking ID# <span id="Order #">71</span>: <span id="Order Name">Jet Set</span>
+    Parking ID# <span id="Order #">71</span>: <span id="Order Name">Jet Set</span>
     </div> *@
-   
+
     <div class="headerSubTitle" style="text-align: center;">
         <img src="img/icons/SingCircle.png" alt="" style="width:8rem;">
     </div>
-   @*  <div class="headerSubTitle">
-        Parking Receipt
+    @*  <div class="headerSubTitle">
+    Parking Receipt
     </div> *@
     <div class="headerTitle">
         บริษัท สิงห์สยาม ลิสซิ่ง จำกัด
@@ -337,48 +338,21 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">งวดที่</th>
                 <th scope="col">รายการ</th>
-                <th scope="col">รวมเงิน</th>
-              
+                <th class="text-end" scope="col">รวมเงิน</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var items in lst_receiptdescs)
-            {
-                <tr>
-                    <th scope="row">@items.Periodtran.Period/@items.Promise.Periods</th>
-                    <td>@items.Receipttran.Receiptdesc</td>
-                    @if(items.Deposit != 0)
-                    {
+            <tr><th colspan="2">งวดที่คงเหลือ 20 งวด  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp งวดที่ 14 - 33</th></tr>
+            <tr><td class="text-end" colspan="2">ยอดลูกหนี้คงเหลือ : 48,673</td></tr>
+            <tr><td class="text-end" colspan="2">ชำระค่าปรับ : 5607</td></tr>
+            <tr><td class="text-end" colspan="2">ค่าปิดบัญชี : 5607</td></tr>
+            <tr><td class="text-end" colspan="2">ดอกเบี้ยเพิ่ม : 5607</td></tr>
+            <tr><td class="text-end" colspan="2">เงินรับฝากล่วงหน้าตัดบัญชี : 5607</td></tr>
+            <tr><td class="text-end" colspan="2">ส่วนลด : 5607</td></tr>
+            <tr><td class="text-end" colspan="2">ส่วนต่าง : 5607</td></tr>
 
-                        <td>@items.Deposit </td>
-                    }
-                    else
-                    {
-
-                        <td>@items.Amount </td>
-                    }
-
-                </tr>
-            }
-           
-         
-         
         </tbody>
-     
-        <tfoot>
-            @if (receipt.ck_total_fee)
-            {
-                <tr>
-                    <th colspan="2" scope="row">ชำระค่าปรับ</th>
-                    <td>@receipt.total_fee</td>
-                </tr>
-                
-            }
-       
-        </tfoot>
-        
     </table>
 
 
@@ -395,7 +369,7 @@
             <div class="headerSubTitle" style="font-weight:bold; text-align:center;">
                 = @receipt.amount_text =
             </div>
-            <hr class="line"/>
+            <hr class="line" />
             @if (ck_deposit == true)
             {
 
@@ -403,12 +377,12 @@
             else
             {
                 <div class="headerSubTitle" style="font-weight:bold; text-align:start;">
-                    งวดคงเหลิอ: @receipt.peroid_remain งวด
+                    ปิดสัญญาก่อนกำหนด
                 </div>
             }
-         
 
-            <br/>
+
+            <br />
             <div class="headerSubTitle" style="font-weight:bold; text-align:center;">
                 ลงชื่อ....................................................ผู้รับเงิน
             </div>
@@ -419,11 +393,10 @@
     </div>
 
     <!-- Items Purchased -->
-   
-  @*   <div class="keepIt">
-        Keep your receipt!
+    @*   <div class="keepIt">
+    Keep your receipt!
     </div> *@
-    
+
 </div>
 
 @code {
