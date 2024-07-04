@@ -314,7 +314,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.CustomerInfo
                 check_cus_blacklist =await Managements.Check_Customer_Backlist(new_cus.NatId);
                 if (check_cus_blacklist)
                 {
-                    await JSRuntime.InvokeVoidAsync("alert_customer_blacklist");
+                    await JSRuntime.InvokeVoidAsync("alert_customer_blacklist", new_cus.Branch.BranchName);
                 }
                 else 
                 {

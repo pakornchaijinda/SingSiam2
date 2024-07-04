@@ -49,11 +49,11 @@ function alert_error_pay_notenough() {
         timer: 2500
     })
 }
-function alert_customer_blacklist() {
+function alert_customer_blacklist(data) {
     Swal.fire({
         position: 'center',
         icon: 'error',
-        title: 'บันทึกไม่สำเร็จ เนื่องจากลูกค้า ติดBlacklist',
+        title: 'บันทึกไม่สำเร็จ เนื่องจากลูกค้า ติดBlacklist สาขา:'+data,
         showConfirmButton: true,
         timer: 2500
     })
@@ -69,6 +69,15 @@ function alert_login_fail() {
         icon: 'error',
         title: 'Username หรือ Password ไม่ถูกต้อง!',
         showConfirmButton: true,
+        timer: 2500
+    })
+}
+function alert(data) {
+    Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: data,
+        showConfirmButton: false,
         timer: 2500
     })
 }

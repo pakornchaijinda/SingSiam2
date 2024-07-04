@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop;
 
 namespace SingSiamOffice.Pages.BranchManagement
@@ -151,11 +152,12 @@ namespace SingSiamOffice.Pages.BranchManagement
                 try
                 {
                     var to_remove = db.Branches.Where(s => s.Id == id).FirstOrDefault();
-                    db.Branches.Remove(to_remove);
+                    to_remove.IsActive = false;
+                    db.Entry(to_remove).State = EntityState.Modified;
                     await db.SaveChangesAsync();
                     await JSRuntime.InvokeVoidAsync("deletesuccess");
                     await Task.Delay(100);
-                    list_b = db.Branches.ToList();
+                    list_b = db.Branches.Where(s=>s.IsActive == true).ToList();
 
                 }
                 catch

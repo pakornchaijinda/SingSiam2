@@ -189,7 +189,7 @@
     List<Login> list_em = new List<Login>();
     protected override async Task OnInitializedAsync()
     {
-        list_b = db.Branches.ToList();
+        list_b = db.Branches.Where(s=>s.IsActive == true).ToList();
         b_info = list_b.Where(s => s.Id == b_id).FirstOrDefault();
         list_b.RemoveAll(s => s.Id == b_id);
         list_em = db.Logins.Where(s => s.BranchId == b_id).ToList();
