@@ -562,7 +562,17 @@ namespace SingSiamOffice.Pages.Contracts
         }
         private async Task submit()
         {
+            var check = db.Guarantors.Include(s => s.Promise).Where(s => s.CustomerId == selectCustomer.CustomerId).ToList();
+            var view_status_active = check.Where(s => s.Promise.Status != 2).Count();
+            if (view_status_active != 0)
+            {
+                JSRuntime.InvokeVoidAsync("alert","ไม่สามารถใช้ผู้ค้ำประกันนี้ได้เนื่องจากได้ทำรายการอื่นอยู่ โปรดเปลี่ยนผู้ค้ำประกันใหม่");
+                return;
+            }
+            else
+            {
 
+            }
             CultureInfo thaiCulture = new CultureInfo("th-TH");
             thaiCulture.DateTimeFormat.Calendar = new ThaiBuddhistCalendar();
             if (select_collateral.Id == 1) 
@@ -757,19 +767,10 @@ namespace SingSiamOffice.Pages.Contracts
                 if (value != null)
                 {
                     _selectCustomer = value;
-                    var check = db.Guarantors.Include(s => s.Promise).Where(s => s.CustomerId == selectCustomer.CustomerId).ToList();
-                    var view_status_active = check.Where(s => s.Promise.Status != 2).Count();
-                    if (view_status_active != 0)
-                    {
-                        JSRuntime.InvokeVoidAsync("alert_error");
-                    }
-                    else
-                    {
-                        guarantorNameA = _selectCustomer.FullName;
-                        guarantorANatId = _selectCustomer.NatId;
-                        phoneA = _selectCustomer.Phone;
-                        addressA = _selectCustomer.Address;
-                    }
+                    guarantorNameA = _selectCustomer.FullName;
+                    guarantorANatId = _selectCustomer.NatId;
+                    phoneA = _selectCustomer.Phone;
+                    addressA = _selectCustomer.Address;
                     //guarantorNameA = _selectCustomer.FullName;
                     //guarantorANatId = _selectCustomer.NatId;
                     //phoneA = _selectCustomer.Phone;

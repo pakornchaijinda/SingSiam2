@@ -78,7 +78,7 @@ function alert(data) {
         icon: 'error',
         title: data,
         showConfirmButton: false,
-        timer: 2500
+        timer: 5000
     })
 }
 function confirmdelete() {

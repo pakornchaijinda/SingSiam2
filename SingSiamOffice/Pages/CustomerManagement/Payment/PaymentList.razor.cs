@@ -370,6 +370,13 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
 
 
                         await promiseManagement.addReceipttran(_receipttran_toAdd);
+                        //เพิ้ม expent income
+                            
+                        //TransactionHistory history = new TransactionHistory();
+                        //history.SubjectId = 3;
+                        //history.BranchId = branch_id;
+                        //history.PaymentMethod = payment_method;
+                        //history.Detial = "ได้รับชำระค่างวด งวดที่:" + 
 
 
                         //ยอดที่ชำระ
