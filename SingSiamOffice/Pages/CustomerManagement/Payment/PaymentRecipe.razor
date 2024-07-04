@@ -7,7 +7,7 @@
     .receipt {
         padding: 3mm;
         width: 80mm;
-        border: 1px solid black;
+       /*  border: 1px solid black; */
     }
 
     .orderNo {
@@ -25,13 +25,13 @@
     .headerSubTitle {
         font-family: "Bai Jamjuree", sans-serif;
         /* text-align: center; */
-        font-size: 10pt;
+        font-size: 8pt;
     }
 
     .headerTitle {
         font-family: "Bai Jamjuree", sans-serif;
         text-align: center;
-        font-size: 14pt;
+        font-size: 10pt;
         font-weight: bold;
     }
 
@@ -111,6 +111,9 @@
             content: "\00a0";
         }
 
+        tr, td{
+            font-size:8pt;
+        }
 
     .itemData2 {
         text-align: right;
@@ -294,7 +297,7 @@
     </div> *@
    
     <div class="headerSubTitle" style="text-align: center;">
-        <img src="img/icons/SingCircle.png" alt="" style="width:8rem;">
+        <img src="img/icons/SingCircle.png" alt="" style="width:5rem;">
     </div>
    @*  <div class="headerSubTitle">
         Parking Receipt
@@ -403,7 +406,7 @@
             else
             {
                 <div class="headerSubTitle" style="font-weight:bold; text-align:start;">
-                    งวดคงเหลิอ: @receipt.peroid_remain งวด
+                    งวดคงเหลือ: @receipt.peroid_remain งวด
                 </div>
             }
          
