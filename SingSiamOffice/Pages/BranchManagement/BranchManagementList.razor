@@ -125,7 +125,7 @@
     SingSiamOffice.Models.SingsiamdbContext db = new SingSiamOffice.Models.SingsiamdbContext();
     protected override async Task OnInitializedAsync()
     {
-        list_b =  db.Branches.ToList();
+        list_b =  db.Branches.Where(s=>s.IsActive == true).ToList();
         list_Branch = list_b;
     }
     private async Task<IEnumerable<Branch>> SearchBranch(string value)

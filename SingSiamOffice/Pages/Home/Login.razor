@@ -199,7 +199,10 @@
                 globalData.username = username;
                 globalData.branch_name = brach.Branch.BranchName;
                 branchService.branch_ID = brach.BranchId;
-
+                if (brach.IsActive == false)
+                {
+                    await JSRuntime.InvokeVoidAsync("alert","สาขา"+ brach.Branch.BranchName + "ปิดกิจการ");
+                }
 
                 NavManager.NavigateTo("/dashboard/" + brach.BranchId.ToString(), true);
             }
