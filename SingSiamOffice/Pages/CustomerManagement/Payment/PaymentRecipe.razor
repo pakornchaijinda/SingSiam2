@@ -3,11 +3,11 @@
 
 
 <style>
- 
+
     .receipt {
         padding: 3mm;
         width: 80mm;
-       /*  border: 1px solid black; */
+        /*  border: 1px solid black; */
     }
 
     .orderNo {
@@ -23,13 +23,15 @@
         }
 
     .headerSubTitle {
-        font-family: "Bai Jamjuree", sans-serif;
+        /* font-family: "Bai Jamjuree", sans-serif; */
+        font-family: "Sarabun", sans-serif;
         /* text-align: center; */
         font-size: 8pt;
     }
 
     .headerTitle {
-        font-family: "Bai Jamjuree", sans-serif;
+        /*  font-family: "Bai Jamjuree", sans-serif; */
+        font-family: "Sarabun", sans-serif;
         text-align: center;
         font-size: 10pt;
         font-weight: bold;
@@ -111,9 +113,10 @@
             content: "\00a0";
         }
 
-        tr, td{
-            font-size:8pt;
-        }
+    th, tr, td {
+        font-family: "Sarabun", sans-serif;
+        font-size: 8pt;
+    }
 
     .itemData2 {
         text-align: right;
@@ -283,9 +286,10 @@
             border-width: 36px;
             margin-top: -36px;
         }
-        .line{
-            text-decoration:dashed;
-        }
+
+    .line {
+        text-decoration: dashed;
+    }
 </style>
 
 
@@ -387,14 +391,18 @@
 
     <div class="row">
         <div class="col-12 text-center">
-            <MudStack Row="true" Spacing="5">
-                <div class="headerSubTitle" style="font-weight:bold; ">
-                    ชำระโดย: @receipt.paid_by
+            <div class="row">
+                <div class="col-6">
+                    <div class="headerSubTitle" style="font-weight:bold; ">
+                        ชำระโดย: @receipt.paid_by
+                    </div>
                 </div>
-                <div class="headerSubTitle" style="font-weight:bold; text-align:end;">
-                    รวมเงิน: @receipt.total_amount บาท
+                <div class="col-6">
+                    <div class="headerSubTitle text-end" style="font-weight:bold; text-align:end;">
+                        รวมเงิน: @receipt.total_amount บาท
+                    </div>
                 </div>
-            </MudStack>
+            </div>
             <div class="headerSubTitle" style="font-weight:bold; text-align:center;">
                 = @receipt.amount_text =
             </div>
