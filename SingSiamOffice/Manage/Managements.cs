@@ -31,13 +31,14 @@ namespace SingSiamOffice.Manage
         {
             var config = db.Configs.AsNoTracking().Where(s => s.Id == 1).FirstOrDefault();
             var data = db.Periodtrans.AsNoTracking().Include(s => s.Customer).Include(s => s.Branch).Include(s=>s.Receiptdescs).Where(s => s.PromiseId == promise_id && s.Status != 2 ).ToList();
-
+            var receipt = db.Receiptdescs.AsNoTracking().Where(s=>s.PromiseId == promise_id).ToList();
             int cnt_overpayment = 0;
             foreach (var periodtran in data)
             {
                 //  periodtran.amount_remain = (decimal)periodtran.Amount - (decimal)periodtran.Paidamount;
                 periodtran.tdate_pay = DateTime.ParseExact(periodtran.Tdateformat, "yyyyMMdd", null);
                 periodtran.currentdate = DateTime.ParseExact(DateTime.Now.ToString("yyyyMMdd"), "yyyyMMdd", null);
+                periodtran.ck_receipt = receipt.Any(s => s.PeriodtranId == periodtran.Id);
                 if (periodtran.Deposit != 0)
                 { periodtran.ck_deposit = true; }
                 else 
@@ -92,15 +93,25 @@ namespace SingSiamOffice.Manage
 
             return data;
         }
-        public async Task<List<Receiptdesc>> GetReceipttran(int peroidtran_id) 
+        public async Task<List<Receiptdesc>> GetReceipttran(int peroidtran_id,int? receiptdescId = 0) 
         {
-            var receiptran_id = db.Receiptdescs.AsNoTracking().Where(s => s.PeriodtranId == peroidtran_id).FirstOrDefault().ReceipttranId;
-            var data = db.Receiptdescs.AsNoTracking().Include(s => s.Promise).ThenInclude(s=>s.Product).Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Receipttran).Include(s=>s.Periodtran).Where(s => s.ReceipttranId == receiptran_id).ToList();
-            foreach(var items in data) 
+            int receiptran_id = 0;
+            List<Receiptdesc> lst_receiptdesc = new List<Receiptdesc>();
+            if (receiptdescId == 0)
+            {
+                receiptran_id = db.Receiptdescs.AsNoTracking().Where(s => s.PeriodtranId == peroidtran_id).FirstOrDefault().ReceipttranId;
+                lst_receiptdesc = db.Receiptdescs.AsNoTracking().Include(s => s.Promise).ThenInclude(s => s.Product).Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Receipttran).Include(s => s.Periodtran).Where(s => s.ReceipttranId == receiptran_id).ToList();
+            }
+            else 
+            {
+                lst_receiptdesc = db.Receiptdescs.AsNoTracking().Include(s => s.Promise).ThenInclude(s => s.Product).Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Receipttran).Include(s => s.Periodtran).Where(s => s.ReceipttranId == receiptdescId).ToList();
+            }
+            
+            foreach(var items in lst_receiptdesc) 
             {
                 items.Amount = items.Amount * -1;
             }
-            return data;
+            return lst_receiptdesc;
         }
         private decimal RoundToNearest(decimal value)
         {

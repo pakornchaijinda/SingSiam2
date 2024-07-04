@@ -213,25 +213,39 @@
                                             {
                                                 <td style="@items.style_color">0</td>
                                             }
-                                            @if (items.Ispaid == true || items.Paidamount != 0 || items.Deposit != 0)
+                                            @if (items.ck_receipt)
                                             {
                                                 <td>
                                                     <MudButton Variant="Variant.Outlined" Color="Color.Info" @onclick="() => ToggleDetails(items.Id)">@(ExpandedPeriodtransId == items.Id ? "Hide Details" : "Show Details")</MudButton>
-                                                        <MudButton Variant="Variant.Outlined" Color="Color.Success" @onclick="()=>receipt(items.Id)">Print</MudButton>
+                                                    <MudButton Variant="Variant.Outlined" Color="Color.Success" @onclick="()=>receipt(items.Id)">Print</MudButton>
 
-                                                        <MudButton Variant="Variant.Outlined" Color="Color.Secondary">หลักฐานการโอน</MudButton>
+                                                    <MudButton Variant="Variant.Outlined" Color="Color.Secondary">หลักฐานการโอน</MudButton>
                                                 </td>
                                             }
-                                            else
+                                          
+                                            else if (items.Deposit != 0)
                                             {
                                                 <td>
-                                                    <MudButton Variant="Variant.Outlined" Color="Color.Info" Disabled @onclick="() => ToggleDetails(items.Id)">@(ExpandedPeriodtransId == items.Id ? "Hide Details" : "Show Details")</MudButton>
-                                                 
-                                                   
-                                                   
-                                  @*                       <MudButton Variant="Variant.Outlined" Color="Color.Success" @onclick="()=>receipt(items.Id)" Disabled>Print</MudButton>
+                                                    <MudButton Variant="Variant.Outlined" Color="Color.Info" @onclick="() => ToggleDetails(items.Id)">@(ExpandedPeriodtransId == items.Id ? "Hide Details" : "Show Details")</MudButton>
+
+
+
+                                                    @*                       <MudButton Variant="Variant.Outlined" Color="Color.Success" @onclick="()=>receipt(items.Id)" Disabled>Print</MudButton>
                                                         <MudButton Variant="Variant.Outlined" Color="Color.Secondary" Disabled>หลักฐานการโอน</MudButton>
                                                      *@
+
+                                                </td>
+                                            } else
+                                            {
+
+                                                <td>
+                                                    <MudButton Variant="Variant.Outlined" Color="Color.Info" @onclick="() => ToggleDetails(items.Id)" Disabled>@(ExpandedPeriodtransId == items.Id ? "Hide Details" : "Show Details")</MudButton>
+
+
+
+                                                    <MudButton Variant="Variant.Outlined" Color="Color.Success" @onclick="()=>receipt(items.Id)" Disabled>Print</MudButton>
+                                                    <MudButton Variant="Variant.Outlined" Color="Color.Secondary" Disabled>หลักฐานการโอน</MudButton>
+
 
                                                 </td>
                                             }
@@ -252,7 +266,7 @@
                                                            <td style="@items.style_color"></td>
                                                         <td style="@items.style_color"></td>
                                                         <td>
-                                                            <MudButton Variant="Variant.Outlined" Color="Color.Success" @onclick="()=>receipt(items.Id)" Disabled>Print</MudButton>
+                                                            <MudButton Variant="Variant.Outlined" Color="Color.Success" @onclick="()=>receipt(i.ReceipttranId)">Print</MudButton>
                                                             <MudButton Variant="Variant.Outlined" Color="Color.Secondary" Disabled>หลักฐานการโอน</MudButton>
                                                         </td>
                                                     </tr>

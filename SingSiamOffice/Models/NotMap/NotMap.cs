@@ -71,6 +71,9 @@ namespace SingSiamOffice.Models
         //รับฝากเงิน
         [NotMapped]
         public bool ck_deposit { get; set;}
+        //ตรวจสอบ Slip
+        [NotMapped]
+        public bool ck_receipt { get; set; }
     }
     public partial class Receipttran 
     {
