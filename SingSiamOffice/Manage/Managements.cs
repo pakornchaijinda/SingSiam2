@@ -39,6 +39,11 @@ namespace SingSiamOffice.Manage
                 periodtran.tdate_pay = DateTime.ParseExact(periodtran.Tdateformat, "yyyyMMdd", null);
                 periodtran.currentdate = DateTime.ParseExact(DateTime.Now.ToString("yyyyMMdd"), "yyyyMMdd", null);
                 periodtran.ck_receipt = receipt.Any(s => s.PeriodtranId == periodtran.Id);
+                try
+                {
+                    periodtran.Paidremain = receipt.Where(s => s.PeriodtranId == periodtran.Id).FirstOrDefault().Amount;
+                }
+                catch (Exception ex) { periodtran.Paidremain = 0; }
                 if (periodtran.Deposit != 0)
                 { periodtran.ck_deposit = true; }
                 else 
@@ -82,13 +87,14 @@ namespace SingSiamOffice.Manage
                         periodtran.latedate = 0;
                         periodtran.style_color = "color: black;";
                         periodtran.check_overpay = false;
-                        if (periodtran.Paidremain != 0)
-                        { 
-                            periodtran.pending_amount = (decimal)periodtran.Amount - (decimal)periodtran.Paidremain;
-                        }
+                      
                     }
                 }
-
+                if (periodtran.Paidremain != 0)
+                {
+                    periodtran.amount_remain = (decimal)periodtran.Amount + (decimal)periodtran.Paidremain;
+                    periodtran.total_deptAmount = (decimal)periodtran.amount_remain;
+                }
             }
 
             return data;

@@ -230,7 +230,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
         {
             _periodtran =await managements.GetPeriodtransbyPromiseId(promise_id);
             _promise = await managements.GetPromisebyPromiseId(promise_id);
-            _promise_pay.OverPayQty = _periodtran.Where(s=>s.OverPayQty >0).Count();
+            _promise_pay.OverPayQty = _periodtran.Where(s=>s.OverPayQty > 0).Count();
           
             _promise_pay.total_deposit = (decimal)_periodtran.Sum(p => p.Deposit);
             _promise_pay.total_fee = _periodtran.Sum(p => p.total_fee);
@@ -498,7 +498,6 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                                 _receipttran_toAdd.Cappaid = _periodtran.Where(s => s.Ispaid == false).FirstOrDefault().Capital;
 
                                 var calpay_remain = (decimal)customerPayAmount - _receipttran_toAdd.Arbalance;
-                                //      _receipttran_toAdd.Inspaid = _periodtran.Where(s => s.Ispaid == false).FirstOrDefault().Interest + calpay_remain;
                                 _receipttran_toAdd.Intpaid = _periodtran.Where(s => s.Ispaid == false).FirstOrDefault().Interest + calpay_remain;
                                 _receipttran_toAdd.Capremain = _promise.Capital - _receipttran_toAdd.Cappaid;
                                 var sum_interate = _periodtran.Where(s => s.Ispaid == false).Sum(s => s.Interest);
