@@ -9,6 +9,8 @@ public partial class Promise
 
     public string? Promiseno { get; set; }
 
+    public string? Branch { get; set; }
+
     public string? Refcode { get; set; }
 
     public DateTime? Tdatetime { get; set; }
@@ -16,6 +18,10 @@ public partial class Promise
     public string? Tdate { get; set; }
 
     public string? Tdateformat { get; set; }
+
+    public string? Customer { get; set; }
+
+    public string? Product { get; set; }
 
     public string? Prddesc { get; set; }
 
@@ -29,31 +35,31 @@ public partial class Promise
 
     public int? Ptype { get; set; }
 
-    public decimal? Chargeamt { get; set; }
+    public double? Chargeamt { get; set; }
 
     public int? Taxpromise { get; set; }
 
-    public decimal? Totaldown { get; set; }
+    public double? Totaldown { get; set; }
 
     public int? Specialtaxpromise { get; set; }
 
-    public decimal? Downamount { get; set; }
+    public double? Downamount { get; set; }
 
-    public decimal? Capital { get; set; }
+    public double? Capital { get; set; }
 
-    public decimal? Intrate { get; set; }
+    public double? Intrate { get; set; }
 
-    public decimal? Service { get; set; }
+    public double? Service { get; set; }
 
-    public decimal? Insurance { get; set; }
+    public double? Insurance { get; set; }
 
-    public decimal? Latepc { get; set; }
+    public double? Latepc { get; set; }
 
     public int? Periods { get; set; }
 
-    public decimal? Amount { get; set; }
+    public double? Amount { get; set; }
 
-    public decimal? Deposit { get; set; }
+    public double? Deposit { get; set; }
 
     public string? Daypaid { get; set; }
 
@@ -81,7 +87,7 @@ public partial class Promise
 
     public string? Warndesc { get; set; }
 
-    public decimal? Nampa { get; set; }
+    public double? Nampa { get; set; }
 
     public string? Dateclose { get; set; }
 
@@ -95,7 +101,7 @@ public partial class Promise
 
     public string? Closecase { get; set; }
 
-    public decimal? Closeresult { get; set; }
+    public double? Closeresult { get; set; }
 
     public string? Colname1 { get; set; }
 
@@ -141,43 +147,7 @@ public partial class Promise
 
     public int? Sumstatus { get; set; }
 
-    public decimal? Sumcharge1 { get; set; }
+    public double? Sumcharge1 { get; set; }
 
-    public decimal? Sumcharge2 { get; set; }
-
-    public int BranchId { get; set; }
-
-    public int ProductId { get; set; }
-
-    public int CustomerId { get; set; }
-
-    public int? ProvinceId { get; set; }
-
-    public int? ContractType { get; set; }
-
-    public string? UploadImg { get; set; }
-
-    public bool? Guarantor { get; set; }
-
-    public string? JsonPrddesc { get; set; }
-
-    public virtual Branch Branch { get; set; } = null!;
-
-    public virtual Customer Customer { get; set; } = null!;
-
-    public virtual ICollection<Guarantor> Guarantors { get; set; } = new List<Guarantor>();
-
-    public virtual ICollection<Periodtran> Periodtrans { get; set; } = new List<Periodtran>();
-
-    public virtual Collateral Product { get; set; } = null!;
-
-    public virtual Province? Province { get; set; }
-
-    public virtual ICollection<ReceiptdescCancle> ReceiptdescCancles { get; set; } = new List<ReceiptdescCancle>();
-
-    public virtual ICollection<Receiptdesc> Receiptdescs { get; set; } = new List<Receiptdesc>();
-
-    public virtual ICollection<ReceipttranCancle> ReceipttranCancles { get; set; } = new List<ReceipttranCancle>();
-
-    public virtual ICollection<Receipttran> Receipttrans { get; set; } = new List<Receipttran>();
+    public double? Sumcharge2 { get; set; }
 }

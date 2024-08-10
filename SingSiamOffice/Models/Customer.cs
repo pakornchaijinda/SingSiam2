@@ -5,59 +5,45 @@ namespace SingSiamOffice.Models;
 
 public partial class Customer
 {
-    public int CustomerId { get; set; }
+    public int Id { get; set; }
 
-    public string NatId { get; set; } = null!;
+    public string? Cardid { get; set; }
 
-    public string FullName { get; set; } = null!;
+    public string? Name { get; set; }
 
-    public DateTime Bdate { get; set; }
+    public string? Address { get; set; }
 
-    public string Religion { get; set; } = null!;
+    public string? Telephone { get; set; }
 
-    public string Address { get; set; } = null!;
+    public string? Office { get; set; }
 
-    public string CardCreate { get; set; } = null!;
+    public string? Officeaddress { get; set; }
 
-    public string CardExprite { get; set; } = null!;
+    public string? Officetel { get; set; }
 
-    public string Phone { get; set; } = null!;
+    public string? Homemap { get; set; }
 
-    public string Job { get; set; } = null!;
+    public string? Officemap { get; set; }
 
-    public string JobAddress { get; set; } = null!;
+    public string? Nickname { get; set; }
 
-    public string LocationLink { get; set; } = null!;
+    public string? Reference { get; set; }
 
-    public string ManRef { get; set; } = null!;
+    public string? Jobdesc { get; set; }
 
-    public string ManRelation { get; set; } = null!;
+    public string? Cardexpire { get; set; }
 
-    public string ManPhone { get; set; } = null!;
+    public string? Cardexpireformat { get; set; }
 
-    public string OrtherDebt { get; set; } = null!;
+    public string? HomeN { get; set; }
 
-    public int BranchId { get; set; }
+    public string? HomeE { get; set; }
 
-    public string CusImg { get; set; } = null!;
+    public string? OfficeN { get; set; }
+
+    public string? OfficeE { get; set; }
 
     public int? Status { get; set; }
 
-    public virtual ICollection<BlackList> BlackLists { get; set; } = new List<BlackList>();
-
-    public virtual Branch Branch { get; set; } = null!;
-
-    public virtual ICollection<Guarantor> Guarantors { get; set; } = new List<Guarantor>();
-
-    public virtual ICollection<Periodtran> Periodtrans { get; set; } = new List<Periodtran>();
-
-    public virtual ICollection<Promise> Promises { get; set; } = new List<Promise>();
-
-    public virtual ICollection<ReceiptdescCancle> ReceiptdescCancles { get; set; } = new List<ReceiptdescCancle>();
-
-    public virtual ICollection<Receiptdesc> Receiptdescs { get; set; } = new List<Receiptdesc>();
-
-    public virtual ICollection<ReceipttranCancle> ReceipttranCancles { get; set; } = new List<ReceipttranCancle>();
-
-    public virtual ICollection<Receipttran> Receipttrans { get; set; } = new List<Receipttran>();
+    public double? Arbalance { get; set; }
 }

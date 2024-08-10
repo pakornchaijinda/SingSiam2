@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SingSiamOffice.Models;
 
-public partial class Receipttran
+public partial class ReceipttranCancel
 {
     public int Id { get; set; }
 

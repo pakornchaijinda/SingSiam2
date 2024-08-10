@@ -15,25 +15,25 @@ public partial class Config
 
     public string? Signname { get; set; }
 
-    public decimal? Servicecharge { get; set; }
+    public double? Servicecharge { get; set; }
 
     public int? Asktime { get; set; }
 
-    public decimal? Askamt { get; set; }
+    public double? Askamt { get; set; }
 
-    public decimal? Askpc { get; set; }
+    public double? Askpc { get; set; }
 
     public int? Followtime { get; set; }
 
-    public decimal? Followamt { get; set; }
+    public double? Followamt { get; set; }
 
-    public decimal? Followpc { get; set; }
+    public double? Followpc { get; set; }
 
     public int? Hurrytime { get; set; }
 
-    public decimal? Hurryamt { get; set; }
+    public double? Hurryamt { get; set; }
 
-    public decimal? Hurrypc { get; set; }
+    public double? Hurrypc { get; set; }
 
     public int? Daylate { get; set; }
 
@@ -53,7 +53,7 @@ public partial class Config
 
     public int? Closeedit { get; set; }
 
-    public decimal? Taxrate { get; set; }
+    public double? Taxrate { get; set; }
 
     public string? Taxid { get; set; }
 
@@ -67,9 +67,9 @@ public partial class Config
 
     public string? Wwwpath { get; set; }
 
-    public decimal? Specialtaxrate { get; set; }
+    public double? Specialtaxrate { get; set; }
 
-    public decimal? Localtaxrate { get; set; }
+    public double? Localtaxrate { get; set; }
 
     public int? Disablemanual { get; set; }
 

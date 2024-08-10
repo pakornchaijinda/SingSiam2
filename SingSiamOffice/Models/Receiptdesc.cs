@@ -7,11 +7,13 @@ public partial class Receiptdesc
 {
     public int Id { get; set; }
 
-    public int PromiseId { get; set; }
+    public string? Promiseno { get; set; }
 
-    public int BranchId { get; set; }
+    public string? Branch { get; set; }
 
-    public int CustomerId { get; set; }
+    public int? Ptype { get; set; }
+
+    public string? Customer { get; set; }
 
     public string? Receiptno { get; set; }
 
@@ -27,11 +29,11 @@ public partial class Receiptdesc
 
     public string? Perioddate { get; set; }
 
-    public decimal? Cappaid { get; set; }
+    public double? Cappaid { get; set; }
 
-    public decimal? Intpaid { get; set; }
+    public double? Intpaid { get; set; }
 
-    public decimal? Amount { get; set; }
+    public double? Amount { get; set; }
 
     public string? Usercode { get; set; }
 
@@ -39,37 +41,23 @@ public partial class Receiptdesc
 
     public string? Clientbranch { get; set; }
 
-    public decimal? Loanplus { get; set; }
+    public double? Loanplus { get; set; }
 
-    public decimal? Loanminus { get; set; }
+    public double? Loanminus { get; set; }
 
-    public decimal? Oldint { get; set; }
+    public double? Oldint { get; set; }
 
-    public decimal? Newint { get; set; }
+    public double? Newint { get; set; }
 
     public int? Periodchg { get; set; }
 
-    public decimal? Deposit { get; set; }
+    public double? Deposit { get; set; }
 
-    public decimal? Chargeamt { get; set; }
+    public double? Chargeamt { get; set; }
 
-    public decimal? Lateamt { get; set; }
+    public double? Lateamt { get; set; }
 
-    public decimal? Srvpaid { get; set; }
+    public double? Srvpaid { get; set; }
 
-    public decimal? Inspaid { get; set; }
-
-    public int ReceipttranId { get; set; }
-
-    public int PeriodtranId { get; set; }
-
-    public virtual Branch Branch { get; set; } = null!;
-
-    public virtual Customer Customer { get; set; } = null!;
-
-    public virtual Periodtran Periodtran { get; set; } = null!;
-
-    public virtual Promise Promise { get; set; } = null!;
-
-    public virtual Receipttran Receipttran { get; set; } = null!;
+    public double? Inspaid { get; set; }
 }
