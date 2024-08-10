@@ -34,7 +34,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
             }
         }
 
-
+            
 
         protected override async void OnInitialized()
         {
