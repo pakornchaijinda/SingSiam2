@@ -33,6 +33,9 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                 await JSRuntime.InvokeVoidAsync("printReceipt");
             }
         }
+
+
+
         protected override async void OnInitialized()
         {
             lst_receiptdescs = await Manage.GetReceipttran(peroidtran_id,type);
