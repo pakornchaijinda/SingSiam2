@@ -135,6 +135,10 @@ namespace SingSiamOffice.Pages.Expense
                             PaymentMethod = Paytype
                         };
                     }
+                    my_b = db.Branches.Where(s => s.Id == b_id).FirstOrDefault();
+                    int code = my_b.Accdocno.Value;
+                    name = $"{my_b.Code}.{code.ToString("D7")}";
+                    Add_expren.TransectionRef = name ;
                     db.TransactionHistories.Add(Add_expren);
                     await db.SaveChangesAsync();
 

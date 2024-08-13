@@ -215,12 +215,8 @@
 
         list_subject = db.SubjectCosts.Where(s => s.IsActive == true).OrderBy(s=>s.SubjectCode).ToList();
 
-        string timestamp = DateTime.Now.ToString("ddMMyy");
-
-        // Generating a random text part (You can adjust the length as per your requirement)
-        string randomText = RandomString(5); // Generates a random string of length 5
         my_b = list_Branch.Where(s => s.Id == b_id).FirstOrDefault();
-        int code = my_b.Accdocno.Value + 1;
+        int code = my_b.Accdocno.Value;
         name = $"{my_b.Code}.{code.ToString("D7")}";
     }
 
