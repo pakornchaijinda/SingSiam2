@@ -15,7 +15,7 @@ public partial class SingsiamdbContext : DbContext
     {
     }
 
-    public virtual DbSet<BlackList> BlackLists { get; set; }
+    //public virtual DbSet<BlackList> BlackLists { get; set; }
 
     public virtual DbSet<Branch> Branches { get; set; }
 

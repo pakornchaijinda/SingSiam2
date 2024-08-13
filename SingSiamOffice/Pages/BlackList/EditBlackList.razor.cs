@@ -50,16 +50,11 @@ namespace SingSiamOffice.Pages.BlackList
             var confirm = await JSRuntime.InvokeAsync<bool>("confirmSaveData");
             if (confirm)
             {
-
-              
-                edit_black.CustomerId = selectCus.BranchId;
-               edit_black.CreateTime = DateTime.Now;
-             
                 if (await save())
                 {
                     await JSRuntime.InvokeVoidAsync("confirm");
                     await Task.Delay(100);
-                    navigationManager.NavigateTo("/blacklist_list/" + b_id.ToString());
+                    navigationManager.NavigateTo("/blacklist_list");
 
                 }
                 else
@@ -76,7 +71,7 @@ namespace SingSiamOffice.Pages.BlackList
 
         private void goback()
         {
-            navigationManager.NavigateTo("/blacklist_list/" + edit_black.BranchId.ToString()) ;
+            navigationManager.NavigateTo("/blacklist_list");
         }
     }
 }

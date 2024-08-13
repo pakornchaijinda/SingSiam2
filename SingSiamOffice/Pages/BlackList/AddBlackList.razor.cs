@@ -33,7 +33,7 @@ namespace SingSiamOffice.Pages.BlackList
         {
             try
             {
-                db.BlackLists.Add(add_black);
+                db.Blacklists.Add(add_black);
                 await db.SaveChangesAsync();
                 return true;
             }catch (Exception ex)
@@ -47,16 +47,16 @@ namespace SingSiamOffice.Pages.BlackList
             var confirm = await JSRuntime.InvokeAsync<bool>("confirmSaveData");
             if (confirm)
             {
-                add_black.BranchId = b_id;
-                add_black.CustomerId = selectCus.BranchId;
-                add_black.Detial = description;
-                add_black.CreateTime = DateTime.Now;
+                add_black.Cardid = selectCus.Cardid;
+                add_black.Name = selectCus.Name;
+                add_black.Tdesc = description;
+          
                 if (await save())
                 {
                     await JSRuntime.InvokeVoidAsync("confirm");
                     await Task.Delay(100);
 
-                    navigationManager.NavigateTo("/blacklist_list/"+b_id.ToString());
+                    navigationManager.NavigateTo("/blacklist_list");
                 }
                 else
                 {
@@ -73,7 +73,7 @@ namespace SingSiamOffice.Pages.BlackList
 
         private void goback()
         {
-            navigationManager.NavigateTo("/blacklist_list/" + b_id.ToString());
+            navigationManager.NavigateTo("/blacklist_list");
         }
     }
 }

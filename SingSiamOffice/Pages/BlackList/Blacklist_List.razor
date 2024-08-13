@@ -1,4 +1,4 @@
-﻿@page "/blacklist_list/{b_id:int}"
+﻿@page "/blacklist_list"
 @* <h3>Blacklist_List</h3> *@
 @using Models
 @using Microsoft.EntityFrameworkCore
@@ -32,7 +32,7 @@
              
                     </div>
                     <div class="col-3 pb-3">
-                        <MudAutocomplete T="BlackList" Label="กรอกเลขบัตรหรือชื่อที่ต้องการค้นหา" @bind-Value="selectBlackList" Margin="Margin.Dense" ToStringFunc="@(e=> e==null?null : $"{e.Customer.NatId} | {e.Customer.FullName}")" SearchFunc="@SearchValue" Variant="Variant.Outlined" />
+                        <MudAutocomplete T="SingSiamOffice.Models.Blacklist" Label="กรอกเลขบัตรหรือชื่อที่ต้องการค้นหา" @bind-Value="selectBlackList" Margin="Margin.Dense" ToStringFunc="@(e=> e==null?null : $"{e.Cardid}")" SearchFunc="@SearchValue" Variant="Variant.Outlined" />
                       
                     </div>
                 
@@ -145,18 +145,17 @@
     string imporText = "color:#840012; font-weight:600;";
     string detailtext = "color:#1C2833 ; font-weight:600; font-style: italic;";
     int loopcount = 1; // Initialize loop count variable
-    [Parameter]
-    public int b_id { get; set; }
-    List<BlackList> list_black = new List<BlackList>();
 
-    SingSiamOffice.Models.SingsiamdbContext db = new SingSiamOffice.Models.SingsiamdbContext();
+    List<SingSiamOffice.Models.Blacklist> list_black = new List<SingSiamOffice.Models.Blacklist>();
+
+    SingSiamOffice.Models.SingsiamnewdbContext db = new SingSiamOffice.Models.SingsiamnewdbContext();
     protected override async Task OnInitializedAsync()
     {
-        list_black = db.BlackLists.Include(s => s.Customer).Where(s => s.BranchId == b_id).ToList();
+        list_black = db.Blacklists.ToList();
 
     }
-    Models.BlackList selectBlackList = null;
-    Models.BlackList _selectBlackList
+    SingSiamOffice.Models.Blacklist selectBlackList = null;
+    SingSiamOffice.Models.Blacklist _selectBlackList
     {
         get { return _selectBlackList; }
         set
@@ -173,7 +172,7 @@
             }
         }
     }
-    private async Task<IEnumerable<BlackList>> SearchValue(string value)
+    private async Task<IEnumerable<SingSiamOffice.Models.Blacklist>> SearchValue(string value)
     {
         // In real life use an asynchronous function for fetching data from an api.
         await Task.Delay(5);
@@ -181,14 +180,14 @@
         // if text is null or empty, show complete list
         if (string.IsNullOrEmpty(value))
             return list_black;
-        return list_black.Where(x => x.Customer.NatId.Contains(value, StringComparison.InvariantCultureIgnoreCase) || x.Customer.FullName.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+        return list_black.Where(x => x.Cardid.Contains(value, StringComparison.InvariantCultureIgnoreCase));
     }
     private void fillter()
     {
         if (selectBlackList != null)
         {
-           
-            list_black = list_black.Where(s => s.CustomerId == selectBlackList.CustomerId).ToList();
+
+            list_black = list_black.Where(s => s.Cardid == selectBlackList.Cardid).ToList();
 
             StateHasChanged();
         }
@@ -196,9 +195,9 @@
     }
     private void reset()
     {
-    
+
         selectBlackList = null;
-        list_black = db.BlackLists.Include(s => s.Customer).Where(s=>s.BranchId == b_id).ToList();
+        list_black = db.Blacklists.ToList();
         StateHasChanged();
     }
 

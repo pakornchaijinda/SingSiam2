@@ -23,16 +23,16 @@ namespace SingSiamOffice.Authentication
 
         Manage.Hasher hasher = new Manage.Hasher();
 
-        private List<Login> _users;
-        private Login _login;
-        private SingsiamdbContext db = new SingsiamdbContext();
+        private List<Userfile> _users;
+        private Userfile _login;
+        private SingsiamnewdbContext db = new SingsiamnewdbContext();
         public UserAccountService()
         {
 
-            _users = db.Logins.AsNoTracking().Include(s => s.Role).Include(s => s.Branch).ToList();
+            _users = db.Userfiles.ToList();
         }
 
-        public async Task<Login> GetByUserName(string userName, string passWord)
+        public async Task<Userfile> GetByUserName(string userName, string passWord)
         {
             if (await checkUserPassword(userName, passWord) == false)
             {
@@ -40,19 +40,19 @@ namespace SingSiamOffice.Authentication
             }
             else
             {
-                return db.Logins.Where(x => x.Username == userName).AsNoTracking().Include(s => s.Role).Include(s => s.Branch).FirstOrDefault();
+                return db.Userfiles.Where(x => x.Code == userName).AsNoTracking().FirstOrDefault();
             }
 
         }
         public async Task<bool> checkUserPassword(string username, string password)
         {
         
-            _login = db.Logins.Where(u => u.Username == username && u.IsActive == true).AsNoTracking().FirstOrDefault();
+            _login = db.Userfiles.Where(u => u.Code == username ).AsNoTracking().FirstOrDefault();
             if (_login == null)
             {
                 return false;//ไม่มี user นี้
             }
-            string hashedPWD = hasher.hashPassword(password, _login.Salt);
+            string hashedPWD = password;
             if (hashedPWD == _login.Password)
             {
                 return true;

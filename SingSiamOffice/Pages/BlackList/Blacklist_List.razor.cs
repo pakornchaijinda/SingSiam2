@@ -66,11 +66,11 @@ namespace SingSiamOffice.Pages.BlackList
      
 
         private bool viewBlacklist;
-        SingSiamOffice.Models.BlackList to_view = new SingSiamOffice.Models.BlackList();
+        SingSiamOffice.Models.Blacklist to_view = new SingSiamOffice.Models.Blacklist();
         private void ViewBlacklist(int id)
         {
             viewBlacklist = true;
-            to_view = list_black.Where(s => s.BlackId == id).FirstOrDefault();
+            to_view = list_black.Where(s => s.Id == id).FirstOrDefault();
 
 
         }
@@ -81,17 +81,17 @@ namespace SingSiamOffice.Pages.BlackList
 
         private void AddBlacklist()
         {
-            navigationManager.NavigateTo("/add-blacklist/"+b_id.ToString());
+            navigationManager.NavigateTo("/add-blacklist");
         }
         private void EditBlacklist(int id)
         {
-            navigationManager.NavigateTo("/edit-blacklist/"+id.ToString());
+            navigationManager.NavigateTo("/edit-blacklist/");
         }
         async Task<bool> remove(int id)
         {
             try
             {
-                var remove = list_black.Where(s => s.BlackId == id).FirstOrDefault();
+                var remove = list_black.Where(s => s.Id == id).FirstOrDefault();
                 db.Remove(remove);
                 await db.SaveChangesAsync();
                 return true;
@@ -107,7 +107,7 @@ namespace SingSiamOffice.Pages.BlackList
                 {
                     await JSRuntime.InvokeVoidAsync("deletesuccess");
                     await Task.Delay(100);
-                    list_black = db.BlackLists.Include(s => s.Customer).ToList();
+                    reset();
 
                 }
                 else

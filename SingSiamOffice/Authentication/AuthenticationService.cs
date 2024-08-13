@@ -38,19 +38,32 @@ namespace SingSiamOffice.Authentication
           
             if (userinfo != null)
             {
-                await localStorage.SetItemAsync("authToken", userinfo.Username);
+                await localStorage.SetItemAsync("authToken", userinfo.Code);
                 var customAuthStateProvider = (CustomAuthenticationStateProvider)authStateProvider;
                 await customAuthStateProvider.UpdateAuthenticationState(new UserSession
                 {
-                    UserName = userinfo.Username,
-                    Role = userinfo.Role.RoleName,
-                    BranchId = (int)userinfo.BranchId
+                    UserName = userinfo.Code,
+                   
+                    BranchId = (int)userinfo.Branchchg
                 });
+                string Role_name = "";
+                switch (userinfo.Adminflg)
+                {
+                    case 1:
+                        Role_name = "Admin";
+                        break;
+                    default:
+                        Role_name = "พนักงาน";
+                        break;
+                }
+
+
                 AuthenticatedUserModel userModel = new AuthenticatedUserModel
                 {
-                    Username = userinfo.Username,
-                    RoleName = userinfo.Role.RoleName,
-                    BranchId= (int)userinfo.BranchId    
+                    Username = userinfo.Code,
+              
+                    RoleName = Role_name,
+                    BranchId= (int)userinfo.Branchchg    
                 };
 
                 return userModel;
