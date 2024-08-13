@@ -29,6 +29,18 @@ public partial class Branch
 
     public int? ProvinceId { get; set; }
 
+    public int? Promiseno { get; set; }
+
+    public int? Refcode { get; set; }
+
+    public int? Receipt { get; set; }
+
+    public int? Accdocno { get; set; }
+
+    public int? Arpaidno { get; set; }
+
+    public string? Code { get; set; }
+
     public virtual ICollection<BlackList> BlackLists { get; set; } = new List<BlackList>();
 
     public virtual ICollection<Customer> Customers { get; set; } = new List<Customer>();

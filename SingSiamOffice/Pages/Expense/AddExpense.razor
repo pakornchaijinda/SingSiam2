@@ -220,7 +220,8 @@
         // Generating a random text part (You can adjust the length as per your requirement)
         string randomText = RandomString(5); // Generates a random string of length 5
         my_b = list_Branch.Where(s => s.Id == b_id).FirstOrDefault();
-        name = my_b.BranchCode + "-" + timestamp + "-" + randomText;
+        int code = my_b.Accdocno.Value + 1;
+        name = $"{my_b.Code}.{code.ToString("D7")}";
     }
 
     private string RandomString(int length)

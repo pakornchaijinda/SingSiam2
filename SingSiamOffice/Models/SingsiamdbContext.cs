@@ -97,9 +97,11 @@ public partial class SingsiamdbContext : DbContext
             entity.HasIndex(e => e.BranchCode, "IX_branch").IsUnique();
 
             entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Accdocno).HasColumnName("accdocno");
             entity.Property(e => e.Address)
                 .HasMaxLength(250)
                 .HasColumnName("address");
+            entity.Property(e => e.Arpaidno).HasColumnName("arpaidno");
             entity.Property(e => e.BlankType)
                 .HasMaxLength(50)
                 .HasColumnName("blank_type");
@@ -112,6 +114,10 @@ public partial class SingsiamdbContext : DbContext
             entity.Property(e => e.BranchName)
                 .HasMaxLength(50)
                 .HasColumnName("branch_name");
+            entity.Property(e => e.Code)
+                .HasMaxLength(10)
+                .IsUnicode(false)
+                .HasColumnName("code");
             entity.Property(e => e.CreateAt)
                 .HasColumnType("datetime")
                 .HasColumnName("create_at");
@@ -122,10 +128,13 @@ public partial class SingsiamdbContext : DbContext
             entity.Property(e => e.Phone)
                 .HasMaxLength(10)
                 .HasColumnName("phone");
+            entity.Property(e => e.Promiseno).HasColumnName("promiseno");
             entity.Property(e => e.Province)
                 .HasMaxLength(50)
                 .HasColumnName("province");
             entity.Property(e => e.ProvinceId).HasColumnName("province_id");
+            entity.Property(e => e.Receipt).HasColumnName("receipt");
+            entity.Property(e => e.Refcode).HasColumnName("refcode");
 
             entity.HasOne(d => d.ProvinceNavigation).WithMany(p => p.Branches)
                 .HasForeignKey(d => d.ProvinceId)
