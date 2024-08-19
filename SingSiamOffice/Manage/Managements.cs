@@ -152,9 +152,10 @@ namespace SingSiamOffice.Manage
         }
         public async Task<string> Get_Promise_No(int branch_id, string type)
         {
-            var next_no = db.RunningNos.AsNoTracking().Where(s => s.BranchId == branch_id && s.Type == type).FirstOrDefault().NextNo;
+            //var next_no = db.RunningNos.AsNoTracking().Where(s => s.BranchId == branch_id && s.Type == type).FirstOrDefault().NextNo;
             var branch = db.Branches.AsNoTracking().Include(s => s.ProvinceNavigation).Where(s => s.Id == branch_id).FirstOrDefault();
             var branch_province = branch.ProvinceNavigation.ProvinceShortEn;
+            var next_no = branch.Promiseno+1;
             int nextNo = Convert.ToInt32(next_no);
             string numberPart = nextNo.ToString("D7");
             string prefix = branch_province.Trim() + branch.BranchCode.Trim() + "#";
@@ -163,9 +164,10 @@ namespace SingSiamOffice.Manage
         }
         public async Task<string> Get_Receipt_No(int branch_id, string type)
         {
-            var next_no = db.RunningNos.AsNoTracking().Where(s => s.BranchId == branch_id && s.Type == type).FirstOrDefault().NextNo;
+           // var next_no = db.RunningNos.AsNoTracking().Where(s => s.BranchId == branch_id && s.Type == type).FirstOrDefault().NextNo;
             var branch = db.Branches.AsNoTracking().Include(s => s.ProvinceNavigation).Where(s => s.Id == branch_id).FirstOrDefault();
             var branch_province = branch.ProvinceNavigation.ProvinceShortEn;
+            var next_no = branch.Receipt +1;
             int nextNo = Convert.ToInt32(next_no);
             string numberPart = nextNo.ToString("D7");
             string prefix = branch_province.Trim() + branch.BranchCode.Trim() + "-";
@@ -174,8 +176,9 @@ namespace SingSiamOffice.Manage
         }
         public async Task<string> Get_Ref_Code(int branch_id, string type, string branch_code, int product_id)
         {
-            var next_no = db.RunningNos.AsNoTracking().Where(s => s.BranchId == branch_id && s.Type == type).FirstOrDefault().NextNo;
+            //var next_no = db.RunningNos.AsNoTracking().Where(s => s.BranchId == branch_id && s.Type == type).FirstOrDefault().NextNo;
             var product_code = db.Collaterals.AsNoTracking().Where(s => s.Id == product_id).FirstOrDefault().Refcode;
+            var next_no = db.Branches.AsNoTracking().Where(s => s.Id == branch_id).FirstOrDefault().Refcode +1;
             int nextNo = Convert.ToInt32(next_no);
             string numberPart = nextNo.ToString("D4");
             string result = product_code.Trim() + "-" + numberPart + "/" + branch_code;
