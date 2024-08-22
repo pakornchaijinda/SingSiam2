@@ -146,7 +146,7 @@ namespace SingSiamOffice.Manage
         public async Task<bool> Check_Customer_Backlist(string natId)
         {
 
-            var ck = db.BlackLists.AsNoTracking().Any(s => s.CNatid == natId);
+            var ck = db.BlackLists.Include(s=>s.Customer).AsNoTracking().Any(s => s.Customer.NatId == natId);
 
             return ck;
         }
@@ -183,6 +183,11 @@ namespace SingSiamOffice.Manage
             string numberPart = nextNo.ToString("D4");
             string result = product_code.Trim() + "-" + numberPart + "/" + branch_code;
             return result;
+        }
+        public async Task<BlackList> GetBlackList(int cus_id)
+        {
+            var info = db.BlackLists.AsNoTracking().Where(s => s.CustomerId == cus_id).FirstOrDefault();
+            return info;
         }
         public async Task<Customer> GetCustomerInfo(int cus_id)
         {

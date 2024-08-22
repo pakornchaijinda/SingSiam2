@@ -213,7 +213,15 @@ function confirmSaveData() {
     });
 
 }
-
+function alert_bk() {
+    Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'พบรายชื่อใน Black List',
+        showConfirmButton: false,
+        timer: 1500
+    })
+}
 function confirm() {
     Swal.fire({
         position: 'center',

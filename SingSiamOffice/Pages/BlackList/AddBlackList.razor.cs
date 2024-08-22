@@ -48,7 +48,7 @@ namespace SingSiamOffice.Pages.BlackList
             if (confirm)
             {
                 add_black.BranchId = b_id;
-                add_black.CustomerId = selectCus.BranchId;
+                add_black.CustomerId = selectCus.CustomerId;
                 add_black.Detial = description;
                 add_black.CreateTime = DateTime.Now;
                 if (await save())

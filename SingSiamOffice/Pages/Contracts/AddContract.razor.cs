@@ -488,6 +488,8 @@ namespace SingSiamOffice.Pages.Contracts
                 await JSRuntime.InvokeVoidAsync("sideBar");
             }
         }
+       
+        Models.BlackList bk = new Models.BlackList();
         protected override async void OnInitialized()
         {
             list_customer = await Managements.GetCustomerbyBranch(branch_id);
@@ -500,7 +502,12 @@ namespace SingSiamOffice.Pages.Contracts
             branch = await Managements.GetBranches(branch_id);
 
             username = globalData.username;
-          
+            bk = await Managements.GetBlackList(c_id);
+            if (bk != null)
+            {
+                _customer.Status = 0;
+                await JSRuntime.InvokeVoidAsync("alert_bk");
+            }
         }
         string date = DateTime.Now.AddYears(543).ToString("dd/MM/yyyy");
 

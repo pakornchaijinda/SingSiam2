@@ -67,9 +67,6 @@ public partial class SingsiamdbContext : DbContext
 
             entity.Property(e => e.BlackId).HasColumnName("black_id");
             entity.Property(e => e.BranchId).HasColumnName("branch_id");
-            entity.Property(e => e.CNatid)
-                .HasMaxLength(13)
-                .HasColumnName("c_natid");
             entity.Property(e => e.CreateTime)
                 .HasColumnType("datetime")
                 .HasColumnName("create_time");
@@ -78,11 +75,6 @@ public partial class SingsiamdbContext : DbContext
                 .HasMaxLength(255)
                 .IsUnicode(false)
                 .HasColumnName("detial");
-
-            entity.HasOne(d => d.Branch).WithMany(p => p.BlackLists)
-                .HasForeignKey(d => d.BranchId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_black_list_branch");
 
             entity.HasOne(d => d.Customer).WithMany(p => p.BlackLists)
                 .HasForeignKey(d => d.CustomerId)
@@ -402,7 +394,9 @@ public partial class SingsiamdbContext : DbContext
                 .HasMaxLength(20)
                 .IsUnicode(false)
                 .HasColumnName("religion");
-            entity.Property(e => e.Status).HasColumnName("status");
+            entity.Property(e => e.Status)
+                .HasDefaultValueSql("((1))")
+                .HasColumnName("status");
 
             entity.HasOne(d => d.Branch).WithMany(p => p.Customers)
                 .HasForeignKey(d => d.BranchId)

@@ -15,9 +15,5 @@ public partial class BlackList
 
     public int BranchId { get; set; }
 
-    public string CNatid { get; set; } = null!;
-
-    public virtual Branch Branch { get; set; } = null!;
-
     public virtual Customer Customer { get; set; } = null!;
 }

@@ -152,7 +152,7 @@
     SingSiamOffice.Models.SingsiamdbContext db = new SingSiamOffice.Models.SingsiamdbContext();
     protected override async Task OnInitializedAsync()
     {
-        list_black = db.BlackLists.Include(s => s.Customer).Where(s => s.BranchId == b_id).ToList();
+        list_black = db.BlackLists.Include(s => s.Customer).ToList();
 
     }
     Models.BlackList selectBlackList = null;
@@ -198,7 +198,7 @@
     {
     
         selectBlackList = null;
-        list_black = db.BlackLists.Include(s => s.Customer).Where(s=>s.BranchId == b_id).ToList();
+        list_black = db.BlackLists.Include(s => s.Customer).ToList();
         StateHasChanged();
     }
 
