@@ -154,11 +154,11 @@ namespace SingSiamOffice.Manage
         {
             //var next_no = db.RunningNos.AsNoTracking().Where(s => s.BranchId == branch_id && s.Type == type).FirstOrDefault().NextNo;
             var branch = db.Branches.AsNoTracking().Include(s => s.ProvinceNavigation).Where(s => s.Id == branch_id).FirstOrDefault();
-            var branch_province = branch.ProvinceNavigation.ProvinceShortEn;
+            var branch_province = branch.Code;
             var next_no = branch.Promiseno+1;
             int nextNo = Convert.ToInt32(next_no);
             string numberPart = nextNo.ToString("D7");
-            string prefix = branch_province.Trim() + branch.BranchCode.Trim() + "#";
+            string prefix = branch_province.Trim() + "#";
             var promise_no = prefix + numberPart;
             return promise_no;
         }
