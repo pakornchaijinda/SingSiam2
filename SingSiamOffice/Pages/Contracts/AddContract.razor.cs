@@ -569,17 +569,25 @@ namespace SingSiamOffice.Pages.Contracts
         }
         private async Task submit()
         {
-            var check = db.Guarantors.Include(s => s.Promise).Where(s => s.CustomerId == selectCustomer.CustomerId).ToList();
-            var view_status_active = check.Where(s => s.Promise.Status != 2).Count();
-            if (view_status_active != 0)
+            try
             {
-                JSRuntime.InvokeVoidAsync("alert","ไม่สามารถใช้ผู้ค้ำประกันนี้ได้เนื่องจากได้ทำรายการอื่นอยู่ โปรดเปลี่ยนผู้ค้ำประกันใหม่");
-                return;
-            }
-            else
-            {
+                List<Guarantor> check = db.Guarantors.Include(s => s.Promise).Where(s => s.CustomerId == selectCustomer.CustomerId).ToList();
+                var view_status_active = check.Where(s => s.Promise.Status != 2).Count();
+                if (view_status_active != 0)
+                {
+                    JSRuntime.InvokeVoidAsync("alert", "ไม่สามารถใช้ผู้ค้ำประกันนี้ได้เนื่องจากได้ทำรายการอื่นอยู่ โปรดเปลี่ยนผู้ค้ำประกันใหม่");
+                    return;
+                }
+                else
+                {
 
+                }
             }
+            catch 
+            {
+            
+            }
+           
             CultureInfo thaiCulture = new CultureInfo("th-TH");
             thaiCulture.DateTimeFormat.Calendar = new ThaiBuddhistCalendar();
             if (select_collateral.Id == 1) 
