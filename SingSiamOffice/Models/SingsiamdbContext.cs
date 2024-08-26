@@ -128,7 +128,16 @@ public partial class SingsiamdbContext : DbContext
                 .HasColumnName("province");
             entity.Property(e => e.ProvinceId).HasColumnName("province_id");
             entity.Property(e => e.Receipt).HasColumnName("receipt");
-            entity.Property(e => e.Refcode).HasColumnName("refcode");
+            entity.Property(e => e.Refcode1nv).HasColumnName("refcode_1nv");
+            entity.Property(e => e.Refcode1v).HasColumnName("refcode_1v");
+            entity.Property(e => e.Refcode2nv).HasColumnName("refcode_2nv");
+            entity.Property(e => e.Refcode2v).HasColumnName("refcode_2v");
+            entity.Property(e => e.Refcode3nv).HasColumnName("refcode_3nv");
+            entity.Property(e => e.Refcode3v).HasColumnName("refcode_3v");
+            entity.Property(e => e.Refcode4nv).HasColumnName("refcode_4nv");
+            entity.Property(e => e.Refcode4v).HasColumnName("refcode_4v");
+            entity.Property(e => e.Refcode5nv).HasColumnName("refcode_5nv");
+            entity.Property(e => e.Refcode5v).HasColumnName("refcode_5v");
 
             entity.HasOne(d => d.ProvinceNavigation).WithMany(p => p.Branches)
                 .HasForeignKey(d => d.ProvinceId)

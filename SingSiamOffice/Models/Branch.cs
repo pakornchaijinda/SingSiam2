@@ -31,7 +31,7 @@ public partial class Branch
 
     public int? Promiseno { get; set; }
 
-    public int? Refcode { get; set; }
+    public int? Refcode1v { get; set; }
 
     public int? Receipt { get; set; }
 
@@ -40,6 +40,24 @@ public partial class Branch
     public int? Arpaidno { get; set; }
 
     public string? Code { get; set; }
+
+    public int? Refcode1nv { get; set; }
+
+    public int? Refcode2v { get; set; }
+
+    public int? Refcode2nv { get; set; }
+
+    public int? Refcode3v { get; set; }
+
+    public int? Refcode3nv { get; set; }
+
+    public int? Refcode4v { get; set; }
+
+    public int? Refcode4nv { get; set; }
+
+    public int? Refcode5v { get; set; }
+
+    public int? Refcode5nv { get; set; }
 
     public virtual ICollection<Customer> Customers { get; set; } = new List<Customer>();
 
