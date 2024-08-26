@@ -571,7 +571,7 @@ namespace SingSiamOffice.Pages.Contracts
         {
             try
             {
-                List<Guarantor> check = db.Guarantors.Include(s => s.Promise).Where(s => s.CustomerId == selectCustomer.CustomerId).ToList();
+                List<Guarantor> check = db.Guarantors.Include(s => s.Promise).Where(s => s.CustomerId == c_id).ToList();
                 var view_status_active = check.Where(s => s.Promise.Status != 2).Count();
                 if (view_status_active != 0)
                 {
