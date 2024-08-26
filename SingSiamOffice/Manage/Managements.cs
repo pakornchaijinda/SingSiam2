@@ -76,7 +76,7 @@ namespace SingSiamOffice.Manage
                         {
                             if (cnt_overpayment >0)
                             {
-                                periodtran.total_charge_follow = 100;
+                                periodtran.total_charge_follow = (decimal)config.Followamt;
                             }
                           
                         }
@@ -178,7 +178,8 @@ namespace SingSiamOffice.Manage
         {
             //var next_no = db.RunningNos.AsNoTracking().Where(s => s.BranchId == branch_id && s.Type == type).FirstOrDefault().NextNo;
             var product_code = db.Collaterals.AsNoTracking().Where(s => s.Id == product_id).FirstOrDefault().Refcode;
-            var next_no = db.Branches.AsNoTracking().Where(s => s.Id == branch_id).FirstOrDefault().Refcode +1;
+             var next_no = db.Branches.AsNoTracking().Where(s => s.Id == branch_id).FirstOrDefault().Refcode1v +1;
+           
             int nextNo = Convert.ToInt32(next_no);
             string numberPart = nextNo.ToString("D4");
             string result = product_code.Trim() + "-" + numberPart + "/" + branch_code;
