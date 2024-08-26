@@ -1,8 +1,12 @@
-﻿@page "/customerdept"
+﻿@page "/customerdept/{c_id:int}"
 @* <h3>Customerdept</h3> *@
+@using Models
 
-
-
+@using Microsoft.EntityFrameworkCore;
+@using System.Globalization;
+@inject ISnackbar Snackbar
+@using SingSiamOffice.Manage
+@inject UserLoginService userLoginService
 <Navbar2></Navbar2>
 <div class="content">
     <Header/>
@@ -12,7 +16,7 @@
     <div class="container mt-4 mb-4">
         <div class="row">
             <div class="col-12 mt-4 mb-4">
-                <MudText Typo="Typo.h5" Style="@headertext"><img src="img/icons/depts.svg" alt="" style="width:3rem;"> หนี้อื่นๆ</MudText>
+                <MudText Typo="Typo.h5" Style="@headertext"><img src="img/icons/depts.svg" alt="" style="width:3rem;"> เมนูเพิ่มรายการหนี้อื่นๆ</MudText>
             </div>
         </div>
     </div>
@@ -22,54 +26,45 @@
             <div class="card-header" style="@tableheader">ข้อมูลลูกค้า</div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-3 pb-3 text-center">
-                        <img src="/img/customers/Profile.png" class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-md-8 pb-3">
+                  
+                    <div class="col-md-12 pb-3">
                         <div class="row">
                             <div class="col-4 pb-3 text-center">
                                 <MudStack>
-                                    <MudText Typo="Typo.body1" Style="@imporText">เลขบัตรประจำตัวประชาชน</MudText>
-                                    <MudText Typo="Typo.body1">000-00-00000-000</MudText>
+                                    <MudText Typo="Typo.body1" Style="@imporText">เลขที่รายการ</MudText>
+                                    <MudText Typo="Typo.h6">#@Bill_code</MudText>
+                                </MudStack>
+
+                            </div>
+                            <div class="col-4 pb-3 text-center">
+                                <MudStack>
+                                    <MudText Typo="Typo.body1" Style="@imporText">วันที่ทำรายการ</MudText>
+                                    <MudText Typo="Typo.body1">@DateTime.Now.ToString("d MMMM yyyy", new CultureInfo("th-TH"))</MudText>
+                                </MudStack>
+                            </div>
+                            <div class="col-4 pb-3 text-center">
+                                <MudStack>
+                                    <MudText Typo="Typo.body1" Style="@imporText">เลขบัตรประชาชน</MudText>
+                                    <MudText Typo="Typo.body1">@cus_info.NatId</MudText>
                                 </MudStack>
 
                             </div>
                             <div class="col-4 pb-3 text-center">
                                 <MudStack>
                                     <MudText Typo="Typo.body1" Style="@imporText">ชื่อ - สกุล</MudText>
-                                    <MudText Typo="Typo.body1">นาย xxxx xxxxxxx</MudText>
+                                    <MudText Typo="Typo.body1">@cus_info.FullName</MudText>
                                 </MudStack>
                             </div>
                             <div class="col-4 pb-3 text-center">
                                 <MudStack>
                                     <MudText Typo="Typo.body1" Style="@imporText">เบอร์โทรศัพท์</MudText>
-                                    <MudText Typo="Typo.body1">000-000-0000</MudText>
+                                    <MudText Typo="Typo.body1">@cus_info.Phone</MudText>
                                 </MudStack>
                             </div>
-                            <hr />
-                            <div class="col-4 pb-3 text-center">
-                                <MudStack>
-                                    <MudText Typo="Typo.body1" Style="@imporText">ที่อยู่</MudText>
-                                    <MudText Typo="Typo.body2">
-                                        4517 Washington Ave.
-                                        Manchester, Kentucky 39495
-                                    </MudText>
-                                </MudStack>
-                            </div>
-                            <div class="col-4 pb-3 text-center">
-                                <MudStack>
-                                    <MudText Typo="Typo.body1" Style="@imporText">สถานะลูกค้า</MudText>
-                                    <MudChip Variant="Variant.Text" Color="Color.Success">ปกติ</MudChip>
-                                </MudStack>
-                            </div>
-                            <div class="col-4 pb-3 text-center">
-                                <MudStack>
-                                    <MudText Typo="Typo.body1" Style="@imporText">Link - map</MudText>
-                                    <a href="https://maps.app.goo.gl/xRXML62Nz7GXkGcR7" target="_blank">ดูแผนที่</a>
-                                </MudStack>
-                            </div>
+                           
                         </div>
                     </div>
+                    
                 </div>
 
             </div>
@@ -81,50 +76,54 @@
         <div class="card outer-card">
             <div class="card-body">
                 <div class="row">
-                   <div class="col-md-6 pb-3">
+                   <div class="col-md-5 pb-3">
                         <MudTextField @bind-Value="depts_details" Label="รายละเอียดหนี้" Placeholder="ระบุรายละเอียดหนี้" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
                    </div>
-                    <div class="col-md-4 pb-3">
+                    <div class="col-md-3 pb-3">
                         <MudTextField @bind-Value="depts_amount" Label="จำนวนเงิน" Placeholder="ระบุจำนวนเงิน" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
                     </div>
                     <div class="col-md-2 pb-3">
-                        <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.KeyboardArrowDown" DisableElevation="true" Style="@buttoncolor1" Size="Size.Large">เพิ่มรายการ</MudButton>
+                        <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.KeyboardArrowDown" DisableElevation="true" Style="@buttoncolor1" Size="Size.Large" @onclick="()=>add_Externalar()">เพิ่มรายการ</MudButton>
+                    </div>
+                    <div class="col-md-2 pb-3">
+                        <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.KeyboardArrowDown" DisableElevation="true" Style="@buttoncolor2" Size="Size.Large" @onclick="()=>refresh()">ล้างรายการ</MudButton>
                     </div>
                     <div class="col-md-12 mt-4 mb-4">
                         <div class="table-responsive">
                             <table class="table">
                                 <thead style="@tableheader">
                                     <tr>
-                                        <th scope="col-2">วัน/เดือน/ปี</th>
-                                        <th scope="col-5">รายละเอียด</th>
-                                        <th scope="col-3">จำนวนเงิน</th>
+                                        <th class="col-1">ลำดับ</th>
+                                        <th class="col-2">เลขที่รายการ</th>
+                                        <th class="col-2">วัน/เดือน/ปี</th>
+                                        <th class="col-4">รายละเอียด</th>
+                                        <th class="col-2">จำนวนเงิน</th>
                                    
-                                        <th></th>
+                                        <th class="col-1">เมนูจัดการ</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    @if (list_Externalar.Count() != 0)
+                                    {
+                                        foreach (var data in list_Externalar)
+                                        {
+                                            <tr>
+                                                <td>@data.No</td>
+                                                <td>@data.Docno</td>
+                                                <td>@data.Tdate.ToString("dd/MM/yyyy")</td>
+                                                <td>@data.Tdesc</td>
+                                                <td>@data.Aramount</td>
+                                 
 
-                                        <td>10/12/2566</td>
-                                        <td>ค่าประกันหนี้</td>
-                                        <td>12221</td>
-                                      
-                                        <td class="text-end">
-                                            <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Remove" Color="Color.Error">ลบรายการ</MudButton>
-                                        </td>
-                                    </tr>
-                                    <tr>
-
-                                        <td>10/12/2566</td>
-                                        <td>ค่าประกันหนี้</td>
-                                        <td>12221</td>
-                                     
-
-                                        <td class="text-end">
-                                            <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Remove" Color="Color.Error">ลบรายการ</MudButton>
-                                        </td>
-
-                                    </tr>
+                                                <td class="text-end">
+                                                    <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Remove" Color="Color.Error" @onclick="()=>remove_list(data.No)">ลบรายการ</MudButton>
+                                                </td>
+                                            </tr>
+                                        }
+                                       
+                                    }
+    
+                               
                                 
                                 </tbody>
 
@@ -146,7 +145,13 @@
                     </div>
                     <div class="col-md-12 mt-3 mb-3 text-center">
                         <MudButton Variant="Variant.Outlined" DisableElevation="true" Color="Color.Error" @onclick="()=>goBack()">ย้อนกลับ</MudButton>
-                        <MudButton Variant="Variant.Filled" DisableElevation="true" Style="@buttoncolor1" @onclick="()=>submit()">เพิ่มข้อมูล</MudButton>
+                        @if (tosave)
+                        {
+                            <MudButton Variant="Variant.Filled" DisableElevation="true" Style="@buttoncolor1" @onclick="()=>submit()">เพิ่มข้อมูล</MudButton>
+                        }else{
+                            <MudButton Variant="Variant.Filled" DisableElevation="true" Style="@buttoncolor3" @onclick="()=>print()">ปริ้นใบเสร็จ</MudButton>
+                        }
+
                     </div>
                 </div>
             </div>
@@ -156,17 +161,113 @@
 </div>
 
 @code {
-   
-
     // style
     string tableheader = "background-color:#840012; color:#ffff;";
     string headertext = "color:#840012; font-weight:600;";
     string buttoncolor1 = "background-color:#840012; color:#FFF; font-weight:600;";
+    string buttoncolor2 = "background-color:#120661; color:#FFF; font-weight:600;";
+    string buttoncolor3 = "background-color:#120661; color:#FFF; font-weight:600;";
     string settingbutton = "background-color:#840012; color:#FFF; font-weight:600; ";
     string buttoncollape = "background-color:#fc928c; color:#840012; font-weight:600;";
     string imporText = "color:#840012; font-weight:600;";
     string detailtext = "color:#1C2833 ; font-weight:600; font-style: italic;";
     string detailtextgreen = "color:#1D8348; font-weight:600; font-style: italic;";
     string detailtextred = "color:#922B21; font-weight:600; font-style: italic;";
+
+    [Parameter]
+    public int c_id { get; set; }
+    SingsiamdbContext db = new SingsiamdbContext();
+    Customer cus_info = new Customer();
+    string Bill_code { get; set; }
+    List<Externalar> list_Externalar = new List<Externalar>();
+    Login userLogin = new Login();
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            userLogin = userLoginService.UserLogin;
+            if (userLogin == null)
+            {
+                navigationManager.NavigateTo("/");
+            }
+        }
+        catch
+        {
+            navigationManager.NavigateTo("/");
+        }
+
+        cus_info = db.Customers.Include(s => s.Branch).Where(s => s.CustomerId == c_id).FirstOrDefault();
+        int code = cus_info.Branch.Arpaidno.Value;
+        Bill_code = $"{cus_info.Branch.Code}_{code.ToString("D7")}";
+    }
+    private  void add_Externalar()
+    {
+        int cmd = 0;
+        if (list_Externalar.Count() == 0)
+        {
+            cmd = 1;
+        }
+        else
+        {
+            cmd = list_Externalar.LastOrDefault().No;
+            cmd++;
+        }
+        if (depts_details != null && depts_amount != null)
+        {
+            Externalar to_add = new Externalar()
+                {
+                    No = cmd,
+                    Tdate = DateTime.Now,
+                    Docno = Bill_code,
+                    CustomerId = c_id,
+                    Tdesc = depts_details,
+                    Aramount = depts_amount,
+                    Paidamount = depts_amount,
+                    LoginId = userLogin.Id,
+                    Clientno = cus_info.Branch.Code,
+
+                };
+            list_Externalar.Add(to_add);
+            StateHasChanged();
+
+
+            depts_details = null;
+            depts_amount = null;
+        }
+        else
+        {
+            Snackbar.Add("โปรดเลือกรายการและใส่จำนวน", Severity.Error);
+        }
+    }
+    private void remove_list( int no)
+    {
+        list_Externalar.RemoveAt(no-1);
+        var cmd = 1;
+        if (list_Externalar.Count() >0)
+        {
+            foreach (var data in list_Externalar)
+            {
+                data.No = cmd;
+                cmd++;
+            }
+        }
+
+    }
+    private void refresh()
+    {
+        list_Externalar.Clear();
+        tosave = true;
+        cus_info = db.Customers.Include(s => s.Branch).Where(s => s.CustomerId == c_id).FirstOrDefault();
+        int code = db.Branches.Where(s => s.Id == cus_info.BranchId).AsNoTracking().FirstOrDefault().Arpaidno.Value;
+        Bill_code = $"{cus_info.Branch.Code}_{code.ToString("D7")}";
+        StateHasChanged();
+    }
+
+    private async Task print()
+    {
+        string url = $"/CustomerDeptRecipe/{Bill_code}";
+        await JSRuntime.InvokeAsync<object>("open", url, "_blank");
+        //navigationManager.NavigateTo("/paymentrecipe");
+    }
 
 }

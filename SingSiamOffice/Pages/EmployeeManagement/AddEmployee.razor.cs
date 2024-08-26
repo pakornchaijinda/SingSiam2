@@ -181,6 +181,7 @@ namespace SingSiamOffice.Pages.EmployeeManagement
             roles = db.Roles.Where(s => s.IsActive == true).AsNoTracking().ToList();
             branches = db.Branches.Where(s => s.IsActive == true).AsNoTracking().ToList();
             Runing_no = db.RunningNos.Where(s => s.Type == "ss").FirstOrDefault();
+            New_em.Position = "พนักงานประจำสาขา";
             New_em.Code = Runing_no.NextNo;
         }
 

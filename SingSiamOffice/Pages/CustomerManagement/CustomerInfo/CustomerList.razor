@@ -1,7 +1,8 @@
 ﻿@page "/customerlist/{b_id:int}"
 @* <h3>CustomerList</h3> *@
 @using Models
-
+@using SingSiamOffice.Manage
+@inject UserLoginService userLoginService
 
 <Navbar2></Navbar2>
 <!-- Content Start -->
@@ -11,7 +12,7 @@
     <div class="container-fluid mt-4 mb-4">
         <div class="row">
             <div class="col-md-6 pb-3">
-                <MudText Typo="Typo.h5" Style="@headertext"><img class="rounded-circle" src="img/icons/customer.svg" alt="" style="width:2rem;"> ข้อมูลลูกค้าประจำสาขา : @b_info.BranchName | @b_info.BranchCode</MudText>
+                <MudText Typo="Typo.h5" Style="@headertext"><img class="rounded-circle" src="img/icons/customer.svg" alt="" style="width:2rem;"> ข้อมูลลูกค้าประจำสาขา :@b_info.Code @b_info.BranchName | @b_info.BranchCode</MudText>
             </div>
             <div class="col-md-6 text-end">
                 @* <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Add" Size="Size.Large" Style="@buttoncolor1" @onclick="()=>addCustomer(b_id)">เพิ่มลูกค้า</MudButton> *@
@@ -29,7 +30,7 @@
                         <MudText Typo="Typo.body1" Style="@headertext">ค้นหาข้อมูลลูกค้า</MudText>
 
                     </div>
-                    <div class="col-3 pb-3">
+                    <div class="col-lg-3 col-md-3  col-sm-12 pb-3">
                         <MudAutocomplete T="Customer" Label="กรอกเลขบัตรหรือชื่อที่ต้องการค้นหา" @bind-Value="selectCustomer" Margin="Margin.Dense" ToStringFunc="@(e=> e==null?null : $"{e.NatId} | {e.FullName}")" SearchFunc="@SearchValue" Variant="Variant.Outlined" />
 
                     </div>
@@ -103,12 +104,21 @@
                                                             </MudText>
                                                         </MudStack>
                                                     </div>
-    @*                                                 <div class="col-4 pb-3 text-center">
+                                                    <div class="col-4 pb-3 text-center">
                                                         <MudStack>
                                                             <MudText Typo="Typo.body1" Style="@imporText">สถานะลูกค้า</MudText>
-                                                            <MudChip Variant="Variant.Text" Color="Color.Success">ปกติ</MudChip>
+                                                            @if (CheckBlacklist(data.CustomerId))
+                                                            {
+                                                                <MudChip Variant="Variant.Text" Color="Color.Error">ติด Blacklist</MudChip>
+                                                            }
+                                                            else
+                                                            {
+                                                                <MudChip Variant="Variant.Text" Color="Color.Success">ปกติ</MudChip>
+                                                               
+                                                            }
+
                                                         </MudStack>
-                                                    </div> *@
+                                                    </div>
                                                     <div class="col-4 pb-3 text-center">
                                                         <MudStack>
                                                             <MudText Typo="Typo.body1" Style="@imporText">Link - map</MudText>
@@ -191,8 +201,8 @@
                                                                         <MudStack Row="true" Class="mt-2">
                                                                             <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.RemoveRedEye" Color="Color.Default" @onclick="()=>viewContract( items.CustomerId,items.Id,items.BranchId)">ดูข้อมูลสัญญา</MudButton>
                                                                             <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Money" Style="@buttoncolor1" @onclick="()=>goPayment(items.CustomerId,items.Id,items.BranchId)">ชำระค่างวด</MudButton>
-                                                                            <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.StickyNote2" Size="Size.Large" Style="@buttoncolor2" @onclick="()=>goCustomerDept(1)">หนี้อื่นๆ</MudButton>
-                                                                            <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Remove" Color="Color.Error" @onclick="()=>deleteContract(1)">ยกเลิกสัญญา</MudButton>
+                                                                            <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.StickyNote2" Size="Size.Large" Style="@buttoncolor2" @onclick="()=>goCustomerDept(items.CustomerId)">หนี้อื่นๆ</MudButton>
+                                                                     @*        <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Remove" Color="Color.Error" @onclick="()=>deleteContract(1)">ยกเลิกสัญญา</MudButton> *@
                                                                         </MudStack>
                                                                     </td>
                                                                 </tr>
@@ -285,22 +295,28 @@
             }
         }
     }
-   async private void fillter()
+    async private void fillter()
     {
         if (selectCustomer!=null)
         {
             list_customer_show.Clear();
             list_customer_show = list_customer.Where(s => s.CustomerId == selectCustomer.CustomerId).ToList();
-           
             lst_Promises = await managements.GetPromisebyCustomerId(selectCustomer.CustomerId);
             StateHasChanged();
         }
 
     }
+    private bool CheckBlacklist(int cus_id)
+    {
+        // Check if there is at least one record with the given customer ID
+        var isBlacklisted =  db.BlackLists.Where(s => s.CustomerId == cus_id).Any();
+
+        return isBlacklisted;
+    }
     private void reset()
     {
         selectCustomer = null;
-        b_info = db.Branches.Where(s => s.IsActive == true).FirstOrDefault();
+        // b_info = db.Branches.Where(s => s.IsActive == true).FirstOrDefault();
         list_customer = db.Customers.Where(s => s.BranchId == b_id).ToList();
         list_customer_show.Clear();
         foreach (var data in list_customer)

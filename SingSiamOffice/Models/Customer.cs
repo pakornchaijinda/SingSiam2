@@ -47,6 +47,8 @@ public partial class Customer
 
     public virtual Branch Branch { get; set; } = null!;
 
+    public virtual ICollection<Externalar> Externalars { get; set; } = new List<Externalar>();
+
     public virtual ICollection<Guarantor> Guarantors { get; set; } = new List<Guarantor>();
 
     public virtual ICollection<Periodtran> Periodtrans { get; set; } = new List<Periodtran>();

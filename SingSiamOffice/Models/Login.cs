@@ -41,6 +41,8 @@ public partial class Login
 
     public virtual Branch Branch { get; set; } = null!;
 
+    public virtual ICollection<Externalar> Externalars { get; set; } = new List<Externalar>();
+
     public virtual Role Role { get; set; } = null!;
 
     public virtual ICollection<TransactionHistory> TransactionHistories { get; set; } = new List<TransactionHistory>();

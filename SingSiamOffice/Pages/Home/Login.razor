@@ -177,7 +177,7 @@
         if (!String.IsNullOrEmpty(username) && !String.IsNullOrEmpty(password))
         {
             var result = await AuthenticationService.Login(new AuthenticationUserModel { UserName = username, Password = password });
-            eventLog.Update_by = await _userManager.GetUserId(username);
+       
             if (result == null)
             {
                 await JSRuntime.InvokeVoidAsync("alert_login_fail");
@@ -185,11 +185,12 @@
             }
             if (result.RoleName == "Admin")
             {
-
+                eventLog.Update_by = await _userManager.GetUserId(username);
                 NavManager.NavigateTo("/dashboard-admin", true);
             }
             else
             {
+                     eventLog.Update_by = await _userManager.GetUserId(username);
                 var brach = db.Logins.Where(s => s.Username == username).Include(s => s.Branch).FirstOrDefault();
                 globalData.username = username;
                 globalData.branch_name = brach.Branch.BranchName;

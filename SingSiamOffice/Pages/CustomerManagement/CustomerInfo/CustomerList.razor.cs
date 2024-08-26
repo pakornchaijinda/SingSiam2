@@ -62,10 +62,22 @@ namespace SingSiamOffice.Pages.CustomerManagement.CustomerInfo
                 await JSRuntime.InvokeVoidAsync("sideBar");
             }
         }
+        Login userLogin = new Login();
         protected override async void OnInitialized()
         {
-            
-                list_customer = await managements.GetCustomerbyBranch(b_id);
+            try
+            {
+                userLogin = userLoginService.UserLogin;
+                if (userLogin == null)
+                {
+                    navigationManager.NavigateTo("/");
+                }
+            }
+            catch
+            {
+                navigationManager.NavigateTo("/");
+            }
+            list_customer = await managements.GetCustomerbyBranch(b_id);
             
         }
 
@@ -125,7 +137,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.CustomerInfo
         }
         private void goCustomerDept(int cus_id)
         {
-            navigationManager.NavigateTo("/customerdept/");
+            navigationManager.NavigateTo("/customerdept/"+cus_id);
         }
         private void goPayment(int cus_id, int promise_id, int branch_id)
         {

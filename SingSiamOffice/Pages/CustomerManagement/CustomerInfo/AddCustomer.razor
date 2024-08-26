@@ -47,7 +47,7 @@
                                 <img class="mb-3" src="@idcardimg" alt="" style="width: 10rem;">
                             </div>
                             <div class="col-md-3 pb-3">
-                                <MudTextField @bind-Value="new_cus.NatId" Label="เลขบัตรประจำตัวประชาชน" Placeholder="ระบุเลขบัตรประจำตัวประชาชน" Variant="Variant.Outlined" Margin="Margin.Dense" Mask="@(new PatternMask("0-0000-00000-00-0"))"></MudTextField>
+                                <MudTextField @bind-Value="new_cus.NatId" Label="เลขบัตรประจำตัวประชาชน" Placeholder="ระบุเลขบัตรประจำตัวประชาชน" Variant="Variant.Outlined" Margin="Margin.Dense" ></MudTextField>
                             </div>
                         </div>
                         <div class="row">
@@ -88,7 +88,7 @@
                     <div class="row">
 
                         <div class="col-md-3 pb-3">
-                            <MudTextField @bind-Value="new_cus.Phone" Label="เบอร์โทรศัพท์ติดต่อ" Placeholder="ระบุเบอร์โทรศัพท์ติดต่อ" Variant="Variant.Outlined" Margin="Margin.Dense" Mask="@(new PatternMask("000-000-0000"))"></MudTextField>
+                            <MudTextField @bind-Value="new_cus.Phone" Label="เบอร์โทรศัพท์ติดต่อ" Placeholder="ระบุเบอร์โทรศัพท์ติดต่อ" Variant="Variant.Outlined" Margin="Margin.Dense" ></MudTextField>
                         </div>
                         <div class="col-md-3 pb-3">
                             <MudTextField @bind-Value="new_cus.Job" Label="อาชีพ" Placeholder="ระบุอาชีพ" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
@@ -111,7 +111,7 @@
                             <MudTextField @bind-Value="new_cus.ManRelation" Label="ความสัมพันธ์" Placeholder="ระบุความสัมพันธ์" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
                         </div>
                         <div class="col-md-3 pb-3">
-                            <MudTextField @bind-Value="new_cus.ManPhone" Label="เบอร์โทรศัพท์ติดต่อบุคคลอ้างอิง" Placeholder="เบอร์โทรศัพท์ติดต่อบุคคลอ้างอิง" Variant="Variant.Outlined" Margin="Margin.Dense" Mask="@(new PatternMask("000-000-0000"))"></MudTextField>
+                            <MudTextField @bind-Value="new_cus.ManPhone" Label="เบอร์โทรศัพท์ติดต่อบุคคลอ้างอิง" Placeholder="เบอร์โทรศัพท์ติดต่อบุคคลอ้างอิง" Variant="Variant.Outlined" Margin="Margin.Dense" ></MudTextField>
                         </div>
                         <div class="col-md-12 pb-3">
                             <MudTextField @bind-Value="new_cus.OrtherDebt" Label="หนี้อื่นๆ" Placeholder="หนี้อื่นๆโปรดระบุ" Variant="Variant.Outlined" Margin="Margin.Dense" Lines="3"></MudTextField>

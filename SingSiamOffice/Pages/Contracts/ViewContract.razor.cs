@@ -176,11 +176,17 @@ namespace SingSiamOffice.Pages.Contracts
         //        await JSRuntime.InvokeVoidAsync("sideBar");
         //    }
         //}
+        SingsiamdbContext db = new SingsiamdbContext();
         protected override async void OnInitialized()
         {
            
             _customer = await Managements.GetCustomerInfo(c_id);
             _promises = await Managements.GetPromisebyPromiseId(promise_id);
+            var back_list = db.BlackLists.Where(s => s.CustomerId == c_id).FirstOrDefault();
+            if (back_list != null)
+            {
+                _customer.Status = 0;
+            }
             try
             {
                 string[] subpath = _promises.UploadImg.Split('\\');

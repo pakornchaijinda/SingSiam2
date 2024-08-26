@@ -162,7 +162,7 @@ namespace SingSiamOffice.Pages.Expense
 
         private void goback()
         {
-            navigationManager.NavigateTo("/expense-list");
+            navigationManager.NavigateTo("/expense-list/"+b_id.ToString());
         }
 
         [Inject]

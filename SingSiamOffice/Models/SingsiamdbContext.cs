@@ -27,6 +27,8 @@ public partial class SingsiamdbContext : DbContext
 
     public virtual DbSet<EventLog> EventLogs { get; set; }
 
+    public virtual DbSet<Externalar> Externalars { get; set; }
+
     public virtual DbSet<Guarantor> Guarantors { get; set; }
 
     public virtual DbSet<Login> Logins { get; set; }
@@ -425,6 +427,48 @@ public partial class SingsiamdbContext : DbContext
                 .HasMaxLength(50)
                 .HasColumnName("table_name");
             entity.Property(e => e.UpdateBy).HasColumnName("update_by");
+        });
+
+        modelBuilder.Entity<Externalar>(entity =>
+        {
+            entity.ToTable("Externalar", tb => tb.HasTrigger("UpdateRunningNo_Extenalar"));
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Aramount)
+                .HasDefaultValueSql("((0))")
+                .HasColumnName("aramount");
+            entity.Property(e => e.Clientno)
+                .HasMaxLength(5)
+                .IsUnicode(false)
+                .HasColumnName("clientno");
+            entity.Property(e => e.CustomerId).HasColumnName("customer_id");
+            entity.Property(e => e.Docno)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasColumnName("docno");
+            entity.Property(e => e.Flg).HasColumnName("flg");
+            entity.Property(e => e.LoginId).HasColumnName("login_id");
+            entity.Property(e => e.Paidamount)
+                .HasDefaultValueSql("((0))")
+                .HasColumnName("paidamount");
+            entity.Property(e => e.Tdate)
+                .HasColumnType("datetime")
+                .HasColumnName("tdate");
+            entity.Property(e => e.Tdesc)
+                .HasMaxLength(150)
+                .IsUnicode(false)
+                .HasDefaultValueSql("('-')")
+                .HasColumnName("tdesc");
+
+            entity.HasOne(d => d.Customer).WithMany(p => p.Externalars)
+                .HasForeignKey(d => d.CustomerId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Externalar_customer");
+
+            entity.HasOne(d => d.Login).WithMany(p => p.Externalars)
+                .HasForeignKey(d => d.LoginId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Externalar_login");
         });
 
         modelBuilder.Entity<Guarantor>(entity =>
@@ -1667,7 +1711,7 @@ public partial class SingsiamdbContext : DbContext
         {
             entity.HasKey(e => e.TransactionId);
 
-            entity.ToTable("Transaction_history");
+            entity.ToTable("Transaction_history", tb => tb.HasTrigger("UpdateRunningNoTrans"));
 
             entity.Property(e => e.TransactionId).HasColumnName("Transaction_id");
             entity.Property(e => e.BranchId).HasColumnName("Branch_id");

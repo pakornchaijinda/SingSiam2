@@ -7,10 +7,10 @@
 
 <Navbar2></Navbar2>
 <!-- Content Start -->
-<div class="content">
+<div class="content container-fluid p-3">
     <Header />
 
-    <div class="container mt-4 mb-4">
+    <div class="container-fluid mt-4 mb-4">
 
         <div class="row">
             <div class="col-12 mt-4 mb-4">
@@ -25,7 +25,7 @@
 
     </div>
 
-    <div class="container mt-4 mb-4">
+    <div class="container-fluid mt-4 mb-4">
         <div class="card outer-card">
             <div class="card-body">
                 <div class="row">
@@ -52,7 +52,7 @@
     </div>
 
 
-    <div class="container mt-4 mb-4">
+    <div class="container-fluid mt-4 mb-4">
         <div class="card">
             <div class="card-body">
                 <div class="row">
@@ -64,14 +64,15 @@
                             <table class="table table-striped">
                                 <thead style="@tableheader">
                                     <tr>
-                                        <th class="col">เลขรหัสธุรกรรม</th>
-                                        <th class="col">วัน / เดือน / ปี</th>
-                                        <th class="col">รายการ</th>
-                                        <th class="col">จำนวนเงินรับ(บาท)</th>
-                                        <th class="col">จำนวนเงินออก(บาท)</th>
-                                        <th class="col">ประเภทการจ่าย</th>
-                                        <th class="col">ผู้ทำรายการ</th>
+                                        <th class="col text-center">เลขรหัสธุรกรรม</th>
+                                        <th class="col text-center">วัน / เดือน / ปี</th>
+                                        <th class="col text-center">รายการ</th>
+                                        <th class="col text-center bg-primary text-white">รายรับ</th>
+                                        <th class="col text-center bg-danger text-white">รายจ่าย</th>
+                                        <th class="col text-center">ประเภทการจ่าย</th>
+                                        <th class="col text-center">ผู้ทำรายการ</th>
                                         <th class="col text-center">จัดการ</th>
+
 
                                         <th></th>
                                     </tr>
@@ -83,8 +84,7 @@
                                             <tr>
                                                 <td>@data.TransectionRef</td>
                                                 <td>@data.CreateAt.ToString("dd/MM/yyyy hh:mm:ss")</td>
-                                                <td>@data.Subject.SubjectName</td>
-
+                                                <td>@data.Subject.SubjectName @data.Detial</td>
                                                 @if (data.Subject.SubjectType == 1)
                                                 {
 

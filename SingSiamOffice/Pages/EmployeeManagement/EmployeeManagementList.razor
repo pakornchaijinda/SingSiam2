@@ -4,10 +4,10 @@
 <Navbar></Navbar>
 
 <!-- Content Start -->
-<div class="content">
+<div class="content container-fluid p-3">
     <Header />
 
-    <div class="container mt-4 mb-4">
+    <div class="container-fluid mt-4 mb-4">
 
         <div class="row">
             <div class="col-12 mt-4 mb-4">
@@ -22,7 +22,7 @@
 
     </div>
 
-    <div class="container mt-4 mb-4">
+    <div class="container-fluid mt-4 mb-4">
         <div class="card outer-card">
             <div class="card-body">
                 <div class="row">
@@ -55,7 +55,7 @@
     </div>
 
 
-    <div class="container mt-4 mb-4">
+    <div class="container-fluid mt-4 mb-4">
         <div class="card outer-card">
             <div class="card-body">
                 <div class="col-12 pb-3">
@@ -70,6 +70,7 @@
                                 <th>ชื่อ - นามสกุล</th>
                                 <th>เบอร์โทรศัพท์</th>
                                 <th>สาขา</th>
+                                <th>วันที่สร้างผู้ใช้งาน</th>
                                 <th>สถานะ</th>
                                 <th></th>
                             </tr>
@@ -85,6 +86,7 @@
                                     <td>@data.Fullname</td>
                                     <td>@data.Phone</td>
                                     <td>@data.Branch.BranchName</td>
+                                    <td>@data.CreatedAt.ToString("dd/MM/yyyy")</td>
                                     @if(data.IsActive){
                                         <td><MudChip Color="Color.Success">เปิดใช้งาน</MudChip></td>
                                     }

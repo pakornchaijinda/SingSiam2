@@ -84,7 +84,7 @@ namespace SingSiamOffice.Pages.EmployeeManagement
         List<Login> List_employ = new List<Login>();
         protected override async Task OnInitializedAsync()
         {
-            List_employ = db.Logins.Include(s => s.Branch).AsNoTracking().ToList();
+            List_employ = db.Logins.Include(s => s.Branch).AsNoTracking().OrderByDescending(s=>s.CreatedAt).ToList();
             List_Branch = db.Branches.AsNoTracking().ToList();
             List_Role  = db.Roles.AsNoTracking().ToList();  
         }

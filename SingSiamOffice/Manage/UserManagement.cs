@@ -68,8 +68,9 @@ namespace SingSiamOffice.Manage
         }
         public async Task<int> GetUserId(string usernaem)
         {
-           var data = db.Logins.Include(s => s.Role).Where(s => s.Username == usernaem).FirstOrDefault().Id; // 
-            return data;
+           var data = db.Logins.Include(s => s.Role).Where(s => s.Username == usernaem).AsNoTracking().FirstOrDefault(); //
+                                                                                                           //
+            return data.Id;
         }
         public async Task<bool> CheckUserLoginActive(UserLogin input)
         {

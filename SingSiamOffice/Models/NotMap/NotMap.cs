@@ -2,10 +2,17 @@
 
 namespace SingSiamOffice.Models
 {
+    
+    public partial class Externalar
+    {
+        [NotMapped]
+        public int No { get; set; }
+       
+    }
     public partial class Promise
     {
         [NotMapped]
-        public decimal Interest { get; set; }
+        public decimal Interest { get; set; }   
         [NotMapped]
         public decimal CapitalCal { get; set; }
         [NotMapped]

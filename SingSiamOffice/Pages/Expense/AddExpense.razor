@@ -209,7 +209,18 @@
     Branch my_b = new Branch();
     protected override async Task OnInitializedAsync()
     {
-        userLogin = userLoginService.UserLogin;
+        try
+        {
+            userLogin = userLoginService.UserLogin;
+            if (userLogin == null)
+            {
+                navigationManager.NavigateTo("/");
+            }
+        }
+        catch
+        {
+            navigationManager.NavigateTo("/");
+        }
 
         list_Branch = db.Branches.Where(s=>s.IsActive == true).ToList();
 
