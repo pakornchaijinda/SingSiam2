@@ -40,41 +40,37 @@
             <div class="card outer-card">
                 <div class="card-header" style="@tableheader">ข้อมูลบัตรประจำตัวประชาชน</div>
                 <div class="card-body">
-                    @if (readcard_info != null)
-                    {
-                        <div class="row">
-                            <div class="col-md-12 text-center pb-3">
-                                <img class="mb-3" src="@idcardimg" alt="" style="width: 10rem;">
-                            </div>
-                            <div class="col-md-3 pb-3">
-                                <MudTextField @bind-Value="new_cus.NatId" Label="เลขบัตรประจำตัวประชาชน" Placeholder="ระบุเลขบัตรประจำตัวประชาชน" Variant="Variant.Outlined" Margin="Margin.Dense" ></MudTextField>
-                            </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center pb-3">
+                            <img class="mb-3" src="@idcardimg" alt="" style="width: 10rem;">
                         </div>
-                        <div class="row">
-                        
-                            <div class="col-md-3 pb-3">
-                                <MudTextField @bind-Value="new_cus.FullName" id="name" Label="ชื่อ - นามสกุล" Placeholder="ระบุชื่อ - นามสกุล" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
-                            </div>
+                        <div class="col-md-3 pb-3">
+                            <MudTextField @bind-Value="new_cus.NatId" Label="เลขบัตรประจำตัวประชาชน" Placeholder="ระบุเลขบัตรประจำตัวประชาชน" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+                        </div>
+                    </div>
+                    <div class="row">
 
-                            <div class="col-md-3 pb-3">
-                                <MudDatePicker @bind-Date="dob" Label="วัน/เดือน/ปีเกิด" Culture="@GetThaiCulture()" PickerVariant="PickerVariant.Dialog" UseShortNames="false" TitleDateFormat="dddd, dd MMMM" Margin="Margin.Dense" Variant="Variant.Outlined" Style="background-color:#fff;" Required RequiredError="กรุณาระบุวัน/เดือน/ปีเกิด" />
-                             </div>
-                             <div class="col-md-3 pb-3">
-                                <MudTextField @bind-Value="new_cus.Religion" Label="ศาสนา" Placeholder="ระบุศาสนา" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
-                             </div>
-                             <div class="col-md-12 pb-3">
-                                <MudTextField @bind-Value="new_cus.Address" Label="ที่อยู่" Placeholder="ระบุที่อยู่" Variant="Variant.Outlined" Margin="Margin.Dense" Lines="3"></MudTextField>
-                             </div>
-                             <div class="col-md-3 pb-3">
-                                <MudTextField @bind-Value="new_cus.CardCreate" HelperText="ตัวอย่าง 01/12" Label="วันที่ออกบัตร" Placeholder="ระบุวันที่ออกบัตร" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
-                             </div>
-                             <div class="col-md-3 pb-3">
-                                <MudTextField @bind-Value="new_cus.CardExprite" HelperText="ตัวอย่าง 01/12" Label="วันที่บัตรหมดอายุ" Placeholder="ระบุวันที่บัตรหมดอายุ" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
-                             </div>
-                         </div>
+                        <div class="col-md-3 pb-3">
+                            <MudTextField @bind-Value="new_cus.FullName" id="name" Label="ชื่อ - นามสกุล" Placeholder="ระบุชื่อ - นามสกุล" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+                        </div>
 
+                        <div class="col-md-3 pb-3">
+                            <MudDatePicker @bind-Date="dob" Label="วัน/เดือน/ปีเกิด" Culture="@GetThaiCulture()" PickerVariant="PickerVariant.Dialog" UseShortNames="false" TitleDateFormat="dddd, dd MMMM" Margin="Margin.Dense" Variant="Variant.Outlined" Style="background-color:#fff;" Required RequiredError="กรุณาระบุวัน/เดือน/ปีเกิด" />
+                        </div>
+                        <div class="col-md-3 pb-3">
+                            <MudTextField @bind-Value="new_cus.Religion" Label="ศาสนา" Placeholder="ระบุศาสนา" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+                        </div>
+                        <div class="col-md-12 pb-3">
+                            <MudTextField @bind-Value="new_cus.Address" Label="ที่อยู่" Placeholder="ระบุที่อยู่" Variant="Variant.Outlined" Margin="Margin.Dense" Lines="3"></MudTextField>
+                        </div>
+                        <div class="col-md-3 pb-3">
+                            <MudTextField @bind-Value="new_cus.CardCreate" HelperText="ตัวอย่าง 01/12" Label="วันที่ออกบัตร" Placeholder="ระบุวันที่ออกบัตร" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+                        </div>
+                        <div class="col-md-3 pb-3">
+                            <MudTextField @bind-Value="new_cus.CardExprite" HelperText="ตัวอย่าง 01/12" Label="วันที่บัตรหมดอายุ" Placeholder="ระบุวันที่บัตรหมดอายุ" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+                        </div>
+                    </div>
 
-                    }
                 </div>
             </div>
 
