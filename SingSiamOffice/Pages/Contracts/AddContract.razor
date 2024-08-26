@@ -86,7 +86,25 @@
            </div>
        </div>
     </div>
+    <div class="container-fluid mt-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <MudText Typo="Typo.h6">ข้อมูลภาษี</MudText>
+                    </div>
+                    <div class="col-6 text-end">
+                        <MudRadioGroup @bind-Value="vat">
+                            <MudRadio Value="1" Color="Color.Primary" Size="Size.Medium">Vat</MudRadio>
+                            <MudRadio Value="2" Color="Color.Secondary" Size="Size.Medium">NVat</MudRadio>
 
+                        </MudRadioGroup>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
     <div class="container-fluid mt-4 mb-4">
         <div class="card outer-card">
@@ -677,25 +695,7 @@
     </div>
 
 
-    <div class="container-fluid mt-4 mb-4">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-6">
-                        <MudText Typo="Typo.h6">ข้อมูลภาษี</MudText>
-                    </div>
-                    <div class="col-6 text-end">
-                        <MudRadioGroup @bind-Value="vat">
-                            <MudRadio Value="1" Color="Color.Primary" Size="Size.Medium">Vat</MudRadio>
-                            <MudRadio Value="2" Color="Color.Secondary" Size="Size.Medium">NVat</MudRadio>
-
-                        </MudRadioGroup>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
+ 
 
     <div class="container-fluid mt-4 mb-4">
         <div class="card outer-card">
