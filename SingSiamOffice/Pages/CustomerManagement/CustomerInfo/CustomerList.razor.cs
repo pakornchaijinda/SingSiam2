@@ -127,6 +127,11 @@ namespace SingSiamOffice.Pages.CustomerManagement.CustomerInfo
             navigationManager.NavigateTo($"/view-contract/{branch_id}/{cus_id}/{promise_id}");
         }
 
+        private void printContract()
+        {
+            navigationManager.NavigateTo("/contractreport");
+        }
+
         private void goBlacklist(int brach_id)
         {
             navigationManager.NavigateTo("/blacklist_list");

@@ -1,0 +1,207 @@
+﻿@page "/contractreport"
+@* <h3>ContractReport</h3> *@
+
+<style>
+    .left-detail{
+        line-height:1px;
+    }
+    .contract-detail{
+        line-height: 5px;
+    }
+
+    .headerTitle{
+        font-weight:bold;
+    }
+</style>
+<div id="printableArea">
+    <div class="container-fuid">
+        <div class="row">
+            <div class="col-12 text-end">
+                <p><strong>วันที่พิมพ์: @date</strong></p>
+            </div>
+            <div class="col-12 text-center">
+                <div class="headerSubTitle" style="text-align: center;">
+                    <img src="img/icons/SingCircle.png" alt="" style="width:5rem;">
+                </div>
+                <div class="headerTitle">
+                    บริษัท สิงห์สยาม ลิสซิ่ง จำกัด
+                </div>
+                <div class="headerTitle">
+                    เลขประจำตัวผู้เสียภาษี 0365561000591
+                </div>
+            </div>
+            <div class="col-12 text-end left-detail">
+                <p class="contract-detail"><strong>เลขที่สัญญา:</strong> 123412312</p>
+                <p class="contract-detail"><strong>เลขที่อ้างอิง:</strong> 123412312</p>
+            </div>
+            <div class="container contract-detail mt-4 mb-4">
+                <div class="col-12">
+                    <p class="contract-detail">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;สัญญานี้เกิดขึ้นเมื่อวันที่ : ............. <strong>@date</strong> .............<strong>ณ</strong>............. <strong>บริษัท สิงห์สยาม ลิสซิ่ง จำกัด</strong>............................</p>
+                    <p class="contract-detail">สำนักงานตั้งอยู่ที่ : .......................<strong>[เงินด่วน พร้อมใช้]</strong>............เลขประจำตัวผู้เสียภาษี.............<strong>0365561000591</strong>..........................</p>
+                    <p class="contract-detail">ระหว่าง :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>นาย abcd efghijk</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;บัตรประชาชนเลขที่&nbsp;&nbsp;&nbsp;<strong>123456789012</strong></p>
+                    <p class="contract-detail">อยู่ที่ :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>หกดกหดหกด หกดหกด หก หดกหดหกดหกด  หกดหก ดหกดหกดหกด 434343434</strong></p>
+                    <p class="contract-detail">โทรศัพท์ :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>0933423423e4 พี่อาฮิม</strong></p>
+
+                </div>
+                <br />
+                <div class="col-12 mt-2 mb-4 contract-detail">
+                    <p class="contract-detail">ซึ่งต่อไปนี้ในสัญญานี้เรียกว่า &nbsp;&nbsp;&nbsp;&nbsp;<strong>ผู้เช่าซื้อ</strong> &nbsp;&nbsp;&nbsp;&nbsp;ฝ่ายหนึ่ง กับ  &nbsp;&nbsp;&nbsp;&nbsp;<strong>บริษัท สิงห์สยาม ลิสซิ่ง จำกัด</strong></p>
+                    <p class="contract-detail">ซึ่งต่อไปนี้ในสัญญานี้เรียกว่า &nbsp;&nbsp;&nbsp;&nbsp;<strong>เจ้าของ</strong> &nbsp;&nbsp;&nbsp;&nbsp;อีกฝ่ายหนึ่ง ทั้งสองฝ่ายได้ตกลงทำสัญญากัน</p>
+                    <p class="contract-detail">เพื่อเป็นประกันการชำระหนี้ตามสัญญานี้ &nbsp;&nbsp;&nbsp;&nbsp;<strong>ผู้เช่าซื้อ</strong> &nbsp;&nbsp;&nbsp;&nbsp;ได้มอบหลักทรัพย์ค้ำประกันปรากฎดังนี้</p>
+                </div>
+                <br />
+                <div class="col-12 mt-2 mb-4">
+                    <table class="table table-bordered">
+                        <thead class="text-center">
+                            <tr style="background-color:#e5e5e5;">
+                                <th style="font-weight:bold;">รายละเอียดหลักประกันสัญญา</th>
+                                <th style="font-weight:bold;">เงื่อนไขในสัญญา</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    @if (collateral == 1)
+                                    {
+                                        <ul class="list-group border-0">
+                                            <li class="list-group-item border-0">ประเภทโฉนด : <strong>12312312312</strong></li>
+                                            <li class="list-group-item border-0">เลขที่โฉนด : <strong>12312312312</strong></li>
+                                            <li class="list-group-item border-0">ประเภทที่ดิน : <strong>12312312312</strong></li>
+                                            <li class="list-group-item border-0">ระวาง : <strong>12312312312</strong></li>
+                                            <li class="list-group-item border-0">เลขที่ดิน : <strong>12312312312</strong></li>
+                                            <li class="list-group-item border-0">เล่ม : <strong>12312312312</strong></li>
+                                            <li class="list-group-item border-0">หน้า : <strong>12312312312</strong></li>
+                                            <li class="list-group-item border-0">หน้าสำรวจ : <strong>12312312312</strong></li>
+                                            <li class="list-group-item border-0">จำนวนที่ดิน : <strong>12312312312</strong></li>
+                                        </ul>
+                                    }
+                                    @if (collateral == 2)
+                                    {
+                                        <ul class="list-group border-0">
+                                            <li class="list-group-item border-0">ประเภทรถ : <strong>12312312312</strong></li>
+                                            <li class="list-group-item border-0">ยี่ห้อรถ : <strong>12312312312</strong></li>
+                                            <li class="list-group-item border-0">สีรถ : <strong>12312312312</strong></li>
+                                            <li class="list-group-item border-0">เลขตัวถัง : <strong>12312312312</strong></li>
+                                            <li class="list-group-item border-0">รุ่น : <strong>12312312312</strong></li>
+                                            <li class="list-group-item border-0">เลขทะเบียน : <strong>12312312312</strong></li>
+                                            <li class="list-group-item border-0">เลขเครื่อง : <strong>12312312312</strong></li>
+                                            <li class="list-group-item border-0">รถปี : <strong>12312312312</strong></li>
+                                            <li class="list-group-item border-0">จังหวัด : <strong>12312312312</strong></li>
+                                            <li class="list-group-item border-0">วันครบภาษี : <strong>12312312312</strong></li>
+                                        </ul>
+                                    }
+
+                                </td>
+                                <td>
+                                    <ul class="list-group border-0">
+                                        <li class="list-group-item border-0">เงินทำสัญญา <strong>55555</strong> บาท</li>
+                                        <li class="list-group-item border-0">ดอกเบี้ย <strong>55555</strong>  บาท</li>
+                                        <li class="list-group-item border-0">เงินดาว์น <strong>55555</strong>  บาท</li>
+                                        <li class="list-group-item border-0">จำนวนงวด <strong>55555</strong>  บาท</li>
+                                        <li class="list-group-item border-0">งวดละ <strong>55555</strong>  บาท</li>
+                                        <li class="list-group-item border-0">ค่าธรรมเนียมภาษี <strong>55555</strong>  บาท</li>
+                                        <li class="list-group-item border-0">เริ่มชำระงวดแรก <strong>55555</strong>  บาท</li>
+                                        <li class="list-group-item border-0">ชำระงวดสุดท้าย <strong>55555</strong>  บาท</li>
+                                    </ul>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <br />
+                <div class="col-8 mt-4 mb-4">
+                    <p style="font-weight:bold;">ประเมินสภาพทรัพย์สิน</p>
+                    <div class="row mt-2">
+                        <div class="col-3 text-center">
+                            <p>( ) ดีมาก</p>
+                        </div>
+                        <div class="col-3 text-center">
+                            <p>( ) ดี</p>
+                        </div>
+                        <div class="col-3 text-center">
+                            <p>( ) ปานกลาง</p>
+                        </div>
+                        <div class="col-3 text-center">
+                            <p>( ) ไม่ดี</p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-8 mt-4 mb-4">
+                    <p style="font-weight:bold;">ชำระงวดสุดท้าย</p>
+                    <div class="row mt-2">
+                        <div class="col-3 text-center">
+                            <p>( ) ดีมาก</p>
+                        </div>
+                        <div class="col-3 text-center">
+                            <p>( ) ดี</p>
+                        </div>
+                        <div class="col-3 text-center">
+                            <p>( ) ปานกลาง</p>
+                        </div>
+                        <div class="col-3 text-center">
+                            <p>( ) ไม่ดี</p>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <div class="col-12 mt-4 mb-4 text-end">
+                    <p>ลงชื่อ...................................ผู้รายงาน</p>
+                    <p>(........................................................)</p>
+                </div>
+                <hr />
+                <br />
+
+                <p>---------------------------------------------------------------------------------------------------------------------------------------------------</p>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="card mb-3">
+                            <div class="row g-0">
+                                <div class="col-4 text-center">
+                                    <img src="img/icons/SingCircle.png" alt="" style="width:5rem;">
+                                </div>
+                                <div class="col-8">
+                                    <div class="card-body">
+                                        <p class="card-text"><small>Name : <strong>abcd efdfdfdf</strong></small></p>
+                                        <p class="card-text"><small>Code : <strong>12312312312</strong></small></p>
+                                        <p class="card-text"><small>Date : <strong>@date</strong></small></p>
+                                        <p class="card-text"><small>Expire :<strong>@date</strong></small></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="card" style="border:none;">
+                            <div class="row g-0">
+                                <div class="col-3" style="display:flex; align-items:center;">
+                                    <img src="img/icons/cutting.png" alt="" style="width:4rem;">
+                                </div>
+                                <div class="col-9">
+                                    <div class="card-body">
+                                        <p><small><strong>หมายเหตุ :</strong> กรุณาตัดตามกรอบที่กำหนดไว้</small></p>
+                                        <p><small>เพื่อใช้ในการติดเล่มทะเบียนรถ และโฉนดที่ดิน</small></p>
+                                        <p><small>จากนั้นใช้กาวทา และนำไปติดด้านบนมุมขวา</small></p>
+                                        <p><small>ของเล่มทะเบียนรถ และโฉนดที่ดิน</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+@code {
+    DateOnly date { get; set; } = DateOnly.FromDateTime(DateTime.Now);
+    int collateral { get; set; } = 1;
+
+}
