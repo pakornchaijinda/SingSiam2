@@ -206,17 +206,28 @@
                                                                     <td class="text-end">
                                                                         <MudStack Row="true" Class="mt-2">
                                                                             <div class="btn-group" role="group">
-                                                                                <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                                <button id="contractdropdown" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                                                                     ข้อมูลสัญญา
                                                                                 </button>
-                                                                                <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                                                <ul class="dropdown-menu" aria-labelledby="contractdropdown">
                                                                                     <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>viewContract( items.CustomerId,items.Id,items.BranchId)">ดูข้อมูลสัญญา</a></li>
                                                                                     <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>printContract(items.Id)">พิมพ์สัญญา</a></li>
                                                                                     <li><a style="cursor:pointer; background-color:red; color:#fff;" class="dropdown-item" @onclick="()=>deleteContract()">ลบสัญญา</a></li>
                                                                                 </ul>
                                                                             </div>
+
+                                                                            <div class="btn-group" role="group">
+                                                                                <button id="paymentdropdown" type="button" style="@buttoncolor1" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                                    ชำระค่างวด
+                                                                                </button>
+                                                                                <ul class="dropdown-menu" aria-labelledby="paymentdropdown">
+                                                                                    <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>goPayment(items.CustomerId,items.Id,items.BranchId)">ชำระค่างวด</a></li>
+                                                                                    <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>printPaymentDetail()">พิมพ์รายละเอียด</a></li>
+                                                                             
+                                                                                </ul>
+                                                                            </div>
                                                                             @* <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.RemoveRedEye" Color="Color.Default" @onclick="()=>viewContract( items.CustomerId,items.Id,items.BranchId)">ดูข้อมูลสัญญา</MudButton> *@
-                                                                            <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Money" Style="@buttoncolor1" @onclick="()=>goPayment(items.CustomerId,items.Id,items.BranchId)">ชำระค่างวด</MudButton>
+                                                                            @* <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Money" Style="@buttoncolor1" @onclick="()=>goPayment(items.CustomerId,items.Id,items.BranchId)">ชำระค่างวด</MudButton> *@
 
                                                                          
                                                                             
