@@ -178,6 +178,7 @@
     SingsiamdbContext db = new SingsiamdbContext();
     Customer cus_info = new Customer();
     string Bill_code { get; set; }
+    string Bill_code_before { get; set; }
     List<Externalar> list_Externalar = new List<Externalar>();
     Login userLogin = new Login();
 
@@ -214,9 +215,9 @@
     private void get_data()
     {
         cus_info = db.Customers.Include(s => s.Branch).Where(s => s.CustomerId == c_id).FirstOrDefault();
-        int code = cus_info.Branch.Arpaidno.Value;
+        int code = db.Branches.Where(s=>s.Id == cus_info.BranchId).AsNoTracking().FirstOrDefault().Arpaidno.Value;
         Bill_code = $"{cus_info.Branch.Code}_{code.ToString("D7")}";
-        Elements = db.Externalars.Where(s => s.CustomerId == c_id).OrderByDescending(s => s.Tdesc).AsNoTracking().ToList();
+        Elements = db.Externalars.Where(s => s.CustomerId == c_id).OrderByDescending(s => s.Id).AsNoTracking().ToList();
         int cmd = 1;
         foreach (var data in Elements)
         {
@@ -281,7 +282,7 @@
     }
     private void refresh()
     {
-
+        get_data();
         depts_details = null;
         depts_amount = null;
         StateHasChanged();
@@ -289,10 +290,10 @@
 
     private async Task print()
     {
-        var check_in_table = db.Externalars.Where(s => s.Docno == Bill_code).Any();
+        var check_in_table = db.Externalars.Where(s => s.Docno == Bill_code_before).Any();
         if (check_in_table)
         {
-            string url = $"/CustomerDeptRecipe/{Bill_code}";
+            string url = $"/CustomerDeptRecipe/{Bill_code_before}";
             await JSRuntime.InvokeAsync<object>("open", url, "_blank");
         }
         else
