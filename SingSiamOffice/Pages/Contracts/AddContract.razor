@@ -90,34 +90,26 @@
        </div>
     </div>
     <div class="container-fluid mt-4 mb-4">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-6">
-                        <MudText Typo="Typo.h6">ข้อมูลภาษี</MudText>
-                    </div>
-                    <div class="col-6 text-end">
-                        <MudRadioGroup @bind-Value="vat">
-                            <MudRadio Value="1" Color="Color.Primary" Size="Size.Medium">Vat</MudRadio>
-                            <MudRadio Value="2" Color="Color.Secondary" Size="Size.Medium">NVat</MudRadio>
-
-                        </MudRadioGroup>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="container-fluid mt-4 mb-4">
         <div class="card outer-card">
             <div class="card-header" style="@tableheader">ข้อมูลหลักประกัน</div>
             <div class="card-body">
                 <div class="row">
+                    <div class="col-md-6 pb-3">
+                           <MudStack Row="true">
+                        <MudText Typo="Typo.body1" Class="mt-2">ข้อมูลภาษี</MudText>
+                            <MudRadioGroup T="int" @bind-Value="vat" SelectedOptionChanged="RadioChagne">
+                            <MudRadio Value="1" Color="Color.Primary" Size="Size.Medium">Vat</MudRadio>
+                            <MudRadio Value="2" Color="Color.Secondary" Size="Size.Medium">NVat</MudRadio>
+
+                        </MudRadioGroup>
+                        </MudStack>
+                    </div>
+                </div>
+                <div class="row">
                      <div class="col-md-6 pb-3">
                             <MudStack Row="true">
                                 <MudText Typo="Typo.body1" Class="mt-2">ประเภทหลักประกัน</MudText>
-                            <MudAutocomplete T="Collateral" Style="@field_box" ToStringFunc="@(e=> e==null?null : $"{e.Name}")" SearchFunc="SearchCollateral" Label="ประเภทหลักประกัน" Placeholder="กรุณาระบุประเภทหลักประกัน" @bind-Value="select_collateral" Clearable="true" Required="true" RequiredError="กรุณาระบุประเภทหลักประกัน!" Variant="Variant.Outlined" Margin="Margin.Dense">
+                            <MudAutocomplete Disabled="disable_product" T="Collateral" Style="@field_box" ToStringFunc="@(e=> e==null?null : $"{e.Name}")" SearchFunc="SearchCollateral" Label="ประเภทหลักประกัน" Placeholder="กรุณาระบุประเภทหลักประกัน" @bind-Value="select_collateral" Clearable="true" Required="true" RequiredError="กรุณาระบุประเภทหลักประกัน!" Variant="Variant.Outlined" Margin="Margin.Dense">
                                               
                                             </MudAutocomplete>
                             </MudStack>

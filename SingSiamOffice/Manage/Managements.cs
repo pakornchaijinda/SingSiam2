@@ -174,14 +174,24 @@ namespace SingSiamOffice.Manage
             var receipt_no = prefix + numberPart;
             return receipt_no;
         }
-        public async Task<string> Get_Ref_Code(int branch_id, string type, string branch_code, int product_id)
+        public async Task<string> Get_Ref_Code(int branch_id, string type, string branch_code, int product_id,int vat)
         {
+            int next_no = 0;
             //var next_no = db.RunningNos.AsNoTracking().Where(s => s.BranchId == branch_id && s.Type == type).FirstOrDefault().NextNo;
             var product_code = db.Collaterals.AsNoTracking().Where(s => s.Id == product_id).FirstOrDefault().Refcode;
-             var next_no = db.Branches.AsNoTracking().Where(s => s.Id == branch_id).FirstOrDefault().Refcode +1;
+            //var next_no = db.Branches.AsNoTracking().Where(s => s.Id == branch_id).FirstOrDefault().Refcode +1;
+
+            if (vat == 1)
+            {
+                next_no = (int)db.ProductRefcodes.AsNoTracking().Where(s => s.BranchId == branch_id && s.CollateralId == product_id).FirstOrDefault().RefcodeV + 1;
+            }
+            else
+            {
+                next_no = (int)db.ProductRefcodes.AsNoTracking().Where(s => s.BranchId == branch_id && s.CollateralId == product_id).FirstOrDefault().RefcodeNv + 1;
+            }
            
-            int nextNo = Convert.ToInt32(next_no);
-            string numberPart = nextNo.ToString("D4");
+           
+            string numberPart = next_no.ToString("D4");
             string result = product_code.Trim() + "-" + numberPart + "/" + branch_code;
             return result;
         }

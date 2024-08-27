@@ -45,6 +45,7 @@ namespace SingSiamOffice.Pages.Contracts
         Helpers.calamount c { get; set; }
         bool addGuarantor { get; set; } = false;
 
+        bool disable_product = true;
         Province _select_province = null;
         Province select_province
         {
@@ -75,7 +76,7 @@ namespace SingSiamOffice.Pages.Contracts
                 {
                     _select_collateral = value;
                     PromiseInfo.ProductId = _select_collateral.Id;
-                    GetRefCode();
+                    GetRefCode(vat);
                     StateHasChanged();
                 }
                 else
@@ -86,7 +87,11 @@ namespace SingSiamOffice.Pages.Contracts
             }
 
         }
-
+        private void RadioChagne(int b) 
+        {
+            disable_product = false;
+            StateHasChanged();
+        }
 
         #region Parameter
 
@@ -562,9 +567,9 @@ namespace SingSiamOffice.Pages.Contracts
             }
         }
   
-        private async void GetRefCode() 
+        private async void GetRefCode(int vat) 
         {
-            var RefCode = await Managements.Get_Ref_Code(branch_id, "refcode", branch.BranchCode, select_collateral.Id);
+            var RefCode = await Managements.Get_Ref_Code(branch_id, "refcode", branch.BranchCode, select_collateral.Id,vat);
             PromiseInfo.Refcode = RefCode;
         }
         private async Task submit()
