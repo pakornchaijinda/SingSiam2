@@ -67,16 +67,21 @@ namespace SingSiamOffice.Pages.CustomerManagement.CustomerInfo
         {
             try
             {
-                userLogin = userLoginService.UserLogin;
-                if (userLogin == null)
+                var auth = await localStorage.GetItemAsync<string>("authToken");
+                if (auth == null)
                 {
                     navigationManager.NavigateTo("/");
+                }
+                else
+                {
+                    userLogin = db.Logins.Where(s => s.Username == auth).FirstOrDefault();
                 }
             }
             catch
             {
                 navigationManager.NavigateTo("/");
             }
+
             list_customer = await managements.GetCustomerbyBranch(b_id);
             
         }
