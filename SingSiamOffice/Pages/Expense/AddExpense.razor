@@ -7,7 +7,8 @@
 @using System.Text;
 @inject ISnackbar Snackbar
 @inject UserLoginService userLoginService
-
+@using Blazored.LocalStorage
+@inject ILocalStorageService localStorage
 <Navbar2></Navbar2>
 <!-- Content Start -->
 <div class="content">
@@ -211,10 +212,14 @@
     {
         try
         {
-            userLogin = userLoginService.UserLogin;
-            if (userLogin == null)
+            var auth = await localStorage.GetItemAsync<string>("authToken");
+            if (auth == null)
             {
                 navigationManager.NavigateTo("/");
+            }
+            else
+            {
+                userLogin = db.Logins.Where(s => s.Username == auth).FirstOrDefault();
             }
         }
         catch
