@@ -4,6 +4,7 @@
 @using SingSiamOffice.Manage
 @using Microsoft.EntityFrameworkCore;
 @using System.Globalization;
+
 <style>
 
     .receipt {
@@ -393,6 +394,7 @@
     Externalar receipt = new Externalar();
     double sum_price = 0;
     string thai_text = "";
+
     protected override async Task OnInitializedAsync()
     {
         list_Externalar = db.Externalars.Include(s => s.Login).Where(s => s.Docno == DocNo).ToList();
