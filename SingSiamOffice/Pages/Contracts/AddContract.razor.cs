@@ -708,7 +708,7 @@ namespace SingSiamOffice.Pages.Contracts
             PromiseInfo.BranchId = branch_id;
             PromiseInfo.Usercode = username;
             PromiseInfo.Person1 = username;
-            PromiseInfo.Interest_Service = c.total_interate_service;
+            PromiseInfo.Interest_Service = (c.total_interate_service > 0)?c.total_interate_service : c.interate;
             PromiseInfo.CapitalCal = c.capital;
             PromiseInfo.ContractType = contract_type;
             if (guarantor == 1)

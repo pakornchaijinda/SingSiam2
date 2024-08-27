@@ -692,7 +692,6 @@ public partial class SingsiamdbContext : DbContext
 
             entity.HasOne(d => d.Promise).WithMany(p => p.Periodtrans)
                 .HasForeignKey(d => d.PromiseId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_periodtran_promise");
         });
 
