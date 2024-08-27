@@ -131,6 +131,10 @@ namespace SingSiamOffice.Pages.CustomerManagement.CustomerInfo
         {
             navigationManager.NavigateTo("/contractreport");
         }
+        private void printPaymentDetail()
+        {
+            navigationManager.NavigateTo("/customerpaymentreport");
+        }
 
         private void goBlacklist(int brach_id)
         {

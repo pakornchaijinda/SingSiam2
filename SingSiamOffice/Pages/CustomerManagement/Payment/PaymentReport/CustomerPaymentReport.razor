@@ -1,0 +1,148 @@
+﻿@page "/customerpaymentreport"
+@* <h3>CustomerPaymentReport</h3> *@
+
+
+<style>
+    .left-detail {
+        line-height: 1px;
+    }
+
+    .contract-detail {
+        line-height: 1.5px;
+    }
+
+    .headerTitle {
+        font-weight: bold;
+    }
+    th,td{
+        font-size:12px;
+    }
+</style>
+<div id="printableArea">
+    <div class="container-fuid">
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="headerTitle">
+                    บริษัท สิงห์สยาม ลิสซิ่ง จำกัด
+                </div>
+                <div class="headerTitle">
+                    [เงินด่วน พร้อมใช้] เลขประจำตัวผู้เสียภาษี 0365561000591
+                </div>
+            </div>
+            <p>---------------------------------------------------------------------------------------------------------------------------------------------------</p>
+            <div class="container contract-detail mt-4 mb-4">
+                <div class="col-12">
+                    <p class="contract-detail"><small>เลขที่อ้างอิง : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>@date</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; วันที่ทำสัญญา:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>@date</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; เลขที่สัญญา: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>0091/11</strong></small></p>
+                    <p class="contract-detail"><small>ผู้ทำสัญญา : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>แม่ปู</strong></small></p>
+                    <p class="contract-detail"><small>ที่อยู่ : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>หกดหกดกดฟห หกดหก กหดหด หกด หกด หกดหก  23423</strong></small></p>
+                    <p class="contract-detail"><small>บุคคลอ้างอิง : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>นาย abcd efghijk</strong></small></p>
+                    @* ประเภทหลักประกัน *@
+                    <p class="contract-detail"><small>หลักประกัน: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>รถจักยานยนต์</strong></small></p>
+                    @if (collateral == 1)
+                    {
+                        <p class="contract-detail"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ยี่ห้อรถ &nbsp;&nbsp;<strong>Honda</strong>, รุ่น &nbsp;&nbsp;<strong>Wave 110 I</strong>, รถปี &nbsp;&nbsp;<strong>2564</strong></small></p>
+                        <p class="contract-detail"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; สี &nbsp;&nbsp;<strong>เขียว</strong>, เลขทะเบียน &nbsp;&nbsp;<strong>กก 123</strong>, จังหวัด &nbsp;&nbsp;<strong>เพชรบูรณ์</strong></small></p>
+                        <p class="contract-detail"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; เลขตัวรถ &nbsp;&nbsp;<strong>WQQEQESDVSDVSD</strong>, เลขตัวถัง &nbsp;&nbsp;<strong>ASDASDASDASD</strong>, วันที่ครบภาษี &nbsp;&nbsp;<strong>13 มกราคม 2568</strong></small></p>
+                    }
+                  
+                    @if (collateral == 2)
+                    {
+                        <p class="contract-detail"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ประเภทโฉนด &nbsp;&nbsp;<strong>นส.4</strong>, เลขที่โฉนด &nbsp;&nbsp;<strong>6799</strong>, ประเภทที่ดิน &nbsp;&nbsp;<strong>ที่บ้าน</strong></small></p>
+                        <p class="contract-detail"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ระวาง &nbsp;&nbsp;<strong>5242 IV 3854-4</strong>, เลขที่ดิน &nbsp;&nbsp;<strong>423</strong>, เล่ม &nbsp;&nbsp;<strong>680</strong></small></p>
+                        <p class="contract-detail"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; หน้า &nbsp;&nbsp;<strong>99</strong>, หน้าสำรวจ &nbsp;&nbsp;<strong>4634</strong>, จำนวนที่ดิน &nbsp;&nbsp;<strong>18.5 ตรว.</strong></small></p>
+                    }
+                    
+
+                    <p class="contract-detail"><small>ผู้ค้ำประกัน#1 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>นาย abcd efghijk</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ความสัมพันธ์ผู้ซื้อ : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>แฟน</strong></small></p>
+                    <p class="contract-detail"><small>บุคคลอ้างอิง: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>-</strong></small></p>
+                    <p class="contract-detail"><small>ผู้ค้ำประกัน#2 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>นาย abcd efghijk</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ความสัมพันธ์ผู้ซื้อ : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>แฟน</strong></small></p>
+                    <p class="contract-detail"><small>บุคคลอ้างอิง: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>-</strong></small></p>
+                    <p class="contract-detail text-end"><small>เงินดาวน์ : &nbsp;&nbsp; <strong>25,000</strong> &nbsp;&nbsp; จำนวนงวด: &nbsp;&nbsp; <strong>30</strong>&nbsp;&nbsp; เงินต้นทำสัญญา: &nbsp;&nbsp; <strong>25,000</strong>&nbsp;&nbsp; เงินต้นคงเหลือ: &nbsp;&nbsp; <strong>25,000</strong>&nbsp;&nbsp; ชำระทุกวันที่: &nbsp;&nbsp; <strong>9</strong></small></p>
+                    <p class="contract-detail text-end"><small>ภาษีมูลค่าเพิ่ม (7%) : &nbsp;&nbsp; <strong>2,103.03</strong> &nbsp;&nbsp; ดอกเบี้ย: &nbsp;&nbsp; <strong>5,002</strong>&nbsp;&nbsp; ต่อปี: &nbsp;&nbsp; <strong>10.11%</strong></small></p>
+                </div>
+                <br />
+                <div class="col-12 mt-2 mb-4">
+                    <table class="table table-bordered" style="padding:0; width:100%;">
+                        <thead class="text-center">
+                            <tr style="background-color:#e5e5e5;">
+                                <th style="font-weight:bold;">งวด</th>
+                                <th style="font-weight:bold;">วันที่ครบ</th>
+                                <th style="font-weight:bold;">วันที่ชำระ</th>
+                                <th style="font-weight:bold;">ใบเสร็จ</th>
+                                <th style="font-weight:bold;">ค่างวด</th>
+                                <th style="font-weight:bold;">เงินต้น</th>
+                                 <th style="font-weight:bold;">ดอกเบี้ย</th>
+                                <th style="font-weight:bold;">vat</th>
+                                <th style="font-weight:bold;">ค่าปรับ</th>
+                                <th style="font-weight:bold;">ทวงถาม</th>
+                                <th style="font-weight:bold;">รวมชำระ</th>
+                                <th style="font-weight:bold;">เงินต้นคงเหลือ</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>9/8/64</td>
+                                <td>9/8/64</td>
+                                <td>PAV0001</td>
+                                <td>
+                                        <p><strong>1380</strong></p>
+                                        <p><small>-1380</small></p>
+                                </td>
+                                <td>
+                                        <p><strong>1080</strong></p>
+                                        <p><small>-1080</small></p>
+                                </td>
+                                <td>
+                                        <p><strong>281</strong></p>
+                                        <p><small>-281</small></p>
+                                </td>
+                                <td>87.66</td>
+                                <td> </td>
+                                <td> </td>
+                                <td>1,340</td>
+                                <td>23,958</td>
+                            </tr>
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td></td>
+                                <td>ยอดรวม</td>
+                                <td></td>
+                                <td>4,010</td>
+                                <td>4,010</td>
+                                <td>3,126</td>
+                                <td>876</td>
+                                <td> </td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>4,010</td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 mt-4">
+                <p>พิมพ์เมื่อวันที่ <strong> @date</strong></p>
+
+            </div>
+            <div class="col-6 mt-4 text-end">
+                <p>บันทึกข้อมูลโดย: <strong>ss06 :นางสาวปาริฉัตร  กิงก่องแก้ว</strong></p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    DateOnly date { get; set; } = DateOnly.FromDateTime(DateTime.Now);
+    int collateral { get; set; } = 2;
+
+
+}
