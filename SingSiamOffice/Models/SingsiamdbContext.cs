@@ -1192,7 +1192,7 @@ public partial class SingsiamdbContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("tdateformat");
             entity.Property(e => e.Usercode)
-                .HasMaxLength(20)
+                .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("usercode");
 
@@ -1218,7 +1218,6 @@ public partial class SingsiamdbContext : DbContext
 
             entity.HasOne(d => d.Receipttran).WithMany(p => p.Receiptdescs)
                 .HasForeignKey(d => d.ReceipttranId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_receiptdesc_receipttran");
         });
 
@@ -1303,7 +1302,7 @@ public partial class SingsiamdbContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("tdateformat");
             entity.Property(e => e.Usercode)
-                .HasMaxLength(20)
+                .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("usercode");
 
@@ -1509,7 +1508,7 @@ public partial class SingsiamdbContext : DbContext
                 .HasColumnName("transferpaid");
             entity.Property(e => e.UploadImg).HasColumnName("upload_img");
             entity.Property(e => e.Usercode)
-                .HasMaxLength(20)
+                .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasDefaultValueSql("('-')")
                 .HasColumnName("usercode");
@@ -1657,7 +1656,7 @@ public partial class SingsiamdbContext : DbContext
                 .HasColumnName("transferdate");
             entity.Property(e => e.Transferpaid).HasColumnName("transferpaid");
             entity.Property(e => e.Usercode)
-                .HasMaxLength(20)
+                .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("usercode");
 

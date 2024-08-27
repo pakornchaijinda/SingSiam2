@@ -1,6 +1,10 @@
-﻿@page "/customerpaymentreport"
+﻿@page "/customerpaymentreport/{promise_id:int}"
 @* <h3>CustomerPaymentReport</h3> *@
-
+@using Models
+@using SingSiamOffice.Manage;
+@using Microsoft.EntityFrameworkCore;
+@using System.Globalization;
+@using Newtonsoft.Json;
 
 <style>
     .left-detail {
@@ -32,33 +36,58 @@
             <p>---------------------------------------------------------------------------------------------------------------------------------------------------</p>
             <div class="container contract-detail mt-4 mb-4">
                 <div class="col-12">
-                    <p class="contract-detail"><small>เลขที่อ้างอิง : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>@date</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; วันที่ทำสัญญา:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>@date</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; เลขที่สัญญา: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>0091/11</strong></small></p>
-                    <p class="contract-detail"><small>ผู้ทำสัญญา : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>แม่ปู</strong></small></p>
-                    <p class="contract-detail"><small>ที่อยู่ : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>หกดหกดกดฟห หกดหก กหดหด หกด หกด หกดหก  23423</strong></small></p>
-                    <p class="contract-detail"><small>บุคคลอ้างอิง : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>นาย abcd efghijk</strong></small></p>
+                    <p class="contract-detail"><small>เลขที่อ้างอิง : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>@_promises.Promiseno</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; วันที่ทำสัญญา:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>@_promises.Tdatetime.Value.ToString("d MMMM yyyy", new CultureInfo("th-TH"))</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; เลขที่สัญญา: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>@_promises.Refcode</strong></small></p>
+                    <p class="contract-detail"><small>ผู้ทำสัญญา : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>@_promises.Customer.FullName</strong></small></p>
+                    <p class="contract-detail"><small>ที่อยู่ : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>@_promises.Customer.Address</strong></small></p>
+                    <p class="contract-detail"><small>บุคคลอ้างอิง : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>-</strong></small></p>
                     @* ประเภทหลักประกัน *@
-                    <p class="contract-detail"><small>หลักประกัน: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>รถจักยานยนต์</strong></small></p>
-                    @if (collateral == 1)
+                    <p class="contract-detail"><small>หลักประกัน: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>@_promises.Product.Name</strong></small></p>
+                    @if (_promises.ProductId == 1 || _promises.ProductId == 2 || _promises.ProductId == 4)
                     {
-                        <p class="contract-detail"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ยี่ห้อรถ &nbsp;&nbsp;<strong>Honda</strong>, รุ่น &nbsp;&nbsp;<strong>Wave 110 I</strong>, รถปี &nbsp;&nbsp;<strong>2564</strong></small></p>
-                        <p class="contract-detail"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; สี &nbsp;&nbsp;<strong>เขียว</strong>, เลขทะเบียน &nbsp;&nbsp;<strong>กก 123</strong>, จังหวัด &nbsp;&nbsp;<strong>เพชรบูรณ์</strong></small></p>
-                        <p class="contract-detail"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; เลขตัวรถ &nbsp;&nbsp;<strong>WQQEQESDVSDVSD</strong>, เลขตัวถัง &nbsp;&nbsp;<strong>ASDASDASDASD</strong>, วันที่ครบภาษี &nbsp;&nbsp;<strong>13 มกราคม 2568</strong></small></p>
+                        <p class="contract-detail"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ยี่ห้อรถ &nbsp;&nbsp;<strong>@collateral1.vehicle_brand</strong>, รุ่น &nbsp;&nbsp;<strong>@collateral1.vehicle_ver</strong>, รถปี &nbsp;&nbsp;<strong>@collateral1.vehicle_yr</strong></small></p>
+                        <p class="contract-detail"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; สี &nbsp;&nbsp;<strong>@collateral1.vehicle_color</strong>, เลขทะเบียน &nbsp;&nbsp;<strong>@collateral1.plate</strong>, จังหวัด &nbsp;&nbsp;<strong>@_promises.Province.ProvinceName</strong></small></p>
+                        <p class="contract-detail"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; เลขตัวรถ &nbsp;&nbsp;<strong>@collateral1.machineNo</strong>, เลขตัวถัง &nbsp;&nbsp;<strong>@collateral1.chassisNo</strong>, วันที่ครบภาษี &nbsp;&nbsp;<strong>@collateral1.tax_issue</strong></small></p>
                     }
                   
-                    @if (collateral == 2)
+                    @if (_promises.ProductId == 3)
                     {
-                        <p class="contract-detail"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ประเภทโฉนด &nbsp;&nbsp;<strong>นส.4</strong>, เลขที่โฉนด &nbsp;&nbsp;<strong>6799</strong>, ประเภทที่ดิน &nbsp;&nbsp;<strong>ที่บ้าน</strong></small></p>
-                        <p class="contract-detail"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ระวาง &nbsp;&nbsp;<strong>5242 IV 3854-4</strong>, เลขที่ดิน &nbsp;&nbsp;<strong>423</strong>, เล่ม &nbsp;&nbsp;<strong>680</strong></small></p>
-                        <p class="contract-detail"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; หน้า &nbsp;&nbsp;<strong>99</strong>, หน้าสำรวจ &nbsp;&nbsp;<strong>4634</strong>, จำนวนที่ดิน &nbsp;&nbsp;<strong>18.5 ตรว.</strong></small></p>
+                        <p class="contract-detail"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ประเภทโฉนด &nbsp;&nbsp;<strong>@collateral2.deedType</strong>, เลขที่โฉนด &nbsp;&nbsp;<strong>@collateral2.deedNo</strong>, ประเภทที่ดิน &nbsp;&nbsp;<strong>@collateral2.landType</strong></small></p>
+                        <p class="contract-detail"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ระวาง &nbsp;&nbsp;<strong>@collateral2.mapsheet</strong>, เลขที่ดิน &nbsp;&nbsp;<strong>@collateral2.parcelNo</strong>, เล่ม &nbsp;&nbsp;<strong>@collateral2.volumn</strong></small></p>
+                        <p class="contract-detail"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; หน้า &nbsp;&nbsp;<strong>@collateral2.page</strong>, หน้าสำรวจ &nbsp;&nbsp;<strong>@collateral2.pageInspect</strong>, จำนวนที่ดิน &nbsp;&nbsp;<strong>@collateral2.landAmount</strong></small></p>
                     }
-                    
+                    @if (_promises.ProductId == 5)
+                    {
+                        <p class="contract-detail"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; เลขที่สมุด &nbsp;&nbsp;<strong>@collateral3.bookNo</strong>, เลขที่รหัสเกษตรกร &nbsp;&nbsp;<strong>@collateral3.farmerCode</strong>, วันที่ขึ้นทะเบียน &nbsp;&nbsp;<strong>@collateral3.fregisDate</strong></small></p>
+                        <p class="contract-detail"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; เอกสารสิทธิ์ &nbsp;&nbsp;<strong>@collateral3.docRight</strong>, การถือครอง &nbsp;&nbsp;<strong>@collateral3.fHolding</strong>, กิจกรรม &nbsp;&nbsp;<strong>@collateral3.fActivity</strong></small></p>
+                        <p class="contract-detail"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; เนื้อที่ &nbsp;&nbsp;<strong>@collateral3.fArea</strong>, ผลผลิต &nbsp;&nbsp;<strong>@collateral3.fProduct</strong>, ที่ตั้ง X:Y:Z &nbsp;&nbsp;<strong>@collateral3.fLocate</strong></small></p>
+                    }
 
-                    <p class="contract-detail"><small>ผู้ค้ำประกัน#1 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>นาย abcd efghijk</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ความสัมพันธ์ผู้ซื้อ : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>แฟน</strong></small></p>
-                    <p class="contract-detail"><small>บุคคลอ้างอิง: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>-</strong></small></p>
-                    <p class="contract-detail"><small>ผู้ค้ำประกัน#2 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>นาย abcd efghijk</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ความสัมพันธ์ผู้ซื้อ : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>แฟน</strong></small></p>
-                    <p class="contract-detail"><small>บุคคลอ้างอิง: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>-</strong></small></p>
-                    <p class="contract-detail text-end"><small>เงินดาวน์ : &nbsp;&nbsp; <strong>25,000</strong> &nbsp;&nbsp; จำนวนงวด: &nbsp;&nbsp; <strong>30</strong>&nbsp;&nbsp; เงินต้นทำสัญญา: &nbsp;&nbsp; <strong>25,000</strong>&nbsp;&nbsp; เงินต้นคงเหลือ: &nbsp;&nbsp; <strong>25,000</strong>&nbsp;&nbsp; ชำระทุกวันที่: &nbsp;&nbsp; <strong>9</strong></small></p>
-                    <p class="contract-detail text-end"><small>ภาษีมูลค่าเพิ่ม (7%) : &nbsp;&nbsp; <strong>2,103.03</strong> &nbsp;&nbsp; ดอกเบี้ย: &nbsp;&nbsp; <strong>5,002</strong>&nbsp;&nbsp; ต่อปี: &nbsp;&nbsp; <strong>10.11%</strong></small></p>
+                    @if(_guarantor.Count > 0)
+                    {
+                        for (int i = 0; i < _guarantor.Count; i++)
+                        {
+                            if (i == 0)
+                            {
+                                <p class="contract-detail"><small>ผู้ค้ำประกัน#1 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>@_guarantor[i].GuarantorName</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ความสัมพันธ์ผู้ซื้อ : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>@_guarantor[i].GuarantorRelation</strong></small></p>
+                                <p class="contract-detail"><small>บุคคลอ้างอิง: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>-</strong></small></p>
+                            }
+                            else if(i == 1)
+                            {
+                                <p class="contract-detail"><small>ผู้ค้ำประกัน#2 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>@_guarantor[i].GuarantorName</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ความสัมพันธ์ผู้ซื้อ : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>@_guarantor[i].GuarantorRelation</strong></small></p>
+                                <p class="contract-detail"><small>บุคคลอ้างอิง: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>-</strong></small></p>
+
+                            }
+
+                        }
+                    }
+                  
+                       
+                      
+                    
+                 
+                  
+                    <p class="contract-detail text-end"><small>เงินดาวน์ : &nbsp;&nbsp; <strong>0</strong> &nbsp;&nbsp; จำนวนงวด: &nbsp;&nbsp; <strong>@_promises.Periods</strong>&nbsp;&nbsp; เงินต้นทำสัญญา: &nbsp;&nbsp; <strong>@_promises.Capital</strong>&nbsp;&nbsp; เงินต้นคงเหลือ: &nbsp;&nbsp; <strong>@_promises.Capital</strong>&nbsp;&nbsp; ชำระทุกวันที่: &nbsp;&nbsp; <strong>@_promises.Daypaid</strong></small></p>
+                    <p class="contract-detail text-end"><small>ภาษีมูลค่าเพิ่ม (7%) : &nbsp;&nbsp; <strong></strong> &nbsp;&nbsp; ดอกเบี้ย: &nbsp;&nbsp; <strong>@_promises.Interest </strong>&nbsp;&nbsp; ต่อปี: &nbsp;&nbsp; <strong></strong></small></p>
                 </div>
                 <br />
                 <div class="col-12 mt-2 mb-4">
@@ -132,7 +161,7 @@
 
             </div>
             <div class="col-6 mt-4 text-end">
-                <p>บันทึกข้อมูลโดย: <strong>ss06 :นางสาวปาริฉัตร  กิงก่องแก้ว</strong></p>
+                <p>บันทึกข้อมูลโดย: <strong>@_promises.Usercode :@globalData.fullname</strong></p>
 
             </div>
         </div>
@@ -143,6 +172,71 @@
 @code {
     DateOnly date { get; set; } = DateOnly.FromDateTime(DateTime.Now);
     int collateral { get; set; } = 2;
+    [Parameter]
+    public int promise_id { get; set; }
+    private Promise _promises { get; set; }
+    SingsiamdbContext db = new SingsiamdbContext();
+    [Inject]
+    Manage.Managements Managements { get; set; }
+    [Inject]
+    Manage.GlobalData globalData { get; set; }
+    Collateral1 collateral1 = new Collateral1();
+    Collateral2 collateral2 = new Collateral2();
+    Collateral3 collateral3 = new Collateral3();
+    private List<Guarantor> _guarantor { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        _promises = db.Promises.Include(s => s.Periodtrans).Include(s => s.Customer).ThenInclude(s => s.Branch).Include(s => s.Product).Include(s => s.Province).Where(s => s.Id == promise_id).AsNoTracking().FirstOrDefault();
 
+
+        _promises.Interest = (decimal)_promises.Periodtrans.Select(s => s.Interest).FirstOrDefault();
+
+        try
+        {
+            _guarantor = await Managements.GetGurantorbyPromiseId(promise_id); //ผู้ค้ำ
+
+        }
+        catch(Exception ex) { }
+        List<int> product_group = new List<int> { 1, 2, 4 };
+        if (product_group.Contains(_promises.ProductId))
+        {
+            collateral1 = JsonConvert.DeserializeObject<Collateral1>(_promises.JsonPrddesc);
+        }
+        if (_promises.ProductId == 3)
+        {
+            collateral2 = JsonConvert.DeserializeObject<Collateral2>(_promises.JsonPrddesc);
+        }
+        if (_promises.ProductId == 5)
+        {
+            collateral3 = JsonConvert.DeserializeObject<Collateral3>(_promises.JsonPrddesc);
+        }
+    }
+    public string FormatThaiYear(DateTime date)
+    {
+        // Add 543 years to the Gregorian year to get the Thai Buddhist year
+        int thaiYear = date.Year + 543;
+
+        // Format the date as you want, for example, "dd/MM/yyyy"
+        return date.ToString($"dd/MM/{thaiYear}");
+    }
+    public string FormatThaiYear_Increate(DateTime date)
+    {
+        // Add 543 years to the Gregorian year to get the Thai Buddhist year
+        int thaiYear = date.Year + 544;
+
+        // Format the date as you want, for example, "dd/MM/yyyy"
+        return date.ToString($"dd/MM/{thaiYear}");
+    }
+    public string FormatThaiYear_Increase_str(string dateStr)
+    {
+        // Parse the input string to a DateTime object
+        DateTime date = DateTime.ParseExact(dateStr, "dd/MM/yyyy", null);
+
+        // Add 544 years to the Gregorian year to get the desired Thai Buddhist year
+        int thaiYear = date.Year + 544;
+
+        // Return the date formatted with the new Thai year
+        return date.ToString($"dd/MM/{thaiYear}");
+    }
 
 }

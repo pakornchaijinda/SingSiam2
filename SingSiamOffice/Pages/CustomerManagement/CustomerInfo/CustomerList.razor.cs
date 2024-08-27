@@ -140,9 +140,11 @@ namespace SingSiamOffice.Pages.CustomerManagement.CustomerInfo
             string url = $"/contractreport/{id.ToString()}";
             await JSRuntime.InvokeAsync<object>("open", url, "_blank");
         }
-        private void printPaymentDetail()
+        private async Task printPaymentDetail(int id)
         {
-            navigationManager.NavigateTo("/customerpaymentreport");
+            //navigationManager.NavigateTo($"/customerpaymentreport/{id}");
+            string url = $"/customerpaymentreport/{id.ToString()}";
+            await JSRuntime.InvokeAsync<object>("open", url, "_blank");
         }
 
         private void goBlacklist(int brach_id)
