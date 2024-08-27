@@ -29,33 +29,27 @@
                   
                     <div class="col-md-12 pb-3">
                         <div class="row">
-                            <div class="col-4 pb-3 text-center">
-                                <MudStack>
-                                    <MudText Typo="Typo.body1" Style="@imporText">เลขที่รายการ</MudText>
-                                    <MudText Typo="Typo.h6">#@Bill_code</MudText>
-                                </MudStack>
-
-                            </div>
-                            <div class="col-4 pb-3 text-center">
+                            
+                            <div class="col-4 pb-1 text-center">
                                 <MudStack>
                                     <MudText Typo="Typo.body1" Style="@imporText">วันที่ทำรายการ</MudText>
                                     <MudText Typo="Typo.body1">@DateTime.Now.ToString("d MMMM yyyy", new CultureInfo("th-TH"))</MudText>
                                 </MudStack>
                             </div>
-                            <div class="col-4 pb-3 text-center">
+                            <div class="col-4 pb-1 text-center">
                                 <MudStack>
                                     <MudText Typo="Typo.body1" Style="@imporText">เลขบัตรประชาชน</MudText>
                                     <MudText Typo="Typo.body1">@cus_info.NatId</MudText>
                                 </MudStack>
 
                             </div>
-                            <div class="col-4 pb-3 text-center">
+                            <div class="col-4 pb-1 text-center">
                                 <MudStack>
                                     <MudText Typo="Typo.body1" Style="@imporText">ชื่อ - สกุล</MudText>
                                     <MudText Typo="Typo.body1">@cus_info.FullName</MudText>
                                 </MudStack>
                             </div>
-                            <div class="col-4 pb-3 text-center">
+                            <div class="col-4 pb-1 text-center">
                                 <MudStack>
                                     <MudText Typo="Typo.body1" Style="@imporText">เบอร์โทรศัพท์</MudText>
                                     <MudText Typo="Typo.body1">@cus_info.Phone</MudText>
@@ -86,49 +80,58 @@
                         <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.KeyboardArrowDown" DisableElevation="true" Style="@buttoncolor1" Size="Size.Large" @onclick="()=>add_Externalar()">เพิ่มรายการ</MudButton>
                     </div>
                     <div class="col-md-2 pb-3">
-                        <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.KeyboardArrowDown" DisableElevation="true" Style="@buttoncolor2" Size="Size.Large" @onclick="()=>refresh()">ล้างรายการ</MudButton>
+                        <MudButton Variant="Variant.Filled"  DisableElevation="true" Style="@buttoncolor2" Size="Size.Large" @onclick="()=>refresh()">ล้างรายการ</MudButton>
                     </div>
                     <div class="col-md-12 mt-4 mb-4">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead style="@tableheader">
-                                    <tr>
-                                        <th class="col-1">ลำดับ</th>
-                                        <th class="col-2">เลขที่รายการ</th>
-                                        <th class="col-2">วัน/เดือน/ปี</th>
-                                        <th class="col-4">รายละเอียด</th>
-                                        <th class="col-2">จำนวนเงิน</th>
-                                   
-                                        <th class="col-1">เมนูจัดการ</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if (list_Externalar.Count() != 0)
-                                    {
-                                        foreach (var data in list_Externalar)
-                                        {
-                                            <tr>
-                                                <td>@data.No</td>
-                                                <td>@data.Docno</td>
-                                                <td>@data.Tdate.ToString("dd/MM/yyyy")</td>
-                                                <td>@data.Tdesc</td>
-                                                <td>@data.Aramount</td>
-                                 
-
-                                                <td class="text-end">
-                                                    <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Remove" Color="Color.Error" @onclick="()=>remove_list(data.No)">ลบรายการ</MudButton>
-                                                </td>
-                                            </tr>
-                                        }
-                                       
-                                    }
-    
+                       <div class="row">
+                            <div class="col-md-6 pb-1">
+                               <MudText Typo="Typo.body1" Style="@imporText">เลขทีใบเสร็จรับเงิน @Bill_code</MudText>
                                
-                                
-                                </tbody>
+                               
+                            </div>
+                            <div class="col-6 pb-1">
+                                <MudText Typo="Typo.body1" Style="@imporText">จำนวนชำระครั้งนี้: @selectedItems?.Where(s=>s.PaidComplete == false).Sum(x => x.Aramount).Value.ToString("N0")</MudText>
+                            </div>
+                       </div>
+                    </div>
+                    <div class="col-md-12 mt-4 mb-4">
+                        <MudTable @ref="_table" T="Externalar" Items="@Elements" MultiSelection="true" SelectionChangeable="_selectionChangeable" Hover="true"
+                                        @bind-SelectedItems="selectedItems" OnRowClick="@OnRowClick" SelectOnRowClick="@_selectOnRowClick">
+                        
+                            <HeaderContent>
+                                <MudTh>ลำดับ</MudTh>
+                                <MudTh>วันที่</MudTh>
+                                <MudTh>รายละเอียด</MudTh>
+                                <MudTh>ยอดค้าง</MudTh>
+                                <MudTh>สถาณะ</MudTh>
+                                @* <MudTh>จัดการ</MudTh> *@
+                            </HeaderContent>
+                            <RowTemplate>
+                                <MudTd DataLabel="ลำดับ">@context.No</MudTd>
+                            @*     <MudTd DataLabel="Sign">@context.Docno</MudTd> *@
+                                <MudTd DataLabel="วันที่">@context.Tdate.ToString("dd/MM/yyyy")</MudTd>
+                                <MudTd DataLabel="รายละเอียด">@context.Tdesc</MudTd>
+                                <MudTd DataLabel="ยอดค้าง">@context.Aramount</MudTd>
+                               @if(context.PaidComplete.Value){
+                                    <MudTd DataLabel="สถาณะ">
+                                        <MudChip T="string" Color="Color.Success">Success</MudChip>
+                                    </MudTd>
+                                }
+                                else{
 
-                            </table>
-                        </div>
+                                    <MudTd DataLabel="สถาณะ">
+                                        <MudChip T="string" Color="Color.Error">ค้างจ่าย</MudChip>
+                                    </MudTd>
+                                }
+
+                                @* <MudTd DataLabel="จัดการ"> <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Remove" Color="Color.Error" @onclick="()=>remove_list(context.No)">ลบรายการ</MudButton></MudTd> *@
+                            </RowTemplate>
+                            <PagerContent>
+                                <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100 }" />
+                            </PagerContent>
+                          
+                        </MudTable>
+                  
                     </div>
                 </div>
             </div>
@@ -144,14 +147,10 @@
                         <MudText Typo="Typo.body1" Color="Color.Error">* กรุณาตรวจสอบข้อมูลให้ถูกต้องและครบถ้วนทุกครั้งก่อนการเพิ่มข้อมูล</MudText>
                     </div>
                     <div class="col-md-12 mt-3 mb-3 text-center">
-                        <MudButton Variant="Variant.Outlined" DisableElevation="true" Color="Color.Error" @onclick="()=>goBack()">ย้อนกลับ</MudButton>
-                        @if (tosave)
-                        {
-                            <MudButton Variant="Variant.Filled" DisableElevation="true" Style="@buttoncolor1" @onclick="()=>submit()">เพิ่มข้อมูล</MudButton>
-                        }else{
-                            <MudButton Variant="Variant.Filled" DisableElevation="true" Style="@buttoncolor3" @onclick="()=>print()">ปริ้นใบเสร็จ</MudButton>
-                        }
-
+                        <MudButton Variant="Variant.Outlined" DisableElevation="true" Color="Color.Error" @onclick="()=>goBack()">ย้อนกลับ</MudButton>&nbsp;
+                        <MudButton Variant="Variant.Filled" DisableElevation="true" Style="@buttoncolor1" @onclick="()=>submit()">เพิ่มข้อมูล</MudButton>&nbsp;
+                        <MudButton Variant="Variant.Filled" DisableElevation="true" Style="@buttoncolor3" @onclick="()=>print()">ปริ้นใบเสร็จ</MudButton>
+                     
                     </div>
                 </div>
             </div>
@@ -181,6 +180,20 @@
     string Bill_code { get; set; }
     List<Externalar> list_Externalar = new List<Externalar>();
     Login userLogin = new Login();
+
+    private string _selectedItemText = "No row clicked";
+    private MudTable<Externalar> _table;
+    private HashSet<Externalar> selectedItems = new HashSet<Externalar>();
+    private List<Externalar> Elements = new List<Externalar>();
+    private bool _selectOnRowClick = true;
+    private bool _selectionChangeable = true;
+    double sum_total { get; set; }
+    void OnRowClick(TableRowClickEventArgs<Externalar> args)
+    {
+        _selectedItemText = $"{args.Item.Id}";
+
+        StateHasChanged();
+    }
     protected override async Task OnInitializedAsync()
     {
         try
@@ -195,10 +208,21 @@
         {
             navigationManager.NavigateTo("/");
         }
+        get_data();
 
+    }
+    private void get_data()
+    {
         cus_info = db.Customers.Include(s => s.Branch).Where(s => s.CustomerId == c_id).FirstOrDefault();
         int code = cus_info.Branch.Arpaidno.Value;
         Bill_code = $"{cus_info.Branch.Code}_{code.ToString("D7")}";
+        Elements = db.Externalars.Where(s => s.CustomerId == c_id).OrderByDescending(s => s.Tdesc).AsNoTracking().ToList();
+        int cmd = 1;
+        foreach (var data in Elements)
+        {
+            data.No = cmd;
+            cmd++;
+        }
     }
     private  void add_Externalar()
     {
@@ -218,21 +242,23 @@
                 {
                     No = cmd,
                     Tdate = DateTime.Now,
-                    Docno = Bill_code,
+                    Docno = null,
                     CustomerId = c_id,
                     Tdesc = depts_details,
                     Aramount = depts_amount,
-                    Paidamount = depts_amount,
+                    Paidamount = 0,
                     LoginId = userLogin.Id,
                     Clientno = cus_info.Branch.Code,
-
+                    PaidComplete = false
                 };
-            list_Externalar.Add(to_add);
-            StateHasChanged();
-
-
+            db.Externalars.Add(to_add);
+            db.SaveChanges();
+            get_data();
             depts_details = null;
             depts_amount = null;
+            Snackbar.Add("เพิ่มข้อมูลสำเร็จ", Severity.Success);
+            StateHasChanged();
+
         }
         else
         {
@@ -255,18 +281,25 @@
     }
     private void refresh()
     {
-        list_Externalar.Clear();
-        tosave = true;
-        cus_info = db.Customers.Include(s => s.Branch).Where(s => s.CustomerId == c_id).FirstOrDefault();
-        int code = db.Branches.Where(s => s.Id == cus_info.BranchId).AsNoTracking().FirstOrDefault().Arpaidno.Value;
-        Bill_code = $"{cus_info.Branch.Code}_{code.ToString("D7")}";
+
+        depts_details = null;
+        depts_amount = null;
         StateHasChanged();
     }
 
     private async Task print()
     {
-        string url = $"/CustomerDeptRecipe/{Bill_code}";
-        await JSRuntime.InvokeAsync<object>("open", url, "_blank");
+        var check_in_table = db.Externalars.Where(s => s.Docno == Bill_code).Any();
+        if (check_in_table)
+        {
+            string url = $"/CustomerDeptRecipe/{Bill_code}";
+            await JSRuntime.InvokeAsync<object>("open", url, "_blank");
+        }
+        else
+        {
+            Snackbar.Add("โปรดเพิ่มข้อมูลก่อนกด print ใบเสร็จรับเงิน", Severity.Error);
+        }
+
         //navigationManager.NavigateTo("/paymentrecipe");
     }
 

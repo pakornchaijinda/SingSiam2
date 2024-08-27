@@ -9,7 +9,7 @@ public partial class Externalar
 
     public DateTime Tdate { get; set; }
 
-    public string Docno { get; set; } = null!;
+    public string? Docno { get; set; }
 
     public int CustomerId { get; set; }
 
@@ -24,6 +24,8 @@ public partial class Externalar
     public string? Clientno { get; set; }
 
     public int Flg { get; set; }
+
+    public bool? PaidComplete { get; set; }
 
     public virtual Customer Customer { get; set; } = null!;
 

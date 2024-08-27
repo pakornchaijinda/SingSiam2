@@ -31,7 +31,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.CustomerDept
 
         private async Task submit()
         {
-            if (list_Externalar.Count() == 0)
+            if (selectedItems.Count() == 0)
             {
                 Snackbar.Add("โปรดเลือกรายการและใส่จำนวน", Severity.Error);
                 return;
@@ -48,22 +48,26 @@ namespace SingSiamOffice.Pages.CustomerManagement.CustomerDept
                     //uppdate_accpiad.Arpaidno = uppdate_accpiad.Arpaidno.Value + 1;
                     //db.Entry(uppdate_accpiad).State = EntityState.Modified;
                     //db.SaveChangesAsync();
-                    foreach (var data in list_Externalar)
+                    foreach (var data in selectedItems)
                     {
-                        db.Externalars.Add(data);
-                        db.SaveChangesAsync();
+                        data.Docno = Bill_code;
+                        data.Paidamount = data.Aramount;
+                        data.PaidComplete = true;
+                        db.Entry(data).State = EntityState.Modified;
+                        await db.SaveChangesAsync();
                     }
-                   
-                    
+                    get_data();
+                    await JSRuntime.InvokeVoidAsync("confirm");
+                    await Task.Delay(100);
+
                 }
-                catch
+                catch(Exception e)
                 {
                     await JSRuntime.InvokeVoidAsync("alert_error");
                 }
 
-                await JSRuntime.InvokeVoidAsync("confirm");
-                await Task.Delay(100);
-                tosave = false; 
+              
+               
 
             }
             else

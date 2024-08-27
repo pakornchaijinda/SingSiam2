@@ -125,6 +125,11 @@
                                                             <a href="@data.LocationLink" target="_blank">ดูแผนที่</a>
                                                         </MudStack>
                                                     </div>
+                                                    <div class="col-4 pb-3 text-center">
+                                                        <MudText Typo="Typo.body1" Style="@imporText">หนี้อื่นๆ</MudText>
+                                                        <MudButton Variant="Variant.Outlined"  Size="Size.Large" Style="@buttoncolor2" @onclick="()=>goCustomerDept(data.CustomerId)">@data.Sum_Externalar.ToString("N0") บาท</MudButton>
+                                                    
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -201,8 +206,10 @@
                                                                         <MudStack Row="true" Class="mt-2">
                                                                             <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.RemoveRedEye" Color="Color.Default" @onclick="()=>viewContract( items.CustomerId,items.Id,items.BranchId)">ดูข้อมูลสัญญา</MudButton>
                                                                             <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Money" Style="@buttoncolor1" @onclick="()=>goPayment(items.CustomerId,items.Id,items.BranchId)">ชำระค่างวด</MudButton>
-                                                                            <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.StickyNote2" Size="Size.Large" Style="@buttoncolor2" @onclick="()=>goCustomerDept(items.CustomerId)">หนี้อื่นๆ</MudButton>
-                                                                     @*        <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Remove" Color="Color.Error" @onclick="()=>deleteContract(1)">ยกเลิกสัญญา</MudButton> *@
+
+                                                                         
+                                                                            
+                                                                            @*        <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Remove" Color="Color.Error" @onclick="()=>deleteContract(1)">ยกเลิกสัญญา</MudButton> *@
                                                                         </MudStack>
                                                                     </td>
                                                                 </tr>
@@ -301,6 +308,10 @@
         {
             list_customer_show.Clear();
             list_customer_show = list_customer.Where(s => s.CustomerId == selectCustomer.CustomerId).ToList();
+            foreach (var data in list_customer_show)
+            {
+                data.Sum_Externalar = db.Externalars.Where(s => s.CustomerId == data.CustomerId).Sum(s => s.Aramount).Value;
+            }
             lst_Promises = await managements.GetPromisebyCustomerId(selectCustomer.CustomerId);
             StateHasChanged();
         }

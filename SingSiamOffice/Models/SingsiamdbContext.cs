@@ -450,6 +450,7 @@ public partial class SingsiamdbContext : DbContext
                 .HasColumnName("docno");
             entity.Property(e => e.Flg).HasColumnName("flg");
             entity.Property(e => e.LoginId).HasColumnName("login_id");
+            entity.Property(e => e.PaidComplete).HasDefaultValueSql("((0))");
             entity.Property(e => e.Paidamount)
                 .HasDefaultValueSql("((0))")
                 .HasColumnName("paidamount");
