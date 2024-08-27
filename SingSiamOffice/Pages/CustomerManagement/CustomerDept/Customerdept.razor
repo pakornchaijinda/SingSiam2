@@ -91,21 +91,21 @@
                                
                                
                             </div>
-                            <div class="col-6 pb-1">
+                            <div class="col-6 pb-1 text-end">
                                 <MudText Typo="Typo.body1" Style="@imporText">จำนวนชำระครั้งนี้: @selectedItems?.Where(s=>s.PaidComplete == false).Sum(x => x.Aramount).Value.ToString("N0")</MudText>
                             </div>
                        </div>
                     </div>
                     <div class="col-md-12 mt-4 mb-4">
-                        <MudTable @ref="_table" T="Externalar" Items="@Elements" MultiSelection="true" SelectionChangeable="_selectionChangeable" Hover="true"
+                            <MudTable  @ref="_table" T="Externalar" Items="@Elements" MultiSelection="true" SelectionChangeable="_selectionChangeable" Hover="true"
                                         @bind-SelectedItems="selectedItems" OnRowClick="@OnRowClick" SelectOnRowClick="@_selectOnRowClick">
                         
-                            <HeaderContent>
-                                <MudTh>ลำดับ</MudTh>
-                                <MudTh>วันที่</MudTh>
-                                <MudTh>รายละเอียด</MudTh>
-                                <MudTh>ยอดค้าง</MudTh>
-                                <MudTh>สถาณะ</MudTh>
+                                <HeaderContent >
+                                    <MudTh Style="@tableheader">ลำดับ</MudTh>
+                                    <MudTh Style="@tableheader">วันที่</MudTh>
+                                    <MudTh Style="@tableheader">รายละเอียด</MudTh>
+                                    <MudTh Style="@tableheader">ยอดค้างชำระ</MudTh>
+                                    <MudTh Style="@tableheader">สถานะ</MudTh>
                                 @* <MudTh>จัดการ</MudTh> *@
                             </HeaderContent>
                             <RowTemplate>
@@ -113,16 +113,16 @@
                             @*     <MudTd DataLabel="Sign">@context.Docno</MudTd> *@
                                 <MudTd DataLabel="วันที่">@context.Tdate.ToString("dd/MM/yyyy")</MudTd>
                                 <MudTd DataLabel="รายละเอียด">@context.Tdesc</MudTd>
-                                <MudTd DataLabel="ยอดค้าง">@context.Aramount</MudTd>
+                                <MudTd DataLabel="ยอดค้างชำระ">@context.Aramount</MudTd>
                                @if(context.PaidComplete.Value){
-                                    <MudTd DataLabel="สถาณะ">
-                                        <MudChip T="string" Color="Color.Success">Success</MudChip>
+                                    <MudTd DataLabel="สถานะ">
+                                        <MudChip T="string" Color="Color.Success">ชำระสำเร็จ</MudChip>
                                     </MudTd>
                                 }
                                 else{
 
-                                    <MudTd DataLabel="สถาณะ">
-                                        <MudChip T="string" Color="Color.Error">ค้างจ่าย</MudChip>
+                                    <MudTd DataLabel="สถานะ">
+                                        <MudChip T="string" Color="Color.Error">ค้างชำระ</MudChip>
                                     </MudTd>
                                 }
 

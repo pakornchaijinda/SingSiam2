@@ -128,7 +128,7 @@
                                                     </div>
                                                     <div class="col-4 pb-3 text-center">
                                                         <MudText Typo="Typo.body1" Style="@imporText">หนี้อื่นๆ</MudText>
-                                                        <MudButton Variant="Variant.Outlined"  Size="Size.Large" Style="@buttoncolor2" @onclick="()=>goCustomerDept(data.CustomerId)">@data.Sum_Externalar.ToString("N0") บาท</MudButton>
+                                                        <MudButton Variant="Variant.Outlined"  Size="Size.Large" Style="@buttoncolor2" @onclick="()=>goCustomerDept(data.CustomerId)">มียอดคงค้าง @data.Sum_Externalar.ToString("N0") บาท</MudButton>
                                                     
                                                     </div>
                                                 </div>
@@ -212,6 +212,7 @@
                                                                                 <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                                                                                     <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>viewContract( items.CustomerId,items.Id,items.BranchId)">ดูข้อมูลสัญญา</a></li>
                                                                                     <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>printContract()">พิมพ์สัญญา</a></li>
+                                                                                    <li><a style="cursor:pointer; background-color:red; color:#fff;" class="dropdown-item" @onclick="()=>deleteContract()">ลบสัญญา</a></li>
                                                                                 </ul>
                                                                             </div>
                                                                             @* <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.RemoveRedEye" Color="Color.Default" @onclick="()=>viewContract( items.CustomerId,items.Id,items.BranchId)">ดูข้อมูลสัญญา</MudButton> *@
