@@ -90,7 +90,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.CustomerInfo
 };
 
 
-        private async Task deleteContract(int Contract)
+        private async Task deleteContract()
         {
             var confirm = await JSRuntime.InvokeAsync<bool>("deleteContract");
             if (confirm)
