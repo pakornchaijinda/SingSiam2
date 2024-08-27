@@ -310,7 +310,7 @@
             list_customer_show = list_customer.Where(s => s.CustomerId == selectCustomer.CustomerId).ToList();
             foreach (var data in list_customer_show)
             {
-                data.Sum_Externalar = db.Externalars.Where(s => s.CustomerId == data.CustomerId).Sum(s => s.Aramount).Value;
+                data.Sum_Externalar = db.Externalars.Where(s => s.CustomerId == data.CustomerId && s.PaidComplete == false).Sum(s => s.Aramount).Value;
             }
             lst_Promises = await managements.GetPromisebyCustomerId(selectCustomer.CustomerId);
             StateHasChanged();

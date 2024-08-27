@@ -50,12 +50,16 @@ namespace SingSiamOffice.Pages.CustomerManagement.CustomerDept
                     //db.SaveChangesAsync();
                     foreach (var data in selectedItems)
                     {
-                        data.Docno = Bill_code;
-                        data.Paidamount = data.Aramount;
-                        data.PaidComplete = true;
-                        db.Entry(data).State = EntityState.Modified;
-                        await db.SaveChangesAsync();
+                        string updateQuery = "UPDATE Externalar SET docno = @p0, Paidamount = @p1, PaidComplete = @p2 WHERE Id = @p3";
+                        await db.Database.ExecuteSqlRawAsync(updateQuery,
+                            Bill_code,
+                            data.Aramount,
+                            true,
+                            data.Id
+                        );
+                        
                     }
+                    Bill_code_before = Bill_code;
                     get_data();
                     await JSRuntime.InvokeVoidAsync("confirm");
                     await Task.Delay(100);
