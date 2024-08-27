@@ -1,6 +1,10 @@
-﻿@page "/contractreport"
+﻿@page "/contractreport/{promise_id:int}"
 @* <h3>ContractReport</h3> *@
-
+@using Models
+@using SingSiamOffice.Manage;
+@using Microsoft.EntityFrameworkCore;
+@using System.Globalization;
+@using Newtonsoft.Json;
 <style>
     .left-detail{
         line-height:1px;
@@ -17,7 +21,7 @@
     <div class="container-fuid">
         <div class="row">
             <div class="col-12 text-end">
-                <p><strong>วันที่พิมพ์: @date</strong></p>
+                <p><strong>วันที่พิมพ์: @DateTime.Now.ToString("d MMMM yyyy", new CultureInfo("th-TH"))</strong></p>
             </div>
             <div class="col-12 text-center">
                 <div class="headerSubTitle" style="text-align: center;">
@@ -31,16 +35,16 @@
                 </div>
             </div>
             <div class="col-12 text-end left-detail">
-                <p class="contract-detail"><strong>เลขที่สัญญา:</strong> 123412312</p>
-                <p class="contract-detail"><strong>เลขที่อ้างอิง:</strong> 123412312</p>
+                <p class="contract-detail"><strong>เลขที่สัญญา:</strong> @_promises.Promiseno</p>
+                <p class="contract-detail"><strong>เลขที่อ้างอิง:</strong> @_promises.Refcode</p>
             </div>
             <div class="container contract-detail mt-4 mb-4">
                 <div class="col-12">
-                    <p class="contract-detail">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;สัญญานี้เกิดขึ้นเมื่อวันที่ : ............. <strong>@date</strong> .............<strong>ณ</strong>............. <strong>บริษัท สิงห์สยาม ลิสซิ่ง จำกัด</strong>............................</p>
+                    <p class="contract-detail">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;สัญญานี้เกิดขึ้นเมื่อวันที่ : ............. <strong>@_promises.Tdatetime.Value.ToString("d MMMM yyyy", new CultureInfo("th-TH"))</strong> .............<strong>ณ</strong>............. <strong>บริษัท สิงห์สยาม ลิสซิ่ง จำกัด</strong>............................</p>
                     <p class="contract-detail">สำนักงานตั้งอยู่ที่ : .......................<strong>[เงินด่วน พร้อมใช้]</strong>............เลขประจำตัวผู้เสียภาษี.............<strong>0365561000591</strong>..........................</p>
-                    <p class="contract-detail">ระหว่าง :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>นาย abcd efghijk</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;บัตรประชาชนเลขที่&nbsp;&nbsp;&nbsp;<strong>123456789012</strong></p>
-                    <p class="contract-detail">อยู่ที่ :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>หกดกหดหกด หกดหกด หก หดกหดหกดหกด  หกดหก ดหกดหกดหกด 434343434</strong></p>
-                    <p class="contract-detail">โทรศัพท์ :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>0933423423e4 พี่อาฮิม</strong></p>
+                    <p class="contract-detail">ระหว่าง :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>@_promises.Customer.FullName</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;บัตรประชาชนเลขที่&nbsp;&nbsp;&nbsp;<strong>@_promises.Customer.NatId</strong></p>
+                    <p class="contract-detail">อยู่ที่ :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>@_promises.Customer.Address </strong></p>
+                    <p class="contract-detail">โทรศัพท์ :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>@_promises.Customer.Phone</strong></p>
 
                 </div>
                 <br />
@@ -62,47 +66,95 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    @if (collateral == 1)
+                                   
+                                    @if (_promises.ProductId == 1)
                                     {
                                         <ul class="list-group border-0">
-                                            <li class="list-group-item border-0">ประเภทโฉนด : <strong>12312312312</strong></li>
-                                            <li class="list-group-item border-0">เลขที่โฉนด : <strong>12312312312</strong></li>
-                                            <li class="list-group-item border-0">ประเภทที่ดิน : <strong>12312312312</strong></li>
-                                            <li class="list-group-item border-0">ระวาง : <strong>12312312312</strong></li>
-                                            <li class="list-group-item border-0">เลขที่ดิน : <strong>12312312312</strong></li>
-                                            <li class="list-group-item border-0">เล่ม : <strong>12312312312</strong></li>
-                                            <li class="list-group-item border-0">หน้า : <strong>12312312312</strong></li>
-                                            <li class="list-group-item border-0">หน้าสำรวจ : <strong>12312312312</strong></li>
-                                            <li class="list-group-item border-0">จำนวนที่ดิน : <strong>12312312312</strong></li>
+                                            <li class="list-group-item border-0">ประเภทรถ : <strong>@_promises.Product.Name</strong></li>
+                                            <li class="list-group-item border-0">ยี่ห้อรถ : <strong>@collateral1.vehicle_brand</strong></li>
+                                            <li class="list-group-item border-0">สีรถ : <strong>@collateral1.vehicle_color</strong></li>
+                                            <li class="list-group-item border-0">เลขตัวถัง : <strong>@collateral1.chassisNo</strong></li>
+                                            <li class="list-group-item border-0">รุ่น : <strong>@collateral1.vehicle_ver</strong></li>
+                                            <li class="list-group-item border-0">เลขทะเบียน : <strong>@collateral1.plate</strong></li>
+                                            <li class="list-group-item border-0">เลขเครื่อง : <strong>@collateral1.machineNo</strong></li>
+                                            <li class="list-group-item border-0">รถปี : <strong>@collateral1.vehicle_yr</strong></li>
+                                            <li class="list-group-item border-0">จังหวัด : <strong>@_promises.Province.ProvinceName</strong></li>
+                                            <li class="list-group-item border-0">วันเสียภาษี : <strong>@collateral1.tax_issue</strong></li>
                                         </ul>
                                     }
-                                    @if (collateral == 2)
+                                    else if (_promises.ProductId == 2)
+                                    {
+                                    <ul class="list-group border-0">
+                                            <li class="list-group-item border-0">ประเภทรถ : <strong>@_promises.Product.Name</strong></li>
+                                            <li class="list-group-item border-0">ยี่ห้อรถ : <strong>@collateral1.vehicle_brand</strong></li>
+                                            <li class="list-group-item border-0">สีรถ : <strong>@collateral1.vehicle_color</strong></li>
+                                            <li class="list-group-item border-0">เลขตัวถัง : <strong>@collateral1.chassisNo</strong></li>
+                                            <li class="list-group-item border-0">รุ่น : <strong>@collateral1.vehicle_ver</strong></li>
+                                            <li class="list-group-item border-0">เลขทะเบียน : <strong>@collateral1.plate</strong></li>
+                                            <li class="list-group-item border-0">เลขเครื่อง : <strong>@collateral1.machineNo</strong></li>
+                                            <li class="list-group-item border-0">รถปี : <strong>@collateral1.vehicle_yr</strong></li>
+                                            <li class="list-group-item border-0">จังหวัด : <strong>@_promises.Province.ProvinceName</strong></li>
+                                            <li class="list-group-item border-0">วันเสียภาษี : <strong>@collateral1.tax_issue</strong></li>
+                                    </ul>
+                                    }
+                                    else if (_promises.ProductId == 4)
                                     {
                                         <ul class="list-group border-0">
-                                            <li class="list-group-item border-0">ประเภทรถ : <strong>12312312312</strong></li>
-                                            <li class="list-group-item border-0">ยี่ห้อรถ : <strong>12312312312</strong></li>
-                                            <li class="list-group-item border-0">สีรถ : <strong>12312312312</strong></li>
-                                            <li class="list-group-item border-0">เลขตัวถัง : <strong>12312312312</strong></li>
-                                            <li class="list-group-item border-0">รุ่น : <strong>12312312312</strong></li>
-                                            <li class="list-group-item border-0">เลขทะเบียน : <strong>12312312312</strong></li>
-                                            <li class="list-group-item border-0">เลขเครื่อง : <strong>12312312312</strong></li>
-                                            <li class="list-group-item border-0">รถปี : <strong>12312312312</strong></li>
-                                            <li class="list-group-item border-0">จังหวัด : <strong>12312312312</strong></li>
-                                            <li class="list-group-item border-0">วันครบภาษี : <strong>12312312312</strong></li>
-                                        </ul>
-                                    }
+                                            <li class="list-group-item border-0">ประเภทรถ : <strong>@_promises.Product.Name</strong></li>
+                                            <li class="list-group-item border-0">ยี่ห้อรถ : <strong>@collateral1.vehicle_brand</strong></li>
+                                            <li class="list-group-item border-0">สีรถ : <strong>@collateral1.vehicle_color</strong></li>
+                                            <li class="list-group-item border-0">เลขตัวถัง : <strong>@collateral1.chassisNo</strong></li>
+                                            <li class="list-group-item border-0">รุ่น : <strong>@collateral1.vehicle_ver</strong></li>
+                                            <li class="list-group-item border-0">เลขทะเบียน : <strong>@collateral1.plate</strong></li>
+                                            <li class="list-group-item border-0">เลขเครื่อง : <strong>@collateral1.machineNo</strong></li>
+                                            <li class="list-group-item border-0">รถปี : <strong>@collateral1.vehicle_yr</strong></li>
+                                            <li class="list-group-item border-0">จังหวัด : <strong>@_promises.Province.ProvinceName</strong></li>
+                                            <li class="list-group-item border-0">วันเสียภาษี : <strong>@collateral1.tax_issue</strong></li>
 
+                                        </ul>
+                                    }
+                                    else if (_promises.ProductId == 3)
+                                    {
+                                        <ul class="list-group border-0">
+                                            <li class="list-group-item border-0">ประเภทโฉนด : <strong>@collateral2.deedType</strong></li>
+                                            <li class="list-group-item border-0">เลขที่โฉนด : <strong>@collateral2.deedNo</strong></li>
+                                            <li class="list-group-item border-0">ประเภทที่ดิน : <strong>@collateral2.landType</strong></li>
+                                            <li class="list-group-item border-0">ระวาง : <strong>@collateral2.mapsheet</strong></li>
+                                            <li class="list-group-item border-0">เลขที่ดิน : <strong>@collateral2.parcelNo</strong></li>
+                                            <li class="list-group-item border-0">เล่ม : <strong>@collateral2.volumn</strong></li>
+                                            <li class="list-group-item border-0">หน้า : <strong>@collateral2.page</strong></li>
+                                            <li class="list-group-item border-0">หน้าสำรวจ : <strong>@collateral2.pageInspect</strong></li>
+                                            <li class="list-group-item border-0">จำนวนที่ดิน : <strong>@collateral2.landAmount</strong></li>
+                                        </ul>
+                                    }
+                                    else if (_promises.ProductId == 5)
+                                    {
+                                        <ul class="list-group border-0">
+                                            <li class="list-group-item border-0">เลขที่สมุด : <strong>@collateral3.bookNo</strong></li>
+                                            <li class="list-group-item border-0">เลขที่รหัสเกษตรกร : <strong>@collateral3.farmerCode</strong></li>
+                                            <li class="list-group-item border-0">วันที่ขึ้นทะเบียน : <strong>@collateral3.fregisDate</strong></li>
+                                            <li class="list-group-item border-0">เอกสารสิทธิ์ : <strong>@collateral3.docRight</strong></li>
+                                            <li class="list-group-item border-0">การถือครอง : <strong>@collateral3.fHolding</strong></li>
+                                            <li class="list-group-item border-0">กิจกรรม : <strong>@collateral3.fActivity</strong></li>
+                                            <li class="list-group-item border-0">เนื้อที่ : <strong>@collateral3.fArea</strong></li>
+                                            <li class="list-group-item border-0">ผลผลิต : <strong>@collateral3.fProduct</strong></li>
+                                            <li class="list-group-item border-0">ที่ตั้ง X:Y:Z: <strong>@collateral3.fLocate</strong></li>
+                                        </ul>
+                                    }
                                 </td>
                                 <td>
                                     <ul class="list-group border-0">
-                                        <li class="list-group-item border-0">เงินทำสัญญา <strong>55555</strong> บาท</li>
-                                        <li class="list-group-item border-0">ดอกเบี้ย <strong>55555</strong>  บาท</li>
-                                        <li class="list-group-item border-0">เงินดาว์น <strong>55555</strong>  บาท</li>
-                                        <li class="list-group-item border-0">จำนวนงวด <strong>55555</strong>  บาท</li>
-                                        <li class="list-group-item border-0">งวดละ <strong>55555</strong>  บาท</li>
-                                        <li class="list-group-item border-0">ค่าธรรมเนียมภาษี <strong>55555</strong>  บาท</li>
-                                        <li class="list-group-item border-0">เริ่มชำระงวดแรก <strong>55555</strong>  บาท</li>
-                                        <li class="list-group-item border-0">ชำระงวดสุดท้าย <strong>55555</strong>  บาท</li>
+                                        <li class="list-group-item border-0">ชำระทุกวันที่ <strong>@_promises.Daypaid</strong> บาท</li>
+                                        <li class="list-group-item border-0">เงินทำสัญญา <strong>@_promises.Capital</strong> บาท</li>
+                                        <li class="list-group-item border-0">จำนวนงวด <strong>@_promises.Periods</strong> งวด</li>
+                                        <li class="list-group-item border-0">ดอกเบี้ย <strong>@_promises.Interest</strong> %</li>
+                                        <li class="list-group-item border-0">งวดละ <strong>@_promises.Amount</strong> บาท</li>
+                                        <li class="list-group-item border-0">ค่าบริการ <strong>@_promises.Service</strong> บาท</li>
+                                        <li class="list-group-item border-0">ค่าประกันหนี้ <strong>@_promises.Chargeamt</strong> บาท</li>
+                                    </ul>
+                                    <ul class="list-group border-0">
+                                        <li class="list-group-item border-0"> <strong style="font-size:1rem;">เริ่มชำระงวดแรก @_promises.Firstdate</strong> บาท</li>
+                                        <li class="list-group-item border-0"> <strong style="font-size:1rem;">ชำระงวดสุดท้าย @FormatThaiYear_Increase_str(_promises.Firstdate)</strong> บาท</li>
                                     </ul>
                                 </td>
                             </tr>
@@ -165,10 +217,10 @@
                                 </div>
                                 <div class="col-8">
                                     <div class="card-body">
-                                        <p class="card-text"><small>Name : <strong>abcd efdfdfdf</strong></small></p>
-                                        <p class="card-text"><small>Code : <strong>12312312312</strong></small></p>
-                                        <p class="card-text"><small>Date : <strong>@date</strong></small></p>
-                                        <p class="card-text"><small>Expire :<strong>@date</strong></small></p>
+                                        <p class="card-text"><small>Name : <strong>@_promises.Customer.FullName</strong></small></p>
+                                        <p class="card-text"><small>Code : <strong>@_promises.Refcode</strong></small></p>
+                                        <p class="card-text"><small>Date : <strong>@FormatThaiYear(_promises.Tdatetime.Value)</strong></small></p>
+                                        <p class="card-text"><small>Expire :<strong>@FormatThaiYear_Increate(_promises.Tdatetime.Value)</strong></small></p>
                                     </div>
                                 </div>
                             </div>
@@ -203,5 +255,62 @@
 @code {
     DateOnly date { get; set; } = DateOnly.FromDateTime(DateTime.Now);
     int collateral { get; set; } = 1;
+    [Parameter]
+    public int promise_id { get; set; }
+    private Promise _promises { get; set; }
+    SingsiamdbContext db = new SingsiamdbContext();
+    [Inject]
+    Manage.Managements Managements { get; set; }
+    Collateral1 collateral1 = new Collateral1();
+    Collateral2 collateral2 = new Collateral2();
+    Collateral3 collateral3 = new Collateral3();
+    private List<Guarantor> _guarantor { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        _promises = db.Promises.Include(s => s.Periodtrans).Include(s => s.Customer).ThenInclude(s => s.Branch).Include(s => s.Product).Include(s => s.Province).Where(s => s.Id == promise_id).AsNoTracking().FirstOrDefault();
+ 
 
+        _promises.Interest = (decimal)_promises.Periodtrans.Select(s => s.Interest).FirstOrDefault();
+        // _guarantor = await Managements.GetGurantorbyPromiseId(promise_id); //ผู้ค้ำ
+        List<int> product_group = new List<int> { 1, 2, 4 };
+        if (product_group.Contains(_promises.ProductId))
+        {
+            collateral1 = JsonConvert.DeserializeObject<Collateral1>(_promises.JsonPrddesc);
+        }
+        if (_promises.ProductId == 3)
+        {
+            collateral2 = JsonConvert.DeserializeObject<Collateral2>(_promises.JsonPrddesc);
+        }
+        if (_promises.ProductId == 5)
+        {
+            collateral3 = JsonConvert.DeserializeObject<Collateral3>(_promises.JsonPrddesc);
+        }
+    }
+    public string FormatThaiYear(DateTime date)
+    {
+        // Add 543 years to the Gregorian year to get the Thai Buddhist year
+        int thaiYear = date.Year + 543;
+
+        // Format the date as you want, for example, "dd/MM/yyyy"
+        return date.ToString($"dd/MM/{thaiYear}");
+    }
+    public string FormatThaiYear_Increate(DateTime date)
+    {
+        // Add 543 years to the Gregorian year to get the Thai Buddhist year
+        int thaiYear = date.Year + 544;
+
+        // Format the date as you want, for example, "dd/MM/yyyy"
+        return date.ToString($"dd/MM/{thaiYear}");
+    }
+    public string FormatThaiYear_Increase_str(string dateStr)
+    {
+        // Parse the input string to a DateTime object
+        DateTime date = DateTime.ParseExact(dateStr, "dd/MM/yyyy", null);
+
+        // Add 544 years to the Gregorian year to get the desired Thai Buddhist year
+        int thaiYear = date.Year + 544;
+
+        // Return the date formatted with the new Thai year
+        return date.ToString($"dd/MM/{thaiYear}");
+    }
 }

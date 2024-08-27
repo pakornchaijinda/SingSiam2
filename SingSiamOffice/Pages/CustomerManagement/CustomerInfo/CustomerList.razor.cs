@@ -132,9 +132,13 @@ namespace SingSiamOffice.Pages.CustomerManagement.CustomerInfo
             navigationManager.NavigateTo($"/view-contract/{branch_id}/{cus_id}/{promise_id}");
         }
 
-        private void printContract()
+       
+        private async Task printContract(int id)
         {
-            navigationManager.NavigateTo("/contractreport");
+            //navigationManager.NavigateTo("/contractreport/" + id.ToString());
+
+            string url = $"/contractreport/{id.ToString()}";
+            await JSRuntime.InvokeAsync<object>("open", url, "_blank");
         }
 
         private void goBlacklist(int brach_id)

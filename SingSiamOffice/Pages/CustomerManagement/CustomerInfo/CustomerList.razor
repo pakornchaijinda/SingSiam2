@@ -211,7 +211,7 @@
                                                                                 </button>
                                                                                 <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                                                                                     <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>viewContract( items.CustomerId,items.Id,items.BranchId)">ดูข้อมูลสัญญา</a></li>
-                                                                                    <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>printContract()">พิมพ์สัญญา</a></li>
+                                                                                    <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>printContract(items.Id)">พิมพ์สัญญา</a></li>
                                                                                     <li><a style="cursor:pointer; background-color:red; color:#fff;" class="dropdown-item" @onclick="()=>deleteContract()">ลบสัญญา</a></li>
                                                                                 </ul>
                                                                             </div>
