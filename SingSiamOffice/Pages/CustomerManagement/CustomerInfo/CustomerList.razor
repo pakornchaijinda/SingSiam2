@@ -204,7 +204,16 @@
 
                                                                     <td class="text-end">
                                                                         <MudStack Row="true" Class="mt-2">
-                                                                            <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.RemoveRedEye" Color="Color.Default" @onclick="()=>viewContract( items.CustomerId,items.Id,items.BranchId)">ดูข้อมูลสัญญา</MudButton>
+                                                                            <div class="btn-group" role="group">
+                                                                                <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                                    ข้อมูลสัญญา
+                                                                                </button>
+                                                                                <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                                                    <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>viewContract( items.CustomerId,items.Id,items.BranchId)">ดูข้อมูลสัญญา</a></li>
+                                                                                    <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>printContract()">พิมพ์สัญญา</a></li>
+                                                                                </ul>
+                                                                            </div>
+                                                                            @* <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.RemoveRedEye" Color="Color.Default" @onclick="()=>viewContract( items.CustomerId,items.Id,items.BranchId)">ดูข้อมูลสัญญา</MudButton> *@
                                                                             <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Money" Style="@buttoncolor1" @onclick="()=>goPayment(items.CustomerId,items.Id,items.BranchId)">ชำระค่างวด</MudButton>
 
                                                                          
