@@ -35,6 +35,8 @@ public partial class SingsiamdbContext : DbContext
 
     public virtual DbSet<Periodtran> Periodtrans { get; set; }
 
+    public virtual DbSet<ProductRefcode> ProductRefcodes { get; set; }
+
     public virtual DbSet<Promise> Promises { get; set; }
 
     public virtual DbSet<Province> Provinces { get; set; }
@@ -691,6 +693,30 @@ public partial class SingsiamdbContext : DbContext
                 .HasForeignKey(d => d.PromiseId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_periodtran_promise");
+        });
+
+        modelBuilder.Entity<ProductRefcode>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("product_refcode");
+
+            entity.Property(e => e.BranchId).HasColumnName("branch_id");
+            entity.Property(e => e.CollateralId).HasColumnName("collateral_id");
+            entity.Property(e => e.RefcodeNv)
+                .HasDefaultValueSql("((0))")
+                .HasColumnName("refcode_nv");
+            entity.Property(e => e.RefcodeV).HasColumnName("refcode_v");
+
+            entity.HasOne(d => d.Branch).WithMany()
+                .HasForeignKey(d => d.BranchId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_product_refcode_branch");
+
+            entity.HasOne(d => d.Collateral).WithMany()
+                .HasForeignKey(d => d.CollateralId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_product_refcode_Collateral");
         });
 
         modelBuilder.Entity<Promise>(entity =>
