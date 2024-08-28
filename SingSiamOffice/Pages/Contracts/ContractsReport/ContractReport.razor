@@ -144,17 +144,17 @@
                                 </td>
                                 <td>
                                     <ul class="list-group border-0">
-                                        <li class="list-group-item border-0">ชำระทุกวันที่ <strong>@_promises.Daypaid</strong> บาท</li>
-                                        <li class="list-group-item border-0">เงินทำสัญญา <strong>@_promises.Capital</strong> บาท</li>
+                                        <li class="list-group-item border-0">ชำระทุกวันที่ <strong>@_promises.Daypaid</strong></li>
+                                        <li class="list-group-item border-0">เงินทำสัญญา <strong>@_promises.Capital.Value.ToString("N0")</strong> บาท</li>
                                         <li class="list-group-item border-0">จำนวนงวด <strong>@_promises.Periods</strong> งวด</li>
-                                        <li class="list-group-item border-0">ดอกเบี้ย <strong>@_promises.Interest</strong> %</li>
-                                        <li class="list-group-item border-0">งวดละ <strong>@_promises.Amount</strong> บาท</li>
+                                        <li class="list-group-item border-0">ดอกเบี้ย <strong>@_promises.Intrate.ToString()</strong> %</li>
+                                        <li class="list-group-item border-0">งวดละ <strong>@_promises.Amount.Value.ToString("N0")</strong> บาท</li>
                                         <li class="list-group-item border-0">ค่าบริการ <strong>@_promises.Service</strong> บาท</li>
                                         <li class="list-group-item border-0">ค่าประกันหนี้ <strong>@_promises.Chargeamt</strong> บาท</li>
                                     </ul>
                                     <ul class="list-group border-0">
                                         <li class="list-group-item border-0"> <strong style="font-size:1rem;">เริ่มชำระงวดแรก @_promises.Firstdate</strong> บาท</li>
-                                        <li class="list-group-item border-0"> <strong style="font-size:1rem;">ชำระงวดสุดท้าย @FormatThaiYear_Increase_str(_promises.Firstdate)</strong> บาท</li>
+                                        <li class="list-group-item border-0"> <strong style="font-size:1rem;">ชำระงวดสุดท้าย @FormatThaiYear_Increase_mouth(_promises.Firstdate, _promises.Periods.Value)</strong> บาท</li>
                                     </ul>
                                 </td>
                             </tr>
@@ -219,8 +219,8 @@
                                     <div class="card-body">
                                         <p class="card-text"><small>Name : <strong>@_promises.Customer.FullName</strong></small></p>
                                         <p class="card-text"><small>Code : <strong>@_promises.Refcode</strong></small></p>
-                                        <p class="card-text"><small>Date : <strong>@FormatThaiYear(_promises.Tdatetime.Value)</strong></small></p>
-                                        <p class="card-text"><small>Expire :<strong>@FormatThaiYear_Increate(_promises.Tdatetime.Value)</strong></small></p>
+                                        <p class="card-text"><small>Date : <strong>@_promises.Firstdate</strong></small></p>
+                                        <p class="card-text"><small>Expire :<strong>@FormatThaiYear_Increase_mouth(_promises.Firstdate, _promises.Periods.Value)</strong></small></p>
                                     </div>
                                 </div>
                             </div>
@@ -308,9 +308,23 @@
         DateTime date = DateTime.ParseExact(dateStr, "dd/MM/yyyy", null);
 
         // Add 544 years to the Gregorian year to get the desired Thai Buddhist year
-        int thaiYear = date.Year + 544;
+        int thaiYear = date.Year + 1;
 
         // Return the date formatted with the new Thai year
         return date.ToString($"dd/MM/{thaiYear}");
+    }
+    public string FormatThaiYear_Increase_mouth(string dateStr, int monthsToAdd)
+    {
+        // Parse the input string to a DateTime object
+        DateTime date = DateTime.ParseExact(dateStr, "dd/MM/yyyy", null);
+
+        // Add the specified number of months to the DateTime object
+        DateTime newDate = date.AddMonths(monthsToAdd);
+
+        // Convert to Thai Buddhist year
+        int thaiYear = newDate.Year;
+
+        // Return the date formatted with the new Thai year
+        return newDate.ToString($"dd/MM/{thaiYear}");
     }
 }
