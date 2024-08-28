@@ -373,7 +373,7 @@
                 (  @receipt.Login.Fullname  )
             </div>
             <div class="headerSubTitle" style="font-weight:bold; text-align:center;">
-                @DateTime.Now.ToString($"dd:MM:{thaiYear}");
+                @ConvertToThaiDateString(DateTime.Now)
             </div>
         </div>
     </div>

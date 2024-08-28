@@ -168,17 +168,17 @@
                                         <tr>
                                             <td style="@items.style_color">@items.Period</td>
                                             <td style ="@items.style_color">@items.Tdate</td>
-                                            <td style="@items.style_color">@items.Capital</td>
+                                            <td style="@items.style_color">@items.Capital.Value.ToString("N0")</td>
                                             <td style="@items.style_color">@items.Interest</td>
-                                            <td style="@items.style_color">@items.Amount</td>
+                                            <td style="@items.style_color">@items.Amount.Value.ToString("N0")</td>
                                             @if (items.Ispaid == true)
                                             {
-                                                <td style="@items.style_color">@items.Paidamount</td>
+                                                <td style="@items.style_color">@items.Paidamount.Value.ToString("N0")</td>
 
                                             }
                                             else if(items.Ispaid == false && items.Paidremain != 0)
                                             {
-                                                <td style="@items.style_color">@items.Paidamount</td>
+                                                <td style="@items.style_color">@items.Paidamount.Value.ToString("N0")</td>
                                             }
                                             else
                                             {
@@ -194,11 +194,11 @@
                                             else if (items.Ispaid == false && items.Paidremain != 0)
                                             {
 
-                                                <td style="@items.style_color">@items.amount_remain </td>
+                                                <td style="@items.style_color">@items.amount_remain.ToString("N0") </td>
                                             }
                                             else
                                             {
-                                                <td style="@items.style_color">@items.Amount</td>
+                                                <td style="@items.style_color">@items.Amount.Value.ToString("N0")</td>
 
 
                                             }
