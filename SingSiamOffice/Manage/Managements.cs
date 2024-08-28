@@ -13,11 +13,24 @@ namespace SingSiamOffice.Manage
         public async Task<List<Promise>> GetPromisebyCustomerId(int customer_id)
         {
             var data = db.Promises.AsNoTracking().Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Product).Include(s => s.Periodtrans).Include(s => s.Province).Where(s => s.CustomerId == customer_id && s.Status != 2).ToList();
+            foreach (var promise in data) 
+            {
+                promise.FormatCapital = promise.Capital.Value.ToString("N0");
+                promise.FormatAmount = promise.Amount.Value.ToString("N0");
+                promise.FormatInterest = promise.Intrate.Value.ToString("N0");
+                promise.FormatChargeamt = promise.Chargeamt.Value.ToString("N0");
+            }
             return data;
         }
         public async Task<Promise> GetPromisebyPromiseId(int promise_id)
         {
             var data = db.Promises.AsNoTracking().Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Product).Include(s => s.Periodtrans).Include(s => s.Province).Where(s => s.Id == promise_id && s.Status != 2).FirstOrDefault();
+
+            data.FormatCapital = data.Capital.Value.ToString("N0");
+            data.FormatAmount = data.Amount.Value.ToString("N0");
+            data.FormatInterest = data.Periodtrans.FirstOrDefault().Interest.Value.ToString("N0");
+            data.FormatChargeamt = data.Chargeamt.Value.ToString("N0");
+            
             return data;
         }
         public async Task<int?> GetCurrentPeriod(int promise_id) 
@@ -228,6 +241,12 @@ namespace SingSiamOffice.Manage
             var branch_info = db.Branches.AsNoTracking().Where(s => s.Id == b_id).FirstOrDefault();
             return branch_info;
         }
+        public string FormatNumber(decimal number)
+        {
+            // Using standard numeric format specifier with no decimal places
+            return number.ToString("N0", CultureInfo.InvariantCulture);
+        }
+
         public async Task<List<Periodtran>> Add_Periodtrans(Promise promise, int ptype)
         {
             List<Periodtran> lst_periodtrans = new List<Periodtran>();

@@ -230,6 +230,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
         {
             _periodtran =await managements.GetPeriodtransbyPromiseId(promise_id);
             _promise = await managements.GetPromisebyPromiseId(promise_id);
+         
             _promise_pay.OverPayQty = _periodtran.Where(s=>s.OverPayQty > 0).Count();
           
             _promise_pay.total_deposit = (decimal)_periodtran.Sum(p => p.Deposit);
