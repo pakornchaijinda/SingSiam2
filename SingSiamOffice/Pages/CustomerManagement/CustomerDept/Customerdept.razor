@@ -1,4 +1,4 @@
-﻿@page "/customerdept/{c_id:int}"
+﻿@page "/customerdept/{c_id:int}/{promis_id:int}"
 @* <h3>Customerdept</h3> *@
 @using Models
 
@@ -15,7 +15,7 @@
 
 
 
-    <div class="container mt-4 mb-4">
+    <div class="container-fluid mt-4 mb-4">
         <div class="row">
             <div class="col-12 mt-4 mb-4">
                 <MudText Typo="Typo.h5" Style="@headertext"><img src="img/icons/depts.svg" alt="" style="width:3rem;"> เมนูเพิ่มรายการหนี้อื่นๆ</MudText>
@@ -23,7 +23,7 @@
         </div>
     </div>
 
-    <div class="container mt-4 mb-4">
+    <div class="container-fluid mt-4 mb-4">
         <div class="card outer-card">
             <div class="card-header" style="@tableheader">ข้อมูลลูกค้า</div>
             <div class="card-body">
@@ -31,7 +31,12 @@
                   
                     <div class="col-md-12 pb-3">
                         <div class="row">
-                            
+                            <div class="col-4 pb-1 text-center">
+                                <MudStack>
+                                    <MudText Typo="Typo.body1" Style="@imporText">สัญญาเลขที่</MudText>
+                                    <MudText Typo="Typo.body1">@promise.Promiseno</MudText>
+                                </MudStack>
+                            </div>
                             <div class="col-4 pb-1 text-center">
                                 <MudStack>
                                     <MudText Typo="Typo.body1" Style="@imporText">วันที่ทำรายการ</MudText>
@@ -68,7 +73,7 @@
     </div>
 
 
-    <div class="container mt-4 mb-4">
+    <div class="container-fluid mt-4 mb-4">
         <div class="card outer-card">
             <div class="card-body">
                 <div class="row">
@@ -141,7 +146,7 @@
 
     </div>
 
-    <div class="container mt-4 mb-4">
+    <div class="container-fluid mt-4 mb-4">
         <div class="card outer-card">
             <div class="card-body">
                 <div class="row">
@@ -150,7 +155,7 @@
                     </div>
                     <div class="col-md-12 mt-3 mb-3 text-center">
                         <MudButton Variant="Variant.Outlined" DisableElevation="true" Color="Color.Error" @onclick="()=>goBack()">ย้อนกลับ</MudButton>&nbsp;
-                        <MudButton Variant="Variant.Filled" DisableElevation="true" Style="@buttoncolor1" @onclick="()=>submit()">เพิ่มข้อมูล</MudButton>&nbsp;
+                        <MudButton Variant="Variant.Filled" DisableElevation="true" Style="@buttoncolor1" @onclick="()=>submit()">ชำระเงิน</MudButton>&nbsp;
                         <MudButton Variant="Variant.Filled" DisableElevation="true" Style="@buttoncolor3" @onclick="()=>print()">ปริ้นใบเสร็จ</MudButton>
                      
                     </div>
@@ -177,6 +182,10 @@
 
     [Parameter]
     public int c_id { get; set; }
+    [Parameter]
+    public int promis_id { get; set; }
+
+
     SingsiamdbContext db = new SingsiamdbContext();
     Customer cus_info = new Customer();
     string Bill_code { get; set; }
@@ -190,6 +199,7 @@
     private List<Externalar> Elements = new List<Externalar>();
     private bool _selectOnRowClick = true;
     private bool _selectionChangeable = true;
+    Promise promise = new Promise();
     double sum_total { get; set; }
     void OnRowClick(TableRowClickEventArgs<Externalar> args)
     {
@@ -221,10 +231,11 @@
     }
     private void get_data()
     {
+        promise = db.Promises.Where(s => s.Id == promis_id).FirstOrDefault();
         cus_info = db.Customers.Include(s => s.Branch).Where(s => s.CustomerId == c_id).FirstOrDefault();
         int code = db.Branches.Where(s=>s.Id == cus_info.BranchId).AsNoTracking().FirstOrDefault().Arpaidno.Value;
         Bill_code = $"{cus_info.Branch.Code}_{code.ToString("D7")}";
-        Elements = db.Externalars.Where(s => s.CustomerId == c_id).OrderByDescending(s => s.Id).AsNoTracking().ToList();
+        Elements = db.Externalars.Where(s => s.CustomerId == c_id && s.PaidComplete == false).OrderByDescending(s => s.Id).AsNoTracking().ToList();
         int cmd = 1;
         foreach (var data in Elements)
         {
