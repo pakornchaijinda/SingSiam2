@@ -169,7 +169,7 @@
                                             <td style="@items.style_color">@items.Period</td>
                                             <td style ="@items.style_color">@items.Tdate</td>
                                             <td style="@items.style_color">@items.Capital.Value.ToString("N0")</td>
-                                            <td style="@items.style_color">@items.Interest</td>
+                                            <td style="@items.style_color">@items.Interest.Value.ToString("N0")</td>
                                             <td style="@items.style_color">@items.Amount.Value.ToString("N0")</td>
                                             @if (items.Ispaid == true)
                                             {
@@ -259,10 +259,10 @@
                                                     <tr>
                                                         <td style="@items.style_color"></td>
                                                         <td style="@items.style_color">@i.Tdate</td>
-                                                        <td style="@items.style_color">@i.Cappaid</td>
-                                                        <td style="@items.style_color">@i.Intpaid</td>
-                                                        <td style="@items.style_color">@i.Cappaid</td>
-                                                        <td style="@items.style_color">@i.Deposit</td>
+                                                        <td style="@items.style_color">@i.Cappaid.Value.ToString("N0")</td>
+                                                        <td style="@items.style_color">@i.Intpaid.Value.ToString("N0")</td>
+                                                        <td style="@items.style_color">@i.Cappaid.Value.ToString("N0")</td>
+                                                        <td style="@items.style_color">@i.Deposit.Value.ToString("N0")</td>
                                                            <td style="@items.style_color"></td>
                                                         <td style="@items.style_color"></td>
                                                         <td>
