@@ -91,6 +91,8 @@ namespace SingSiamOffice.Pages.Expense
                     await db.SaveChangesAsync();
                     await JSRuntime.InvokeVoidAsync("deletesuccess");
                     await Task.Delay(100);
+                    Get_data();
+                    StateHasChanged();
                 }
                 catch
                 {

@@ -30,7 +30,7 @@
                         <MudSelect @bind-Value="subject_Id" Label="รหัสบัญชีรายการธุรกรรม" Margin="Margin.Dense" Variant="Variant.Outlined" Clearable>
                             @if(list_subject != null){
                                   @foreach(var data in list_subject){
-                                    <MudSelectItem Value="@(data.SubjectId)">@data.SubjectCode | @data.SubjectName</MudSelectItem>
+                                    <MudSelectItem Value="@(data.SubjectId)">@data.SubjectName</MudSelectItem>
                                   }                              
                             }
                          

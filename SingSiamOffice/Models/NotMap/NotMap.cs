@@ -9,12 +9,7 @@ namespace SingSiamOffice.Models
         public int No { get; set; }
        
     }
-    public partial class Customer
-    {
-        [NotMapped]
-        public double Sum_Externalar { get; set; }
-
-    }
+ 
     public partial class Promise
     {
         [NotMapped]
@@ -34,6 +29,8 @@ namespace SingSiamOffice.Models
         public string FormatAmount {  get; set; }
         [NotMapped]
         public string FormatChargeamt { get; set; }
+        [NotMapped]
+        public double Sum_Externalar { get; set; }
     }
     public partial class Periodtran
     {

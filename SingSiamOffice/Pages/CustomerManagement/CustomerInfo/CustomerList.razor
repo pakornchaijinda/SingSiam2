@@ -226,7 +226,7 @@
                                                                              
                                                                                 </ul>
                                                                             </div>
-                                                                            <MudButton Variant="Variant.Outlined" Size="Size.Large" Style="@buttoncolor2" @onclick="()=>goCustomerDept(data.CustomerId,items.Id)">หนี้อื่นๆ ยอดค้าง @data.Sum_Externalar.ToString("N0") บาท</MudButton>
+                                                                            <MudButton Variant="Variant.Outlined" Size="Size.Large" Style="@buttoncolor2" @onclick="()=>goCustomerDept(data.CustomerId,items.Id)">หนี้อื่นๆ ยอดค้าง @items.Sum_Externalar.ToString("N0") บาท</MudButton>
                                                                             @* <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.RemoveRedEye" Color="Color.Default" @onclick="()=>viewContract( items.CustomerId,items.Id,items.BranchId)">ดูข้อมูลสัญญา</MudButton> *@
                                                                             @* <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Money" Style="@buttoncolor1" @onclick="()=>goPayment(items.CustomerId,items.Id,items.BranchId)">ชำระค่างวด</MudButton> *@
 
@@ -299,7 +299,7 @@
 
     List<int> Sections = new List<int> { 1, 2, 3 }; // Example dynamic range of sections
     Dictionary<int, bool> _expandedStates = new Dictionary<int, bool>();
-
+    List<Externalar> list_Externalars = new List<Externalar>();
 
     private async void OnExpandCollapseClick(int cus_id)
     {
@@ -331,11 +331,16 @@
         {
             list_customer_show.Clear();
             list_customer_show = list_customer.Where(s => s.CustomerId == selectCustomer.CustomerId).ToList();
-            foreach (var data in list_customer_show)
-            {
-                data.Sum_Externalar = db.Externalars.Where(s => s.CustomerId == data.CustomerId && s.PaidComplete == false).Sum(s => s.Aramount).Value;
-            }
+
+            // foreach (var data in list_customer_show)
+            // {
+            //     data.Sum_Externalar = db.Externalars.Where(s => s.CustomerId == data.CustomerId && s.PaidComplete == false ).Sum(s => s.Aramount).Value;
+            // }
             lst_Promises = await managements.GetPromisebyCustomerId(selectCustomer.CustomerId);
+            foreach (var data in lst_Promises)
+            {
+                data.Sum_Externalar =   db.Externalars.Where(s => s.PromiseId == data.Id && s.PaidComplete == false ).Sum(s => s.Aramount).Value;
+            }
             StateHasChanged();
         }
 
