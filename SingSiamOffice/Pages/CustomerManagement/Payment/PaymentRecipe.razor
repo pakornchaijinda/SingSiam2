@@ -14,7 +14,7 @@
         width: 100%;
         text-align: right;
         padding-bottom: 1mm;
-        font-size: 8pt;
+        font-size: 10pt;
         font-weight: bold;
     }
 
@@ -26,7 +26,7 @@
         /* font-family: "Bai Jamjuree", sans-serif; */
         font-family: "Sarabun", sans-serif;
         /* text-align: center; */
-        font-size: 8pt;
+        font-size: 10pt;
     }
 
     .headerTitle {
@@ -47,7 +47,7 @@
     #date {
         margin: 5pt 0px;
         text-align: center;
-        font-size: 8pt;
+        font-size: 10pt;
     }
 
     #barcode {
@@ -115,7 +115,7 @@
 
     th, tr, td {
         font-family: "Sarabun", sans-serif;
-        font-size: 8pt;
+        font-size: 10pt;
     }
 
     .itemData2 {
@@ -149,7 +149,7 @@
     .totals {
         flex-grow: 1;
         align-self: center;
-        font-size: 8pt;
+        font-size: 10pt;
     }
 
         .totals .row {
@@ -164,7 +164,7 @@
     .totalRow > div, .total > div {
         text-align: right;
         align-items: baseline;
-        font-size: 8pt;
+        font-size: 10pt;
     }
 
     .totals .col1 {
@@ -215,7 +215,7 @@
         }
 
     .etaLabel {
-        font-size: 8pt;
+        font-size: 10pt;
     }
 
     .printType {
@@ -289,6 +289,11 @@
 
     .line {
         text-decoration: dashed;
+    }
+    .tt{
+        width:100%;
+        display: flex;
+        justify-content: center;
     }
 </style>
 
@@ -391,15 +396,16 @@
 
     <div class="row">
         <div class="col-12 text-center">
+         
             <div class="row">
-                <div class="col-6">
+                <div class="col-7">
                     <div class="headerSubTitle" style="font-weight:bold; ">
-                        ชำระโดย: @receipt.paid_by
+                        <small><strong>ชำระโดย:</strong> @receipt.paid_by</small>
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-5">
                     <div class="headerSubTitle text-end" style="font-weight:bold; text-align:end;">
-                        รวมเงิน: @receipt.total_amount บาท
+                        <small><strong>รวมเงิน:</strong> @receipt.total_amount บาท</small>
                     </div>
                 </div>
             </div>
