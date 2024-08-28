@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using System;
 using System.Globalization;
 
 namespace SingSiamOffice.Pages.Dashboard
@@ -8,6 +9,8 @@ namespace SingSiamOffice.Pages.Dashboard
     {
         [Inject]
         IJSRuntime JSRuntime { get; set; }
+        [Inject]
+        NavigationManager navigationManager { get; set; }
 
 
         private string role { get; set; } = "employee";
@@ -35,6 +38,15 @@ namespace SingSiamOffice.Pages.Dashboard
             return culture;
         }
 
+        private async void moneyCalculate()
+        {
+            //navigationManager.NavigateTo($"/moneycalculator");
+
+            string url = $"/moneycalculator/";
+            await JSRuntime.InvokeAsync<object>("open", url, "_blank");
+
+        }
+     
 
 
 
@@ -43,7 +55,7 @@ namespace SingSiamOffice.Pages.Dashboard
         //{
         //    if (firstRender) 
         //    {
-                
+
         //        await JSRuntime.InvokeVoidAsync("sideBar");
         //    }
         //}

@@ -27,7 +27,7 @@
             <div class="col-12 mt-4 mb-4">
                 <MudText Typo="Typo.h5" Style="@headertext"><img class="rounded-circle" src="img/icons/dashboard.svg" alt="" style="width:3rem;"> Dashboard สาขา: @b_info.Code @b_info.BranchCode | @b_info.BranchName</MudText>
             </div>
-            <div class="col-12 mt-4 mb-4">
+            <div class="col-9 mt-4 mb-4">
                 @if (list_transection.Count() == 0)
                 {
                     <MudText Typo="Typo.h6"><img src="img/icons/calendar.svg" alt="" style="width:2rem;"> ยังไม่มีรายการบันทึกเข้ามาในระบบ</MudText>
@@ -38,6 +38,9 @@
                 }
 
             </div>
+            <div class="col-3 text-end mt-4 mb-4">
+                <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Calculate" Style="@buttoncolor1" @onclick="()=>moneyCalculate()">คำนวนค่างวด</MudButton>
+                </div>
         </div>
 
     </div>
