@@ -297,7 +297,7 @@
 
 
 <!-- START RECEIPT -->
-<div id="printableArea" class="receipt p-2">
+<div id="printableArea" class="receipt">
 
     <div class="headerSubTitle" style="text-align: center;">
         <img src="img/icons/SingCircle.png" alt="" style="width:8rem;">
@@ -328,7 +328,7 @@
        สาขา: @cus_info.Branch.BranchName
     </div>
     <div class="headerSubTitle">
-        ชื่อ-นามสกุล: บริษัท สิงห์สยาม ลิสซิ่ง จำกัด
+        ชื่อ-นามสกุล: @cus_info.FullName
     </div>
  
 
@@ -340,11 +340,14 @@
             </tr>
         </thead>
         <tbody>
-            
-            <tr>
-                <td class="text-start"> @cus_info.FullName</td>
-                <td class="text-end">@sum_price.ToString("N0")</td>
-            </tr>
+            @foreach (var data in list_Externalar)
+            {
+                <tr>
+                    <td class="text-start"> @data.Tdesc</td>
+                    <td class="text-end">@data.Aramount.Value.ToString("N0")</td>
+                </tr>
+            }
+           
         
         </tbody>
     </table>
