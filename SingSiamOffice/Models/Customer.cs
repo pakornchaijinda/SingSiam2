@@ -39,7 +39,7 @@ public partial class Customer
 
     public int BranchId { get; set; }
 
-    public string CusImg { get; set; } = null!;
+    public string? CusImg { get; set; }
 
     public int? Status { get; set; }
 
