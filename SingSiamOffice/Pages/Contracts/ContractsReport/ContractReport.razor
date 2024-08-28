@@ -152,8 +152,8 @@
                                         <li class="list-group-item border-0">จำนวนงวด <strong>@_promises.Periods</strong> งวด</li>
                                         <li class="list-group-item border-0">ดอกเบี้ย <strong>@_promises.Intrate.ToString()</strong> %</li>
                                         <li class="list-group-item border-0">งวดละ <strong>@_promises.Amount.Value.ToString("N0")</strong> บาท</li>
-                                        <li class="list-group-item border-0">ค่าบริการ <strong>@_promises.Service</strong> บาท</li>
-                                        <li class="list-group-item border-0">ค่าประกันหนี้ <strong>@_promises.Chargeamt</strong> บาท</li>
+                                      @*   <li class="list-group-item border-0">ค่าบริการ <strong>@_promises.Service</strong> บาท</li> *@
+                                        <li class="list-group-item border-0">ค่าธรรมเนียมภาษี <strong>@_promises.Chargeamt.Value.ToString("N0")</strong> บาท</li>
                                     </ul>
                                     <ul class="list-group border-0">
                                         <li class="list-group-item border-0"> <strong style="font-size:1rem;">เริ่มชำระงวดแรก @_promises.Firstdate</strong> บาท</li>

@@ -155,9 +155,9 @@ namespace SingSiamOffice.Pages.CustomerManagement.CustomerInfo
         {
             navigationManager.NavigateTo("/deptcollection-list");
         }
-        private void goCustomerDept(int cus_id)
+        private void goCustomerDept(int cus_id,int promise_id)
         {
-            navigationManager.NavigateTo("/customerdept/"+cus_id);
+            navigationManager.NavigateTo("/customerdept/"+cus_id.ToString() + "/"+promise_id.ToString());
         }
         private void goPayment(int cus_id, int promise_id, int branch_id)
         {
