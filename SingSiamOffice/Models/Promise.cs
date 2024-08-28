@@ -165,6 +165,8 @@ public partial class Promise
 
     public virtual Customer Customer { get; set; } = null!;
 
+    public virtual ICollection<Externalar> Externalars { get; set; } = new List<Externalar>();
+
     public virtual ICollection<Guarantor> Guarantors { get; set; } = new List<Guarantor>();
 
     public virtual ICollection<Periodtran> Periodtrans { get; set; } = new List<Periodtran>();
@@ -174,10 +176,6 @@ public partial class Promise
     public virtual Province? Province { get; set; }
 
     public virtual ICollection<ReceiptdescCancle> ReceiptdescCancles { get; set; } = new List<ReceiptdescCancle>();
-
-    public virtual ICollection<Receiptdesc> Receiptdescs { get; set; } = new List<Receiptdesc>();
-
-    public virtual ICollection<ReceipttranCancle> ReceipttranCancles { get; set; } = new List<ReceipttranCancle>();
 
     public virtual ICollection<Receipttran> Receipttrans { get; set; } = new List<Receipttran>();
 }

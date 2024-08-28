@@ -84,12 +84,18 @@ namespace SingSiamOffice.Pages.Expense
             var confirm = await JSRuntime.InvokeAsync<bool>("confirmdelete");
             if (confirm)
             {
-
-                await JSRuntime.InvokeVoidAsync("deletesuccess");
-                await Task.Delay(100);
-
-                navigationManager.NavigateTo("/expense-list");
-
+               var toremove = db.TransactionHistories.Where(s => s.TransactionId == id).FirstOrDefault();
+                try
+                {
+                    db.RemoveRange(toremove);
+                    await db.SaveChangesAsync();
+                    await JSRuntime.InvokeVoidAsync("deletesuccess");
+                    await Task.Delay(100);
+                }
+                catch
+                {
+                    await JSRuntime.InvokeVoidAsync("delete_error");
+                }
             }
             else
             {
@@ -97,7 +103,7 @@ namespace SingSiamOffice.Pages.Expense
             }
         }
 
-
+      
         private void AddExpense(int id)
         {
             navigationManager.NavigateTo("/add-expense/"+ id.ToString());

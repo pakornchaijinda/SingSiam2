@@ -25,7 +25,9 @@ public partial class TransactionHistory
 
     public string? SlipUrl { get; set; }
 
-    public string? TransectionRemark { get; set; }
+    public int? TransectionIdRef { get; set; }
+
+    public bool? ConfirmTransection { get; set; }
 
     public virtual Branch Branch { get; set; } = null!;
 

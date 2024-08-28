@@ -454,6 +454,7 @@ public partial class SingsiamdbContext : DbContext
             entity.Property(e => e.Paidamount)
                 .HasDefaultValueSql("((0))")
                 .HasColumnName("paidamount");
+            entity.Property(e => e.PromiseId).HasColumnName("Promise_id");
             entity.Property(e => e.Tdate)
                 .HasColumnType("datetime")
                 .HasColumnName("tdate");
@@ -472,6 +473,11 @@ public partial class SingsiamdbContext : DbContext
                 .HasForeignKey(d => d.LoginId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Externalar_login");
+
+            entity.HasOne(d => d.Promise).WithMany(p => p.Externalars)
+                .HasForeignKey(d => d.PromiseId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Externalar_promise");
         });
 
         modelBuilder.Entity<Guarantor>(entity =>
@@ -1207,13 +1213,7 @@ public partial class SingsiamdbContext : DbContext
 
             entity.HasOne(d => d.Periodtran).WithMany(p => p.Receiptdescs)
                 .HasForeignKey(d => d.PeriodtranId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_receiptdesc_periodtran");
-
-            entity.HasOne(d => d.Promise).WithMany(p => p.Receiptdescs)
-                .HasForeignKey(d => d.PromiseId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_receiptdesc_promise");
 
             entity.HasOne(d => d.Receipttran).WithMany(p => p.Receiptdescs)
                 .HasForeignKey(d => d.ReceipttranId)
@@ -1668,11 +1668,6 @@ public partial class SingsiamdbContext : DbContext
                 .HasForeignKey(d => d.CustomerId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_receipttran_cancle_customer");
-
-            entity.HasOne(d => d.Promise).WithMany(p => p.ReceipttranCancles)
-                .HasForeignKey(d => d.PromiseId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_receipttran_cancle_promise");
         });
 
         modelBuilder.Entity<Role>(entity =>
@@ -1740,6 +1735,7 @@ public partial class SingsiamdbContext : DbContext
 
             entity.Property(e => e.TransactionId).HasColumnName("Transaction_id");
             entity.Property(e => e.BranchId).HasColumnName("Branch_id");
+            entity.Property(e => e.ConfirmTransection).HasColumnName("confirm_transection");
             entity.Property(e => e.CreateAt)
                 .HasColumnType("datetime")
                 .HasColumnName("Create_at");
@@ -1753,13 +1749,11 @@ public partial class SingsiamdbContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("Slip_url");
             entity.Property(e => e.SubjectId).HasColumnName("Subject_id");
+            entity.Property(e => e.TransectionIdRef).HasColumnName("transection_id_ref");
             entity.Property(e => e.TransectionRef)
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("Transection_ref");
-            entity.Property(e => e.TransectionRemark)
-                .HasColumnType("text")
-                .HasColumnName("Transection_remark");
 
             entity.HasOne(d => d.Branch).WithMany(p => p.TransactionHistories)
                 .HasForeignKey(d => d.BranchId)

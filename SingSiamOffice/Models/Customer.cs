@@ -25,17 +25,17 @@ public partial class Customer
 
     public string Job { get; set; } = null!;
 
-    public string JobAddress { get; set; } = null!;
+    public string? JobAddress { get; set; }
 
-    public string LocationLink { get; set; } = null!;
+    public string? LocationLink { get; set; }
 
-    public string ManRef { get; set; } = null!;
+    public string? ManRef { get; set; }
 
-    public string ManRelation { get; set; } = null!;
+    public string? ManRelation { get; set; }
 
-    public string ManPhone { get; set; } = null!;
+    public string? ManPhone { get; set; }
 
-    public string OrtherDebt { get; set; } = null!;
+    public string? OrtherDebt { get; set; }
 
     public int BranchId { get; set; }
 
