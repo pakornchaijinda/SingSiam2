@@ -87,7 +87,7 @@
                  
                   
                     <p class="contract-detail text-end"><small>เงินดาวน์ : &nbsp;&nbsp; <strong>0</strong> &nbsp;&nbsp; จำนวนงวด: &nbsp;&nbsp; <strong>@_promises.Periods</strong>&nbsp;&nbsp; เงินต้นทำสัญญา: &nbsp;&nbsp; <strong>@_promises.Capital</strong>&nbsp;&nbsp; เงินต้นคงเหลือ: &nbsp;&nbsp; <strong>@_promises.Capital</strong>&nbsp;&nbsp; ชำระทุกวันที่: &nbsp;&nbsp; <strong>@_promises.Daypaid</strong></small></p>
-                    <p class="contract-detail text-end"><small>ภาษีมูลค่าเพิ่ม (7%) : &nbsp;&nbsp; <strong></strong> &nbsp;&nbsp; ดอกเบี้ย: &nbsp;&nbsp; <strong>@_promises.Interest </strong>&nbsp;&nbsp; ต่อปี: &nbsp;&nbsp; <strong></strong></small></p>
+                    <p class="contract-detail text-end"><small>@* ภาษีมูลค่าเพิ่ม (7%) : &nbsp;&nbsp; <strong></strong> &nbsp;&nbsp; *@ ดอกเบี้ย: &nbsp;&nbsp; <strong>@_promises.Interest </strong>@* &nbsp;&nbsp; ต่อปี: &nbsp;&nbsp; *@ <strong></strong></small></p>
                 </div>
                 <br />
                 <div class="col-12 mt-2 mb-4">
@@ -101,7 +101,7 @@
                                 <th style="font-weight:bold;">ค่างวด</th>
                                 <th style="font-weight:bold;">เงินต้น</th>
                                  <th style="font-weight:bold;">ดอกเบี้ย</th>
-                                <th style="font-weight:bold;">vat</th>
+                            @*     <th style="font-weight:bold;">vat</th> *@
                                 <th style="font-weight:bold;">ค่าปรับ</th>
                                 <th style="font-weight:bold;">ทวงถาม</th>
                                 <th style="font-weight:bold;">รวมชำระ</th>
@@ -144,7 +144,7 @@
                                 <td>4,010</td>
                                 <td>3,126</td>
                                 <td>876</td>
-                                <td> </td>
+                                @* <td> </td> *@
                                 <td>0</td>
                                 <td>0</td>
                                 <td>4,010</td>
