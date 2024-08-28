@@ -27,7 +27,11 @@ public partial class Externalar
 
     public bool? PaidComplete { get; set; }
 
+    public int PromiseId { get; set; }
+
     public virtual Customer Customer { get; set; } = null!;
 
     public virtual Login Login { get; set; } = null!;
+
+    public virtual Promise Promise { get; set; } = null!;
 }

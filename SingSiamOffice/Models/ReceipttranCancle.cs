@@ -102,6 +102,4 @@ public partial class ReceipttranCancle
     public virtual Branch Branch { get; set; } = null!;
 
     public virtual Customer Customer { get; set; } = null!;
-
-    public virtual Promise Promise { get; set; } = null!;
 }

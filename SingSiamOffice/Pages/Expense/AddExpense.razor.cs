@@ -60,6 +60,9 @@ namespace SingSiamOffice.Pages.Expense
             {
                 try
                 {
+                    my_b = db.Branches.Where(s => s.Id == b_id).FirstOrDefault();
+                    int code = my_b.Accdocno.Value;
+                    name = $"{my_b.Code}.{code.ToString("D7")}";
                     var Add_expren = new TransactionHistory();
                     if (subject_Id == 4) //โอนเงินไปสาขาอื่น
                     {
@@ -74,8 +77,10 @@ namespace SingSiamOffice.Pages.Expense
                             CreateAt = DateTime.Now,
                             LoginId = userLogin.Id,
                             Detial = description,
-                            PaymentMethod = 2
+                            PaymentMethod = 2,
                         };
+                        db.TransactionHistories.Add(Add_expren);
+                        await db.SaveChangesAsync();
                         var add_amout_to_brach = new TransactionHistory()
                         {
                             BranchId = selectBranch.Id,
@@ -86,10 +91,20 @@ namespace SingSiamOffice.Pages.Expense
                             CreateAt = DateTime.Now,
                             LoginId = userLogin.Id,
                             Detial = description1+ " ได้รับเงินโอนเงินจากสาขา: " + my_b.BranchCode + " | " + my_b.BranchName,
+                            TransectionIdRef = Add_expren.TransactionId,
                             PaymentMethod = 2
                         };
                         db.TransactionHistories.Add(add_amout_to_brach);
                         await db.SaveChangesAsync();
+
+                        Add_expren.TransectionIdRef = add_amout_to_brach.TransactionId;
+                        db.Entry(Add_expren).State = EntityState.Modified;
+                        await db.SaveChangesAsync();
+
+                        await JSRuntime.InvokeVoidAsync("confirm");
+                        await Task.Delay(100);
+                        navigationManager.NavigateTo("/expense-list/" + id.ToString());
+                        return;
                     }else if (subject_Id == 9) //ถอนเงินตั้งสำรอง
                     {
                         Add_expren = new TransactionHistory()
@@ -135,9 +150,7 @@ namespace SingSiamOffice.Pages.Expense
                             PaymentMethod = Paytype
                         };
                     }
-                    my_b = db.Branches.Where(s => s.Id == b_id).FirstOrDefault();
-                    int code = my_b.Accdocno.Value;
-                    name = $"{my_b.Code}.{code.ToString("D7")}";
+
                     Add_expren.TransectionRef = name ;
                     db.TransactionHistories.Add(Add_expren);
                     await db.SaveChangesAsync();
