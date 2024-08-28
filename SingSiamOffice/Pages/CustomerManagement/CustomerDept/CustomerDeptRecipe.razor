@@ -297,7 +297,7 @@
 
 
 <!-- START RECEIPT -->
-<div id="printableArea" class="receipt">
+<div id="printableArea" class="receipt p-2">
 
     <div class="headerSubTitle" style="text-align: center;">
         <img src="img/icons/SingCircle.png" alt="" style="width:8rem;">
@@ -343,7 +343,7 @@
             
             <tr>
                 <td class="text-start"> @cus_info.FullName</td>
-                <td class="text-end">@sum_price</td>
+                <td class="text-end">@sum_price.ToString("N0")</td>
             </tr>
         
         </tbody>
@@ -355,7 +355,7 @@
             <div class="row">
                 <div class="col-12 text-end">
                     <div class="headerSubTitle text-end" style="font-weight:bold; text-align:end;">
-                        รวมเงิน: @sum_price บาท
+                        รวมเงิน: @sum_price.ToString("N0") บาท
                     </div>
                 </div>
             </div>
@@ -373,7 +373,7 @@
                 (  @receipt.Login.Fullname  )
             </div>
             <div class="headerSubTitle" style="font-weight:bold; text-align:center;">
-                @DateTime.Now.ToString($"dd:MM:{thaiYear}");
+                @ConvertToThaiDateString(DateTime.Now)
             </div>
         </div>
     </div>
