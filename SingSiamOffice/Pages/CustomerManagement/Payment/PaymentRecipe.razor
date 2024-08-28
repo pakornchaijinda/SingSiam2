@@ -359,7 +359,7 @@
             @foreach (var items in lst_receiptdescs)
             {
                 <tr>
-                    <th scope="row">@items.Periodtran.Period/@items.Promise.Periods</th>
+                    @* <th scope="row">@items.Periodtran.Period/@items.Promise.Periods</th> *@
                     <td>@items.Receipttran.Receiptdesc</td>
                     @if(items.Deposit != 0 )
                     {

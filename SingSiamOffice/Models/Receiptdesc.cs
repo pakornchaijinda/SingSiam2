@@ -69,5 +69,7 @@ public partial class Receiptdesc
 
     public virtual Periodtran Periodtran { get; set; } = null!;
 
+    public virtual Promise Promise { get; set; } = null!;
+
     public virtual Receipttran Receipttran { get; set; } = null!;
 }

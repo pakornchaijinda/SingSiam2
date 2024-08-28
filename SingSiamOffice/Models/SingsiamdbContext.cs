@@ -1215,6 +1215,11 @@ public partial class SingsiamdbContext : DbContext
                 .HasForeignKey(d => d.PeriodtranId)
                 .HasConstraintName("FK_receiptdesc_periodtran");
 
+            entity.HasOne(d => d.Promise).WithMany(p => p.Receiptdescs)
+                .HasForeignKey(d => d.PromiseId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_receiptdesc_promise");
+
             entity.HasOne(d => d.Receipttran).WithMany(p => p.Receiptdescs)
                 .HasForeignKey(d => d.ReceipttranId)
                 .HasConstraintName("FK_receiptdesc_receipttran");

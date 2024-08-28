@@ -177,5 +177,7 @@ public partial class Promise
 
     public virtual ICollection<ReceiptdescCancle> ReceiptdescCancles { get; set; } = new List<ReceiptdescCancle>();
 
+    public virtual ICollection<Receiptdesc> Receiptdescs { get; set; } = new List<Receiptdesc>();
+
     public virtual ICollection<Receipttran> Receipttrans { get; set; } = new List<Receipttran>();
 }
