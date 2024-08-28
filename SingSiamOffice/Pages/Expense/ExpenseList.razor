@@ -87,7 +87,20 @@
                                               
                                                 @if (data.Subject.SubjectType > 2)
                                                 {
-                                                    <td>@data.Subject.SubjectName @data.Detial <strong>[ @data.Price.ToString("N0") ]</strong></td>
+                                                    <td>@data.Subject.SubjectName @data.Detial <strong>[ @data.Price.ToString("N0") ]  </strong></td>
+                                                }else if (data.SubjectId == 4 || data.SubjectId == 21)
+                                                {
+                                                    <td>@data.Subject.SubjectName @data.Detial <strong>[ @data.Price.ToString("N0") ] 
+                                                    @if (data.ConfirmTransection.Value)
+                                                    {
+                                                        <span class=""> ยืนยันเรียบร้อย</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span> สาขาต้นทางยังไม่ได้ยืนยัน</span>
+                                                    }
+                                                        </strong>
+                                                    </td>
                                                 }
                                                 else
                                                 {
@@ -296,10 +309,14 @@
         if (confirm)
         {
             var to_confirm = db.TransactionHistories.Where(s => s.TransactionId == id).FirstOrDefault();
-            // to_confirm.TransectionRemark = "Confirm";
+            to_confirm.ConfirmTransection = true;
             try
             {
                 db.Entry(to_confirm).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                var ref_id = db.TransactionHistories.Where(s => s.TransactionId == to_confirm.TransectionIdRef).FirstOrDefault();
+                ref_id.ConfirmTransection = true;
+                db.Entry(ref_id).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 await JSRuntime.InvokeVoidAsync("confirm");
                 await Task.Delay(100);

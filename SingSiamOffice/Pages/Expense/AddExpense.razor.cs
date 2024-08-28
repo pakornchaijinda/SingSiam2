@@ -90,13 +90,17 @@ namespace SingSiamOffice.Pages.Expense
                             Price = amount,
                             CreateAt = DateTime.Now,
                             LoginId = userLogin.Id,
-                            TransectionIdRef = id,
                             Detial = description1+ " ได้รับเงินโอนเงินจากสาขา: " + my_b.BranchCode + " | " + my_b.BranchName,
-                            TransactionId = Add_expren.TransactionId,
+                            TransectionIdRef = Add_expren.TransactionId,
                             PaymentMethod = 2
                         };
                         db.TransactionHistories.Add(add_amout_to_brach);
                         await db.SaveChangesAsync();
+
+                        Add_expren.TransectionIdRef = add_amout_to_brach.TransactionId;
+                        db.Entry(Add_expren).State = EntityState.Modified;
+                        await db.SaveChangesAsync();
+
                         await JSRuntime.InvokeVoidAsync("confirm");
                         await Task.Delay(100);
                         navigationManager.NavigateTo("/expense-list/" + id.ToString());
