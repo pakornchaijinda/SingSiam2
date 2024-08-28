@@ -679,7 +679,7 @@ namespace SingSiamOffice.Pages.Contracts
             PromiseInfo.Tdate = DateTime.Now.ToString("yyyy/MM/dd",thaiCulture);
             PromiseInfo.Tdateformat = DateTime.Now.ToString("yyyyMMdd");
             PromiseInfo.CustomerId = c_id;
-            PromiseInfo.Ptype = contract_type;
+            PromiseInfo.Ptype = vat;
             PromiseInfo.Chargeamt = c.chargement;
 
           
