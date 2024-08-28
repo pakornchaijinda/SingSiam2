@@ -19,12 +19,21 @@ namespace SingSiamOffice.Models
     {
         [NotMapped]
         public decimal Interest { get; set; }   
+
         [NotMapped]
         public decimal CapitalCal { get; set; }
         [NotMapped]
         public decimal Interest_Service { get; set; }
         [NotMapped]
         public DateTime FirstDatePay { get; set; }
+        [NotMapped]
+        public string FormatCapital { get; set; }
+        [NotMapped]
+        public string FormatInterest { get; set; }
+        [NotMapped]
+        public string FormatAmount {  get; set; }
+        [NotMapped]
+        public string FormatChargeamt { get; set; }
     }
     public partial class Periodtran
     {

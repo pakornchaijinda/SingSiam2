@@ -340,22 +340,22 @@
                                                                       Required RequiredError="กรุณาระบุชำระทุกวันที่"  /> *@
                          </div>
                          <div class="col-md-4 pb-3">
-                             <MudTextField ReadOnly Style="@field_box" @bind-Value="_promises.Capital" Label="เงินทำสัญญา" Placeholder="ระบุเงินทำสัญญา" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+                             <MudTextField ReadOnly Style="@field_box" @bind-Value="_promises.FormatCapital" Label="เงินทำสัญญา" Placeholder="ระบุเงินทำสัญญา" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
                          </div>
                          <div class="col-md-4 pb-3">
                              <MudTextField ReadOnly Style="@field_box" @bind-Value="_promises.Periods" Label="จำนวนงวด" Placeholder="ระบุจำนวนงวด" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
                          </div>
                          <div class="col-md-4 pb-3">
-                            <MudTextField ReadOnly Style="@field_box" @bind-Value=" _promises.Interest" Label="ดอกเบี้ย" Placeholder="ระบุดอกเบี้ย" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+                            <MudTextField ReadOnly Style="@field_box" @bind-Value=" _promises.FormatInterest" Label="ดอกเบี้ย" Placeholder="ระบุดอกเบี้ย" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
                          </div>
                          <div class="col-md-4 pb-3">
-                             <MudTextField ReadOnly Style="@field_box" @bind-Value="_promises.Amount" Label="งวดละ" Placeholder="ระบุจำนวนที่ชำระต่องวด" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+                             <MudTextField ReadOnly Style="@field_box" @bind-Value="_promises.FormatAmount" Label="งวดละ" Placeholder="ระบุจำนวนที่ชำระต่องวด" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
                          </div>
                          <div class="col-md-4 pb-3">
                              <MudTextField ReadOnly Style="@field_box" @bind-Value="_promises.Service" Label="ค่าบริการ" Placeholder="ระบุค่าบริการ" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
                          </div>
                          <div class="col-md-4 pb-3">
-                             <MudTextField ReadOnly Style="@field_box" @bind-Value="_promises.Chargeamt" Label="ค่าประกันหนี้" Placeholder="ระบุค่าประกันหนี้" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+                             <MudTextField ReadOnly Style="@field_box" @bind-Value="_promises.FormatChargeamt" Label="ค่าประกันหนี้" Placeholder="ระบุค่าประกันหนี้" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
                          </div>
                        @*   <div class="col-md-4 pb-3">
                              <MudField Style="@field_box" @bind-Value="carryingCost" Label="ค่านำพา" Placeholder="ระบุค่านำพา" Variant="Variant.Outlined" Margin="Margin.Dense"></MudField>
@@ -366,25 +366,28 @@
                 {
                     <div class="row">
                         <div class="col-md-4 pb-3">
-                            <MudTextField ReadOnly Style="@field_box" @bind-Value="principle" Label="เงินต้น" Placeholder="ระบุเงินต้น" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+                            <MudTextField ReadOnly Style="@field_box" @bind-Value="_promises.FormatCapital" Label="เงินต้น" Placeholder="ระบุเงินต้น" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
                         </div>
                         <div class="col-md-4 pb-3">
-                            <MudTextField ReadOnly Style="@field_box" @bind-Value="installmentsTerm" Label="จำนวนงวด" Placeholder="ระบุจำนวนงวด" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+                            <MudTextField ReadOnly Style="@field_box" @bind-Value="_promises.Periods" Label="จำนวนงวด" Placeholder="ระบุจำนวนงวด" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
                         </div>
                         <div class="col-md-4 pb-3">
-                            <MudTextField ReadOnly Style="@field_box" @bind-Value="interest" Label="ดอกเบี้ย" Placeholder="ระบุดอกเบี้ย" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+                            <MudTextField ReadOnly Style="@field_box" @bind-Value="_promises.FormatInterest" Label="ดอกเบี้ย" Placeholder="ระบุดอกเบี้ย" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
                         </div>
                         <div class="col-md-4 pb-3">
-                            <MudTextField ReadOnly Style="@field_box" @bind-Value="installments" Label="งวดละ" Placeholder="ระบุจำนวนที่ชำระต่องวด" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+                            <MudTextField ReadOnly Style="@field_box" @bind-Value="_promises.Amount" Label="งวดละ" Placeholder="ระบุจำนวนที่ชำระต่องวด" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
                         </div>
                         <div class="col-md-4 pb-3">
-                            <MudTextField ReadOnly Style="@field_box" @bind-Value="paymentTerm" Label="ชำระทุกวันที่"  Margin="Margin.Dense" Variant="Variant.Outlined"  />
+                            <MudTextField ReadOnly Style="@field_box" @bind-Value="_promises.Daypaid" Label="ชำระทุกวันที่" Margin="Margin.Dense" Variant="Variant.Outlined" />
                          </div>
+                        <div class="col-md-4 pb-3">
+                            <MudTextField ReadOnly Style="@field_box" @bind-Value="_promises.FormatChargeamt" Label="ค่าประกันหนี้" Placeholder="ระบุค่าประกันหนี้" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+                        </div>
                          @* ค่าธรรมเนียม
                     รกจักรยานยนต์ คิดเป็น 4% ของยอดกู้
                     รถยนต์ – โฉนดที่ดิน – รถเพื่อการเกษตร – สมุดทะเบียนเกษตรกร  คิดเป็น 5% ของยอดกู้ *@
 
-                         <div class="col-md-4 pb-3">
+                      @*    <div class="col-md-4 pb-3">
                              <MudTextField ReadOnly Style="@field_box" @bind-Value="fee" Label="ค่าธรรมเนียม" Placeholder="ระบุค่าธรรมเนียม" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
                          </div>
                          <div class="col-md-4 pb-3">
@@ -395,7 +398,7 @@
                          </div>
                          <div class="col-md-4 pb-3">
                              <MudTextField ReadOnly Style="@field_box" @bind-Value="carryingCost" Label="ค่านำพา" Placeholder="ระบุค่านำพา" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
-                         </div>
+                         </div> *@
 
                      </div>
                 }
