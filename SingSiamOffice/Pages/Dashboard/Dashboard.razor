@@ -16,6 +16,23 @@
 
 @using Blazored.LocalStorage
 @inject ILocalStorageService localStorage
+
+<style>
+    .sticky {
+        position: -webkit-sticky;
+        position: sticky;
+        bottom: 0;
+        
+    }
+
+    .centerbox {
+        display: grid;
+        align-items: center;
+    }
+    th h6{
+        color:#fff;
+    }
+</style>
 <Navbar2></Navbar2>
 <!-- Content Start -->
 <div class="content container-fluid p-3">
@@ -293,7 +310,79 @@
        
 
      </div>
+    <div class="container-fluid mt-4 mb-4 sticky">
+        <div class="card outer-card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-9 centerbox">
+                        <table class="table table-bordered" style="border:1px solid;">
+                            <thead>
+                                <tr class="text-center">
+                                    <th scope="col" style="@cashbox">
+                                        <h6>ธนบัตร</h6>
+                                        <h6>1,000</h6>
+                                    </th>
+                                    <th scope="col" style="@cashbox">
+                                        <h6>ธนบัตร</h6>
+                                        <h6>500</h6>
+                                    </th>
+                                    <th scope="col" style="@cashbox">
+                                        <h6>ธนบัตร</h6>
+                                        <h6>100</h6>
+                                    </th>
+                                    <th scope="col" style="@cashbox">
+                                        <h6>ธนบัตร</h6>
+                                        <h6>20</h6>
+                                    </th>
+                                    <th scope="col" style="@cashbox">
+                                        <h6>เหรียญ</h6>
+                                        <h6>10</h6>
+                                    </th>
+                                    <th scope="col" style="@cashbox">
+                                        <h6>เหรียญ</h6>
+                                        <h6>5</h6>
+                                    </th>
+                                    <th scope="col" style="@cashbox">
+                                        <h6>เหรียญ</h6>
+                                        <h6>1</h6>
+                                    </th>
 
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-center">
+                                    <th><input type="number" class="form-control" id="1000" min="1" value="0"></th>
+                                    <th><input type="number" class="form-control" id="500" min="1" value="0"></th>
+                                    <th><input type="number" class="form-control" id="100" min="1" value="0"></th>
+                                    <th><input type="number" class="form-control" id="20" min="1" value="0"></th>
+                                    <th><input type="number" class="form-control" id="10" min="1" value="0"></th>
+                                    <th><input type="number" class="form-control" id="5" min="1"  value="0"></th>
+                                    <th><input type="number" class="form-control" id="1" min="1"  value="0"></th>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-3 centerbox">
+                        <div class="row">
+                            <div class="col-4 text-center">
+                                <button>
+                                    <img src="img/icons/cashtotal.svg" alt="" style="width:5rem;">
+                                </button>
+                                   
+                                </div>
+                            <div class="col-8 text-center" >
+                                    <h3>นับเงินสด</h3>
+                                <h3 style="color:#840012;">0.0</h3>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+     
+    </div>
 </div>
 
 
@@ -309,6 +398,8 @@
     string detailtext = "color:#1C2833 ; font-weight:600; font-style: italic;";
     string receivedmoney = "color:#2ba037; font-weight:600;";
     string outmoney = "color:#7f0011; font-weight:600;";
+
+    string cashbox = "background-color:#17202a; color:#fff; font-weight:600;";
 
     string cash = "color:#0E6655; font-weight:600;";
     string banktransfer = "color:#5B2C6F ; font-weight:600;";
