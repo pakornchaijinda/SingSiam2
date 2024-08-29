@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using SingSiamOffice.Models;
 using System;
 using System.Diagnostics;
+using Newtonsoft.Json;
 
 namespace SingSiamOffice.Pages.Expense
 {
@@ -134,6 +135,40 @@ namespace SingSiamOffice.Pages.Expense
                             Detial = description,
                             PaymentMethod = 2
                         };
+                    }
+                    else if (subject_Id == 7) //ได้รับชำระค่าธรรมเนียมภาษี
+                    {
+                        Add_expren = new TransactionHistory()
+                        {
+                            BranchId = id,
+                            TransectionRef = name,
+                            SubjectId = subject_Id,
+                            SlipUrl = filePath,
+                            Price = amount,
+                            CreateAt = DateTime.Now,
+                            LoginId = userLogin.Id,
+                            Detial = description,
+                            PaymentMethod = Paytype,
+                        };
+                        db.TransactionHistories.Add(Add_expren);
+                        await db.SaveChangesAsync();
+                        var data = new
+                        {
+                            refcode = selectPromise.Refcode,
+                            tdec = DateTime.Now.ToString("dd/MM/yyyy"),
+                            price = amount
+                        };
+                        string jsonString = JsonConvert.SerializeObject(data);
+                        var new_add = new TransectionSlip();
+                        new_add.TransactionHistoryId = Add_expren.TransactionId;
+                        new_add.Doc = jsonString;
+                        db.TransectionSlips.Add(new_add);
+                        await db.SaveChangesAsync();
+                        await JSRuntime.InvokeVoidAsync("confirm");
+                        await Task.Delay(100);
+                        navigationManager.NavigateTo("/expense-list/" + id.ToString());
+                        return;
+
                     }
                     else
                     {

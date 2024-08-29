@@ -1781,26 +1781,6 @@ public partial class SingsiamdbContext : DbContext
                 .HasConstraintName("FK_Transaction_history_Subject_cost");
         });
 
-        modelBuilder.Entity<TransectionSlip>(entity =>
-        {
-            entity.HasKey(e => e.TransactionSlipId);
-
-            entity.ToTable("Transection_slip");
-
-            entity.Property(e => e.TransactionSlipId)
-                .ValueGeneratedNever()
-                .HasColumnName("Transaction_slip_id");
-            entity.Property(e => e.Doc)
-                .IsUnicode(false)
-                .HasDefaultValueSql("('-')");
-            entity.Property(e => e.TransactionHistoryId).HasColumnName("Transaction_history_id");
-
-            entity.HasOne(d => d.TransactionHistory).WithMany(p => p.TransectionSlips)
-                .HasForeignKey(d => d.TransactionHistoryId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Transection_slip_Transaction_history");
-        });
-
         OnModelCreatingPartial(modelBuilder);
     }
 
