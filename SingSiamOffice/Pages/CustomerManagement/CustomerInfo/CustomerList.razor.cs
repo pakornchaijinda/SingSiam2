@@ -107,6 +107,10 @@ namespace SingSiamOffice.Pages.CustomerManagement.CustomerInfo
                     await JSRuntime.InvokeVoidAsync("deleteContractSuccess");
                     await Task.Delay(100);
 
+                    //reset
+                    reset();
+                   
+
                     navigationManager.NavigateTo($"/customerlist/{b_id}");
                 }
                
