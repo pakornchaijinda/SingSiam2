@@ -170,7 +170,11 @@
                                                             {
                                                                 <MudMenuItem @onclick="()=>except(data.TransactionId)">ยอมรับเงินโอนระหว่างสาขา</MudMenuItem>
                                                             }
-                                                           
+                                                            else if (data.SubjectId == 7)
+                                                            {
+                                                                <MudMenuItem @onclick="()=>print(data.TransactionId)">พิมพ์ใบเสร็จรับเงิน</MudMenuItem>
+                                                            }
+
 
                                                            
 
@@ -339,5 +343,11 @@
         {
             //await JSRuntime.InvokeVoidAsync("delete_error");
         }
+    }
+    
+    private async Task print(int id)
+    {
+        string url = $"/TaxRecipe/{id}";
+        await JSRuntime.InvokeAsync<object>("open", url, "_blank");
     }
 }

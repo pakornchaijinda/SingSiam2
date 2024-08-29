@@ -57,6 +57,8 @@ public partial class SingsiamdbContext : DbContext
 
     public virtual DbSet<TransactionHistory> TransactionHistories { get; set; }
 
+    public virtual DbSet<TransectionSlip> TransectionSlips { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server=103.91.204.106;Database=singsiamdb;user id=sqlserver;password=singsiamP@ssw0rd;Trusted_Connection=false;MultipleActiveResultSets=true;TrustServerCertificate=true");
@@ -939,6 +941,9 @@ public partial class SingsiamdbContext : DbContext
                 .HasDefaultValueSql("((0.00))")
                 .HasColumnType("decimal(10, 2)")
                 .HasColumnName("intrate");
+            entity.Property(e => e.IsDelete)
+                .HasDefaultValueSql("((0))")
+                .HasColumnName("is_delete");
             entity.Property(e => e.JsonPrddesc).HasColumnName("json_prddesc");
             entity.Property(e => e.Latepc)
                 .HasDefaultValueSql("((0.00))")
@@ -1774,6 +1779,24 @@ public partial class SingsiamdbContext : DbContext
                 .HasForeignKey(d => d.SubjectId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Transaction_history_Subject_cost");
+        });
+
+        modelBuilder.Entity<TransectionSlip>(entity =>
+        {
+            entity.HasKey(e => e.TransactionSlipId);
+
+            entity.ToTable("Transection_slip");
+
+            entity.Property(e => e.TransactionSlipId).HasColumnName("Transaction_slip_id");
+            entity.Property(e => e.Doc)
+                .IsUnicode(false)
+                .HasDefaultValueSql("('-')");
+            entity.Property(e => e.TransactionHistoryId).HasColumnName("Transaction_history_id");
+
+            entity.HasOne(d => d.TransactionHistory).WithMany(p => p.TransectionSlips)
+                .HasForeignKey(d => d.TransactionHistoryId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Transection_slip_Transaction_history");
         });
 
         OnModelCreatingPartial(modelBuilder);

@@ -45,10 +45,10 @@
                         {
                             
                             <div class="row">
-                                <div class="col-md-12 pb-3">
+                              @*   <div class="col-md-12 pb-3">
                                     <MudText Typo="Typo.body1" Style="@imporText">ยอดเงินคงเหลือทั้งหมดของสาขา : <span style="color:green; font-weight:600;">100000</span> บาท</MudText>
                                 </div>
-                                <hr />
+                                <hr /> *@
                                 <div class="col-md-12 pb-3">
                                     <MudAutocomplete T="Branch" @bind-Value="selectBranch" Label="ระบุสาขาที่ต้องการโอนเงิน" SearchFunc="@SearchBranch" ToStringFunc="@(e=> e==null?null : $"{e.BranchName} | {e.BranchCode}")" Margin="Margin.Dense" Variant="Variant.Outlined" Style="background-color:#fff;" Clearable />
                                 </div>
@@ -56,7 +56,7 @@
                                
                                 <div class="row">
                                     <div class="col-md-6 pb-3">
-                                         <MudTextField @bind-Value="name" Label="เลขที่อ้างอิง" Variant="Variant.Outlined" Margin="Margin.Dense" ReadOnly Style="@buttoncollape"></MudTextField>
+                                        <MudTextField @bind-Value="name" Label="เลขที่ใบเสร็จ" Variant="Variant.Outlined" Margin="Margin.Dense" ReadOnly Style="@buttoncollape"></MudTextField>
                                     </div>
                                     <div class="col-md-6 pb-3">
                                         <MudTextField @bind-Value="amount" Label="จำนวนเงิน" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
@@ -110,6 +110,50 @@
                                 </div>
                             </div>
                         }
+                        else if (subject_Id == 7) //ได้รับชำระค่าธรรมเนียมภาษี
+                        {
+                                <div class="row">
+                                   
+                                    <div class="col-md-6 pb-3">
+                                        <MudTextField @bind-Value="name" Label="เลขที่ใบเสร็จ" Variant="Variant.Outlined" Margin="Margin.Dense" ReadOnly Style="@buttoncollape"></MudTextField>
+                                    </div>
+                                    <div class="col-md-12 pb-3">
+                                    <MudAutocomplete T="Promise" @bind-Value="selectPromise" Label="เลขที่อ้างอิงสัญญา" SearchFunc="@SearchPromise" ToStringFunc="@(e=> e==null?null : $"{e.Refcode}")" Margin="Margin.Dense" Variant="Variant.Outlined" Style="background-color:#fff;" Clearable />
+                                    </div>
+                                    @if (selectPromise != null)
+                                    {
+                                        <div class="col-md-6 pb-3">
+                                        <MudTextField @bind-Value="selectPromise.Promiseno" Label="สัญญาเลขที่" Variant="Variant.Outlined" Margin="Margin.Dense" ReadOnly></MudTextField>
+                                        </div>
+                                        <div class="col-md-6 pb-3">
+                                        <MudTextField @bind-Value="selectPromise.Customer.FullName" Label="ลูกค้า" Variant="Variant.Outlined" Margin="Margin.Dense" ReadOnly></MudTextField>
+                                        </div>
+                                        <div class="col-md-6 pb-3">
+                                            <MudTextField @bind-Value="selectPromise.Product.Name" Label="หลักประกัน" Variant="Variant.Outlined" Margin="Margin.Dense" ReadOnly></MudTextField>
+                                        </div>
+                                    }
+                                  
+                                    <div class="col-md-6 pb-3">
+                                        <MudNumericField @bind-Value="amount" Label="จำนวนเงิน" Variant="Variant.Outlined" Margin="Margin.Dense"></MudNumericField>
+                                    </div>
+                                    <div class="col-md-12 pb-3">
+                                        <MudRadioGroup @bind-Value="@Paytype">
+                                            <MudRadio Value="1" Color="Color.Primary"> เงินสด</MudRadio>
+                                            <MudRadio Value="2" Color="Color.Secondary">เงินโอน</MudRadio>
+                                        </MudRadioGroup>
+                                    </div>
+                                    <div class="col-md-12 pb-3">
+                                        <MudTextField @bind-Value="description" Label="คำอธิบาย" Variant="Variant.Outlined" Margin="Margin.Dense" Lines="5"></MudTextField>
+                                    </div>
+                                    <div class="col-md-12 pb-3 text-center">
+                                        <MudButton Variant="Variant.Outlined" Size="Size.Large" Color="Color.Error" @onclick="()=>goback()">กลับ</MudButton>
+                                    <MudButton Variant="Variant.Filled" Size="Size.Large" Style="@buttoncolor1" @onclick="()=>submit(b_id)">เพิ่มรายการ</MudButton>
+                                    @* <MudButton Variant="Variant.Filled" Size="Size.Large" Color="Color.Info" @onclick="()=>submit(b_id)">พิมพ์ใบเสร็จรับเงิน</MudButton> *@
+                                    </div>
+                                </div>
+
+                            
+                        }
                         else
                         {
 
@@ -124,7 +168,7 @@
                                 }
                              
                                 <div class="col-md-6 pb-3">
-                                    <MudTextField @bind-Value="name" Label="เลขที่อ้างอิง" Variant="Variant.Outlined" Margin="Margin.Dense" ReadOnly Style="@buttoncollape"></MudTextField>
+                                    <MudTextField @bind-Value="name" Label="เลขที่ใบเสร็จ" Variant="Variant.Outlined" Margin="Margin.Dense" ReadOnly Style="@buttoncollape"></MudTextField>
                                 </div>
 
                                 <div class="col-md-6 pb-3">
@@ -168,7 +212,7 @@
                                 </div>
                                 <div class="col-md-12 pb-3 text-center">
                                     <MudButton Variant="Variant.Outlined" Size="Size.Large" Color="Color.Error" @onclick="()=>goback()">กลับ</MudButton>
-                                    <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Add" Size="Size.Large" Style="@buttoncolor1" @onclick="()=>submit(b_id)">เพิ่มรายการ</MudButton>
+                                    <MudButton Variant="Variant.Filled"  Size="Size.Large" Style="@buttoncolor1" @onclick="()=>submit(b_id)">เพิ่มรายการ</MudButton>
                                 </div>
                             </div>
 
@@ -190,7 +234,7 @@
     // style
     string tableheader = "background-color:#840012; color:#ffff;";
     string headertext = "color:#840012; font-weight:600;";
-    string buttoncolor1 = "background-color:#840012; color:#FFF; font-weight:600;";
+    string buttoncolor1 = "background-color:#840012; color:#FFF;";
     string settingbutton = "background-color:#840012; color:#FFF; font-weight:600; ";
     string buttoncollape = "background-color:#fc928c; color:#840012; font-weight:600;";
     string imporText = "color:#840012; font-weight:600;";
@@ -208,6 +252,7 @@
     List<SubjectCost> list_subject = new List<SubjectCost>();
     Login userLogin = new Login();
     Branch my_b = new Branch();
+    List<Promise> list_promise = new List<Promise>();
     protected override async Task OnInitializedAsync()
     {
         try
@@ -226,7 +271,7 @@
         {
             navigationManager.NavigateTo("/");
         }
-
+        list_promise = db.Promises.Include(s => s.Customer).Include(s => s.Product).Where(s => s.BranchId == b_id).AsNoTracking().ToList();
         list_Branch = db.Branches.Where(s=>s.IsActive == true).ToList();
 
         list_subject = db.SubjectCosts.Where(s => s.IsActive == true).OrderBy(s=>s.SubjectCode).ToList();
@@ -257,6 +302,16 @@
             return list_Branch;
         return list_Branch.Where(x => x.BranchName.Contains(value, StringComparison.InvariantCultureIgnoreCase));
     }
+    private async Task<IEnumerable<Promise>> SearchPromise(string value)
+    {
+        // In real life use an asynchronous function for fetching data from an api.
+        await Task.Delay(5);
+
+        // if text is null or empty, show complete list
+        if (string.IsNullOrEmpty(value))
+            return list_promise;
+        return list_promise.Where(x => x.Refcode.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+    }
     private string description2;
     private void OnDescriptionChanged(string value)
     {
@@ -282,6 +337,23 @@
             }
         }
     }
+    Models.Promise selectPromise = null;
+    Models.Promise _selectPromise
+    {
+        get { return _selectPromise; }
+        set
+        {
+            if (value != null)
+            {
 
+                _selectPromise = value;
+
+            }
+            else
+            {
+
+            }
+        }
+    }
   
 }
