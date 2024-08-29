@@ -206,6 +206,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
 
         bool _expanded = true;
         private decimal totalFee { get; set; }
+        private decimal totalFee_Old { get; set; }
         private void OnExpandCollapseClick()
         {
             _expanded = !_expanded;
@@ -240,8 +241,8 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
 
             if (_promise_pay.OverPayQty > 0)
             {
-                _promise_pay.total_deptAmount = _periodtran.Sum(p => p.amount_remain);
-                _promise_pay.pending_amount = _promise_pay.total_deptAmount - _promise_pay.total_deposit + _promise_pay.total_fee + _promise_pay.total_charge_follow;
+                _promise_pay.total_deptAmount = _periodtran.Sum(p => p.amount_remain) + _promise_pay.total_fee;
+                _promise_pay.pending_amount = _promise_pay.total_deptAmount - _promise_pay.total_deposit  + _promise_pay.total_charge_follow;
             }
             else 
             {
@@ -249,6 +250,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                 _promise_pay.pending_amount = 0;
             }
             totalFee = _promise_pay.total_fee;
+            totalFee_Old = _promise_pay.total_fee;
             var receipt = await managements.Get_Receipt_No(branch_id, "receipt");
             ReceiptNo = receipt.ToString();
         }

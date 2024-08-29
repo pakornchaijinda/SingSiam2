@@ -347,7 +347,10 @@
                                                                     <div>
                                                                         <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">ค่าปรับ  :</div>
-                                                                            <input type="text" class="form-control text-end" style="@boxfieldred" @bind-value:event="onchange" @oninput="CalculateStandardDimensions" @bind-value="@totalFee">
+                                                                            <input type="text" class="form-control text-end" style="@imporText"
+                                                                                   @bind-value="@totalFee_Old" readonly>
+                                                                            <input type="text" class="form-control text-end" style="@boxfieldred" @bind-value:event="onchange"
+                                                                                   @oninput="CalculateStandardDimensions" @bind-value="@totalFee">
                                                                         </div>
                                                                     </div>
                                                                     <div>
@@ -602,7 +605,10 @@
                                                                     <div>
                                                                         <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">ค่าปรับ  :</div>
-                                                                            <input type="text" class="form-control text-end" @oninput="ValueChanged" value="@totalFee" style="@boxfieldred">
+                                                                            <input type="text" class="form-control text-end" style="@boxfieldred"
+                                                                                   @bind-value="@totalFee_Old" readonly>
+                                                                            <input type="text" class="form-control text-end" style="@boxfieldred" @bind-value:event="onchange"
+                                                                                   @oninput="ValueChanged" @bind-value="@totalFee">
                                                                         </div>
                                                                     </div>
                                                                     <div>
