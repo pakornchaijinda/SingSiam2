@@ -45,4 +45,9 @@
         public string? fProduct { get; set; }
         public string? fLocate { get; set; }
     }
+    public class CalculatePaymentPeriod
+    {
+        public string period_qty { get; set; }
+        public string? period_price { get;set; }
+    }
 }

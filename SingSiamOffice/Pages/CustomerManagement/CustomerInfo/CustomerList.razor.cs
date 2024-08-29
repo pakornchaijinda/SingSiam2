@@ -17,6 +17,8 @@ namespace SingSiamOffice.Pages.CustomerManagement.CustomerInfo
         NavigationManager navigationManager { get; set; }
         [Inject]
         Manage.Managements managements { get; set; }
+        [Inject]
+        Manage.PromiseManagement promiseManagement { get; set; }
         [Inject] AuthenticationStateProvider authStateProvider { get; set; }    
         [Inject] AuthenticationStateProvider AuthenticationStateProvider { get; set; }
        
@@ -95,16 +97,19 @@ namespace SingSiamOffice.Pages.CustomerManagement.CustomerInfo
 };
 
 
-        private async Task deleteContract()
+        private async Task deleteContract(int promiseId)
         {
             var confirm = await JSRuntime.InvokeAsync<bool>("deleteContract");
             if (confirm)
             {
+                if (await promiseManagement.Delete_Promise(promiseId))
+                {
+                    await JSRuntime.InvokeVoidAsync("deleteContractSuccess");
+                    await Task.Delay(100);
 
-                await JSRuntime.InvokeVoidAsync("deleteContractSuccess");
-                await Task.Delay(100);
-
-                navigationManager.NavigateTo("/customerlist");
+                    navigationManager.NavigateTo($"/customerlist/{b_id}");
+                }
+               
 
             }
             else

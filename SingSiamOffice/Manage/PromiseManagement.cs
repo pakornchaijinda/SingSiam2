@@ -27,6 +27,14 @@ namespace SingSiamOffice.Manage
                 return null;
             }
         }
+        public async Task<bool> Delete_Promise(int promiseId) 
+        {
+            var to_del = db.Promises.Where(s=>s.Id == promiseId).FirstOrDefault();
+            to_del.IsDelete = true;
+            db.Entry(to_del).State = EntityState.Modified;
+            await db.SaveChangesAsync();
+            return true;
+        }
         public async Task addGuarantor(List<Guarantor> guarantor)
         {
             try

@@ -34,4 +34,6 @@ public partial class TransactionHistory
     public virtual Login Login { get; set; } = null!;
 
     public virtual SubjectCost Subject { get; set; } = null!;
+
+    public virtual ICollection<TransectionSlip> TransectionSlips { get; set; } = new List<TransectionSlip>();
 }

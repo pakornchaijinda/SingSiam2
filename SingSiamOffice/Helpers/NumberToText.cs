@@ -1,4 +1,5 @@
-﻿using SingSiamOffice.Models;
+﻿using SingSiamOffice.Manage;
+using SingSiamOffice.Models;
 
 namespace SingSiamOffice.Helpers
 {
@@ -101,7 +102,29 @@ namespace SingSiamOffice.Helpers
             return c;
         }
 
+        public async Task<List<CalculatePaymentPeriod>> CalculatePaymentPeriods(decimal capital,decimal interate) 
+        {
+            List<CalculatePaymentPeriod> list_calculatePaymentPeriods = new List<CalculatePaymentPeriod>();
+            int totalMonths = 48;
 
+            for (int month = 1; month <= totalMonths; month++)
+            {
+                CalculatePaymentPeriod c = new CalculatePaymentPeriod();
+                var intrate_qty = interate / 100;
+                int amonut_interate = (int)(capital * intrate_qty);
+              
+                if (month % 3 == 0 || month == totalMonths)
+                {
+                    var total = (capital / month) + amonut_interate;
+                    var amonut = (int)Math.Ceiling(Convert.ToDouble(total) / 10.0) * 10;
+                    c.period_qty = month.ToString() + " งวด";
+                    c.period_price ="งวดละ " + amonut.ToString("N0") + " บาท";
+                    list_calculatePaymentPeriods.Add(c);
+                }
+               
+            }
+            return list_calculatePaymentPeriods;
+        }
 
 
         public async Task<string> ConvertNumberToThaiWords(int number)

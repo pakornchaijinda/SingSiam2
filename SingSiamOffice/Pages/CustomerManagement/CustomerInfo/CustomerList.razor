@@ -199,8 +199,8 @@
                                                                     <td>@items.Refcode</td>
                                                                     <td>@items.Product.Name</td>
                                                                     <td>@items.Promiseno</td>
-                                                                    <td>@items.Capital</td>
-                                                                    <td>@items.Amount</td>
+                                                                    <td>@items.Capital.Value.ToString("N0")</td>
+                                                                    <td>@items.Amount.Value.ToString("N0")</td>
                                                                     <td>@items.Branch.BranchName</td>
 
                                                                     <td class="text-end">
@@ -212,7 +212,7 @@
                                                                                 <ul class="dropdown-menu" aria-labelledby="contractdropdown">
                                                                                     <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>viewContract( items.CustomerId,items.Id,items.BranchId)">ดูข้อมูลสัญญา</a></li>
                                                                                     <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>printContract(items.Id)">พิมพ์สัญญา</a></li>
-                                                                                    <li><a style="cursor:pointer; background-color:red; color:#fff;" class="dropdown-item" @onclick="()=>deleteContract()">ลบสัญญา</a></li>
+                                                                                    <li><a style="cursor:pointer; background-color:red; color:#fff;" class="dropdown-item" @onclick="()=>deleteContract(items.Id)">ลบสัญญา</a></li>
                                                                                 </ul>
                                                                             </div>
 

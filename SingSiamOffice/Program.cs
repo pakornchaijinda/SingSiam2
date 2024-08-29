@@ -29,6 +29,7 @@ builder.Services.AddSingleton<SingSiamOffice.Manage.UserManagement>();
 builder.Services.AddSingleton<SingSiamOffice.Manage.Managements>();
 builder.Services.AddSingleton<SingSiamOffice.Manage.PromiseManagement>();
 builder.Services.AddSingleton<SingSiamOffice.Manage.GlobalData>();
+builder.Services.AddSingleton<SingSiamOffice.Manage.CalculatePaymentPeriod>();
 builder.Services.AddSingleton<SingSiamOffice.Manage.Collateral1>();
 builder.Services.AddSingleton<SingSiamOffice.Manage.Collateral2>();
 builder.Services.AddSingleton<SingSiamOffice.Manage.Collateral3>();

@@ -1,4 +1,6 @@
 ﻿@page "/moneycalculator"
+@using SingSiamOffice.Manage
+@inject IJSRuntime JSRuntime
 @* <h3>MoneyCalculator</h3> *@
 
 <div class="container mt-4 mb-4">
@@ -20,14 +22,14 @@
                         <div class="col-12">
                             <div class="input-group mb-3">
                                 <span class="input-group-text">ยอดเงินที่ต้องการกู้</span>
-                                <input type="text" class="form-control" placeholder="ระบุยอดเงินที่ต้องการกู้"  >
+                                <input type="text" class="form-control" placeholder="ระบุยอดเงินที่ต้องการกู้" @bind-value="capital" >
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="input-group mb-3">
                                 <span class="input-group-text">ระบุดอกเบี้ย</span>
-                                <select class="form-select" @bind="@selectInterest" placeholder="ระบุดอกเบี้ย">
-                                    
+                                <select class="form-select" @onchange="OnInterestChanged" placeholder="ระบุดอกเบี้ย">
+                                    <option value="1">-</option>
                                     <option value="2">1.19</option>
                                     <option value="3">1.25</option>
                                     <option value="4">1.90</option>
@@ -41,13 +43,14 @@
                             <div class="col-12">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1">ระบุดอกเบี้ย %</span>
-                                    <input type="text" class="form-control" aria-label="ระบุดอกเบี้ย %">
+                                    <input type="text" class="form-control" aria-label="ระบุดอกเบี้ย %" @bind-value="manual_interate" @oninput="OnManualInterestChanged">
                                 </div>
                             </div>
                         }
                       
                         <div class="col-12 text-center">
-                            <button type="button" class="btn btn-primary " style="@buttoncolor1">คำนวน</button>
+                            <button type="button" class="btn btn-primary " style="@buttoncolor1" @onclick="()=>Calculate(capital,interate)">คำนวน</button>
+                            <button type="button" class="btn btn-warning " style="@buttoncolor1" @onclick="()=>Clear()">ล้าง</button>
                         </div>
                     </div>
                 </div>
@@ -59,8 +62,8 @@
                     <div class="row">
                       
                         <div class="col-12 text-center">
-                            <h5>ยอดเงินกู้ : <span style="@money_color"> 50000</span> บาท</h5>
-                            <h5>ดอกเบี้ย : <span style="@interest_color"> 1.19</span> %</h5>
+                            <h5>ยอดเงินกู้ : <span style="@money_color"> @capital.ToString("N0")</span> บาท</h5>
+                            <h5>ดอกเบี้ย : <span style="@interest_color">@interte_selected</span> %</h5>
                         </div>
                         <div class="col-12">
                             <table class="table table-striped table-bordered">
@@ -72,12 +75,22 @@
                                     </tr>
                                 </thead>
                                 <tbody class="text-center">
-                                    <tr>
+                                    @if (list_calculatePayments.Count > 0)
+                                    {
+                                        foreach(var items in list_calculatePayments)
+                                        {
+                                            <tr>
 
-                                        <td>งวดที่ 1</td>
-                                        <td>งวดละ 43,332 บาท</td>
+                                                <td>@items.period_qty</td>
+                                                <td>@items.period_price</td>
 
-                                    </tr>
+                                            </tr>
+
+                                        }
+                                     
+
+                                    }
+                                  
 
                                 </tbody>
                             </table>
@@ -95,9 +108,88 @@
 
 
 @code {
+    [Inject]
+    Helpers.NumberToText numberToText { get; set; }
+    [Inject]
+    Manage.CalculatePaymentPeriod calculatePaymentPeriod { get; set; }
     string buttoncolor1 = "background-color:#840012; color:#FFF; font-weight:600;";
     string money_color = "color:#145a32; font-weight:600;";
     string interest_color = "color:#840012; font-weight:600;";
 
     private double selectInterest { get; set; }
+    private decimal capital { get; set; }
+
+    private decimal interate { get; set; }
+    private decimal manual_interate { get; set; }
+
+    private string interte_selected { get; set; }
+    private List<CalculatePaymentPeriod> list_calculatePayments = new List<CalculatePaymentPeriod>();
+    private void OnInterestChanged(ChangeEventArgs e)
+    {
+        var s = e.Value.ToString();
+        interate =Convert.ToDecimal(s);
+        switch (interate)
+        {
+            case 2:
+
+                interte_selected = "1.19";
+                break;
+            case 3:
+                interte_selected = "1.25";
+                break;
+            case 4:
+                interte_selected = "1.90";
+                break;
+
+        }
+        if (s =="5")
+        {
+            selectInterest = 5;
+            interte_selected = manual_interate.ToString();
+
+        }
+
+    }
+    private void OnManualInterestChanged(ChangeEventArgs e)
+    {
+        var s = e.Value.ToString();
+        interte_selected = s.ToString();
+        manual_interate = Convert.ToDecimal(interte_selected);
+
+    }
+    async Task Calculate(decimal capital,decimal interate_qty)
+    {
+        switch (interate_qty)
+        {
+            case 2:
+
+                interate = 1.19m;
+                break;
+            case 3:
+                interate = 1.25m;
+                break;
+            case 4:
+                interate = 1.90m;
+                break;
+
+        }
+        if (interate_qty == 5)
+        {
+            interate = Convert.ToDecimal(manual_interate);
+            interte_selected = manual_interate.ToString();
+
+        }
+        list_calculatePayments = await numberToText.CalculatePaymentPeriods(capital,interate); 
+    }
+    async Task Clear()
+    {
+        // interte_selected = string.Empty;
+        // manual_interate = 0.0m;
+        // list_calculatePayments = new List<CalculatePaymentPeriod>();
+        // capital = 0.0m;
+        // selectInterest = 1;
+        // interate = 1;
+        await JSRuntime.InvokeVoidAsync("location.reload");
+
+    }
 }

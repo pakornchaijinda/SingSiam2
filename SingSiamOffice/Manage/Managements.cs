@@ -12,7 +12,8 @@ namespace SingSiamOffice.Manage
 
         public async Task<List<Promise>> GetPromisebyCustomerId(int customer_id)
         {
-            var data = db.Promises.AsNoTracking().Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Product).Include(s => s.Periodtrans).Include(s => s.Province).Where(s => s.CustomerId == customer_id && s.Status != 2).ToList();
+            var data = db.Promises.AsNoTracking().Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Product).Include(s => s.Periodtrans).Include(s => s.Province)
+                .Where(s => s.CustomerId == customer_id && s.Status != 2 && s.IsDelete == false).ToList();
             foreach (var promise in data) 
             {
                 promise.FormatCapital = promise.Capital.Value.ToString("N0");
@@ -24,7 +25,8 @@ namespace SingSiamOffice.Manage
         }
         public async Task<Promise> GetPromisebyPromiseId(int promise_id)
         {
-            var data = db.Promises.AsNoTracking().Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Product).Include(s => s.Periodtrans).Include(s => s.Province).Where(s => s.Id == promise_id && s.Status != 2).FirstOrDefault();
+            var data = db.Promises.AsNoTracking().Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Product).Include(s => s.Periodtrans).Include(s => s.Province)
+                .Where(s => s.Id == promise_id && s.Status != 2 && s.IsDelete == false).FirstOrDefault();
 
             data.FormatCapital = data.Capital.Value.ToString("N0");
             data.FormatAmount = data.Amount.Value.ToString("N0");
@@ -35,7 +37,8 @@ namespace SingSiamOffice.Manage
         }
         public async Task<int?> GetCurrentPeriod(int promise_id) 
         {
-            var data = db.Promises.AsNoTracking().Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Product).Include(s => s.Periodtrans).Include(s => s.Province).Where(s => s.Id == promise_id && s.Status != 2 ).FirstOrDefault();
+            var data = db.Promises.AsNoTracking().Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Product).Include(s => s.Periodtrans).Include(s => s.Province)
+                .Where(s => s.Id == promise_id && s.Status != 2 && s.IsDelete == false ).FirstOrDefault();
            var current_period = data.Periodtrans.Where(s=>s.Ispaid == false).FirstOrDefault();
             
             return current_period.Period;
@@ -43,7 +46,7 @@ namespace SingSiamOffice.Manage
         public async Task<List<Periodtran>> GetPeriodtransbyPromiseId(int promise_id)
         {
             var config = db.Configs.AsNoTracking().Where(s => s.Id == 1).FirstOrDefault();
-            var data = db.Periodtrans.AsNoTracking().Include(s => s.Customer).Include(s => s.Branch).Include(s=>s.Receiptdescs).Where(s => s.PromiseId == promise_id && s.Status != 2 ).ToList();
+            var data = db.Periodtrans.AsNoTracking().Include(s => s.Customer).Include(s => s.Branch).Include(s=>s.Receiptdescs).Where(s => s.PromiseId == promise_id && s.Status != 2 && s.Promise.IsDelete == false).ToList();
             var receipt = db.Receiptdescs.AsNoTracking().Where(s=>s.PromiseId == promise_id).ToList();
             int cnt_overpayment = 0;
             foreach (var periodtran in data)

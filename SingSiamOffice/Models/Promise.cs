@@ -161,6 +161,8 @@ public partial class Promise
 
     public string? JsonPrddesc { get; set; }
 
+    public bool? IsDelete { get; set; }
+
     public virtual Branch Branch { get; set; } = null!;
 
     public virtual Customer Customer { get; set; } = null!;
