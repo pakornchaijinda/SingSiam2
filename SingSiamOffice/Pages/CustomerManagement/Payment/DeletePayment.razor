@@ -3,7 +3,9 @@
 @inject ISnackbar Snackbar
 <style>
     .highlight-red {
-        background-color: red;
+        background-color: #f5b7b1;
+        color: #840012;
+        font-weight:700;
     }
 
 </style>
@@ -118,6 +120,7 @@
     <div class="container mt-4 mb-4">
         <div class="card outer-card mb-4">
             <div class="card-body">
+                <MudText Typo="Typo.body1" Style="@headertext"> * ใบเสร็จตามลำดับการชำระ</MudText>
                 <div class="row">
                     <div class="col-md-12 mt-4 mb-4">
                         <div class="table-responsive">
@@ -143,7 +146,7 @@
                                                 @if (data.index == 0)
                                                 {
                                                     <MudButton Variant="Variant.Outlined" Color="Color.Secondary" @onclick="()=>delete(data.item.Id)">ยกเลิกใบเสร็จ</MudButton>
-                                                 
+                                                    <MudButton Variant="Variant.Outlined" Color="Color.Success" @onclick="()=>receipt(data.item.Id)">Print</MudButton>
                                                 }
                                             </td>
                                         </tr>
