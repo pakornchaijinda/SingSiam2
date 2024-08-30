@@ -9,6 +9,9 @@ public partial class TransactionHistory
 
     public int Price { get; set; }
 
+    /// <summary>
+    /// เงินสด 1 เงินโอน 2
+    /// </summary>
     public int PaymentMethod { get; set; }
 
     public int BranchId { get; set; }
@@ -29,9 +32,13 @@ public partial class TransactionHistory
 
     public bool? ConfirmTransection { get; set; }
 
+    public int? ReceiopttranId { get; set; }
+
     public virtual Branch Branch { get; set; } = null!;
 
     public virtual Login Login { get; set; } = null!;
+
+    public virtual Receipttran? Receiopttran { get; set; }
 
     public virtual SubjectCost Subject { get; set; } = null!;
 

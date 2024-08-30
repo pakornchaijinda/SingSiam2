@@ -112,4 +112,6 @@ public partial class Receipttran
     public virtual Promise Promise { get; set; } = null!;
 
     public virtual ICollection<Receiptdesc> Receiptdescs { get; set; } = new List<Receiptdesc>();
+
+    public virtual ICollection<TransactionHistory> TransactionHistories { get; set; } = new List<TransactionHistory>();
 }
