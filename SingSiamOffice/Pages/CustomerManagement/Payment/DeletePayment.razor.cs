@@ -209,6 +209,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
         private List<Receiptdesc> lst_receiptdescs = new List<Receiptdesc>();
         private Receiptdesc _receiptdesc_toAdd { get; set; }
         private List<Periodtran> _periodtran = new List<Periodtran>();
+        private List<Receipttran> _Receipttran = new List<Receipttran>();
         private Promise _promise = new Promise();
         private Periodtran _promise_pay = new Periodtran();
         private string ReceiptNo { get; set; } = "";
@@ -223,30 +224,11 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
         }
         protected override async void OnInitialized()
         {
+            _Receipttran = await managements.GetReceipttran(promise_id);
             _periodtran = await managements.GetPeriodtransbyPromiseId(promise_id);
             _promise = await managements.GetPromisebyPromiseId(promise_id);
 
-            _promise_pay.OverPayQty = _periodtran.Where(s => s.OverPayQty > 0).Count();
-
-            _promise_pay.total_deposit = (decimal)_periodtran.Sum(p => p.Deposit);
-            _promise_pay.total_fee = _periodtran.Sum(p => p.total_fee);
-            totalFee = _promise_pay.total_fee;
-            _promise_pay.total_charge_follow = _periodtran.Sum(p => p.total_charge_follow);
-
-            if (_promise_pay.OverPayQty > 0)
-            {
-                _promise_pay.total_deptAmount = _periodtran.Sum(p => p.amount_remain) + _promise_pay.total_fee;
-                _promise_pay.pending_amount = _promise_pay.total_deptAmount - _promise_pay.total_deposit + _promise_pay.total_charge_follow;
-            }
-            else
-            {
-                _promise_pay.total_deptAmount = 0;
-                _promise_pay.pending_amount = 0;
-            }
-            totalFee = _promise_pay.total_fee;
-            totalFee_Old = _promise_pay.total_fee;
-            var receipt = await managements.Get_Receipt_No(branch_id, "receipt");
-            ReceiptNo = receipt.ToString();
+  
         }
         private void ValueChanged(ChangeEventArgs args)
         {
@@ -309,7 +291,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
             _promise_pay.total_deptAmount = _periodtran.Sum(p => p.amount_remain) + totalFee;
             _promise_pay.pending_amount = _promise_pay.total_deptAmount - _promise_pay.total_deposit;
         }
-        private async Task delete()
+        private async Task delete(int receipt_id)
         {
             var confirm = await JSRuntime.InvokeAsync<bool>("deleteSlip");
             if (confirm)
@@ -681,9 +663,9 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                 ExpandedPeriodtransId = periodtranId;
             }
         }
-        private async Task receipt(int? peroidtran_id, string type)
+        private async Task receipt(int receipt_id)
         {
-            string url = $"/paymentrecipe/{peroidtran_id}/{type}";
+            string url = $"/paymentrecipe/{receipt_id}";
             await JSRuntime.InvokeAsync<object>("open", url, "_blank");
             //navigationManager.NavigateTo("/paymentrecipe");
         }

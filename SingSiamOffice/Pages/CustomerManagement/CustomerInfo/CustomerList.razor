@@ -223,7 +223,7 @@
                                                                                 <ul class="dropdown-menu" aria-labelledby="paymentdropdown">
                                                                                     <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>goPayment(items.CustomerId,items.Id,items.BranchId)">ชำระค่างวด</a></li>
                                                                                     <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>printPaymentDetail(items.Id)">พิมพ์รายละเอียด</a></li>
-                                                                                    <li><a style="cursor:pointer; background-color:red; color:#fff;" class="dropdown-item" @onclick="()=>canclePayment( items.CustomerId,items.Id,items.BranchId)">ยกเลิกใบเสร็จ</a></li>
+                                                                                    <li><a style="cursor:pointer; background-color:red; color:#fff;" class="dropdown-item" @onclick="()=>canclePayment(items.Id)">ยกเลิกใบเสร็จ</a></li>
                                                                              
                                                                                 </ul>
                                                                             </div>

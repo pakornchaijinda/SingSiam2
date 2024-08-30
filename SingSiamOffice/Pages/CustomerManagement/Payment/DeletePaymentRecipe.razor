@@ -1,6 +1,6 @@
-﻿<h3>DeletePaymentRecipe</h3>
+﻿@page "/deletepaymentreceipe/{promitarn_id:int}"
 
-@page "/deletepaymentreceipe/{peroidtran_id:int}/{type}"
+
 @* <h3>PaymentRecipe</h3> *@
 
 
@@ -446,5 +446,6 @@
 </div>
 
 @code {
-
+    [Parameter]
+    public int promitarn_id { get; set; }
 }

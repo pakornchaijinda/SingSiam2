@@ -1,7 +1,12 @@
-﻿@page "/deletepayment/{branch_id:int}/{c_id:int}/{promise_id:int}"
+﻿@page "/deletepayment/{promise_id:int}"
 @* <h3>DeletePayment</h3> *@
 @inject ISnackbar Snackbar
+<style>
+    .highlight-red {
+        background-color: red;
+    }
 
+</style>
 <Navbar2></Navbar2>
 
 <div class="content  container-fluid p-3 mb-4">
@@ -127,16 +132,24 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="">17/05/65</td>
-                                        <td class="">PA000ABC</td>
-                                        <td class="">ชำระค่างวด</td>
-                                        <td class="">13,231</td>
-                                        <td class="">
-                                            <MudButton Variant="Variant.Outlined" Color="Color.Secondary" @onclick="()=>delete()">ยกเลิกใบเสร็จ</MudButton>
-                                            <MudButton Variant="Variant.Outlined" Color="Color.Success" @onclick="()=>receipt(i.ReceipttranId,type_d)">Print</MudButton>
-                                        </td>
-                                    </tr>
+                                    @foreach (var data in _Receipttran.Select((item, index) => new { item, index }))
+                                    {
+                                        <tr class="@(data.index == 0 ? "highlight-red" : "")">
+                                            <td class="">@data.item.Tdate</td>
+                                            <td class="">@data.item.Receiptno</td>
+                                            <td class="">@data.item.Receiptdesc</td>
+                                            <td class="">@data.item.Amount</td>
+                                            <td class="">
+                                                @if (data.index == 0)
+                                                {
+                                                    <MudButton Variant="Variant.Outlined" Color="Color.Secondary" @onclick="()=>delete(data.item.Id)">ยกเลิกใบเสร็จ</MudButton>
+                                                    <MudButton Variant="Variant.Outlined" Color="Color.Success" @onclick="()=>receipt(data.item.Id)">Print</MudButton>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+
+                                   
                                 </tbody>
                             </table>
                         </div>
