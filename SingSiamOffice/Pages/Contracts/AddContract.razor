@@ -528,19 +528,30 @@
                                          <div class="col-md-4 pb-3">
                                              <MudTextField Style="@field_box" @bind-Value="installmentsTerm" Label="จำนวนงวด" Placeholder="ระบุจำนวนงวด" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
                                          </div>
-                                         <div class="col-md-4 pb-3">
-                                            <MudTextField Style="@field_box" @bind-Value="interest" Label="ดอกเบี้ย" Placeholder="ระบุดอกเบี้ย" Variant="Variant.Outlined" Margin="Margin.Dense" TextChanged="TextChanged"></MudTextField>
-                
+                                         <div class="col-md-2 pb-2">
+                                            <MudTextField Style="@field_box" @bind-Value="interest" Label="ดอกเบี้ย" Placeholder="ระบุดอกเบี้ย" Variant="Variant.Outlined" Margin="Margin.Dense">
+                                              
+                                            </MudTextField>
+                                           
                                          </div>
+                                        <div class="col-md-2 pb-2">
+
+                                            <MudButton Variant="Variant.Filled" Color="Color.Info" Size="Size.Large" OnClick="Cal">คำนวณ</MudButton>
+
+                                        </div>
                                         <div class="col-md-4 pb-3">
                                             <MudTextField Style="@field_box" @bind-Value="c.interate" Label="ค่าดอกเบี้ย"  Variant="Variant.Outlined" Margin="Margin.Dense" ReadOnly></MudTextField>
                                         </div>
                                         <div class="col-md-4 pb-3">
                                             <MudTextField Style="@field_box" @bind-Value="c.total_amount" Label="งวดละ" Placeholder="ระบุจำนวนที่ชำระต่องวด" Variant="Variant.Outlined" Margin="Margin.Dense" ReadOnly></MudTextField>
                                         </div>
-                                        <div class="col-md-4 pb-3">
-                                            <MudTextField Style="@field_box" @bind-Value="serviceCharge" Label="ค่าบริการ" Placeholder="ระบุค่าบริการ" Variant="Variant.Outlined" Margin="Margin.Dense" TextChanged="InterateTextChanged"></MudTextField>
+                                        <div class="col-md-2 pb-3">
+                                            <MudTextField Style="@field_box" @bind-Value="serviceCharge" Label="ค่าบริการ" Placeholder="ระบุค่าบริการ" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
                                         </div>
+                                           <div class="col-md-2 pb-3">
+                                            <MudButton Variant="Variant.Filled" Color="Color.Info" Size="Size.Large" OnClick="Adjust">ปรับค่าบริการ</MudButton>
+                                        
+                                               </div>
                                     @* <div class="col-md-4 pb-3">
                                              <MudTextField Style="@field_box" @bind-Value="deptInsurant" Label="ค่าประกันหนี้" Placeholder="ระบุค่าประกันหนี้" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
                                          </div>
@@ -566,8 +577,11 @@
                                         <div class="col-md-4 pb-3">
                                             <MudTextField Style="@field_box" @bind-Value="installmentsTerm" Label="จำนวนงวด" Placeholder="ระบุจำนวนงวด" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
                                         </div>
-                                        <div class="col-md-4 pb-3">
-                                            <MudTextField Style="@field_box" @bind-Value="interest" Label="ดอกเบี้ย" Placeholder="ระบุดอกเบี้ย" Variant="Variant.Outlined" Margin="Margin.Dense" TextChanged="TextChanged"></MudTextField>
+                                        <div class="col-md-2 pb-3">
+                                            <MudTextField Style="@field_box" @bind-Value="interest" Label="ดอกเบี้ย" Placeholder="ระบุดอกเบี้ย" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+                                        </div>
+                                        <div class="col-md-2 pb-3">
+                                            <MudButton Variant="Variant.Filled" Color="Color.Info" Size="Size.Large" OnClick="Cal">คำนวณ</MudButton>
                                         </div>
                                         <div class="col-md-4 pb-3">
                                             <MudTextField Style="@field_box" @bind-Value="c.interate" Label="ค่าดอกเบี้ย" Variant="Variant.Outlined" Margin="Margin.Dense" ReadOnly></MudTextField>
@@ -575,8 +589,11 @@
                                         <div class="col-md-4 pb-3">
                                             <MudTextField Style="@field_box" @bind-Value="c.amount_Ptype2" Label="งวดละ" Placeholder="ระบุจำนวนที่ชำระต่องวด" Variant="Variant.Outlined" Margin="Margin.Dense" ReadOnly></MudTextField>
                                         </div>
-                                        <div class="col-md-4 pb-3">
-                                            <MudTextField Style="@field_box" @bind-Value="serviceCharge" Label="ค่าบริการ" Placeholder="ระบุค่าบริการ" Variant="Variant.Outlined" Margin="Margin.Dense" TextChanged="InterateTextChanged"></MudTextField>
+                                        <div class="col-md-2 pb-3">
+                                            <MudTextField Style="@field_box" @bind-Value="serviceCharge" Label="ค่าบริการ" Placeholder="ระบุค่าบริการ" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+                                        </div>
+                                        <div class="col-md-2 pb-3">
+                                            <MudButton Variant="Variant.Filled" Color="Color.Info" Size="Size.Large" OnClick="Adjust">ปรับค่าบริการ</MudButton>
                                         </div>
                                         <div class="col-md-4 pb-3">
                                             <MudDatePicker Style="@field_box" @bind-Date="paymentTerm" Label="ชำระทุกวันที่" Culture="@GetThaiCulture()" PickerVariant="PickerVariant.Dialog" UseShortNames="false" TitleDateFormat="dddd, dd MMMM" Margin="Margin.Dense" Variant="Variant.Outlined"  Required RequiredError="กรุณาระบุชำระทุกวันที่" />

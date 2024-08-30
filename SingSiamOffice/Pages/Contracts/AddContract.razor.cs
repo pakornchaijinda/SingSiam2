@@ -461,7 +461,7 @@ namespace SingSiamOffice.Pages.Contracts
         Collateral2 collateral2 = new Collateral2();
         Collateral3 collateral3 = new Collateral3();
 
-     
+        private bool ck_condition { get; set; } = true;
         private async Task<IEnumerable<Province>> SearchProvince(string value)
         {
             // In real life use an asynchronous function for fetching data from an api.
@@ -557,9 +557,43 @@ namespace SingSiamOffice.Pages.Contracts
                 c = await Helpers.cal_amonut(Convert.ToDecimal(paycapital), Convert.ToInt32(installmentsTerm), Convert.ToDecimal(interest), select_collateral.Id);
             }
         }
+        private async Task Cal() 
+        {
+            c = new calamount();
+            double paycapital = 0;
+          
+                if (contract_type == 1)
+                {
+                    paycapital = paymentContract;
+                }
+                else
+                {
+                    paycapital = principle;
+                }
+            if (paycapital == 0 || installmentsTerm == 0 || select_collateral == null)
+            {
+                Snackbar.Configuration.PositionClass = Defaults.Classes.Position.TopCenter;
+                Snackbar.Add($"กรุณาใส่ข้อมูลให้ครบ", Severity.Error);
+            }
+            else 
+            {
+                c = await Helpers.cal_amonut(Convert.ToDecimal(paycapital), Convert.ToInt32(installmentsTerm), Convert.ToDecimal(interest), select_collateral.Id);
+            }
+               
+            
+        }
+        private async Task Adjust() 
+        {
+
+                var total = c.total_amount + Convert.ToDecimal(serviceCharge);
+                c.total_amount = total;
+                c.total_interate_service = c.interate + Convert.ToDecimal(serviceCharge);
+                c.amount_Ptype2 = c.interate + Convert.ToDecimal(serviceCharge);
+
+        }
         private async void InterateTextChanged()
         {
-            if (serviceCharge.ToString().Length > 0)
+            if (serviceCharge.ToString().Length >= 0)
             {
                var total = c.total_amount + Convert.ToDecimal(serviceCharge);
                 c.total_amount = total;
