@@ -3,7 +3,9 @@
 @inject ISnackbar Snackbar
 <style>
     .highlight-red {
-        background-color: red;
+        background-color: #f5b7b1;
+        color: #840012;
+        font-weight:700;
     }
 
 </style>
@@ -142,8 +144,8 @@
                                             <td class="">
                                                 @if (data.index == 0)
                                                 {
-                                                    <MudButton Variant="Variant.Outlined" Color="Color.Secondary" @onclick="()=>delete(data.item.Id)">ยกเลิกใบเสร็จ</MudButton>
-                                                    <MudButton Variant="Variant.Outlined" Color="Color.Success" @onclick="()=>receipt(data.item.Id)">Print</MudButton>
+                                                    <MudButton Variant="Variant.Filled" Style="@buttoncolor1" @onclick="()=>delete(data.item.Id)">ยกเลิกใบเสร็จ</MudButton>
+                                                    <MudButton Variant="Variant.Filled" Color="Color.Success" @onclick="()=>receipt(data.item.Id)">Print</MudButton>
                                                 }
                                             </td>
                                         </tr>
