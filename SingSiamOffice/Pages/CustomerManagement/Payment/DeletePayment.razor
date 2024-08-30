@@ -1,0 +1,207 @@
+﻿@page "/deletepayment/{branch_id:int}/{c_id:int}/{promise_id:int}"
+@* <h3>DeletePayment</h3> *@
+@inject ISnackbar Snackbar
+
+<Navbar2></Navbar2>
+
+<div class="content  container-fluid p-3 mb-4">
+<Header />
+    <div class="container mt-4 mb-4">
+        <div class="row">
+            <div class="col-12 mt-4 mb-4">
+                <MudText Typo="Typo.h5" Style="@headertext"><img class="rounded-circle" src="img/icons/receipt.svg" alt="" style="width:3rem;"> ยกเลิกใบเสร็จ</MudText>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-4 mb-4">
+        <div class="card outer-card">
+            <div class="card-header" style="@tableheader">ข้อมูลลูกค้า</div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <MudStack Spacing="1">
+                            <div>
+                                <div class="input-group">
+                                    <div class="input-group-text" style="@imporText">เลขบัตรประจำตัวประชาชน :</div>
+                                    <input type="text" class="form-control" @bind-value="_promise.Customer.NatId" style="@boxfield" disabled>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="input-group">
+                                    <div class="input-group-text" style="@imporText">ชื่อ - นามสกุล :</div>
+                                    <input type="text" class="form-control" @bind-value="_promise.Customer.FullName" style="@boxfield" disabled>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="input-group">
+                                    <div class="input-group-text" style="@imporText">เลขที่สัญญา :</div>
+                                    <input type="text" class="form-control" @bind-value="_promise.Promiseno" style="@boxfield" disabled>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="input-group">
+                                    <div class="input-group-text" style="@imporText">หลักประกันสัญญา :</div>
+                                    <input type="text" class="form-control" @bind-value="_promise.Product.Name" style="@boxfield" disabled>
+                                </div>
+                            </div>
+
+                        </MudStack>
+                    </div>
+                    <div class="col-md-6">
+                        <MudStack Spacing="1">
+                            <div>
+                                <div class="input-group">
+                                    <div class="input-group-text" style="@imporText">วัน/เดือน/ปี :</div>
+                                    <input type="text" class="form-control" @bind-value="date" style="@boxfield" disabled>
+                                </div>
+                            </div>
+                            <div>
+                    
+                            </div>
+                            <div>
+                                <div class="input-group">
+                                    <div class="input-group-text" style="@imporText">หมายเลขอ้างอิงสัญญา :</div>
+                                    <input type="text" class="form-control" @bind-value="_promise.Refcode" style="@boxfield" disabled>
+                                </div>
+                            </div>
+                            <div>
+
+                                <div class="input-group">
+                                    <div class="input-group-text" style="@imporText">ดอกเบี้ย :</div>
+                                    <input type="text" class="form-control" @bind-value="_promise.FormatInterest" style="@boxfield" disabled>
+                                </div>
+                            </div>
+                        </MudStack>
+                    </div>
+
+                    <div class="col-md-12 mt-2">
+                        <MudStack Row="true" Spacing="1">
+
+                            <div>
+                                <div class="input-group">
+                                    <div class="input-group-text" style="@imporText">เงินต้น :</div>
+                                    <input type="text" class="form-control" @bind-value="_promise.FormatCapital" style="@boxfield" disabled>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="input-group">
+                                    <div class="input-group-text" style="@imporText">จำนวนงวด :</div>
+                                    <input type="text" class="form-control" @bind-value="_promise.Periods" style="@boxfield" disabled>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="input-group">
+                                    <div class="input-group-text" style="@imporText">งวดละ :</div>
+                                    <input type="text" class="form-control" @bind-value="_promise.FormatAmount" style="@boxfield" disabled>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="input-group">
+                                    <div class="input-group-text" style="@imporText">ชำระทุกวันที่ :</div>
+                                    <input type="text" class="form-control" @bind-value="_promise.Daypaid" style="@boxfield" disabled>
+                                </div>
+                            </div>
+          
+                        </MudStack>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container mt-4 mb-4">
+        <div class="card outer-card mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12 mt-4 mb-4">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead style="@tableheader">
+                                    <tr>
+                                        <th class="">วันที่</th>
+                                        <th class="">อ้างอิง</th>
+                                        <th class="">ประเภท</th>
+                                        <th class="">ยอดเงิน</th>
+                                        <th class="">การจัดการ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="">17/05/65</td>
+                                        <td class="">PA000ABC</td>
+                                        <td class="">ชำระค่างวด</td>
+                                        <td class="">13,231</td>
+                                        <td class="">
+                                            <MudButton Variant="Variant.Outlined" Color="Color.Secondary" @onclick="()=>delete()">ยกเลิกใบเสร็จ</MudButton>
+                                            <MudButton Variant="Variant.Outlined" Color="Color.Success" @onclick="()=>receipt(i.ReceipttranId,type_d)">Print</MudButton>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                 
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+@code {
+
+
+    // style
+    string tableheader = "background-color:#840012; color:#ffff;";
+    string headertext = "color:#840012; font-weight:600;";
+    string buttoncolor1 = "background-color:#840012; color:#FFF; font-weight:600;";
+    string settingbutton = "background-color:#840012; color:#FFF; font-weight:600; ";
+    string buttoncollape = "background-color:#fc928c; color:#840012; font-weight:600;";
+    string imporText = "color:#840012; font-weight:600;";
+    string errorText = "color:#810515; font-weight:600;";
+    string detailtext = "color:#1C2833 ; font-weight:600; font-style: italic;";
+
+    string boxfield = "background-color:#fff; color:#3498DB; font-weight:600; ";
+    string boxfieldred = "background-color:#fff; color:#FF0000; font-weight:600; ";
+    string boxfieldgreen = "background-color:#fff; color:#28B463; font-weight:600; ";
+
+    public double? PaidAmount { get; set; }
+    public string otherReason { get; set; }
+    DateTime date { get; set; } = DateTime.UtcNow;
+    public string nat { get; set; } = "12345678998";
+    public string name { get; set; } = "สุรี ศรีเย็น";
+    public string collateral_type { get; set; } = "3 โฉนดที่ดิน";
+
+    public double? principle { get; set; } = 10000;
+    public int? installmentsTerm { get; set; } = 24;
+    public double? installments { get; set; } = 610;
+    public int? paymentTerm { get; set; } = 24;
+
+    public double? otherdepts { get; set; } = 0.00;
+    public double? interest { get; set; } = 1.90;
+
+    public int? paymentTerm_round { get; set; } = 1;
+    public double? payAmount { get; set; } = 670;
+    public double? receivedAmount { get; set; } = 0;
+    public string? receipt_No { get; set; } = "CB-0013110";
+
+    public double? fineAmount { get; set; } = 60;
+    public double? deptAmount { get; set; }
+
+    public decimal? customerPayAmount { get; set; }
+
+
+    public double? paidfineAmount { get; set; } = 0;
+    public decimal? paidprincipleAmount { get; set; }
+    public decimal? paidinterestAmount { get; set; }
+    public double? behindhandAmount { get; set; } = 670;
+
+
+
+}
+

@@ -140,8 +140,11 @@ namespace SingSiamOffice.Pages.CustomerManagement.CustomerInfo
         {
             navigationManager.NavigateTo($"/view-contract/{branch_id}/{cus_id}/{promise_id}");
         }
+        private void canclePayment(int cus_id, int promise_id, int branch_id)
+        {
+            navigationManager.NavigateTo($"/deletepayment/{branch_id}/{cus_id}/{promise_id}");
+        }
 
-       
         private async Task printContract(int id)
         {
             //navigationManager.NavigateTo("/contractreport/" + id.ToString());

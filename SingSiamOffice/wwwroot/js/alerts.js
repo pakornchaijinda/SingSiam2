@@ -155,7 +155,28 @@ function idcard_notfound() {
     })
 }
 
+function deleteSlip() {
+    return new Promise(reslove => {
+        Swal.fire({
+            title: 'คุณต้องการที่จะยกเลิกใบเสร็จ ใช่หรือไม่',
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: 'ยกเลิกใบเสร็จ',
+            denyButtonText: `ยกเลิก`,
+        }).then((result) => {
 
+            /* Read more about isConfirmed, isDenied below */
+            reslove(result.isConfirmed)
+            //if (result.isConfirmed) {
+            //    reslove(result.isConfirmed)
+            //    Swal.fire('บันทีกสำเร็จ!', '', 'success')
+            //} else if (result.isDenied) {
+            //    Swal.fire('บันทีกไม่สำเร็จ กรุณาบันทึกอีกครั้ง', '', 'info')
+            //}
+        })
+    });
+
+}
 
 function deleteContract() {
     return new Promise(reslove => {

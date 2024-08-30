@@ -28,6 +28,7 @@
             <NavLink href="@BlacklistHref" class="nav-item nav-link"><img class="rounded-circle" src="img/icons/backlist.svg" alt="" style="width:3rem;"> Blacklist</NavLink>
            @*  <NavLink href="@DeptCollectionHref" class="nav-item nav-link"><img class="rounded-circle" src="img/icons/customer-service.svg" alt="" style="width:3rem;"> ติดตาม</NavLink> *@
             <NavLink href="@ExpenseListHref" class="nav-item nav-link"><img class="rounded-circle" src="img/icons/expense.svg" alt="" style="width:3rem;"> รายรับ - รายจ่าย</NavLink>
+@*             <NavLink href="@paymentdeleteHref" class="nav-item nav-link"><img class="rounded-circle" src="img/icons/receipt.svg" alt="" style="width:3rem;">  ลบใบเสร็จ</NavLink> *@
         </div>
     </nav>
 </div>
@@ -98,5 +99,7 @@
     string BlacklistHref => "/blacklist_list/" + brach_id.ToString();
     string DeptCollectionHref => "/deptcollection-list/" + brach_id.ToString();
     string ExpenseListHref => "/expense-list/" + brach_id.ToString();
+    string paymentdeleteHref => "/deletepayment/" + brach_id.ToString();
+  
 }
 
