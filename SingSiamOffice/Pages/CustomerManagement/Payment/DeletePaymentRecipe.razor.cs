@@ -35,41 +35,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
         }
         protected override async void OnInitialized()
         {
-            lst_receiptdescs = await Manage.GetReceipttran(peroidtran_id, type);
-            receipttran = lst_receiptdescs.Select(s => s.Receipttran).FirstOrDefault();
-            receipt.daypaid = receipttran.Tdate;
-            receipt.receipt_no = receipttran.Receiptno;
-            receipt.promise_no = lst_receiptdescs.FirstOrDefault().Promise.Refcode;
-            receipt.fullname = lst_receiptdescs.FirstOrDefault().Customer.FullName;
-            receipt.address = lst_receiptdescs.FirstOrDefault().Customer.Address;
-            receipt.product = lst_receiptdescs.FirstOrDefault().Promise.Product.Name;
-            receipt.paid_by = await GetNumberToText.Paid_By((int)receipttran.PaidBy);
-            receipt.total_amount = receipttran.Amount.ToString();
-            receipt.amount_text = await GetNumberToText.ConvertNumberToThaiWords(Convert.ToInt32(receipttran.Amount));
-            receipt.peroid_remain = receipttran.Periodremain.ToString();
-            receipt.total_fee = receipttran.Charge1amt.ToString();
-            receipt.receive_by = globalData.fullname;
-            receipt.deposit = receipttran.Deposit.ToString();
-            if (receipttran.Receiptdesc == "รับฝากเงินล่วงหน้า")
-            {
-                ck_deposit = true;
-            }
-            else
-            {
-                ck_deposit = false;
-            }
-            if (receipttran.Charge1amt > 0)
-            {
-                receipt.ck_total_fee = true;
-            }
+           
         }
-
-
-
-
-
-
-
-
     }
 }

@@ -51,6 +51,11 @@ namespace SingSiamOffice.Manage
 
             return data;
         }
+        public async Task<List<Receipttran>> GetReceipttran_ById(int Receipttran_Id)
+        {
+            var data = db.Receipttrans.Include(s => s.Promise).ThenInclude(s => s.Customer).Include(s => s.Branch).Where(s => s.Id == Receipttran_Id).AsNoTracking().OrderByDescending(s => s.Id).ToList();
+            return data;
+        }
         public async Task<List<Periodtran>> GetPeriodtransbyPromiseId(int promise_id)
         {
             var config = db.Configs.AsNoTracking().Where(s => s.Id == 1).FirstOrDefault();

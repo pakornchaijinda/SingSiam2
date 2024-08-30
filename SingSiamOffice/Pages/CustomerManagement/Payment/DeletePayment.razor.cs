@@ -663,12 +663,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                 ExpandedPeriodtransId = periodtranId;
             }
         }
-        private async Task receipt(int receipt_id)
-        {
-            string url = $"/paymentrecipe/{receipt_id}";
-            await JSRuntime.InvokeAsync<object>("open", url, "_blank");
-            //navigationManager.NavigateTo("/paymentrecipe");
-        }
+       
 
     }
 }
