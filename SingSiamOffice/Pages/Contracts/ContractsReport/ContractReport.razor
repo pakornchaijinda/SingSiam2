@@ -33,9 +33,20 @@
                 <div class="headerTitle">
                     เลขประจำตัวผู้เสียภาษี 0365561000591
                 </div>
-                <div class="headerTitle">
-                    สัญญา ไฟแนนท์
-                </div>
+                
+                   
+                @if (_promises.Ptype == 1)
+                {
+                    <div class="headerTitle">
+                        สัญญาไฟแนนท์
+                    </div>
+                }else
+                {
+                    <div class="headerTitle">
+                        สัญญาเงินกู้
+                    </div>
+                }
+
             </div>
             <div class="col-12 text-end left-detail">
                 <p class="contract-detail"><strong>เลขที่สัญญา:</strong> @_promises.Promiseno</p>

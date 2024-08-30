@@ -271,7 +271,7 @@
         {
             navigationManager.NavigateTo("/");
         }
-        list_promise = db.Promises.Include(s => s.Customer).Include(s => s.Product).Where(s => s.BranchId == b_id).AsNoTracking().ToList();
+        list_promise = db.Promises.Include(s => s.Customer).Include(s => s.Product).Where(s => s.BranchId == b_id && s.IsDelete == false).AsNoTracking().ToList();
         list_Branch = db.Branches.Where(s=>s.IsActive == true).ToList();
 
         list_subject = db.SubjectCosts.Where(s => s.IsActive == true).OrderBy(s=>s.SubjectCode).ToList();
