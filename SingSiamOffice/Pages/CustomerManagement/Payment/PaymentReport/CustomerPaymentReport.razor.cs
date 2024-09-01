@@ -11,7 +11,9 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment.PaymentReport
         {
             if (firstRender)
             {
-                await JSRuntime.InvokeVoidAsync("printReceipt");
+                //await JSRuntime.InvokeVoidAsync("printReceipt");
+                
+                    await JSRuntime.InvokeVoidAsync("addPageBreaks",24);
             }
         }
     }

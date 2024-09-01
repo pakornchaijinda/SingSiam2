@@ -365,4 +365,9 @@ html {
         padding: 3mm; /* Set padding for the receipt */
         width: 74mm; /* Adjusted width to accommodate padding */
     }
+    .page-break {
+        page-break-before: always;
+    }
 }
+
+

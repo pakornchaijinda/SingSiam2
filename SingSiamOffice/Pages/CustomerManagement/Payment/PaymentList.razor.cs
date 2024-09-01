@@ -504,14 +504,28 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
 
                             if (payment_method != 4)
                             {
-                                _receipttran_toAdd.Arbalance = _periodtran.Where(s => s.Ispaid == false).FirstOrDefault().Amount;
+
+                                _receipttran_toAdd.Arbalance = _receipttran_toAdd.Amount;
                                 _receipttran_toAdd.Cappaid = _periodtran.Where(s => s.Ispaid == false).FirstOrDefault().Capital;
 
-                                var calpay_remain = (decimal)customerPayAmount - _receipttran_toAdd.Arbalance;
+                                var calpay_remain = ((decimal)customerPayAmount - _receipttran_toAdd.Cappaid) - totalFee;
+
                                 _receipttran_toAdd.Intpaid = _periodtran.Where(s => s.Ispaid == false).FirstOrDefault().Interest + calpay_remain;
-                                _receipttran_toAdd.Capremain = _promise.Capital - _receipttran_toAdd.Cappaid;
-                                var sum_interate = _periodtran.Where(s => s.Ispaid == false).Sum(s => s.Interest);
-                                _receipttran_toAdd.Intremain = sum_interate - _receipttran_toAdd.Inspaid;
+                                Receipttran? Capremain_before = await managements.GetReceipttran_bypromiseId(promise_id);
+                                if (Capremain_before == null)
+                                {
+                                    _receipttran_toAdd.Capremain = _promise.Capital - _receipttran_toAdd.Cappaid;
+                                    var sum_interate = _periodtran.Where(s => s.Ispaid == false).Sum(s => s.Interest);
+                                    _receipttran_toAdd.Intremain = sum_interate - _receipttran_toAdd.Inspaid;
+                                }
+                                else 
+                                {
+                                    _receipttran_toAdd.Capremain = _promise.Capital - Capremain_before.Capremain;
+                                    var sum_interate = Capremain_before.Intremain;
+                                    _receipttran_toAdd.Intremain = sum_interate - _receipttran_toAdd.Inspaid;
+                                }
+                              
+                             
                                 _receipttran_toAdd.Charge1amt = totalFee;
                                 _receipttran_toAdd.Charge2amt = _promise_pay.total_charge_follow;
                                 var count_periodtran = _periodtran.Where(s => s.Ispaid == false).Count();

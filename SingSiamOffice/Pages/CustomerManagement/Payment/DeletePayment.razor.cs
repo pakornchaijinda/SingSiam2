@@ -296,10 +296,22 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
             var confirm = await JSRuntime.InvokeAsync<bool>("deleteSlip");
             if (confirm)
             {
-                await JSRuntime.InvokeVoidAsync("deletesuccess");
-                await Task.Delay(100);
+                if (await promiseManagement.delete_receiptdesc(receipt_id))
+                {
+                    await promiseManagement.delete_receipttrans(receipt_id);
+                    await JSRuntime.InvokeVoidAsync("deletesuccess");
+                    await Task.Delay(100);
 
-                navigationManager.NavigateTo("/paymentlist");
+                    _Receipttran = await managements.GetReceipttran(promise_id);
+                    _periodtran = await managements.GetPeriodtransbyPromiseId(promise_id);
+                    _promise = await managements.GetPromisebyPromiseId(promise_id);
+                    StateHasChanged();
+                    //navigationManager.NavigateTo($"/customerlist/{branch_id}");
+                }
+                else 
+                {
+                     await JSRuntime.InvokeVoidAsync("delete_error");
+                }
 
             }
             else

@@ -256,6 +256,23 @@ function printReceipt() {
 }
 
 
+function addPageBreaks(rowCount) {
+    const rows = document.querySelectorAll("#printableArea tbody tr");
+    const rowsPerPage = rowCount;
+    let currentRowCount = 0;
+
+    rows.forEach((row, index) => {
+        currentRowCount++;
+        if (currentRowCount > rowsPerPage) {
+            const pageBreak = document.createElement('div');
+            pageBreak.className = 'page-break';
+            row.parentNode.insertBefore(pageBreak, row);
+            currentRowCount = 1;
+        }
+    });
+ //   window.print();
+}
+
 
 
 

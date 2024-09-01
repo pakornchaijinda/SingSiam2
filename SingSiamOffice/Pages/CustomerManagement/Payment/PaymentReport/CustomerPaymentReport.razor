@@ -110,45 +110,50 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>9/8/64</td>
-                                <td>9/8/64</td>
-                                <td>PAV0001</td>
-                                <td>
-                                        <p><strong>1380</strong></p>
-                                        <p><small>-1380</small></p>
-                                </td>
-                                <td>
-                                        <p><strong>1080</strong></p>
-                                        <p><small>-1080</small></p>
-                                </td>
-                                <td>
-                                        <p><strong>281</strong></p>
-                                        <p><small>-281</small></p>
-                                </td>
-                                <td>87.66</td>
-                                <td> </td>
-                                <td> </td>
-                                <td>1,340</td>
-                                <td>23,958</td>
-                            </tr>
+                            @foreach(var items in _periodtrans)
+                            {
+                                <tr>
+                                    <td>@items.Period</td>
+                                    <td>@items.Tdate</td>
+                                    <td>@items.Receiptdescs.FirstOrDefault()?.Tdate </td>
+                                    <td>@items.Receiptdescs.FirstOrDefault()?.Receiptno </td>
+                                    <td>
+                                        <p><strong>@items.Amount</strong></p>
+                                        <p><small>-@items.Paidamount</small></p>
+                                    </td>
+                                    <td>
+                                        <p><strong>@items.Capital</strong></p>
+                                        <p><small>-@items.Cappaid</small></p>
+                                    </td>
+                                    <td>
+                                        <p><strong>@items.Interest</strong></p>
+                                        <p><small>-@items.Intpaid</small></p>
+                                    </td>
 
+                                    <td>@items.Receiptdescs.Where(s => s.PeriodtranId == items.Id).FirstOrDefault()?.Chargeamt </td>
+                                    <td>@items.Receiptdescs.Where(s => s.PeriodtranId == items.Id).FirstOrDefault()?.Lateamt </td>
+                                    <td>@items.Receiptdescs.Where(s => s.PeriodtranId == items.Id).FirstOrDefault()?.Receipttran.Amount</td>
+                                    <td>@items.Receiptdescs.Where(s => s.PeriodtranId == items.Id).FirstOrDefault()?.Receipttran.Capremain</td>
+                                </tr>
+
+
+                            }
+                         
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td></td>
+                              @*   <td></td>
                                 <td>ยอดรวม</td>
                                 <td></td>
                                 <td>4,010</td>
                                 <td>4,010</td>
                                 <td>3,126</td>
                                 <td>876</td>
-                                @* <td> </td> *@
+
                                 <td>0</td>
                                 <td>0</td>
                                 <td>4,010</td>
-                                <td></td>
+                                <td></td> *@
                             </tr>
                         </tfoot>
                     </table>
@@ -184,13 +189,14 @@
     Collateral2 collateral2 = new Collateral2();
     Collateral3 collateral3 = new Collateral3();
     private List<Guarantor> _guarantor { get; set; }
+    private List<Periodtran> _periodtrans { get; set; }
     protected override async Task OnInitializedAsync()
     {
         _promises = db.Promises.Include(s => s.Periodtrans).Include(s => s.Customer).ThenInclude(s => s.Branch).Include(s => s.Product).Include(s => s.Province).Where(s => s.Id == promise_id).AsNoTracking().FirstOrDefault();
 
 
         _promises.Interest = (decimal)_promises.Periodtrans.Select(s => s.Interest).FirstOrDefault();
-
+        _periodtrans = db.Periodtrans.Include(s => s.Receiptdescs).ThenInclude(s=>s.Receipttran).Where(s => s.PromiseId == promise_id).ToList();
         try
         {
             _guarantor = await Managements.GetGurantorbyPromiseId(promise_id); //ผู้ค้ำ

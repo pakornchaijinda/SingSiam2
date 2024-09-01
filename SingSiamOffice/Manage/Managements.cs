@@ -56,6 +56,13 @@ namespace SingSiamOffice.Manage
             var data = db.Receipttrans.Include(s => s.Promise).ThenInclude(s => s.Customer).Include(s => s.Branch).Where(s => s.Id == Receipttran_Id).AsNoTracking().OrderByDescending(s => s.Id).ToList();
             return data;
         }
+        public async Task<Receipttran?> GetReceipttran_bypromiseId(int promiseId)
+        {
+
+            var data = db.Receipttrans.Include(s => s.Promise).ThenInclude(s => s.Customer).Include(s => s.Branch).Where(s => s.PromiseId == promiseId).AsNoTracking().OrderByDescending(s => s.Id).FirstOrDefault();
+            
+            return data;
+        }
         public async Task<List<Periodtran>> GetPeriodtransbyPromiseId(int promise_id)
         {
             var config = db.Configs.AsNoTracking().Where(s => s.Id == 1).FirstOrDefault();
@@ -342,6 +349,9 @@ namespace SingSiamOffice.Manage
 
             return lst_periodtrans;
         }
+
+     
+
 
         // คำนวณดอกเบี้ย
         public decimal CalculateInterest(decimal loanAmount, decimal interestRate, int termMonths)
