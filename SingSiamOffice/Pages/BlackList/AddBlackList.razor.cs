@@ -47,7 +47,7 @@ namespace SingSiamOffice.Pages.BlackList
             var confirm = await JSRuntime.InvokeAsync<bool>("confirmSaveData");
             if (confirm)
             {
-                add_black.BranchId = b_id;
+                
                 add_black.CustomerId = selectCus.CustomerId;
                 add_black.Detial = description;
                 add_black.CreateTime = DateTime.Now;

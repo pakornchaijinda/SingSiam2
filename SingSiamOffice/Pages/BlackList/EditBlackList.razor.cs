@@ -35,9 +35,10 @@ namespace SingSiamOffice.Pages.BlackList
         {
             try
             {
-
-                db.Entry(edit_black).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                var to_edit = db.BlackLists.Where(s => s.BlackId == edit_black.BlackId).FirstOrDefault();
+                to_edit.Detial = edit_black.Detial;
+                db.Entry(to_edit).State = EntityState.Modified;
+                db.SaveChangesAsync();
                 return true;
             }
             catch (Exception ex)
@@ -76,7 +77,7 @@ namespace SingSiamOffice.Pages.BlackList
 
         private void goback()
         {
-            navigationManager.NavigateTo("/blacklist_list/" + edit_black.BranchId.ToString()) ;
+            navigationManager.NavigateTo("/blacklist_list/" + b_id.ToString()) ;
         }
     }
 }

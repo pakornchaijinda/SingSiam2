@@ -13,7 +13,5 @@ public partial class BlackList
 
     public DateTime CreateTime { get; set; }
 
-    public int BranchId { get; set; }
-
     public virtual Customer Customer { get; set; } = null!;
 }

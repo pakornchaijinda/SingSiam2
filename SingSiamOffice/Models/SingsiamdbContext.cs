@@ -72,7 +72,6 @@ public partial class SingsiamdbContext : DbContext
             entity.ToTable("black_list");
 
             entity.Property(e => e.BlackId).HasColumnName("black_id");
-            entity.Property(e => e.BranchId).HasColumnName("branch_id");
             entity.Property(e => e.CreateTime)
                 .HasColumnType("datetime")
                 .HasColumnName("create_time");
