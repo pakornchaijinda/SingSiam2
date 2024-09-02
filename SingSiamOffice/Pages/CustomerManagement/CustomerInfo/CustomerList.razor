@@ -126,11 +126,12 @@
                                                             <a href="@data.LocationLink" target="_blank">ดูแผนที่</a>
                                                         </MudStack>
                                                     </div>
-                                                   @*  <div class="col-4 pb-3 text-center">
-                                                        <MudText Typo="Typo.body1" Style="@imporText">หนี้อื่นๆ</MudText>
-                                                        <MudButton Variant="Variant.Outlined"  Size="Size.Large" Style="@buttoncolor2" @onclick="()=>goCustomerDept(data.CustomerId)">มียอดคงค้าง @data.Sum_Externalar.ToString("N0") บาท</MudButton>
+                                                    <div class="col-4 pb-3 text-center">
+                                                      @*   <MudText Typo="Typo.body1" Style="@imporText">ลบข้อมูลลูกค้า</MudText> *@
+                                                      @*   <MudButton Variant="Variant.Outlined"  Size="Size.Large" Style="@buttoncolor2" @onclick="()=>remove(data.CustomerId)"></MudButton> *@
+                                                        <MudButton Variant="Variant.Outlined" DisableElevation="true" Color="Color.Error" @onclick="()=>remove(data.CustomerId)">ลบข้อมูลลูกค้า</MudButton>
                                                     
-                                                    </div> *@
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -373,6 +374,7 @@
 
         return isBlacklisted;
     }
+   
     private void reset()
     {
         selectCustomer = null;
