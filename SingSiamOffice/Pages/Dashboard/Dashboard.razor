@@ -366,22 +366,23 @@
                     <div class="col-3 centerbox">
                         <div class="row">
                                 <div class="col-4 text-center">
-                                    <button @onclick="()=>Calculator()">
-                                        <img src="img/icons/cashtotal.svg" alt="" style="width:5rem;">
-                                    </button>
-                                   
+                                  
+
+                                <MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="()=>Calculator()" Style="height: 50px;">
+                                    <MudIcon Icon="@Icons.Material.Filled.Calculate" />
+                                    ปุ่มนับเงิน
+                                </MudButton>
+
                                 </div>
                             <div class="col-8 text-center" >
                                     <h3>นับเงินสด</h3>
                                     <h3 style="color:#840012;">@cal_total_bath.ToString("N0")</h3>
-                                </div>
-                            <div class="col-12 text-center">
-                                @if (cal_total_bath == total_3)
-                                {
-                                    <MudButton Variant="Variant.Filled" Style="@buttoncolor1" @onclick="()=>Fillter()">ปิดยอดประจำวัน</MudButton>
-                                }
-                               
+                                    @if (cal_total_bath == total_3)
+                                    {
+                                        <MudButton Variant="Variant.Filled" Style="@buttoncolor1" @onclick="()=>Fillter()">ปิดยอดประจำวัน</MudButton>
+                                    }
                             </div>
+                           
                         </div>
                     </div>
                 </div>
