@@ -16,6 +16,9 @@
     .headerTitle{
         font-weight:bold;
     }
+    html, body{
+        background-color:#fff;
+    }
 </style>
 <div id="printableArea">
     <div class="container-fuid">
@@ -71,7 +74,7 @@
                 <div class="col-12 mt-2 mb-4">
                     <table class="table table-bordered" style="border: 1px solid;">
                         <thead class="text-center">
-                            <tr style="background-color:#e5e5e5;">
+                            <tr class="table-dark" >
                                 <th style="font-weight:bold;">รายละเอียดหลักประกันสัญญา</th>
                                 <th style="font-weight:bold;">เงื่อนไขในสัญญา</th>
 
@@ -84,89 +87,362 @@
                                     @if (_promises.ProductId == 1)
                                     {
                                         <ul class="list-group border-0">
-                                            <li class="list-group-item border-0">ประเภทรถ : <strong>@_promises.Product.Name</strong></li>
-                                            <li class="list-group-item border-0">ยี่ห้อรถ : <strong>@collateral1.vehicle_brand</strong></li>
-                                            <li class="list-group-item border-0">สีรถ : <strong>@collateral1.vehicle_color</strong></li>
-                                            <li class="list-group-item border-0">เลขตัวถัง : <strong>@collateral1.chassisNo</strong></li>
-                                            <li class="list-group-item border-0">รุ่น : <strong>@collateral1.vehicle_ver</strong></li>
-                                            <li class="list-group-item border-0">เลขทะเบียน : <strong>@collateral1.plate</strong></li>
-                                            <li class="list-group-item border-0">เลขเครื่อง : <strong>@collateral1.machineNo</strong></li>
-                                            <li class="list-group-item border-0">รถปี : <strong>@collateral1.vehicle_yr</strong></li>
-                                            <li class="list-group-item border-0">จังหวัด : <strong>@_promises.Province.ProvinceName</strong></li>
-                                            <li class="list-group-item border-0">วันเสียภาษี : <strong>@collateral1.tax_issue</strong></li>
+                                            <li class="list-group-item border-0 d-flex justify-content-center text-center">
+                                                <div>ประเภทรถ</div>
+                                                <div>:</div>
+                                                <div><strong>@_promises.Product.Name</strong></div>
+                                                  
+                                                </li>
+                                            <li class="list-group-item border-0 d-flex justify-content-center text-center">
+                                                <div>ยี่ห้อรถ</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral1.vehicle_brand</strong></div>
+                                              </li>
+                                            <li class="list-group-item border-0 d-flex justify-content-center text-center">
+                                                <div>สีรถ</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral1.vehicle_color</strong></div>
+
+                                            </li>
+                                            <li class="list-group-item border-0 d-flex justify-content-center text-center">
+                                                <div>เลขตัวถัง</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral1.chassisNo</strong></div>
+                                               </li>
+
+                                            <li class="list-group-item border-0 d-flex justify-content-center text-center">
+                                                <div>รุ่น</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral1.vehicle_ver</strong></div>
+                                            </li>
+
+                                            <li class="list-group-item border-0 d-flex justify-content-center text-center">
+                                                <div>เลขทะเบียน</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral1.plate</strong></div>
+                                            </li>
+
+                                            <li class="list-group-item border-0 d-flex justify-content-center text-center">
+                                                <div>เลขเครื่อง</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral1.machineNo</strong></div>
+                                            </li>
+
+                                            <li class="list-group-item border-0 d-flex justify-content-center text-center">
+                                                <div>รถปี</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral1.vehicle_yr</strong></div>
+                                            </li>
+
+                                            <li class="list-group-item border-0 d-flex justify-content-center text-center">
+                                                <div>จังหวัด</div>
+                                                <div>:</div>
+                                                <div><strong>@_promises.Province.ProvinceName</strong></div>
+                                            </li>
+
+                                            <li class="list-group-item border-0 d-flex justify-content-center text-center">
+                                                <div>วันเสียภาษี</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral1.tax_issue</strong></div>
+                                            </li>
+                                         
+                                        
                                         </ul>
                                     }
                                     else if (_promises.ProductId == 2)
                                     {
-                                    <ul class="list-group border-0">
-                                            <li class="list-group-item border-0">ประเภทรถ : <strong>@_promises.Product.Name</strong></li>
-                                            <li class="list-group-item border-0">ยี่ห้อรถ : <strong>@collateral1.vehicle_brand</strong></li>
-                                            <li class="list-group-item border-0">สีรถ : <strong>@collateral1.vehicle_color</strong></li>
-                                            <li class="list-group-item border-0">เลขตัวถัง : <strong>@collateral1.chassisNo</strong></li>
-                                            <li class="list-group-item border-0">รุ่น : <strong>@collateral1.vehicle_ver</strong></li>
-                                            <li class="list-group-item border-0">เลขทะเบียน : <strong>@collateral1.plate</strong></li>
-                                            <li class="list-group-item border-0">เลขเครื่อง : <strong>@collateral1.machineNo</strong></li>
-                                            <li class="list-group-item border-0">รถปี : <strong>@collateral1.vehicle_yr</strong></li>
-                                            <li class="list-group-item border-0">จังหวัด : <strong>@_promises.Province.ProvinceName</strong></li>
-                                            <li class="list-group-item border-0">วันเสียภาษี : <strong>@collateral1.tax_issue</strong></li>
+                                        <ul class="list-group border-0 text-center">
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>ประเภทรถ</div>
+                                                <div>:</div>
+                                                <div><strong>@_promises.Product.Name</strong></div>
+
+                                            </li>
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>ยี่ห้อรถ</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral1.vehicle_brand</strong></div>
+                                            </li>
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>สีรถ</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral1.vehicle_color</strong></div>
+
+                                            </li>
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>เลขตัวถัง</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral1.chassisNo</strong></div>
+                                            </li>
+
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>รุ่น</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral1.vehicle_ver</strong></div>
+                                            </li>
+
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>เลขทะเบียน</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral1.plate</strong></div>
+                                            </li>
+
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>เลขเครื่อง</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral1.machineNo</strong></div>
+                                            </li>
+
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>รถปี</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral1.vehicle_yr</strong></div>
+                                            </li>
+
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>จังหวัด</div>
+                                                <div>:</div>
+                                                <div><strong>@_promises.Province.ProvinceName</strong></div>
+                                            </li>
+
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>วันเสียภาษี</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral1.tax_issue</strong></div>
+                                            </li>
                                     </ul>
                                     }
                                     else if (_promises.ProductId == 4)
                                     {
-                                        <ul class="list-group border-0">
-                                            <li class="list-group-item border-0">ประเภทรถ : <strong>@_promises.Product.Name</strong></li>
-                                            <li class="list-group-item border-0">ยี่ห้อรถ : <strong>@collateral1.vehicle_brand</strong></li>
-                                            <li class="list-group-item border-0">สีรถ : <strong>@collateral1.vehicle_color</strong></li>
-                                            <li class="list-group-item border-0">เลขตัวถัง : <strong>@collateral1.chassisNo</strong></li>
-                                            <li class="list-group-item border-0">รุ่น : <strong>@collateral1.vehicle_ver</strong></li>
-                                            <li class="list-group-item border-0">เลขทะเบียน : <strong>@collateral1.plate</strong></li>
-                                            <li class="list-group-item border-0">เลขเครื่อง : <strong>@collateral1.machineNo</strong></li>
-                                            <li class="list-group-item border-0">รถปี : <strong>@collateral1.vehicle_yr</strong></li>
-                                            <li class="list-group-item border-0">จังหวัด : <strong>@_promises.Province.ProvinceName</strong></li>
-                                            <li class="list-group-item border-0">วันเสียภาษี : <strong>@collateral1.tax_issue</strong></li>
+                                        <ul class="list-group border-0 text-center">
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>ประเภทรถ</div>
+                                                <div>:</div>
+                                                <div><strong>@_promises.Product.Name</strong></div>
+
+                                            </li>
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>ยี่ห้อรถ</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral1.vehicle_brand</strong></div>
+                                            </li>
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>สีรถ</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral1.vehicle_color</strong></div>
+
+                                            </li>
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>เลขตัวถัง</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral1.chassisNo</strong></div>
+                                            </li>
+
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>รุ่น</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral1.vehicle_ver</strong></div>
+                                            </li>
+
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>เลขทะเบียน</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral1.plate</strong></div>
+                                            </li>
+
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>เลขเครื่อง</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral1.machineNo</strong></div>
+                                            </li>
+
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>รถปี</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral1.vehicle_yr</strong></div>
+                                            </li>
+
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>จังหวัด</div>
+                                                <div>:</div>
+                                                <div><strong>@_promises.Province.ProvinceName</strong></div>
+                                            </li>
+
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>วันเสียภาษี</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral1.tax_issue</strong></div>
+                                            </li>
 
                                         </ul>
                                     }
                                     else if (_promises.ProductId == 3)
                                     {
-                                        <ul class="list-group border-0">
-                                            <li class="list-group-item border-0">ประเภทโฉนด : <strong>@collateral2.deedType</strong></li>
-                                            <li class="list-group-item border-0">เลขที่โฉนด : <strong>@collateral2.deedNo</strong></li>
-                                            <li class="list-group-item border-0">ประเภทที่ดิน : <strong>@collateral2.landType</strong></li>
-                                            <li class="list-group-item border-0">ระวาง : <strong>@collateral2.mapsheet</strong></li>
-                                            <li class="list-group-item border-0">เลขที่ดิน : <strong>@collateral2.parcelNo</strong></li>
-                                            <li class="list-group-item border-0">เล่ม : <strong>@collateral2.volumn</strong></li>
-                                            <li class="list-group-item border-0">หน้า : <strong>@collateral2.page</strong></li>
-                                            <li class="list-group-item border-0">หน้าสำรวจ : <strong>@collateral2.pageInspect</strong></li>
-                                            <li class="list-group-item border-0">จำนวนที่ดิน : <strong>@collateral2.landAmount</strong></li>
+                                        <ul class="list-group border-0 text-center">
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>ประเภทโฉนด</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral2.deedType</strong></div>
+                                            </li>
+
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>เลขที่โฉนด</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral2.deedNo</strong></div>
+                                            </li>
+
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>ประเภทที่ดิน</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral2.landType</strong></div>
+                                            </li>
+
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>ระวาง</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral2.mapsheet</strong></div>
+                                            </li>
+
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>เลขที่ดิน</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral2.parcelNo</strong></div>
+                                            </li>
+
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>เล่ม</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral2.volumn</strong></div>
+                                            </li>
+
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>หน้า</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral2.page</strong></div>
+                                            </li>
+
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>หน้าสำรวจ</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral2.pageInspect</strong></div>
+                                            </li>
+
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>จำนวนที่ดิน</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral2.landAmount</strong></div>
+                                            </li>
+
+        
                                         </ul>
                                     }
                                     else if (_promises.ProductId == 5)
                                     {
-                                        <ul class="list-group border-0">
-                                            <li class="list-group-item border-0">เลขที่สมุด : <strong>@collateral3.bookNo</strong></li>
-                                            <li class="list-group-item border-0">เลขที่รหัสเกษตรกร : <strong>@collateral3.farmerCode</strong></li>
-                                            <li class="list-group-item border-0">วันที่ขึ้นทะเบียน : <strong>@collateral3.fregisDate</strong></li>
-                                            <li class="list-group-item border-0">เอกสารสิทธิ์ : <strong>@collateral3.docRight</strong></li>
-                                            <li class="list-group-item border-0">การถือครอง : <strong>@collateral3.fHolding</strong></li>
-                                            <li class="list-group-item border-0">กิจกรรม : <strong>@collateral3.fActivity</strong></li>
-                                            <li class="list-group-item border-0">เนื้อที่ : <strong>@collateral3.fArea</strong></li>
-                                            <li class="list-group-item border-0">ผลผลิต : <strong>@collateral3.fProduct</strong></li>
-                                            <li class="list-group-item border-0">ที่ตั้ง X:Y:Z: <strong>@collateral3.fLocate</strong></li>
+                                        <ul class="list-group border-0 text-center">
+
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>เลขที่สมุด</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral3.bookNo</strong></div>
+                                            </li>
+
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>เลขที่รหัสเกษตรกร</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral3.farmerCode</strong></div>
+                                            </li>
+
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>วันที่ขึ้นทะเบียน</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral3.fregisDate</strong></div>
+                                            </li>
+
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>เอกสารสิทธิ์</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral3.docRight</strong></div>
+                                            </li>
+
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>การถือครอง</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral3.fHolding</strong></div>
+                                            </li>
+
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>กิจกรรม</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral3.fActivity</strong></div>
+                                            </li>
+
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>เนื้อที่</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral3.fArea</strong></div>
+                                            </li>
+
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>ผลผลิต</div>
+                                                <div>:</div>
+                                                <div><strong>@collateral3.fProduct</strong></div>
+                                            </li>
+
+                                            <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                                <div>ที่ตั้ง X:Y:Z: </div>
+                                                <div>:</div>
+                                                <div><strong>@collateral3.fLocate</strong></div>
+                                            </li>
+                                            
                                         </ul>
                                     }
                                 </td>
                                 <td>
-                                    <ul class="list-group border-0">
-                                        <li class="list-group-item border-0">ชำระทุกวันที่ <strong>@_promises.Daypaid</strong></li>
-                                        <li class="list-group-item border-0">เงินทำสัญญา <strong>@_promises.Capital.Value.ToString("N0")</strong> บาท</li>
-                                        <li class="list-group-item border-0">จำนวนงวด <strong>@_promises.Periods</strong> งวด</li>
-                                        <li class="list-group-item border-0">ดอกเบี้ย <strong>@_promises.Intrate.ToString()</strong> %</li>
-                                        <li class="list-group-item border-0">งวดละ <strong>@_promises.Amount.Value.ToString("N0")</strong> บาท</li>
-                                      @*   <li class="list-group-item border-0">ค่าบริการ <strong>@_promises.Service</strong> บาท</li> *@
-                                        <li class="list-group-item border-0">ค่าธรรมเนียมภาษี <strong>@_promises.Chargeamt.Value.ToString("N0")</strong> บาท</li>
+                                    <ul class="list-group border-0 text-center">
+                                        <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                            <div>ชำระทุกวันที่</div>
+                                            <div>:</div>
+                                            <div><strong>@_promises.Daypaid</strong></div>
+                                        </li>
+
+                                        <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                            <div>เงินทำสัญญา</div>
+                                            <div>:</div>
+                                            <div><strong>@_promises.Capital.Value.ToString("N0") บาท</strong></div>
+                                        </li>
+                                        <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                            <div>จำนวนงวด</div>
+                                            <div>:</div>
+                                            <div><strong>@_promises.Periods งวด</strong></div>
+                                        </li>
+
+                                        <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                            <div>ดอกเบี้ย</div>
+                                            <div>:</div>
+                                            <div><strong>@_promises.Intrate.ToString() %</strong></div>
+                                        </li>
+
+                                        <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                            <div>ดอกเบี้ย</div>
+                                            <div>:</div>
+                                            <div><strong>@_promises.Intrate.ToString() %</strong></div>
+                                        </li>
+
+                                        <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                            <div>งวดละ</div>
+                                            <div>:</div>
+                                            <div><strong>@_promises.Amount.Value.ToString("N0") บาท</strong></div>
+                                        </li>
+
+                                        <li class="list-group-item border-0 d-flex justify-content-center gap-4">
+                                            <div>ค่าธรรมเนียมภาษี</div>
+                                            <div>:</div>
+                                            <div><strong>@_promises.Chargeamt.Value.ToString("N0") บาท</strong></div>
+                                        </li>
+
+                     
                                     </ul>
-                                    <ul class="list-group border-0">
+                                    <ul class="list-group border-0 text-center">
                                         <li class="list-group-item border-0"> <strong style="font-size:1rem;">เริ่มชำระงวดแรก @_promises.Firstdate</strong></li>
                                         <li class="list-group-item border-0"> <strong style="font-size:1rem;">ชำระงวดสุดท้าย @FormatThaiYear_Increase_mouth(_promises.Firstdate, _promises.Periods.Value)</strong> </li>
                                     </ul>
@@ -195,7 +471,7 @@
 
                 </div>
                 <div class="col-8 mt-4 mb-4">
-                    <p style="font-weight:bold;">ชำระงวดสุดท้าย</p>
+                    <p style="font-weight:bold;">ประเมินสถานะผู้ขอกู้</p>
                     <div class="row mt-2">
                         <div class="col-3 text-center">
                             <p>( ) ดีมาก</p>
@@ -214,8 +490,8 @@
                 <br />
                 <br />
                 <div class="col-12 mt-4 mb-4 text-end">
-                    <p>ลงชื่อ...................................ผู้รายงาน</p>
-                    <p>(........................................................)</p>
+                    <p>ลงชื่อ......................................................ผู้รายงาน</p>
+                    <p>(...........................................................................)</p>
                 </div>
                 <hr />
                 <br />
