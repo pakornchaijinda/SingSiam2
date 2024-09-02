@@ -302,6 +302,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
             {
                 if (await promiseManagement.delete_receiptdesc(receipt_id))
                 {
+                    await Task.Delay(100);
                     await promiseManagement.delete_receipttrans(receipt_id);
                     await JSRuntime.InvokeVoidAsync("deletesuccess");
                     await Task.Delay(100);
