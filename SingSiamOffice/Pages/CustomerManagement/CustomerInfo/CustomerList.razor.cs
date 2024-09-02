@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop;
 using SingSiamOffice.Authentication;
 using SingSiamOffice.Manage;
@@ -48,7 +49,14 @@ namespace SingSiamOffice.Pages.CustomerManagement.CustomerInfo
 
         private List<Promise> lst_Promises = new List<Promise>();
 
-
+        async private void remove(int cus_id)
+        {
+            // Check if there is at least one record with the given customer ID
+            var to_remove = db.Customers.Where(s => s.CustomerId == cus_id).FirstOrDefault();
+            to_remove.Status = 0;
+            db.Entry(to_remove).State = EntityState.Modified;
+            await db.SaveChangesAsync();
+        }
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
