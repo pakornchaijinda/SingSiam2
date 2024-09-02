@@ -5,8 +5,9 @@
 <style>
 
     .receipt {
-        padding: 3mm;
-        width: 80mm;
+       /*  margin-left:5px; */
+        padding: 4mm;
+        width: 70mm;
         /*  border: 1px solid black; */
     }
 
@@ -14,7 +15,7 @@
         width: 100%;
         text-align: right;
         padding-bottom: 1mm;
-        font-size: 10pt;
+        font-size: 8pt;
         font-weight: bold;
     }
 
@@ -26,7 +27,7 @@
         /* font-family: "Bai Jamjuree", sans-serif; */
         font-family: "Sarabun", sans-serif;
         /* text-align: center; */
-        font-size: 10pt;
+        font-size: 9pt;
     }
 
     .headerTitle {
@@ -47,7 +48,7 @@
     #date {
         margin: 5pt 0px;
         text-align: center;
-        font-size: 10pt;
+        font-size: 8pt;
     }
 
     #barcode {
@@ -360,16 +361,16 @@
             {
                 <tr>
                     @* <th scope="row">@items.Periodtran.Period/@items.Promise.Periods</th> *@
-                    <td>@items.Receipttran.Receiptdesc</td>
+                    <td class="headerSubTitle">@items.Receipttran.Receiptdesc</td>
                     @if(items.Deposit != 0 )
                     {
 
-                        <td>@items.Deposit </td>
+                        <td class="headerSubTitle">@items.Deposit </td>
                     }
                     else
                     {
 
-                        <td>@items.Amount </td>
+                        <td class="headerSubTitle">@items.Amount </td>
                     }
 
                 </tr>
@@ -383,8 +384,8 @@
             @if (receipt.ck_total_fee)
             {
                 <tr>
-                    <th colspan="2" scope="row">ชำระค่าปรับ</th>
-                    <td>@receipt.total_fee</td>
+                    <th class="headerSubTitle" colspan="2" scope="row">ชำระค่าปรับ</th>
+                    <td class="headerSubTitle">@receipt.total_fee</td>
                 </tr>
                 
             }
@@ -398,12 +399,12 @@
         <div class="col-12 text-center">
          
             <div class="row">
-                <div class="col-7">
-                    <div class="headerSubTitle" style="font-weight:bold; ">
+                <div class="col-4">
+                    <div class="headerSubTitle text-nowrap" style="font-weight:bold; ">
                         <small><strong>ชำระโดย:</strong> @receipt.paid_by</small>
                     </div>
                 </div>
-                <div class="col-5">
+                <div class="col-8">
                     <div class="headerSubTitle text-end" style="font-weight:bold; text-align:end;">
                         <small><strong>รวมเงิน:</strong> @receipt.total_amount บาท</small>
                     </div>
@@ -427,7 +428,7 @@
 
             <br/>
             <div class="headerSubTitle" style="font-weight:bold; text-align:center;">
-                ลงชื่อ....................................................ผู้รับเงิน
+                ลงชื่อ..........................................ผู้รับเงิน
             </div>
             <div class="headerSubTitle" style="font-weight:bold; text-align:center;">
                 (  @receipt.receive_by  )
