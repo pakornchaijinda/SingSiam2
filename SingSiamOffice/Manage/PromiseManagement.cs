@@ -190,7 +190,7 @@ namespace SingSiamOffice.Manage
                         toAdd.Srvpaid = item.Srvpaid;
                         toAdd.Inspaid = item.Inspaid;
                         db.ReceiptdescCancles.Add(toAdd);
-                        //  await db.SaveChangesAsync();
+                        await db.SaveChangesAsync();
                     }
                 }
                 db.Receiptdescs.RemoveRange(toEdit);
@@ -211,7 +211,7 @@ namespace SingSiamOffice.Manage
 
                 var toDel = db.TransactionHistories.Where(s => s.ReceiopttranId == receipttransId).FirstOrDefault();
                 db.TransactionHistories.Remove(toDel);
-              
+                await db.SaveChangesAsync();
 
                 var toEdit = db.Receipttrans.Where(s => s.Id == receipttransId).FirstOrDefault();
                 ReceipttranCancle toAdd = new ReceipttranCancle();
@@ -262,7 +262,7 @@ namespace SingSiamOffice.Manage
                 toAdd.Currentperiod = toEdit.Currentperiod;
                 toAdd.Closecase = toEdit.Closecase;
                 db.ReceipttranCancles.Add(toAdd);
-                // await db.SaveChangesAsync();
+                 await db.SaveChangesAsync();
 
 
                 db.Receipttrans.Remove(toEdit);
