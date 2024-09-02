@@ -172,7 +172,34 @@
                                 </div>
 
                                 <div class="col-md-6 pb-3">
-                                    <MudNumericField @bind-Value="amount" Label="จำนวนเงิน" Variant="Variant.Outlined" Margin="Margin.Dense"></MudNumericField>
+                                    @switch (subject_Id)
+                                    {
+                                        case 12:
+                                            <MudNumericField @bind-Value="amount" Label="จำนวนเงิน" Variant="Variant.Outlined" Margin="Margin.Dense" Adornment="Adornment.End" Min="0" Max="2000" AdornmentText="ไม่เกิน 2000" AdornmentColor="Color.Error"></MudNumericField>
+        
+                                            break;
+
+                                        // Add more cases here if needed
+                                        case 13:
+                                            <MudNumericField @bind-Value="amount" Label="จำนวนเงิน" Variant="Variant.Outlined" Margin="Margin.Dense" Adornment="Adornment.End" Min="0" Max="380" AdornmentText="ไม่เกิน 380" AdornmentColor="Color.Error"></MudNumericField>
+
+                                            break;
+                                        case 14:
+                                            <MudNumericField @bind-Value="amount" Label="จำนวนเงิน" Variant="Variant.Outlined" Margin="Margin.Dense" Adornment="Adornment.End" Min="0" Max="800" AdornmentText="ไม่เกิน 800" AdornmentColor="Color.Error"></MudNumericField>
+
+                                            break;
+                                        case 15:
+                                            <MudNumericField @bind-Value="amount" Label="จำนวนเงิน" Variant="Variant.Outlined" Margin="Margin.Dense" Adornment="Adornment.End" Min="0" Max="300" AdornmentText="ไม่เกิน 300" AdornmentColor="Color.Error"></MudNumericField>
+
+                                            break;
+
+
+                                        // Default case if needed
+                                        default:
+                                            <MudTextField @bind-Value="amount" Label="จำนวนเงิน" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+                                            break;
+                                    }
+                                 
                                 </div>
                                 <div class="col-md-12 pb-3">
                                     <MudTextField @bind-Value="description" Label="คำอธิบาย" Variant="Variant.Outlined" Margin="Margin.Dense" Lines="5"></MudTextField>
