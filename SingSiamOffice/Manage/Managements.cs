@@ -179,7 +179,7 @@ namespace SingSiamOffice.Manage
         }
         public async Task<List<Customer>> GetCustomerbyBranch(int branch_id)
         {
-            var customer = db.Customers.AsNoTracking().Include(s => s.Branch).Where(s => s.BranchId == branch_id).ToList();
+            var customer = db.Customers.AsNoTracking().Include(s => s.Branch).Where(s => s.BranchId == branch_id && s.Status == 1).ToList();
 
             return customer;
         }
