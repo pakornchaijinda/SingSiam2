@@ -318,7 +318,7 @@
     }
     private async Task except(int id)
     {
-        var confirm = await JSRuntime.InvokeAsync<bool>("confirmdelete");
+        var confirm = await JSRuntime.InvokeAsync<bool>("confirmSaveData");
         if (confirm)
         {
             var to_confirm = db.TransactionHistories.Where(s => s.TransactionId == id).FirstOrDefault();
