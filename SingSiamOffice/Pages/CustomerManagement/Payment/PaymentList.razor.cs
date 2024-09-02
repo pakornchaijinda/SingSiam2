@@ -290,15 +290,15 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
             {
                 _promise_pay.OverPayQty = _periodtran.Where(s => s.Ispaid == false).Count();
 
-                _promise_pay.total_deposit = _periodtran.Sum(p => p.total_deposit);
-                _promise_pay.total_fee = _periodtran.Sum(p => p.total_fee);
-                _promise_pay.total_charge_follow = _periodtran.Sum(p => p.total_charge_follow);
+                _promise_pay.total_deposit = _periodtran.Where(s => s.Ispaid == false).Sum(p => p.total_deposit);
+                _promise_pay.total_fee = _periodtran.Where(s => s.Ispaid == false).Sum(p => p.total_fee);
+                _promise_pay.total_charge_follow = _periodtran.Where(s => s.Ispaid == false).Sum(p => p.total_charge_follow);
 
               
-                _promise_pay.total_deptAmount = _periodtran.Sum(p => (decimal)p.Amount);
+                _promise_pay.total_deptAmount = _periodtran.Where(s => s.Ispaid == false).Sum(p => (decimal)p.Amount);
                 _promise_pay.pending_amount = _promise_pay.total_deptAmount - _promise_pay.total_deposit + _promise_pay.total_fee + _promise_pay.total_charge_follow;
-                paidprincipleAmount = _periodtran.Sum(p => (decimal)p.Capital);
-                paidinterestAmount = _periodtran.Sum(p => (decimal)p.Interest);
+                paidprincipleAmount = _periodtran.Where(s => s.Ispaid == false).Sum(p => (decimal)p.Capital);
+                paidinterestAmount = _periodtran.Where(s => s.Ispaid == false).Sum(p => (decimal)p.Interest);
             }
             StateHasChanged();
         }
