@@ -312,9 +312,13 @@ namespace SingSiamOffice.Pages.CustomerManagement.CustomerInfo
             if (confirm)
             {
                 check_cus_blacklist =await Managements.Check_Customer_Backlist(new_cus.NatId);
+                bool check_dub = db.Customers.Where(s => s.NatId == new_cus.NatId).Any();
                 if (check_cus_blacklist)
                 {
                     await JSRuntime.InvokeVoidAsync("alert_customer_blacklist", new_cus.Branch.BranchName);
+                }else if (check_dub)
+                {
+                    await JSRuntime.InvokeVoidAsync("alert", "พบข้อมูลซ้ำในระบบ");
                 }
                 else 
                 {

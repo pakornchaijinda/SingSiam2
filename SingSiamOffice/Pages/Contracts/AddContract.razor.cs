@@ -808,7 +808,7 @@ namespace SingSiamOffice.Pages.Contracts
         }
         private void goBack()
         {
-            navigationManager.NavigateTo("/customerlist/" + branch_id.ToString());
+            navigationManager.NavigateTo("/customerlist/" + branch_id.ToString()+"/"+ c_id.ToString());
         }
 
         SingsiamdbContext db = new SingsiamdbContext();

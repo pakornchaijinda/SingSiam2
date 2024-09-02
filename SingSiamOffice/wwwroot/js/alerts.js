@@ -8,7 +8,7 @@
             denyButtonText: `ยกเลิก`,
         }).then((result) => {
 
-            /* Read more about isConfirmed, isDenied below */
+            /* Read more about isConfirmed, isDenied below */a
             reslove(result.isConfirmed)
             //if (result.isConfirmed) {
             //    reslove(result.isConfirmed)

@@ -687,7 +687,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
 
         private void goback()
         {
-            navigationManager.NavigateTo($"/customerlist/{branch_id}");
+            navigationManager.NavigateTo($"/customerlist/{branch_id}/{c_id}");
         }
         private int? ExpandedPeriodtransId;
         private void ToggleDetails(int periodtranId)

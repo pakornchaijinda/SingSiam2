@@ -1,4 +1,4 @@
-﻿@page "/customerlist/{b_id:int}"
+﻿@page "/customerlist/{b_id:int}/{cus_id:int?}"
 @* <h3>CustomerList</h3> *@
 @using Models
 @using SingSiamOffice.Manage
@@ -183,62 +183,67 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            @foreach(var items in lst_Promises)
+                                                            @if (lst_Promises.Count() != 0)
                                                             {
-                                                                <tr>
+                                                                @foreach (var items in lst_Promises)
+                                                                {
+                                                                    <tr>
 
-                                                                    <td>@items.Tdate</td>
-                                                                    @if (items.ContractType == 1)
-                                                                    {
-                                                                        <td>ค่าประกันหนี้</td>
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        <td>สัญญาไฟแนนท์</td>
-                                                                    }
-                                                                    <td>@items.Refcode</td>
-                                                                    <td>@items.Product.Name</td>
-                                                                    <td>@items.Promiseno</td>
-                                                                    <td>@items.Capital.Value.ToString("N0")</td>
-                                                                    <td>@items.Amount.Value.ToString("N0")</td>
-                                                                    <td>@items.Branch.BranchName</td>
+                                                                        <td>@items.Tdate</td>
+                                                                        @if (items.ContractType == 1)
+                                                                        {
+                                                                            <td>ค่าประกันหนี้</td>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <td>สัญญาไฟแนนท์</td>
+                                                                        }
+                                                                        <td>@items.Refcode</td>
+                                                                        <td>@items.Product.Name</td>
+                                                                        <td>@items.Promiseno</td>
+                                                                        <td>@items.Capital.Value.ToString("N0")</td>
+                                                                        <td>@items.Amount.Value.ToString("N0")</td>
+                                                                        <td>@items.Branch.BranchName</td>
 
-                                                                    <td class="text-end">
-                                                                        <MudStack Row="true" Class="mt-2">
-                                                                            <div class="btn-group" role="group">
-                                                                                <button id="contractdropdown" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                                                                    ข้อมูลสัญญา
-                                                                                </button>
-                                                                                <ul class="dropdown-menu" aria-labelledby="contractdropdown">
-                                                                                    <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>viewContract( items.CustomerId,items.Id,items.BranchId)">ดูข้อมูลสัญญา</a></li>
-                                                                                    <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>printContract(items.Id)">พิมพ์สัญญา</a></li>
-                                                                                    <li><a style="cursor:pointer; background-color:red; color:#fff;" class="dropdown-item" @onclick="()=>deleteContract(items.Id)">ลบสัญญา</a></li>
-                                                                                </ul>
-                                                                            </div>
+                                                                        <td class="text-end">
+                                                                            <MudStack Row="true" Class="mt-2">
+                                                                                <div class="btn-group" role="group">
+                                                                                    <button id="contractdropdown" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                                        ข้อมูลสัญญา
+                                                                                    </button>
+                                                                                    <ul class="dropdown-menu" aria-labelledby="contractdropdown">
+                                                                                        <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>viewContract( items.CustomerId,items.Id,items.BranchId)">ดูข้อมูลสัญญา</a></li>
+                                                                                        <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>printContract(items.Id)">พิมพ์สัญญา</a></li>
+                                                                                        <li><a style="cursor:pointer; background-color:red; color:#fff;" class="dropdown-item" @onclick="()=>deleteContract(items.Id)">ลบสัญญา</a></li>
+                                                                                    </ul>
+                                                                                </div>
 
-                                                                            <div class="btn-group" role="group">
-                                                                                <button id="paymentdropdown" type="button" style="@buttoncolor1" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                                                                    ชำระค่างวด
-                                                                                </button>
-                                                                                <ul class="dropdown-menu" aria-labelledby="paymentdropdown">
-                                                                                    <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>goPayment(items.CustomerId,items.Id,items.BranchId)">ชำระค่างวด</a></li>
-                                                                                    <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>printPaymentDetail(items.Id)">พิมพ์รายละเอียด</a></li>
-                                                                                    <li><a style="cursor:pointer; background-color:red; color:#fff;" class="dropdown-item" @onclick="()=>canclePayment(items.Id)">ยกเลิกใบเสร็จ</a></li>
-                                                                             
-                                                                                </ul>
-                                                                            </div>
-                                                                            <MudButton Variant="Variant.Outlined" Size="Size.Large" Style="@buttoncolor2" @onclick="()=>goCustomerDept(data.CustomerId,items.Id)">หนี้อื่นๆ ยอดค้าง @items.Sum_Externalar.ToString("N0") บาท</MudButton>
-                                                                            @* <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.RemoveRedEye" Color="Color.Default" @onclick="()=>viewContract( items.CustomerId,items.Id,items.BranchId)">ดูข้อมูลสัญญา</MudButton> *@
-                                                                            @* <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Money" Style="@buttoncolor1" @onclick="()=>goPayment(items.CustomerId,items.Id,items.BranchId)">ชำระค่างวด</MudButton> *@
+                                                                                <div class="btn-group" role="group">
+                                                                                    <button id="paymentdropdown" type="button" style="@buttoncolor1" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                                        ชำระค่างวด
+                                                                                    </button>
+                                                                                    <ul class="dropdown-menu" aria-labelledby="paymentdropdown">
+                                                                                        <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>goPayment(items.CustomerId,items.Id,items.BranchId)">ชำระค่างวด</a></li>
+                                                                                        <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>printPaymentDetail(items.Id)">พิมพ์รายละเอียด</a></li>
+                                                                                        <li><a style="cursor:pointer; background-color:red; color:#fff;" class="dropdown-item" @onclick="()=>canclePayment(items.Id)">ยกเลิกใบเสร็จ</a></li>
 
-                                                                         
-                                                                            
-                                                                            @*        <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Remove" Color="Color.Error" @onclick="()=>deleteContract(1)">ยกเลิกสัญญา</MudButton> *@
-                                                                        </MudStack>
-                                                                    </td>
-                                                                </tr>
+                                                                                    </ul>
+                                                                                </div>
+                                                                                <MudButton Variant="Variant.Outlined" Size="Size.Large" Style="@buttoncolor2" @onclick="()=>goCustomerDept(data.CustomerId,items.Id)">หนี้อื่นๆ ยอดค้าง @items.Sum_Externalar.ToString("N0") บาท</MudButton>
+                                                                                @* <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.RemoveRedEye" Color="Color.Default" @onclick="()=>viewContract( items.CustomerId,items.Id,items.BranchId)">ดูข้อมูลสัญญา</MudButton> *@
+                                                                                @* <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Money" Style="@buttoncolor1" @onclick="()=>goPayment(items.CustomerId,items.Id,items.BranchId)">ชำระค่างวด</MudButton> *@
+
+
+
+                                                                                @*        <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Remove" Color="Color.Error" @onclick="()=>deleteContract(1)">ยกเลิกสัญญา</MudButton> *@
+                                                                            </MudStack>
+                                                                        </td>
+                                                                    </tr>
+                                                                }
+
                                                             }
-                                                        
+                                                           
+
                                                         </tbody>
 
                                                     </table>
@@ -278,19 +283,34 @@
     string detailtext = "color:#1C2833 ; font-weight:600; font-style: italic;";
     [Parameter]
     public int b_id { get; set; }
-
+    [Parameter]
+    public int? cus_id { get; set; }
 
     SingSiamOffice.Models.SingsiamdbContext db = new SingSiamOffice.Models.SingsiamdbContext();
 
     Branch b_info = new Branch();
     List<Customer> list_customer = new List<Customer>();
     List<Customer> list_customer_show = new List<Customer>();
+    Promise _promise = new Promise();
     protected override async Task OnInitializedAsync()
     {
 
 
         b_info = db.Branches.Where(s => s.IsActive == true && s.Id == b_id).FirstOrDefault();
         list_customer = db.Customers.Where(s => s.BranchId == b_id).ToList();
+
+        if (cus_id!=null)
+        {
+
+            list_customer_show = list_customer.Where(s => s.CustomerId == cus_id).ToList();
+            lst_Promises = await managements.GetPromisebyCustomerId(cus_id.Value);
+            foreach (var data in lst_Promises)
+            {
+                data.Sum_Externalar = db.Externalars.Where(s => s.PromiseId == data.Id && s.PaidComplete == false).Sum(s => s.Aramount).Value;
+            }
+
+            StateHasChanged();
+        }
         foreach (var data in list_customer)
         {
             _expandedStates[data.CustomerId] = true; // You can set initial state as desired

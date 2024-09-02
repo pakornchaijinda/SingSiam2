@@ -230,6 +230,10 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
 
   
         }
+        private void goBack()
+        {
+            navigationManager.NavigateTo($"/customerlist/{_promise.BranchId}/{_promise.CustomerId}");
+        }
         private void ValueChanged(ChangeEventArgs args)
         {
             var total_fee_change = Convert.ToInt32((String)args.Value);
