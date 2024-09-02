@@ -127,8 +127,9 @@
                                                         </MudStack>
                                                     </div>
                                                     <div class="col-4 pb-3 text-center">
-                                                        <MudText Typo="Typo.body1" Style="@imporText">ลบข้อมูลลูกค้า</MudText>
-                                                        <MudButton Variant="Variant.Outlined"  Size="Size.Large" Style="@buttoncolor2" @onclick="()=>remove(data.CustomerId)"></MudButton>
+                                                      @*   <MudText Typo="Typo.body1" Style="@imporText">ลบข้อมูลลูกค้า</MudText> *@
+                                                      @*   <MudButton Variant="Variant.Outlined"  Size="Size.Large" Style="@buttoncolor2" @onclick="()=>remove(data.CustomerId)"></MudButton> *@
+                                                        <MudButton Variant="Variant.Outlined" DisableElevation="true" Color="Color.Error" @onclick="()=>remove(data.CustomerId)">ลบข้อมูลลูกค้า</MudButton>
                                                     
                                                     </div>
                                                 </div>

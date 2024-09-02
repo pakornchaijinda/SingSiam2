@@ -51,11 +51,32 @@ namespace SingSiamOffice.Pages.CustomerManagement.CustomerInfo
 
         async private void remove(int cus_id)
         {
+            var confirm = await JSRuntime.InvokeAsync<bool>("confirmdelete");
+            if (confirm)
+            {
+                try
+                {
+                    var to_remove = db.Customers.Where(s => s.CustomerId == cus_id).FirstOrDefault();
+                    to_remove.Status = 0;
+                    db.Entry(to_remove).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                    await JSRuntime.InvokeVoidAsync("deletesuccess");
+                    await Task.Delay(100);
+
+                    //reset
+                    reset();
+                }
+                catch
+                {
+
+                }
+            }
+            else
+            {
+                //await JSRuntime.InvokeVoidAsync("alert_error");
+            }
             // Check if there is at least one record with the given customer ID
-            var to_remove = db.Customers.Where(s => s.CustomerId == cus_id).FirstOrDefault();
-            to_remove.Status = 0;
-            db.Entry(to_remove).State = EntityState.Modified;
-            await db.SaveChangesAsync();
+           
         }
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
