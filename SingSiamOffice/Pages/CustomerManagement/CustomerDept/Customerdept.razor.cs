@@ -81,7 +81,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.CustomerDept
         }
         private void goBack()
         {
-            navigationManager.NavigateTo("/customerlist/"+cus_info.BranchId.ToString());
+            navigationManager.NavigateTo("/customerlist/"+cus_info.BranchId.ToString()+"/"+ cus_info.CustomerId.ToString());
         }
     }
 }
