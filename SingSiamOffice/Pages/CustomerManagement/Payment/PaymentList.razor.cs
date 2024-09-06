@@ -539,7 +539,14 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                             _receipttran_toAdd.Tdatecalformat = DateTime.Now.ToString("yyyyMMdd");
                             _receipttran_toAdd.peroidtrans_info = _periodtran.Where(s => s.Ispaid == false).Take(period_pay_qty).ToList();
 
-
+                            if (close_type_status == null)
+                            {
+                                _receipttran_toAdd.Closecase = "-";
+                            }
+                            else 
+                            {
+                                _receipttran_toAdd.Closecase = close_type_status;
+                            }
                             if (payment_method != 4)
                             {
 

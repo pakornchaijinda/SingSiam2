@@ -629,9 +629,15 @@
                                                                         <MudRadio Value="1" Color="Color.Success" UnCheckedColor="Color.Default">เงินสด</MudRadio>
                                                                         <MudRadio Value="2" Color="Color.Secondary" UnCheckedColor="Color.Default">เงินโอน</MudRadio>
                                                                         <MudRadio Value="3" Color="Color.Error" UnCheckedColor="Color.Default">อื่นๆ</MudRadio>
-                                                                        <MudRadio Value="4" Color="Color.Info" UnCheckedColor="Color.Default">เงินฝาก</MudRadio>
+                                                                      
                                                                     </MudRadioGroup>
-
+                                                                    <MudSelect @bind-Value="close_type_status" Label="ประเภท" Placeholder="กรุณาเลือกประเภท" Variant="Variant.Outlined" Margin="Margin.Dense">
+                                                                        <MudSelectItem Value="@("ปกติ")">ปกติ</MudSelectItem>
+                                                                        <MudSelectItem Value="@("ยึด")">ยึด</MudSelectItem>
+                                                                        <MudSelectItem Value="@("หนี้สูญ")">หนี้สูญ</MudSelectItem>
+                                                                        <MudSelectItem Value="@("ดำเนินคดี")">ดำเนินคดี</MudSelectItem>
+                                                                        <MudSelectItem Value="@("รอขายทอดตลาด")">รอขายทอดตลาด</MudSelectItem>
+                                                                    </MudSelect>
                                                                     <div class="row">
                                                                         <div class="col-12 text-center">
                                                                             @if (payment_method == 2)
@@ -810,6 +816,6 @@
     public decimal? paidinterestAmount { get; set; }
     public double? behindhandAmount { get; set; } = 670;
 
-
+    public string close_type_status { get; set; }
 
 }
