@@ -7,6 +7,9 @@
 @using Newtonsoft.Json;
 
 <style>
+    html, body {
+        background-color: #fff;
+    }
     .left-detail {
         line-height: 1px;
     }
@@ -188,6 +191,7 @@
     Collateral1 collateral1 = new Collateral1();
     Collateral2 collateral2 = new Collateral2();
     Collateral3 collateral3 = new Collateral3();
+
     private List<Guarantor> _guarantor { get; set; }
     private List<Periodtran> _periodtrans { get; set; }
     protected override async Task OnInitializedAsync()

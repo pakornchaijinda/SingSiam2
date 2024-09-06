@@ -6,7 +6,9 @@
 @using System.Globalization;
 
 <style>
-
+    html, body {
+        background-color: #fff;
+    }
     .receipt {
         /*  margin-left:5px; */
         padding: 4mm;
@@ -404,7 +406,8 @@
     Externalar receipt = new Externalar();
     double sum_price = 0;
     string thai_text = "";
-
+    [Inject]
+    IJSRuntime JSRuntime { get; set; }
     protected override async Task OnInitializedAsync()
     {
         list_Externalar = db.Externalars.Include(s => s.Login).Where(s => s.Docno == DocNo).ToList();
@@ -418,6 +421,13 @@
     {
         int thaiYear = date.Year + 543;
         return date.ToString($"dd/MM/{thaiYear}");
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("printReceipt");
+        }
     }
     public string ConvertToThaiText(double amount)
     {
