@@ -35,10 +35,7 @@ namespace SingSiamOffice.Pages.BlackList
         {
             try
             {
-                var to_edit = db.BlackLists.Where(s => s.BlackId == edit_black.BlackId).FirstOrDefault();
-                to_edit.Detial = edit_black.Detial;
-                db.Entry(to_edit).State = EntityState.Modified;
-                db.SaveChangesAsync();
+                
                 return true;
             }
             catch (Exception ex)
@@ -51,22 +48,23 @@ namespace SingSiamOffice.Pages.BlackList
             var confirm = await JSRuntime.InvokeAsync<bool>("confirmSaveData");
             if (confirm)
             {
-
-              
-                edit_black.CustomerId = selectCus.BranchId;
                edit_black.CreateTime = DateTime.Now;
-             
-                if (await save())
+
+                try
                 {
+                    edit_black.Detial = edit_black.Detial;
+                    db.Entry(edit_black).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
                     await JSRuntime.InvokeVoidAsync("confirm");
                     await Task.Delay(100);
                     navigationManager.NavigateTo("/blacklist_list/" + b_id.ToString());
-
                 }
-                else
+                catch
                 {
                     await JSRuntime.InvokeVoidAsync("alert_error");
                 }
+                
+            
 
             }
             else
