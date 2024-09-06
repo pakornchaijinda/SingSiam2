@@ -6,7 +6,9 @@
 @using System.Globalization;
 @using Newtonsoft.Json;
 <style>
-
+    html, body {
+        background-color: #fff;
+    }
     .receipt {
         /*  margin-left:5px; */
         padding: 4mm;
@@ -401,6 +403,8 @@
     TransectionSlip _transectionSlip = new TransectionSlip();
     Promise _promise = new Promise();
     TransactionHistory receipt = new TransactionHistory();
+    [Inject]
+    IJSRuntime JSRuntime { get; set; }
     double sum_price = 0;
     string thai_text = "";
     public class jsonstring
@@ -422,6 +426,13 @@
     {
         int thaiYear = date.Year + 543;
         return date.ToString($"dd/MM/{thaiYear}");
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("printReceipt");
+        }
     }
     public string ConvertToThaiText(double amount)
     {
