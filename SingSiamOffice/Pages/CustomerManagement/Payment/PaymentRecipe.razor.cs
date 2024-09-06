@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop;
 using SingSiamOffice.Manage;
 using SingSiamOffice.Models;
@@ -24,8 +25,10 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
 
         private List<Receiptdesc> lst_receiptdescs = new List<Receiptdesc>();
         private Receipttran receipttran = new Receipttran();
+        Login userLogin = new Login();
         Manage.Receipt receipt = new Receipt();
         private bool ck_deposit { get; set; }
+        SingSiamOffice.Models.SingsiamdbContext db = new SingSiamOffice.Models.SingsiamdbContext();
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
@@ -35,6 +38,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
         }
         protected override async void OnInitialized()
         {
+           
             lst_receiptdescs = await Manage.GetReceipttran(peroidtran_id,type);
             receipttran = lst_receiptdescs.Select(s => s.Receipttran).FirstOrDefault();
             receipt.daypaid = receipttran.Tdate;
@@ -62,6 +66,24 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
             {
                 receipt.ck_total_fee = true;
             }
+            try
+            {
+                var auth = await localStorage.GetItemAsync<string>("authToken");
+                if (auth == null)
+                {
+                    navigationManager.NavigateTo("/");
+                }
+                else
+                {
+                    userLogin = db.Logins.Where(s => s.Username == auth).AsNoTracking().FirstOrDefault();
+                }
+            }
+            catch
+            {
+
+            }
+            StateHasChanged();
+
         }
 
 
