@@ -577,19 +577,19 @@
                                                                     <div>
                                                                         <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">งวดที่ค้างชำระ  :</div>
-                                                                            <input type="text" class="form-control text-end" @bind-value="_promise_pay.OverPayQty" style="@boxfieldred" disabled>
+                                                                            <input type="text" class="form-control text-end" value="@_promise_pay.OverPayQty.ToString("N0") " style="@boxfieldred" disabled>
                                                                         </div>
                                                                     </div>
                                                                     <div>
                                                                         <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">ยอดที่ต้องชำระ  :</div>
-                                                                            <input type="text" class="form-control text-end" @bind-value="_promise_pay.total_deptAmount" style="@boxfieldred" disabled>
+                                                                            <input type="text" class="form-control text-end" value="@_promise_pay.total_deptAmount.ToString("N0")" style="@boxfieldred" disabled>
                                                                         </div>
                                                                     </div>
                                                                     <div>
                                                                         <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">ยอดรับฝากเงิน  :</div>
-                                                                            <input type="text" class="form-control text-end" @bind-value="_promise_pay.total_deposit" style="@boxfieldgreen" disabled>
+                                                                            <input type="text" class="form-control text-end" value="@_promise_pay.total_deposit.ToString("N0")" style="@boxfieldgreen" disabled>
                                                                         </div>
                                                                     </div>
 
@@ -636,32 +636,6 @@
                                                                         <div class="col-12 text-center">
                                                                             @if (payment_method == 2)
                                                                             {
-                                                                             @*    <MudFileUpload T="IBrowserFile">
-                                                                                    <ButtonTemplate>
-                                                                                        <MudButton HtmlTag="label"
-                                                                                                   Variant="Variant.Filled"
-                                                                                                   Color="Color.Primary"
-                                                                                                   for="@context.Id">
-                                                                                            รูปภาพประกอบ
-                                                                                        </MudButton>
-                                                                                    </ButtonTemplate>
-                                                                                    <SelectedTemplate>
-                                                                                        <div class="row">
-                                                                                            <div class="col-12 mt-2">
-                                                                                                @if (context != null)
-                                                                                                {
-                                                                                                    <di></di>
-                                                                                                    <MudText>ไฟล์ชื่อ : @context.Name</MudText>
-                                                                                                }
-                                                                                                else
-                                                                                                {
-                                                                                                    <MudText>ไม่มีรูปภาพประกอบ</MudText>
-                                                                                                }
-                                                                                            </div>
-                                                                                        </div>
-
-                                                                                    </SelectedTemplate>
-                                                                                </MudFileUpload> *@
                                                                                 @if (_formModel.PreviewUrl != null)
                                                                                 {
                                                                                     <img class="uk-border-circle" src="@_formModel.PreviewUrl" alt="Preview Image" style="height:10rem; width:10rem;" />
@@ -670,8 +644,6 @@
                                                                                 {
                                                                                     <img class="uk-border-circle" src="/img/vehicle/ducati.jpg" alt="Avatar" style="height:10rem; width:10rem;">
                                                                                 }
-
-
                                                                                 <MudFileUpload T="IBrowserFile" FilesChanged="UploadFiles">
                                                                                     <ButtonTemplate>
                                                                                         <MudIconButton HtmlTag="label"
@@ -681,7 +653,6 @@
                                                                                         </MudIconButton>
                                                                                     </ButtonTemplate>
                                                                                 </MudFileUpload>
-
                                                                             }
                                                                             @if (payment_method == 3)
                                                                             {
@@ -691,33 +662,6 @@
                                                                                             <MudTextField @bind-Value="otherReason" Label="ระบุคำอธิบาย" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
                                                                                         </div>
                                                                                         <div class="col-12 text-center">
-                                                                                          @*   <MudFileUpload T="IBrowserFile">
-                                                                                                <ButtonTemplate>
-                                                                                                    <MudButton HtmlTag="label"
-                                                                                                               Variant="Variant.Filled"
-                                                                                                               Color="Color.Primary"
-                                                                                                               for="@context.Id">
-                                                                                                        รูปภาพประกอบ
-                                                                                                    </MudButton>
-                                                                                                </ButtonTemplate>
-                                                                                                <SelectedTemplate>
-                                                                                                    <div class="row">
-                                                                                                        <div class="col-12 mt-2">
-                                                                                                            @if (context != null)
-                                                                                                            {
-                                                                                                                <di></di>
-                                                                                                                <MudText>ไฟล์ชื่อ : @context.Name</MudText>
-                                                                                                            }
-                                                                                                            else
-                                                                                                            {
-                                                                                                                <MudText>ไม่มีรูปภาพประกอบ</MudText>
-                                                                                                            }
-                                                                                                        </div>
-                                                                                                    </div>
-
-                                                                                                </SelectedTemplate>
-                                                                                            </MudFileUpload> *@
-
                                                                                             @if (_formModel.PreviewUrl != null)
                                                                                             {
                                                                                                 <img class="uk-border-circle" src="@_formModel.PreviewUrl" alt="Preview Image" style="height:10rem; width:10rem;" />
@@ -726,8 +670,6 @@
                                                                                             {
                                                                                                 <img class="uk-border-circle" src="/img/vehicle/ducati.jpg" alt="Avatar" style="height:10rem; width:10rem;">
                                                                                             }
-
-
                                                                                             <MudFileUpload T="IBrowserFile" FilesChanged="UploadFiles">
                                                                                                 <ButtonTemplate>
                                                                                                     <MudIconButton HtmlTag="label"
@@ -740,17 +682,10 @@
 
                                                                                         </div>
                                                                                     </div>
-
                                                                                 </MudStack>
-
                                                                             }
                                                                         </div>
                                                                     </div>
-
-
-
-
-
                                                                 </MudStack>
                                                             </div>
                                                         </div>
@@ -761,29 +696,37 @@
                                                                 <MudStack Spacing="1">
                                                                     <div>
                                                                         <div class="input-group">
-                                                                            <div class="input-group-text" style="@imporText">ชำระค่าปรับ/ค่าทวงถาม:</div>
-                                                                            <input type="text" class="form-control text-end" @bind-value="paidfineAmount" style="@boxfield" disabled>
+                                                                            <div class="input-group-text" style="@imporText">+ ดอกเบี้ยเพิ่ม</div>
+                                                                            <input type="text" class="form-control text-end" @bind-value="intplus" style="@boxfield">
+                                                                            <MudButton Variant="Variant.Filled" Color="Color.Info" Size="Size.Large" OnClick="AdjustIntPlus">ปรับค่าบริการ</MudButton>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div>
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-text" style="@imporText">ส่วนลดดอกเบี้ย</div>
+                                                                            <input type="text" class="form-control text-end" @bind-value="discount" style="@boxfield">
+                                                                            <MudButton Variant="Variant.Filled" Color="Color.Info" Size="Size.Large" OnClick="AdjustDiscount">ปรับค่าบริการ</MudButton>
                                                                         </div>
                                                                     </div>
                                                                     <div>
                                                                         <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">ชำระเงินต้น:</div>
-                                                                            <input type="text" class="form-control text-end" @bind-value="paidprincipleAmount" style="@boxfieldgreen" disabled>
+                                                                            <input type="text" class="form-control text-end" value="@paidprincipleAmount.Value.ToString("N0")" style="@boxfieldgreen" disabled>
                                                                         </div>
                                                                     </div>
                                                                     <div>
                                                                         <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">ชำระดอกเบี้ย:</div>
-                                                                            <input type="text" class="form-control text-end" @bind-value="paidinterestAmount" style="@boxfieldgreen" disabled>
+                                                                            <input type="text" class="form-control text-end" value="@paidinterestAmount.Value.ToString("N0")" style="@boxfieldgreen" disabled>
                                                                         </div>
                                                                     </div>
                                                                     <div>
                                                                         <div class="input-group">
-                                                                            <div class="input-group-text" style="@imporText">ค้างยอดชำระยกไป:</div>
-                                                                            <input type="text" class="form-control text-end" @bind-value="_promise_pay.pending_amount" style="@boxfieldred" disabled>
+                                                                            <div class="input-group-text" style="@imporText">ส่วนต่าง:</div>
+                                                                            <input type="text" class="form-control text-end" value="@_promise_pay.pending_amount.ToString("N0")" style="@boxfieldred" disabled>
                                                                         </div>
                                                                     </div>
-
+                                                                   
 
                                                                 </MudStack>
                                                             </div>
@@ -862,7 +805,7 @@
     public decimal? customerPayAmount { get; set; }
 
 
-    public double? paidfineAmount { get; set; } = 0;
+    public string? paidfineAmount { get; set; }
     public decimal? paidprincipleAmount { get; set; }
     public decimal? paidinterestAmount { get; set; }
     public double? behindhandAmount { get; set; } = 670;

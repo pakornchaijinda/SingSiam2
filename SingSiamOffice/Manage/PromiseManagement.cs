@@ -112,7 +112,8 @@ namespace SingSiamOffice.Manage
                     {
                         if (items.payment_method != 4)
                         {
-                            if (to_edit.Amount == (items.Amount * -1))
+                            var amount_remain = to_edit.Amount - to_edit.Paidremain;
+                            if (to_edit.Amount == (amount_remain * -1))
                             {
                                 to_edit.Ispaid = true;
                                 to_edit.Status = 1;
@@ -283,6 +284,7 @@ namespace SingSiamOffice.Manage
             toEdit.Status = 0;
             toEdit.Ispaid = false;
             toEdit.Deposit = 0;
+            toEdit.Paidremain = 0;
             db.Entry(toEdit).State = EntityState.Modified;
           //  await db.SaveChangesAsync();
         }
