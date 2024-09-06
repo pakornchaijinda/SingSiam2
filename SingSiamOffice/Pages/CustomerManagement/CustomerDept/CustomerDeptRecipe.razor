@@ -6,10 +6,13 @@
 @using System.Globalization;
 
 <style>
-
+    html, body {
+        background-color: #fff;
+    }
     .receipt {
-        padding: 3mm;
-        width: 80mm;
+        /*  margin-left:5px; */
+        padding: 4mm;
+        width: 70mm;
         /*  border: 1px solid black; */
     }
 
@@ -29,7 +32,7 @@
         /* font-family: "Bai Jamjuree", sans-serif; */
         font-family: "Sarabun", sans-serif;
         /* text-align: center; */
-        font-size: 8pt;
+        font-size: 9pt;
     }
 
     .headerTitle {
@@ -118,7 +121,7 @@
 
     th, tr, td {
         font-family: "Sarabun", sans-serif;
-        font-size: 8pt;
+        font-size: 10pt;
     }
 
     .itemData2 {
@@ -152,7 +155,7 @@
     .totals {
         flex-grow: 1;
         align-self: center;
-        font-size: 8pt;
+        font-size: 10pt;
     }
 
         .totals .row {
@@ -167,7 +170,7 @@
     .totalRow > div, .total > div {
         text-align: right;
         align-items: baseline;
-        font-size: 8pt;
+        font-size: 10pt;
     }
 
     .totals .col1 {
@@ -218,7 +221,7 @@
         }
 
     .etaLabel {
-        font-size: 8pt;
+        font-size: 10pt;
     }
 
     .printType {
@@ -292,6 +295,12 @@
 
     .line {
         text-decoration: dashed;
+    }
+
+    .tt {
+        width: 100%;
+        display: flex;
+        justify-content: center;
     }
 </style>
 
@@ -397,7 +406,8 @@
     Externalar receipt = new Externalar();
     double sum_price = 0;
     string thai_text = "";
-
+    [Inject]
+    IJSRuntime JSRuntime { get; set; }
     protected override async Task OnInitializedAsync()
     {
         list_Externalar = db.Externalars.Include(s => s.Login).Where(s => s.Docno == DocNo).ToList();
@@ -411,6 +421,13 @@
     {
         int thaiYear = date.Year + 543;
         return date.ToString($"dd/MM/{thaiYear}");
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("printReceipt");
+        }
     }
     public string ConvertToThaiText(double amount)
     {
