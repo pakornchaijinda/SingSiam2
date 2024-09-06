@@ -366,12 +366,15 @@
                     <div class="col-3 centerbox">
                         <div class="row">
                                 <div class="col-4 text-center">
-                                  
+                                <MudTooltip Text="นับเงิน">
+                                    <MudIconButton Icon="@Icons.Material.Filled.Calculate" Variant="Variant.Outlined" Style="@calbutton" Size="Size.Large" @onclick="()=>Calculator()" />
+                                </MudTooltip>
+                      
 
-                                <MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="()=>Calculator()" Style="height: 50px;">
+                                @* <MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="()=>Calculator()" Style="height: 50px;">
                                     <MudIcon Icon="@Icons.Material.Filled.Calculate" />
                                     ปุ่มนับเงิน
-                                </MudButton>
+                                </MudButton> *@
 
                                 </div>
                             <div class="col-8 text-center" >
@@ -399,6 +402,8 @@
     // style
 
     string headertext = "color:#840012; font-weight:600;";
+
+    string calbutton = "background-color:#840012; color:#FFF; font-weight:600; width:6rem; height:6rem;";
     string buttoncolor1 = "background-color:#840012; color:#FFF; font-weight:600;";
     string settingbutton = "background-color:#840012; color:#FFF; font-weight:600; ";
     string buttoncollape = "background-color:#fc928c; color:#840012; font-weight:600;";
