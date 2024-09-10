@@ -2,6 +2,7 @@
 {
     public class GlobalData
     {
+        public int login_id { get;set; }
         public string username { get; set; }
         public string fullname { get; set; }
         public string role { get; set; }    

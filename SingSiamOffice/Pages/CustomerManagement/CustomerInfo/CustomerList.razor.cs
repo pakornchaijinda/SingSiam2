@@ -22,7 +22,8 @@ namespace SingSiamOffice.Pages.CustomerManagement.CustomerInfo
         Manage.PromiseManagement promiseManagement { get; set; }
         [Inject] AuthenticationStateProvider authStateProvider { get; set; }    
         [Inject] AuthenticationStateProvider AuthenticationStateProvider { get; set; }
-       
+
+      
         //[CascadingParameter]
         //private Task<AuthenticationState> authenticationStateTasks { get; set; }
         //AuthenticationState auth;
@@ -37,7 +38,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.CustomerInfo
             _expanded = !_expanded;
         }
 
-
+        private bool ck_customer_branch { get; set; } = false;
         private string value1;
         private string[] states =
         {

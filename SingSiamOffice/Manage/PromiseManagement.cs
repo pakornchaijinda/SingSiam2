@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using SingSiamOffice.Models;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 
 namespace SingSiamOffice.Manage
@@ -26,6 +27,36 @@ namespace SingSiamOffice.Manage
                 var tt = ex.InnerException.Message;
                 return null;
             }
+        }
+        public async Task<bool> addTaxPromise(TransactionHistory items) 
+        {
+
+           TransactionHistory Add_expren = new TransactionHistory()
+            {
+                BranchId = items.BranchId,
+                TransectionRef = items.TransectionRef,
+                SubjectId = 7,
+                Price = items.Price,
+                CreateAt = DateTime.Now,
+                LoginId = items.LoginId,
+                Detial = items.Detial,
+                PaymentMethod = 1,
+            };
+            db.TransactionHistories.Add(Add_expren);
+            await db.SaveChangesAsync();
+            var data = new
+            {
+                refcode = items.TransectionRef,
+                tdec = DateTime.Now.ToString("dd/MM/yyyy"),
+                price = items.Price,
+                detail = items.Detial,
+            };
+            string jsonString = JsonConvert.SerializeObject(data);
+            var new_add = new TransectionSlip();
+            new_add.TransactionHistoryId = Add_expren.TransactionId;
+            new_add.Doc = jsonString;
+            db.TransectionSlips.Add(new_add);
+            return true;
         }
         public async Task<bool> Delete_Promise(int promiseId) 
         {

@@ -94,7 +94,9 @@ public partial class SingsiamdbContext : DbContext
             entity.HasIndex(e => e.BranchCode, "IX_branch").IsUnique();
 
             entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.Accdocno).HasColumnName("accdocno");
+            entity.Property(e => e.Accdocno)
+                .HasDefaultValueSql("((0))")
+                .HasColumnName("accdocno");
             entity.Property(e => e.Address)
                 .HasMaxLength(250)
                 .HasColumnName("address");
@@ -728,7 +730,7 @@ public partial class SingsiamdbContext : DbContext
 
         modelBuilder.Entity<Promise>(entity =>
         {
-            entity.ToTable("promise", tb => tb.HasTrigger("UpdateRunningNo"));
+            entity.ToTable("promise", tb => tb.HasTrigger("UpdateRunningNo_promise"));
 
             entity.HasIndex(e => e.Promiseno, "UQ_promiseno").IsUnique();
 

@@ -461,6 +461,7 @@ namespace SingSiamOffice.Pages.Contracts
         Collateral2 collateral2 = new Collateral2();
         Collateral3 collateral3 = new Collateral3();
 
+        private string RefAccNoCode { get; set; }
         private bool ck_condition { get; set; } = true;
         private async Task<IEnumerable<Province>> SearchProvince(string value)
         {
@@ -605,6 +606,11 @@ namespace SingSiamOffice.Pages.Contracts
         {
             var RefCode = await Managements.Get_Ref_Code(branch_id, "refcode", branch.BranchCode, select_collateral.Id,vat);
             PromiseInfo.Refcode = RefCode;
+        }
+        private async void GetRefCodeAccno(int branchid)
+        {
+            RefAccNoCode = await Managements.Get_Ref_AccCode(branch_id);
+            
         }
         private async Task submit()
         {
@@ -759,6 +765,7 @@ namespace SingSiamOffice.Pages.Contracts
             {
 
                 var b = await promiseManagement.addPromise(PromiseInfo);
+
                 if(guarantor == 1) 
                 {
                     Models.Guarantor g = new Guarantor();
@@ -786,6 +793,20 @@ namespace SingSiamOffice.Pages.Contracts
                     }
                     await promiseManagement.addGuarantor(List_Guarantors);
                 }
+
+                RefAccNoCode = await Managements.Get_Ref_AccCode(b.BranchId);
+                string TaxDetail = _customer.FullName + " " + b.Refcode + " " + b.Chargeamt.ToString();
+                TransactionHistory toAdd = new TransactionHistory()
+                {
+                    Price = Convert.ToInt32(b.Chargeamt),
+                    BranchId = branch_id,
+                    Detial = TaxDetail,
+                    LoginId = globalData.login_id,
+                    TransectionRef = RefAccNoCode,
+                    
+                };
+
+                var transactionhistory = await promiseManagement.addTaxPromise(toAdd);
                 var periodtran = await Managements.Add_Periodtrans(b, contract_type);
                 var ck_save = await promiseManagement.addPeriodtran(periodtran);
 
@@ -795,7 +816,7 @@ namespace SingSiamOffice.Pages.Contracts
 
                     await Task.Delay(100);
 
-                    navigationManager.NavigateTo($"/customerlist/{_customer}");
+                    navigationManager.NavigateTo($"/customerlist/{_customer.CustomerId}");
                 }
 
               

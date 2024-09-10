@@ -241,8 +241,20 @@ namespace SingSiamOffice.Manage
                 result = product_code.Trim() + "-" + numberPart + "/" + branch_code;
             }
            
-           
-           
+            return result;
+        }
+        public async Task<string> Get_Ref_AccCode(int branch_id)
+        {
+            int next_no = 0;
+            string result = "";
+
+            var branch_info = db.Branches.AsNoTracking().Where(s => s.Id == branch_id).FirstOrDefault();
+
+                next_no = (int)branch_info.Accdocno + 1;
+                string numberPart =branch_info.Code+"."+next_no.ToString("D4");
+                result = numberPart;
+            
+
             return result;
         }
         public async Task<BlackList> GetBlackList(int cus_id)

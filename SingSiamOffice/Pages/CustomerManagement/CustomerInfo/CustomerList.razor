@@ -5,6 +5,7 @@
 @inject UserLoginService userLoginService
 @using Blazored.LocalStorage
 @inject ILocalStorageService localStorage
+@inject Manage.BranchService branchService
 <Navbar2></Navbar2>
 <!-- Content Start -->
 <div class="content">
@@ -142,7 +143,7 @@
                                                 <MudStack Row="true">
                                                     <MudText Typo="Typo.body1">เมนูจัดการ</MudText>
                                                     <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Edit" Size="Size.Large" Color="Color.Error" @onclick="()=>editCustomer(data.CustomerId)">แก้ไขข้อมูลส่วนตัว</MudButton>
-                                                    <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.PostAdd" Size="Size.Large" Color="Color.Error" @onclick="()=>addContract(data.CustomerId,b_id)">เพิ่มสัญญา</MudButton>
+                                                    <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.PostAdd" Size="Size.Large" Color="Color.Error" @onclick="()=>addContract(data.CustomerId,b_id)" Disabled="ck_customer_branch">เพิ่มสัญญา</MudButton>
 
                                                 </MudStack>
                                             </div>
@@ -337,7 +338,7 @@
                 data.Sum_Externalar = db.Externalars.Where(s => s.PromiseId == data.Id && s.PaidComplete == false).Sum(s => s.Aramount).Value;
             }
 
-           
+
         }
         foreach (var data in list_customer)
         {
@@ -381,7 +382,16 @@
         {
             list_customer_show.Clear();
             list_customer_show = list_customer.Where(s => s.CustomerId == selectCustomer.CustomerId).ToList();
+            var branchservice_branchId = branchService.branch_ID;
+            if (branchService.branch_ID == selectCustomer.Branch.Id)
+            {
 
+                ck_customer_branch = false;
+            }
+            else
+            {
+                ck_customer_branch = true;    
+            }
             // foreach (var data in list_customer_show)
             // {
             //     data.Sum_Externalar = db.Externalars.Where(s => s.CustomerId == data.CustomerId && s.PaidComplete == false ).Sum(s => s.Aramount).Value;

@@ -354,7 +354,7 @@
         </thead>
         <tbody>
             <tr>
-                <td class="text-start"> @_promise.Customer.FullName</td>
+                <td class="text-start"> @data_json.detail</td>
                 <td class="text-end">@data_json.price.ToString("N0")</td>
             </tr>
            
@@ -416,6 +416,7 @@
         public string refcode { get; set; }
         public string tdec { get; set; }
         public int price { get; set; }
+        public string detail { get; set; }
     }
     jsonstring data_json = new jsonstring();
     Login userLogin = new Login();
