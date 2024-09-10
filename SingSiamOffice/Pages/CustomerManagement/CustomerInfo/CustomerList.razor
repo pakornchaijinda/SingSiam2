@@ -168,7 +168,7 @@
 
                                             <MudDivider />
                                             <MudCollapse Expanded="true">
-                                                <div class="table-responsive">
+                                                <div class="table-responsive mb-4">
                                                     <table class="table">
                                                         <thead>
                                                             <tr>
@@ -215,6 +215,7 @@
                                                                                     <ul class="dropdown-menu" aria-labelledby="contractdropdown">
                                                                                         <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>viewContract( items.CustomerId,items.Id,items.BranchId)">ดูข้อมูลสัญญา</a></li>
                                                                                         <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>printContract(items.Id)">พิมพ์สัญญา</a></li>
+                                                                                        <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>printPaymentDetail(items.Id)">พิมพ์ค่าธรรมเนียม</a></li>
                                                                                         <li><a style="cursor:pointer; background-color:red; color:#fff;" class="dropdown-item" @onclick="()=>deleteContract(items.Id)">ลบสัญญา</a></li>
                                                                                     </ul>
                                                                                 </div>
@@ -225,7 +226,8 @@
                                                                                     </button>
                                                                                     <ul class="dropdown-menu" aria-labelledby="paymentdropdown">
                                                                                         <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>goPayment(items.CustomerId,items.Id,items.BranchId)">ชำระค่างวด</a></li>
-                                                                                        <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>printPaymentDetail(items.Id)">พิมพ์รายละเอียด</a></li>
+                                                                                        <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>printPaymentDetail(items.Id)">พิมพ์ข้อมูลชำระค่างวด</a></li>
+                                                                                   
                                                                                         <li><a style="cursor:pointer; background-color:red; color:#fff;" class="dropdown-item" @onclick="()=>canclePayment(items.Id)">ยกเลิกใบเสร็จ</a></li>
 
                                                                                     </ul>
@@ -239,6 +241,7 @@
                                                                                 @*        <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Remove" Color="Color.Error" @onclick="()=>deleteContract(1)">ยกเลิกสัญญา</MudButton> *@
                                                                             </MudStack>
                                                                         </td>
+                                                                       
                                                                     </tr>
                                                                 }
 
