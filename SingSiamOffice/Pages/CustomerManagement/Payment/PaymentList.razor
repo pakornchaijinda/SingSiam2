@@ -619,6 +619,12 @@
                                                                     </div>
                                                                     <div>
                                                                         <div class="input-group">
+                                                                            <div class="input-group-text" style="@imporText">ดอกเบี้ยที่ลดได้  :</div>
+                                                                            <input type="text" class="form-control text-end" value="@paidinterestAmount.Value.ToString("N0")" style="@boxfieldred" disabled>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div>
+                                                                        <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">ยอดที่ชำระ :</div>
                                                                             <input type="text" class="form-control text-end" @bind-value="customerPayAmount" style="@boxfieldgreen">
                                                                         </div>
@@ -729,7 +735,7 @@
                                                                     <div>
                                                                         <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">ส่วนต่าง:</div>
-                                                                            <input type="text" class="form-control text-end" value="@_promise_pay.pending_amount.ToString("N0")" style="@boxfieldred" disabled>
+                                                                            <input type="text" class="form-control text-end" value="@_promise_pay.total_deptAmount.ToString("N0")" style="@boxfieldred" disabled>
                                                                         </div>
                                                                     </div>
                                                                    
