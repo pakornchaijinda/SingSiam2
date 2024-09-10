@@ -301,43 +301,66 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
 
                 _promise_pay.total_deptAmount = _periodtran.Where(s => s.Ispaid == false).Sum(p => (decimal)p.Amount);
                 _promise_pay.pending_amount = (_promise_pay.total_deptAmount - _promise_pay.total_deposit + _promise_pay.total_fee + _promise_pay.total_charge_follow) * -1;
-                pending_totalpayment = (_promise_pay.pending_amount * -1).ToString();
+           
                     paidprincipleAmount = _periodtran.Where(s => s.Ispaid == false).Sum(p => (decimal)p.Capital);
-                paidinterestAmount = _periodtran.Where(s => s.Ispaid == false).Sum(p => (decimal)p.Interest);
+                var remain_amount = _periodtran.Where(s => s.Ispaid == false).Sum(p => (decimal)p.Paidremain) * -1;
+                paidinterestAmount = _periodtran.Where(s => s.Ispaid == false).Sum(p => (decimal)p.Interest) - remain_amount;
+
+                _promise_pay.total_deptAmount = ((decimal)paidprincipleAmount + (decimal)paidinterestAmount);
             }
             StateHasChanged();
         }
         private async Task AdjustIntPlus()
         {
-            if (intplus == 0)
+            if (intplus == null)
             {
-                _promise_pay.total_deptAmount = _periodtran.Where(s => s.Ispaid == false).Sum(p => (decimal)p.Amount);
-                _promise_pay.pending_amount = (_promise_pay.total_deptAmount - _promise_pay.total_deposit + _promise_pay.total_fee + _promise_pay.total_charge_follow) * -1;
-                pending_totalpayment = (_promise_pay.pending_amount * -1).ToString();
+                intplus = 0;
+                Snackbar.Configuration.PositionClass = Defaults.Classes.Position.TopCenter;
+                Snackbar.Add("กรุณาใส่ตัวเลขที่ต้องการ", Severity.Error);
             }
             else
             {
-                _promise_pay.total_deptAmount = _promise_pay.total_deptAmount + (decimal)intplus;
-                var intplus_total = (_promise_pay.pending_amount * -1) + (decimal)intplus;
-                _promise_pay.pending_amount = intplus_total * -1;
+                if (intplus == 0)
+                {
+                    _promise_pay.total_deptAmount = _periodtran.Where(s => s.Ispaid == false).Sum(p => (decimal)p.Amount);
+                    _promise_pay.pending_amount = (_promise_pay.total_deptAmount - _promise_pay.total_deposit + _promise_pay.total_fee + _promise_pay.total_charge_follow) * -1;
+                    pending_totalpayment = (_promise_pay.pending_amount * -1).ToString();
+                }
+                else
+                {
+                    _promise_pay.total_deptAmount = _promise_pay.total_deptAmount + (decimal)intplus;
+                    var intplus_total = (_promise_pay.pending_amount * -1) + (decimal)intplus;
+                    _promise_pay.pending_amount = intplus_total * -1;
 
+                }
             }
+           
          
         }
         private async Task AdjustDiscount()
         {
-            if (discount == 0)
+            if (discount == null)
             {
-                _promise_pay.total_deptAmount = _periodtran.Where(s => s.Ispaid == false).Sum(p => (decimal)p.Amount);
-                _promise_pay.pending_amount = (_promise_pay.total_deptAmount - _promise_pay.total_deposit + _promise_pay.total_fee + _promise_pay.total_charge_follow) * -1;
-                pending_totalpayment = (_promise_pay.pending_amount * -1).ToString();
+                discount = 0;
+                Snackbar.Configuration.PositionClass = Defaults.Classes.Position.TopCenter;
+                Snackbar.Add("กรุณาใส่ตัวเลขที่ต้องการ", Severity.Error);
             }
             else 
             {
-                _promise_pay.total_deptAmount = _promise_pay.total_deptAmount - (decimal)discount;
-                var discount_total = (_promise_pay.pending_amount * -1) - (decimal)discount;
-                _promise_pay.pending_amount = discount_total * -1;
+                if (discount == 0)
+                {
+                    _promise_pay.total_deptAmount = _periodtran.Where(s => s.Ispaid == false).Sum(p => (decimal)p.Amount);
+                    _promise_pay.pending_amount = (_promise_pay.total_deptAmount - _promise_pay.total_deposit + _promise_pay.total_fee + _promise_pay.total_charge_follow) * -1;
+                    pending_totalpayment = (_promise_pay.pending_amount * -1).ToString();
+                }
+                else
+                {
+                    _promise_pay.total_deptAmount = _promise_pay.total_deptAmount - (decimal)discount;
+                    var discount_total = (_promise_pay.pending_amount * -1) - (decimal)discount;
+                    _promise_pay.pending_amount = discount_total * -1;
+                }
             }
+        
           
         }
 
@@ -539,7 +562,14 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                             _receipttran_toAdd.Tdatecalformat = DateTime.Now.ToString("yyyyMMdd");
                             _receipttran_toAdd.peroidtrans_info = _periodtran.Where(s => s.Ispaid == false).Take(period_pay_qty).ToList();
 
-
+                            if (close_type_status == null)
+                            {
+                                _receipttran_toAdd.Closecase = "-";
+                            }
+                            else 
+                            {
+                                _receipttran_toAdd.Closecase = close_type_status;
+                            }
                             if (payment_method != 4)
                             {
 

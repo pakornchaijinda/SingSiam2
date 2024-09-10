@@ -619,6 +619,12 @@
                                                                     </div>
                                                                     <div>
                                                                         <div class="input-group">
+                                                                            <div class="input-group-text" style="@imporText">ดอกเบี้ยที่ลดได้  :</div>
+                                                                            <input type="text" class="form-control text-end" value="@paidinterestAmount.Value.ToString("N0")" style="@boxfieldred" disabled>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div>
+                                                                        <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">ยอดที่ชำระ :</div>
                                                                             <input type="text" class="form-control text-end" @bind-value="customerPayAmount" style="@boxfieldgreen">
                                                                         </div>
@@ -629,9 +635,15 @@
                                                                         <MudRadio Value="1" Color="Color.Success" UnCheckedColor="Color.Default">เงินสด</MudRadio>
                                                                         <MudRadio Value="2" Color="Color.Secondary" UnCheckedColor="Color.Default">เงินโอน</MudRadio>
                                                                         <MudRadio Value="3" Color="Color.Error" UnCheckedColor="Color.Default">อื่นๆ</MudRadio>
-                                                                        <MudRadio Value="4" Color="Color.Info" UnCheckedColor="Color.Default">เงินฝาก</MudRadio>
+                                                                      
                                                                     </MudRadioGroup>
-
+                                                                    <MudSelect @bind-Value="close_type_status" Label="ประเภท" Placeholder="กรุณาเลือกประเภท" Variant="Variant.Outlined" Margin="Margin.Dense">
+                                                                        <MudSelectItem Value="@("ปกติ")">ปกติ</MudSelectItem>
+                                                                        <MudSelectItem Value="@("ยึด")">ยึด</MudSelectItem>
+                                                                        <MudSelectItem Value="@("หนี้สูญ")">หนี้สูญ</MudSelectItem>
+                                                                        <MudSelectItem Value="@("ดำเนินคดี")">ดำเนินคดี</MudSelectItem>
+                                                                        <MudSelectItem Value="@("รอขายทอดตลาด")">รอขายทอดตลาด</MudSelectItem>
+                                                                    </MudSelect>
                                                                     <div class="row">
                                                                         <div class="col-12 text-center">
                                                                             @if (payment_method == 2)
@@ -710,20 +722,20 @@
                                                                     </div>
                                                                     <div>
                                                                         <div class="input-group">
-                                                                            <div class="input-group-text" style="@imporText">ชำระเงินต้น:</div>
+                                                                            <div class="input-group-text" style="@imporText">เงินต้นคงค้าง:</div>
                                                                             <input type="text" class="form-control text-end" value="@paidprincipleAmount.Value.ToString("N0")" style="@boxfieldgreen" disabled>
                                                                         </div>
                                                                     </div>
                                                                     <div>
                                                                         <div class="input-group">
-                                                                            <div class="input-group-text" style="@imporText">ชำระดอกเบี้ย:</div>
+                                                                            <div class="input-group-text" style="@imporText">ดอกเบี้ยคงค้าง:</div>
                                                                             <input type="text" class="form-control text-end" value="@paidinterestAmount.Value.ToString("N0")" style="@boxfieldgreen" disabled>
                                                                         </div>
                                                                     </div>
                                                                     <div>
                                                                         <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">ส่วนต่าง:</div>
-                                                                            <input type="text" class="form-control text-end" value="@_promise_pay.pending_amount.ToString("N0")" style="@boxfieldred" disabled>
+                                                                            <input type="text" class="form-control text-end" value="@_promise_pay.total_deptAmount.ToString("N0")" style="@boxfieldred" disabled>
                                                                         </div>
                                                                     </div>
                                                                    
@@ -810,6 +822,6 @@
     public decimal? paidinterestAmount { get; set; }
     public double? behindhandAmount { get; set; } = 670;
 
-
+    public string close_type_status { get; set; }
 
 }

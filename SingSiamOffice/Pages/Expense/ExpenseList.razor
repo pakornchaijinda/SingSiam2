@@ -321,13 +321,13 @@
         var confirm = await JSRuntime.InvokeAsync<bool>("confirmSaveData");
         if (confirm)
         {
-            var to_confirm = db.TransactionHistories.Where(s => s.TransactionId == id).FirstOrDefault();
+            var to_confirm = db.TransactionHistories.Where(s => s.TransactionId == id).AsNoTracking().FirstOrDefault();
             to_confirm.ConfirmTransection = true;
             try
             {
                 db.Entry(to_confirm).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                var ref_id = db.TransactionHistories.Where(s => s.TransactionId == to_confirm.TransectionIdRef).FirstOrDefault();
+                var ref_id = db.TransactionHistories.Where(s => s.TransactionId == to_confirm.TransectionIdRef).AsNoTracking().FirstOrDefault();
                 ref_id.ConfirmTransection = true;
                 db.Entry(ref_id).State = EntityState.Modified;
                 await db.SaveChangesAsync();

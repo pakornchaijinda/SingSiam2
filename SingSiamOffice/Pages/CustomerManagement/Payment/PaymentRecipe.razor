@@ -1,6 +1,15 @@
 ﻿@page "/paymentrecipe/{peroidtran_id:int}/{type}"
 @* <h3>PaymentRecipe</h3> *@
-
+@using SingSiamOffice.Manage
+@using SingSiamOffice.Models;
+@* <h3>AddExpense</h3> *@
+@using Models;
+@using Microsoft.EntityFrameworkCore;
+@using System.Text;
+@inject ISnackbar Snackbar
+@inject UserLoginService userLoginService
+@using Blazored.LocalStorage
+@inject ILocalStorageService localStorage
 
 <style>
     html,body{
@@ -433,7 +442,7 @@
                 ลงชื่อ..........................................ผู้รับเงิน
             </div>
             <div class="headerSubTitle" style="font-weight:bold; text-align:center;">
-                (  @receipt.receive_by  )
+                (  @userLogin.Fullname  )
             </div>
         </div>
     </div>

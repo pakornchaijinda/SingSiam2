@@ -5,6 +5,10 @@
 @using Microsoft.EntityFrameworkCore;
 @using System.Globalization;
 @using Newtonsoft.Json;
+@inject UserLoginService userLoginService
+@using Blazored.LocalStorage
+@inject ILocalStorageService localStorage
+@inject NavigationManager navigationManager 
 <style>
     html, body {
         background-color: #fff;
@@ -379,7 +383,7 @@
                 ลงชื่อ....................................................ผู้รับเงิน
             </div>
             <div class="headerSubTitle" style="font-weight:bold; text-align:center;">
-                (  @_TransactionHistory.Login.Fullname  )
+                (  @userLogin.Fullname  )
             </div>
             <div class="headerSubTitle" style="font-weight:bold; text-align:center;">
                 @ConvertToThaiDateString(DateTime.Now)
@@ -414,6 +418,7 @@
         public int price { get; set; }
     }
     jsonstring data_json = new jsonstring();
+    Login userLogin = new Login();
     protected override async Task OnInitializedAsync()
     {
         _transectionSlip = db.TransectionSlips.Include(s=>s.TransactionHistory).ThenInclude(s=>s.Login).Where(s => s.TransactionHistoryId == transection_id).FirstOrDefault();
@@ -421,6 +426,23 @@
         data_json = JsonConvert.DeserializeObject<jsonstring>(_transectionSlip.Doc);
         _promise = db.Promises.Include(s=>s.Branch).Include(s=>s.Customer).Where(s => s.Refcode == data_json.refcode).FirstOrDefault();
         thai_text = ConvertToThaiText(data_json.price);
+        try
+        {
+            var auth = await localStorage.GetItemAsync<string>("authToken");
+            if (auth == null)
+            {
+                navigationManager.NavigateTo("/");
+            }
+            else
+            {
+                userLogin = db.Logins.Where(s => s.Username == auth).AsNoTracking().FirstOrDefault();
+            }
+        }
+        catch
+        {
+
+        }
+        StateHasChanged();
     }
     public string ConvertToThaiDateString(DateTime date)
     {
