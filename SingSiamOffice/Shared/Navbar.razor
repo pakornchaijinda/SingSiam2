@@ -22,7 +22,11 @@
         <div class="navbar-nav w-100">
             <NavLink href="/dashboard-admin" class="nav-item nav-link active"><img class="rounded-circle" src="img/icons/dashboard.svg" alt="" style="width:3rem;"> Dashboard</NavLink>
             <NavLink href="/branchManagement-list" class="nav-item nav-link"><img class="rounded-circle" src="img/icons/branches.svg" alt="" style="width:3rem;"> จัดการสาขา</NavLink>
-            <NavLink href="/employee-list" class="nav-item nav-link"><img class="rounded-circle" src="img/icons/backlist.svg" alt="" style="width:3rem;"> จัดการพนักงาน</NavLink>
+            @if (rolename != "หัวหน้า chief")
+            {
+                <NavLink href="/employee-list" class="nav-item nav-link"><img class="rounded-circle" src="img/icons/backlist.svg" alt="" style="width:3rem;"> จัดการพนักงาน</NavLink>
+            }
+           
             <div class="nav-item dropdown">
                 <NavLink href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><img class="rounded-circle" src="img/icons/report.svg" alt="" style="width:3rem;"> รายงาน</NavLink>
                 <div class="dropdown-menu bg-transparent border-0">

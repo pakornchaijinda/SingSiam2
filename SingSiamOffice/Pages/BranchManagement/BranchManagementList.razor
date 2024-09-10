@@ -1,6 +1,10 @@
 ﻿@page "/branchManagement-list"
 @* <h3>BranchManagementList</h3> *@
 @using SingSiamOffice.Models
+@using SingSiamOffice.Manage
+@inject UserLoginService userLoginService
+@using Blazored.LocalStorage
+@inject ILocalStorageService localStorage
 <Navbar></Navbar>
 <!-- Content Start -->
 <div class="content">
@@ -13,8 +17,11 @@
             <div class="col-12 mt-4 mb-4">
                 <MudStack Row="true">
                     <MudText Typo="Typo.h5" Style="@headertext"><img class="rounded-circle" src="img/icons/branches.svg" alt="" style="width:3rem;"> จัดการสาขา</MudText>
-
-                    <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Add" Size="Size.Large" Style="@buttoncolor1" @onclick="()=>AddBranch()">เพิ่มสาขาใหม่</MudButton>
+                    @if (userLogin.RoleId != 9)
+                    {
+                        <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Add" Size="Size.Large" Style="@buttoncolor1" @onclick="()=>AddBranch()">เพิ่มสาขาใหม่</MudButton>
+                    }
+                   
                 </MudStack>
 
             </div>
@@ -88,8 +95,12 @@
                                         </ActivatorContent>
                                         <ChildContent>
                                             <MudMenuItem @onclick="()=>viewBranchInfo(item.Id)"><MudIcon Icon="@Icons.Material.Filled.RemoveRedEye" Title="Add" Color="Color.Info" /> ดูข้อมูล</MudMenuItem>
-                                            <MudMenuItem @onclick="()=>EditBranch(item.Id)"><MudIcon Icon="@Icons.Material.Filled.Edit" Title="Add" Color="Color.Warning" /> แก้ไข</MudMenuItem>
-                                            <MudMenuItem @onclick="()=>delete(item.Id)"><MudIcon Icon="@Icons.Material.Filled.Cancel" Title="Add" Color="Color.Error" /> ลบ</MudMenuItem>
+                                            @if (userLogin.RoleId != 9)
+                                            {
+                                                <MudMenuItem @onclick="()=>EditBranch(item.Id)"><MudIcon Icon="@Icons.Material.Filled.Edit" Title="Add" Color="Color.Warning" /> แก้ไข</MudMenuItem>
+                                                <MudMenuItem @onclick="()=>delete(item.Id)"><MudIcon Icon="@Icons.Material.Filled.Cancel" Title="Add" Color="Color.Error" /> ลบ</MudMenuItem>
+                                            }
+                                           
 
                                         </ChildContent>
                                     </MudMenu>
@@ -121,10 +132,26 @@
 
     List<Branch> list_b = new List<Branch>();
     List<Branch> list_Branch = new List<Branch>();
-
+    Login userLogin = new Login();
     SingSiamOffice.Models.SingsiamdbContext db = new SingSiamOffice.Models.SingsiamdbContext();
     protected override async Task OnInitializedAsync()
     {
+        try
+        {
+            var auth = await localStorage.GetItemAsync<string>("authToken");
+            if (auth == null)
+            {
+                navigationManager.NavigateTo("/");
+            }
+            else
+            {
+                userLogin = db.Logins.Where(s => s.Username == auth).FirstOrDefault();
+            }
+        }
+        catch
+        {
+            navigationManager.NavigateTo("/");
+        }
         list_b =  db.Branches.Where(s=>s.IsActive == true).ToList();
         list_Branch = list_b;
     }

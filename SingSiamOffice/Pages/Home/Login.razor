@@ -101,7 +101,7 @@
                 try
                 {
 
-                   
+
                     var brach = db.Logins.Where(s => s.Username == userLogin).Include(s => s.Branch).FirstOrDefault();
                     globalData.username = username;
                     globalData.fullname = brach.Fullname;
@@ -188,9 +188,9 @@
             }
             else
             {
-                
+
             }
-            if (result.RoleName == "Admin")
+            if (result.RoleName == "Admin" || result.RoleName == "หัวหน้า chief")
             {
                 eventLog.Update_by = await _userManager.GetUserId(username);
                 NavManager.NavigateTo("/dashboard-admin", true);
