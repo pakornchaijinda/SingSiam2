@@ -189,9 +189,9 @@
             }
             else
             {
-                
+
             }
-            if (result.RoleName == "Admin")
+            if (result.RoleName == "Admin" || result.RoleName == "หัวหน้า chief")
             {
                 eventLog.Update_by = await _userManager.GetUserId(username);
                 NavManager.NavigateTo("/dashboard-admin", true);

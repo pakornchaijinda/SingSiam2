@@ -41,9 +41,16 @@ namespace SingSiamOffice.Pages.Dashboard
         private async void moneyCalculate()
         {
             //navigationManager.NavigateTo($"/moneycalculator");
+            try
+            {
+                string url = $"/moneycalculator/";
+                await JSRuntime.InvokeAsync<object>("open", url, "_blank");
+            }
+            catch
+            {
 
-            string url = $"/moneycalculator/";
-            await JSRuntime.InvokeAsync<object>("open", url, "_blank");
+            }
+          
 
         }
      
