@@ -379,11 +379,16 @@
                                 </div>
                             <div class="col-8 text-center" >
                                     <h3>นับเงินสด</h3>
-                                    <h3 style="color:#840012;">@cal_total_bath.ToString("N0")</h3>
+                                    
                                     @if (cal_total_bath == total_3)
                                     {
-                                        <MudButton Variant="Variant.Filled" Style="@buttoncolor1" @onclick="()=>Fillter()">ปิดยอดประจำวัน</MudButton>
-                                    }
+                                    <h3 style="color:#145a32;">@cal_total_bath.ToString("N0")</h3>
+                                    <MudButton Variant="Variant.Filled" Style="@buttoncolor1" @onclick="()=>Fillter()">ปิดยอดประจำวัน</MudButton>
+                                }
+                                else
+                                {
+                                    <h3 style="color:#840012;">@cal_total_bath.ToString("N0")</h3>
+                                }
                             </div>
                            
                         </div>
