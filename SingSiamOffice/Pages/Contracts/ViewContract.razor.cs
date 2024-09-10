@@ -228,7 +228,7 @@ namespace SingSiamOffice.Pages.Contracts
         }
         private void goBack(int branch_id)
         {
-            navigationManager.NavigateTo($"/customerlist/{branch_id}/{c_id}");
+            navigationManager.NavigateTo($"/customerlist/{_customer.BranchId}/{_customer.CustomerId}");
         }
     }
 }

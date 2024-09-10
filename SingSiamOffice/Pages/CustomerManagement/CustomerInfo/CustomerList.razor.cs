@@ -88,34 +88,14 @@ namespace SingSiamOffice.Pages.CustomerManagement.CustomerInfo
 
                 if (user.Identity.IsAuthenticated)
                 {
-                    list_customer = await managements.GetCustomerbyBranch(b_id);
+                    //list_customer = await managements.GetCustomerbyBranch(b_id);
+                    //list_customer = await managements.GetCustomerAll();
                 }
                 await JSRuntime.InvokeVoidAsync("sideBar");
             }
         }
         Login userLogin = new Login();
-        protected override async void OnInitialized()
-        {
-            try
-            {
-                var auth = await localStorage.GetItemAsync<string>("authToken");
-                if (auth == null)
-                {
-                    navigationManager.NavigateTo("/");
-                }
-                else
-                {
-                    userLogin = db.Logins.Where(s => s.Username == auth).FirstOrDefault();
-                }
-            }
-            catch
-            {
-                navigationManager.NavigateTo("/");
-            }
-
-            list_customer = await managements.GetCustomerbyBranch(b_id);
-            
-        }
+        
 
 
         private string[] search_category = {

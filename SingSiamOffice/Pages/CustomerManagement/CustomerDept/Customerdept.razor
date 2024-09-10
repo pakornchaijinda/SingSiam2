@@ -218,7 +218,7 @@
             }
             else
             {
-                userLogin = db.Logins.Where(s => s.Username == auth).FirstOrDefault();
+                userLogin = db.Logins.Where(s => s.Username == auth).FirstOrDefault(); 
             }
         }
         catch

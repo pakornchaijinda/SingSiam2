@@ -13,7 +13,7 @@
     <div class="container-fluid mt-4 mb-4">
         <div class="row">
             <div class="col-md-6 pb-3">
-                <MudText Typo="Typo.h5" Style="@headertext"><img class="rounded-circle" src="img/icons/customer.svg" alt="" style="width:2rem;"> ข้อมูลลูกค้าประจำสาขา :@b_info.Code @b_info.BranchName | @b_info.BranchCode</MudText>
+                <MudText Typo="Typo.h5" Style="@headertext"><img class="rounded-circle" src="img/icons/customer.svg" alt="" style="width:2rem;"> ข้อมูลลูกค้าประจำสาขา </MudText>
             </div>
             <div class="col-md-6 text-end">
                 @* <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Add" Size="Size.Large" Style="@buttoncolor1" @onclick="()=>addCustomer(b_id)">เพิ่มลูกค้า</MudButton> *@
@@ -32,7 +32,7 @@
 
                     </div>
                     <div class="col-lg-5 col-md-5  col-sm-12 pb-3">
-                        <MudAutocomplete T="Customer" Label="กรอกเลขบัตรหรือชื่อที่ต้องการค้นหา" @bind-Value="selectCustomer" Margin="Margin.Dense" ToStringFunc="@(e=> e==null?null : $"{e.NatId} | {e.FullName}")" SearchFunc="@SearchValue" Variant="Variant.Outlined" />
+                        <MudAutocomplete T="Customer" Label="กรอกเลขบัตรหรือชื่อที่ต้องการค้นหา" @bind-Value="selectCustomer" Margin="Margin.Dense" ToStringFunc="@(e=> e==null?null : $"{e.NatId} | {e.FullName} | สาขา: {e.Branch.Code}")" SearchFunc="@SearchValue" Variant="Variant.Outlined" />
 
                     </div>
                    
@@ -126,12 +126,14 @@
                                                             <a href="@data.LocationLink" target="_blank">ดูแผนที่</a>
                                                         </MudStack>
                                                     </div>
-                                                    <div class="col-4 pb-3 text-center">
-                                                      @*   <MudText Typo="Typo.body1" Style="@imporText">ลบข้อมูลลูกค้า</MudText> *@
-                                                      @*   <MudButton Variant="Variant.Outlined"  Size="Size.Large" Style="@buttoncolor2" @onclick="()=>remove(data.CustomerId)"></MudButton> *@
-                                                        <MudButton Variant="Variant.Outlined" DisableElevation="true" Color="Color.Error" @onclick="()=>remove(data.CustomerId)">ลบข้อมูลลูกค้า</MudButton>
-                                                    
-                                                    </div>
+
+                                                    @if (userLogin.RoleId != 3)
+                                                    {
+                                                        <div class="col-4 pb-3 text-center">
+                                                            <MudButton Variant="Variant.Outlined" DisableElevation="true" Color="Color.Error" @onclick="()=>remove(data.CustomerId)">ลบข้อมูลลูกค้า</MudButton>
+                                                        </div>
+                                                    }
+                                                  
                                                 </div>
                                             </div>
                                         </div>
@@ -215,7 +217,12 @@
                                                                                     <ul class="dropdown-menu" aria-labelledby="contractdropdown">
                                                                                         <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>viewContract( items.CustomerId,items.Id,items.BranchId)">ดูข้อมูลสัญญา</a></li>
                                                                                         <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>printContract(items.Id)">พิมพ์สัญญา</a></li>
-                                                                                        <li><a style="cursor:pointer; background-color:red; color:#fff;" class="dropdown-item" @onclick="()=>deleteContract(items.Id)">ลบสัญญา</a></li>
+                                                                                      
+                                                                                        @if (userLogin.RoleId != 3)
+                                                                                        {
+                                                                                            <li><a style="cursor:pointer; background-color:red; color:#fff;" class="dropdown-item" @onclick="()=>deleteContract(items.Id)">ลบสัญญา</a></li>
+                                                                                        }
+
                                                                                     </ul>
                                                                                 </div>
 
@@ -226,7 +233,11 @@
                                                                                     <ul class="dropdown-menu" aria-labelledby="paymentdropdown">
                                                                                         <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>goPayment(items.CustomerId,items.Id,items.BranchId)">ชำระค่างวด</a></li>
                                                                                         <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>printPaymentDetail(items.Id)">พิมพ์รายละเอียด</a></li>
-                                                                                        <li><a style="cursor:pointer; background-color:red; color:#fff;" class="dropdown-item" @onclick="()=>canclePayment(items.Id)">ยกเลิกใบเสร็จ</a></li>
+                                                                                        @if (userLogin.RoleId != 3)
+                                                                                        {
+                                                                                            <li><a style="cursor:pointer; background-color:red; color:#fff;" class="dropdown-item" @onclick="()=>canclePayment(items.Id)">ยกเลิกใบเสร็จ</a></li>
+                                                                                        }
+                                                                                       
 
                                                                                     </ul>
                                                                                 </div>
@@ -296,9 +307,25 @@
     protected override async Task OnInitializedAsync()
     {
 
+        try
+        {
+            var auth = await localStorage.GetItemAsync<string>("authToken");
+            if (auth == null)
+            {
+                navigationManager.NavigateTo("/");
+            }
+            else
+            {
+                userLogin = db.Logins.Where(s => s.Username == auth).FirstOrDefault();
+            }
+        }
+        catch
+        {
+            navigationManager.NavigateTo("/");
+        }
 
         b_info = db.Branches.Where(s => s.IsActive == true && s.Id == b_id).FirstOrDefault();
-        list_customer = db.Customers.Where(s => s.BranchId == b_id).ToList();
+        list_customer = await managements.GetCustomerAll();
 
         if (cus_id!=null)
         {
@@ -310,13 +337,14 @@
                 data.Sum_Externalar = db.Externalars.Where(s => s.PromiseId == data.Id && s.PaidComplete == false).Sum(s => s.Aramount).Value;
             }
 
-            StateHasChanged();
+           
         }
         foreach (var data in list_customer)
         {
             _expandedStates[data.CustomerId] = true; // You can set initial state as desired
 
         }
+        StateHasChanged();
     }
 
     List<int> Sections = new List<int> { 1, 2, 3 }; // Example dynamic range of sections
@@ -374,18 +402,19 @@
 
         return isBlacklisted;
     }
-   
-    private void reset()
+
+    private async void reset()
     {
         selectCustomer = null;
         // b_info = db.Branches.Where(s => s.IsActive == true).FirstOrDefault();
-        list_customer = db.Customers.Where(s => s.BranchId == b_id).ToList();
+        list_customer = await managements.GetCustomerAll();
         list_customer_show.Clear();
         foreach (var data in list_customer)
         {
             _expandedStates[data.CustomerId] = false; // You can set initial state as desired
 
         }
+        StateHasChanged();
     }
     private async Task<IEnumerable<Customer>> SearchValue(string value)
     {

@@ -250,7 +250,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.CustomerInfo
 
         private void goBack()
         {
-            navigationManager.NavigateTo("/customerlist/"+b_id.ToString()+"/" + c_id.ToString());
+            navigationManager.NavigateTo("/customerlist/"+ edit_cuc.BranchId.ToString()+"/" + c_id.ToString());
         }
 
 

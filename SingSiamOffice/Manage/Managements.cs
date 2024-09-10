@@ -183,6 +183,12 @@ namespace SingSiamOffice.Manage
 
             return customer;
         }
+        public async Task<List<Customer>> GetCustomerAll()
+        {
+            var customer = db.Customers.AsNoTracking().Include(s => s.Branch).Where(s =>  s.Status == 1).ToList();
+
+            return customer;
+        }
         public async Task<bool> Check_Customer_Backlist(string natId)
         {
 
