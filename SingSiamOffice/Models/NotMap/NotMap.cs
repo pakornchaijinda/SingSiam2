@@ -94,6 +94,11 @@ namespace SingSiamOffice.Models
         [NotMapped]
         public bool ck_receipt { get; set; }
     }
+    public partial class TransactionHistory 
+    {
+        [NotMapped]
+        public string refcodetrans { get; set; }
+    }
     public partial class Receipttran 
     {
         [NotMapped]

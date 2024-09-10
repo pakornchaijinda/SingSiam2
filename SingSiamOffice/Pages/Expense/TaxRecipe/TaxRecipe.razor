@@ -311,91 +311,94 @@
 
 <!-- START RECEIPT -->
 <div id="printableArea" class="receipt">
-
-    <div class="headerSubTitle" style="text-align: center;">
-        <img src="img/icons/SingCircle.png" alt="" style="width:8rem;">
-    </div>
-
-    <div class="headerTitle">
-        บริษัท สิงห์สยาม ลิสซิ่ง จำกัด
-    </div>
-    <div class="headerTitle">
-        เลขประจำตัวผู้เสียภาษี 0365561000591
-    </div>
-    <div class="headerTitle">
-        ใบเสร็จรับเงิน
-    </div>
-    <div class="row">
-        <div class="col-12 text-center">
-            <MudStack Row="true" Spacing="2">
-                <div class="headerSubTitle">
-                    วันที่:@FormatThaiYear_str(data_json.tdec);
-                </div>
-                <div class="headerSubTitle">
-                    บิลเลขที่: @_TransactionHistory.TransectionRef
-                </div>
-            </MudStack>
+    @if (_transectionSlip != null)
+    {
+        <div class="headerSubTitle" style="text-align: center;">
+            <img src="img/icons/SingCircle.png" alt="" style="width:8rem;">
         </div>
-    </div>
-    <div class="headerSubTitle">
-        สาขา: @_promise.Branch.BranchName
-    </div>
-    <div class="headerSubTitle">
-        ชื่อ-นามสกุล:  บริษัท สิงห์สยาม ลิสซิ่ง จำกัด
-    </div>
- 
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">รายการ</th>
-                <th class="text-end" scope="col">รวมเงิน</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="text-start"> @data_json.detail</td>
-                <td class="text-end">@data_json.price.ToString("N0")</td>
-            </tr>
-           
-        
-        </tbody>
-    </table>
+        <div class="headerTitle">
+            บริษัท สิงห์สยาม ลิสซิ่ง จำกัด
+        </div>
+        <div class="headerTitle">
+            เลขประจำตัวผู้เสียภาษี 0365561000591
+        </div>
+        <div class="headerTitle">
+            ใบเสร็จรับเงิน
+        </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                <MudStack Row="true" Spacing="2">
+                    <div class="headerSubTitle">
+                        วันที่:@FormatThaiYear_str(data_json.tdec);
+                    </div>
+                    <div class="headerSubTitle">
+                        บิลเลขที่: @_TransactionHistory.TransectionRef
+                    </div>
+                </MudStack>
+            </div>
+        </div>
+        <div class="headerSubTitle">
+            สาขา: @_promise.Branch.BranchName
+        </div>
+        <div class="headerSubTitle">
+            ชื่อ-นามสกุล:  บริษัท สิงห์สยาม ลิสซิ่ง จำกัด
+        </div>
 
 
-    <div class="row">
-        <div class="col-12 text-center">
-            <div class="row">
-                <div class="col-12 text-end">
-                    <div class="headerSubTitle text-end" style="font-weight:bold; text-align:end;">
-                        รวมเงิน: @data_json.price.ToString("N0") บาท
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">รายการ</th>
+                    <th class="text-end" scope="col">รวมเงิน</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-start"> @data_json.detail</td>
+                    <td class="text-end">@data_json.price.ToString("N0")</td>
+                </tr>
+
+
+            </tbody>
+        </table>
+
+
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="row">
+                    <div class="col-12 text-end">
+                        <div class="headerSubTitle text-end" style="font-weight:bold; text-align:end;">
+                            รวมเงิน: @data_json.price.ToString("N0") บาท
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="headerSubTitle" style="font-weight:bold; text-align:center;">
-                = @thai_text =
-            </div>
-            <hr class="line" />
+                <div class="headerSubTitle" style="font-weight:bold; text-align:center;">
+                    = @thai_text =
+                </div>
+                <hr class="line" />
 
-            <br />
-            <div class="headerSubTitle" style="font-weight:bold; text-align:center;">
-                ลงชื่อ....................................................ผู้รับเงิน
-            </div>
-            <div class="headerSubTitle" style="font-weight:bold; text-align:center;">
-                (  @userLogin.Fullname  )
-            </div>
-            <div class="headerSubTitle" style="font-weight:bold; text-align:center;">
-                @ConvertToThaiDateString(DateTime.Now)
+                <br />
+                <div class="headerSubTitle" style="font-weight:bold; text-align:center;">
+                    ลงชื่อ....................................................ผู้รับเงิน
+                </div>
+                <div class="headerSubTitle" style="font-weight:bold; text-align:center;">
+                    (  @userLogin.Fullname  )
+                </div>
+                <div class="headerSubTitle" style="font-weight:bold; text-align:center;">
+                    @ConvertToThaiDateString(DateTime.Now)
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- Items Purchased -->
-    @*   <div class="keepIt">
+        <!-- Items Purchased -->
+        @*   <div class="keepIt">
     Keep your receipt!
     </div> *@
 
+    }
+    
 </div>
 @code {
     int thaiYear = DateTime.Now.Year + 543;
@@ -417,6 +420,7 @@
         public string tdec { get; set; }
         public int price { get; set; }
         public string detail { get; set; }
+        public string refcodetrans { get; set; }
     }
     jsonstring data_json = new jsonstring();
     Login userLogin = new Login();
@@ -425,7 +429,7 @@
         _transectionSlip = db.TransectionSlips.Include(s=>s.TransactionHistory).ThenInclude(s=>s.Login).Where(s => s.TransactionHistoryId == transection_id).FirstOrDefault();
         _TransactionHistory = _transectionSlip.TransactionHistory;
         data_json = JsonConvert.DeserializeObject<jsonstring>(_transectionSlip.Doc);
-        _promise = db.Promises.Include(s=>s.Branch).Include(s=>s.Customer).Where(s => s.Refcode == data_json.refcode).FirstOrDefault();
+        _promise = db.Promises.Include(s => s.Branch).Include(s => s.Customer).Where(s => s.Refcode == data_json.refcodetrans).FirstOrDefault();
         thai_text = ConvertToThaiText(data_json.price);
         try
         {

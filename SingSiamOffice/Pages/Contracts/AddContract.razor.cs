@@ -795,7 +795,7 @@ namespace SingSiamOffice.Pages.Contracts
                 }
 
                 RefAccNoCode = await Managements.Get_Ref_AccCode(b.BranchId);
-                string TaxDetail = _customer.FullName + " " + b.Refcode + " " + b.Chargeamt.ToString();
+                string TaxDetail = _customer.FullName + " " + b.Refcode;
                 TransactionHistory toAdd = new TransactionHistory()
                 {
                     Price = Convert.ToInt32(b.Chargeamt),
@@ -803,7 +803,7 @@ namespace SingSiamOffice.Pages.Contracts
                     Detial = TaxDetail,
                     LoginId = globalData.login_id,
                     TransectionRef = RefAccNoCode,
-                    
+                    refcodetrans = b.Refcode,
                 };
 
                 var transactionhistory = await promiseManagement.addTaxPromise(toAdd);

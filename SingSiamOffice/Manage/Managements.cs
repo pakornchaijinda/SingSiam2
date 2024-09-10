@@ -251,7 +251,7 @@ namespace SingSiamOffice.Manage
             var branch_info = db.Branches.AsNoTracking().Where(s => s.Id == branch_id).FirstOrDefault();
 
                 next_no = (int)branch_info.Accdocno + 1;
-                string numberPart =branch_info.Code+"."+next_no.ToString("D4");
+                string numberPart =branch_info.Code+"."+next_no.ToString("D7");
                 result = numberPart;
             
 

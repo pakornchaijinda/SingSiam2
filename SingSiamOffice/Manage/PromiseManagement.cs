@@ -50,6 +50,7 @@ namespace SingSiamOffice.Manage
                 tdec = DateTime.Now.ToString("dd/MM/yyyy"),
                 price = items.Price,
                 detail = items.Detial,
+                refcodetrans = items.refcodetrans,
             };
             string jsonString = JsonConvert.SerializeObject(data);
             var new_add = new TransectionSlip();
