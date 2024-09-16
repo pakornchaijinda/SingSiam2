@@ -222,9 +222,9 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
         public string pending_totalpayment { get; set; }   
         
         //ยอดที่ต้องชำระ
-        public decimal? total_deptAmount { get; set; }
+        public string? total_deptAmount { get; set; }
         //ยอดรับฝากเงิน
-        public decimal? total_deposit { get; set; }
+        public string? total_deposit { get; set; }
         
           
 
@@ -261,8 +261,8 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                 _promise_pay.total_deptAmount = 0;
                 _promise_pay.pending_amount = 0;
             }
-            total_deptAmount = _promise_pay.total_deptAmount;
-            total_deposit = _promise_pay.total_deposit;
+            total_deptAmount = _promise_pay.total_deptAmount.ToString("N0");
+            total_deposit = _promise_pay.total_deposit.ToString("N0");
             totalFee = _promise_pay.total_fee;
             totalFee_Old = _promise_pay.total_fee;
             var receipt = await managements.Get_Receipt_No(branch_id, "receipt");
