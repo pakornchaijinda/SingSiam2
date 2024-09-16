@@ -412,6 +412,8 @@
     TransactionHistory receipt = new TransactionHistory();
     [Inject]
     IJSRuntime JSRuntime { get; set; }
+    [Inject]
+    Helpers.NumberToText numberToText { get; set; }
     double sum_price = 0;
     string thai_text = "";
     public class jsonstring
@@ -430,7 +432,7 @@
         _TransactionHistory = _transectionSlip.TransactionHistory;
         data_json = JsonConvert.DeserializeObject<jsonstring>(_transectionSlip.Doc);
         _promise = db.Promises.Include(s => s.Branch).Include(s => s.Customer).Where(s => s.Refcode == data_json.refcodetrans).FirstOrDefault();
-        thai_text = ConvertToThaiText(data_json.price);
+        thai_text = await numberToText.ConvertNumberToThaiWords(data_json.price);
         try
         {
             var auth = await localStorage.GetItemAsync<string>("authToken");
