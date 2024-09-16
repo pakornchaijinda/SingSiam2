@@ -219,7 +219,16 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
         private Periodtran _promise_pay = new Periodtran();
         private decimal? intplus { get; set; } = 0;
         private decimal? discount { get; set; } = 0;
-        public string pending_totalpayment { get; set; }    
+        public string pending_totalpayment { get; set; }   
+        
+        //ยอดที่ต้องชำระ
+        public decimal? total_deptAmount { get; set; }
+        //ยอดรับฝากเงิน
+        public decimal? total_deposit { get; set; }
+        
+          
+
+
         private string ReceiptNo { get; set; } = "";
         int activeIndex = 0;
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -252,6 +261,8 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                 _promise_pay.total_deptAmount = 0;
                 _promise_pay.pending_amount = 0;
             }
+            total_deptAmount = _promise_pay.total_deptAmount;
+            total_deposit = _promise_pay.total_deposit;
             totalFee = _promise_pay.total_fee;
             totalFee_Old = _promise_pay.total_fee;
             var receipt = await managements.Get_Receipt_No(branch_id, "receipt");

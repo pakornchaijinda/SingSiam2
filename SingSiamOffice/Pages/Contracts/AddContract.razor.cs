@@ -816,7 +816,7 @@ namespace SingSiamOffice.Pages.Contracts
 
                     await Task.Delay(100);
 
-                    navigationManager.NavigateTo($"/customerlist/{_customer.CustomerId}");
+                    navigationManager.NavigateTo($"/customerlist/{_customer.BranchId}/{_customer.CustomerId}");
                 }
 
               

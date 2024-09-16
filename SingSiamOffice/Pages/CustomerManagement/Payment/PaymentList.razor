@@ -583,13 +583,13 @@
                                                                     <div>
                                                                         <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">ยอดที่ต้องชำระ  :</div>
-                                                                            <input type="text" class="form-control text-end" value="@_promise_pay.total_deptAmount.ToString("N0")" style="@boxfieldred" disabled>
+                                                                            <input type="text" class="form-control text-end" value="@total_deptAmount..ToString("N0")" style="@boxfieldred" disabled>
                                                                         </div>
                                                                     </div>
                                                                     <div>
                                                                         <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">ยอดรับฝากเงิน  :</div>
-                                                                            <input type="text" class="form-control text-end" value="@_promise_pay.total_deposit.ToString("N0")" style="@boxfieldgreen" disabled>
+                                                                            <input type="text" class="form-control text-end" value="@total_deposit.Value.ToString("N0")" style="@boxfieldgreen" disabled>
                                                                         </div>
                                                                     </div>
 
@@ -735,7 +735,7 @@
                                                                     <div>
                                                                         <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">ส่วนต่าง:</div>
-                                                                            <input type="text" class="form-control text-end" value="@_promise_pay.total_deptAmount.ToString("N0")" style="@boxfieldred" disabled>
+                                                                            <input type="text" class="form-control text-end" value="@total_deptAmount.Value.ToString("N0")" style="@boxfieldred" disabled>
                                                                         </div>
                                                                     </div>
                                                                    
