@@ -164,7 +164,11 @@
                                                         <ChildContent>
                                                             
                                                             <MudMenuItem @onclick="()=>ViewExpense(data.TransactionId)">ดูข้อมูล</MudMenuItem>
-                                                            <MudMenuItem @onclick="()=>delete(data.TransactionId)">ลบ</MudMenuItem>
+                                                            @if (data.SubjectId != 4 && data.SubjectId == 21)
+                                                            {
+                                                                <MudMenuItem @onclick="()=>delete(data.TransactionId)">ลบ</MudMenuItem>
+                                                            }
+                                                           
 
                                                             @if (data.SubjectId == 21)
                                                             {
