@@ -9,7 +9,9 @@
 @using SingSiamOffice.Manage
 @inject NavigationManager NavManager
 @inject NavigationManager NavigationManager
-
+@using Blazored.LocalStorage
+@inject ILocalStorageService localStorage
+@using Microsoft.EntityFrameworkCore;
 <div class="sidebar pe-4 pb-3">
     <nav class="navbar bg-light navbar-light">
         <NavLink href="@DashboardHref" class="navbar-brand mx-4 mb-3">
@@ -58,8 +60,18 @@
 
     [Inject]
     NavigationManager navigationManager { get; set; }
+
+    public int brach_id;
+    string DashboardHref { get; set; }
+    string AddCustomer => "/add-customer/" + brach_id.ToString();
+    string CustomerListHref => "/customerlist/" + brach_id.ToString() + "/";
+    string BlacklistHref => "/blacklist_list/" + brach_id.ToString();
+    string DeptCollectionHref => "/deptcollection-list/" + brach_id.ToString();
+    string ExpenseListHref => "/expense-list/" + brach_id.ToString();
+    string paymentdeleteHref => "/deletepayment/" + brach_id.ToString();
     protected override async Task OnInitializedAsync()
     {
+
         var authenticationState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authenticationState.User;
         //auth = await authenticationStateTask;
@@ -78,28 +90,35 @@
             }
 
         }
-        brach_id = branchService.branch_ID;
-        if (brach_id == 0)
+        var auth = await localStorage.GetItemAsync<string>("authToken");
+        if (auth == null)
         {
             navigationManager.NavigateTo("/");
         }
+        else
+        {
+            Models.Login userLogin = db.Logins.Where(s => s.Username == auth).AsNoTracking().FirstOrDefault();
+            brach_id = userLogin.BranchId;
+            if (userLogin.RoleId != 3)
+            {
+                DashboardHref = "/dashboard-admin/";
+            }
+            else
+            {
+                DashboardHref = "/dashboard/" + brach_id.ToString();
+            }
+        }
+        // brach_id = branchService.branch_ID;
+        // if (brach_id == 0)
+        // {
+        //     navigationManager.NavigateTo("/");
+        // }
 
     }
 
 
 
-    public int brach_id;
-
-
-
-    // Properties to store dynamic href values
-    string DashboardHref => "/dashboard/" + brach_id.ToString();
-    string AddCustomer => "/add-customer/" + brach_id.ToString();
-    string CustomerListHref => "/customerlist/" + brach_id.ToString()+"/";
-    string BlacklistHref => "/blacklist_list/" + brach_id.ToString();
-    string DeptCollectionHref => "/deptcollection-list/" + brach_id.ToString();
-    string ExpenseListHref => "/expense-list/" + brach_id.ToString();
-    string paymentdeleteHref => "/deletepayment/" + brach_id.ToString();
+   
   
 }
 

@@ -90,10 +90,30 @@ namespace SingSiamOffice.Pages.BranchManagement
         }
 
 
-        private void viewBranch(int brach_id)
+        private async Task viewBranch(int brach_id)
         {
-           
-            navigationManager.NavigateTo("/customerlist/"+ brach_id.ToString());
+            var auth = await localStorage.GetItemAsync<string>("authToken");
+            if (auth == null)
+            {
+                navigationManager.NavigateTo("/");
+            }
+            else
+            {
+                Models.Login userLogin = db.Logins.Where(s => s.Username == auth).AsNoTracking().FirstOrDefault();
+                if (userLogin.BranchId == brach_id)
+                {
+
+                }
+                else
+                {
+                    userLogin.BranchId = brach_id;
+                    db.Entry(userLogin).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                }
+
+               
+            }
+            navigationManager.NavigateTo("/dashboard/" + brach_id.ToString());
         }
 
     }

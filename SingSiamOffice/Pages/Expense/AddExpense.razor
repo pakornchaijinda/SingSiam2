@@ -159,7 +159,7 @@
                         {
 
                             <div class="row">
-                                @if(subject_Id != 9 && subject_Id != 10 ){
+                                @if(subject_Id != 9 && subject_Id != 10  && subject_Id!=8){
                                     <div class="col-md-12 pb-3">
                                         <MudRadioGroup @bind-Value="@Paytype">
                                             <MudRadio Value="1" Color="Color.Primary"> เงินสด</MudRadio>
@@ -194,7 +194,10 @@
 
                                             break;
 
+                                        case 16:
+                                            <MudNumericField @bind-Value="amount" Label="จำนวนเงิน" Variant="Variant.Outlined" Margin="Margin.Dense" Adornment="Adornment.End" Min="0" Max="300" AdornmentText="ไม่เกิน 300" AdornmentColor="Color.Error"></MudNumericField>
 
+                                            break;
                                         // Default case if needed
                                         default:
                                             <MudTextField @bind-Value="amount" Label="จำนวนเงิน" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>

@@ -451,7 +451,7 @@
     {
 
 
-        branchService.branch_ID = b_id;
+       // branchService.branch_ID = b_id;
         b_info = db.Branches.Where(s => s.Id == b_id).FirstOrDefault();
         list_transection = db.TransactionHistories.Include(s => s.Subject).Include(s => s.Login).Where(s => s.BranchId == b_id).AsNoTracking().OrderByDescending(s => s.CreateAt).ToList();
         //remove transection not confirm

@@ -67,7 +67,7 @@ namespace SingSiamOffice.Pages.Expense
                     var Add_expren = new TransactionHistory();
                     if (subject_Id == 4) //โอนเงินไปสาขาอื่น
                     {
-                        description = description1 + " โอนเงินให้กับสาขา: " + selectBranch.BranchCode + " | " + selectBranch.BranchName;
+                        description = description1 + " โอนเงินให้กับสาขา: " + selectBranch.BranchName + " | " + selectBranch.BranchName;
                         Add_expren = new TransactionHistory()
                         {
                             BranchId = id,
@@ -93,7 +93,7 @@ namespace SingSiamOffice.Pages.Expense
                             CreateAt = DateTime.Now,
                             LoginId = userLogin.Id,
                             ConfirmTransection = false,
-                            Detial = description1+ " ได้รับเงินโอนเงินจากสาขา: " + my_b.BranchCode + " | " + my_b.BranchName,
+                            Detial = description1+ " ได้รับเงินโอนเงินจากสาขา: " + my_b.BranchName + " | " + my_b.BranchName,
                             TransectionIdRef = Add_expren.TransactionId,
                             PaymentMethod = 2
                         };
@@ -174,6 +174,10 @@ namespace SingSiamOffice.Pages.Expense
                     }
                     else
                     {
+                        if (subject_Id==8)
+                        {
+                            Paytype = 2;
+                        }
                          Add_expren = new TransactionHistory()
                         {
                             BranchId = id,

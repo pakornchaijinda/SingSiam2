@@ -6,6 +6,7 @@
 @using Blazored.LocalStorage
 @inject ILocalStorageService localStorage
 @inject Manage.BranchService branchService
+@using Microsoft.EntityFrameworkCore
 <Navbar2></Navbar2>
 <!-- Content Start -->
 <div class="content">
@@ -88,7 +89,7 @@
                                                     <div class="col-4 pb-3 text-center">
                                                         <MudStack>
                                                             <MudText Typo="Typo.body1" Style="@imporText">ชื่อ - สกุล</MudText>
-                                                            <MudText Typo="Typo.body1">@data.FullName</MudText>
+                                                            <MudText Typo="Typo.body1">@data.FullName ลูกค้าประจำสาขา @data.Branch.BranchName</MudText>
                                                         </MudStack>
                                                     </div>
                                                     <div class="col-4 pb-3 text-center">
@@ -133,6 +134,7 @@
                                                         <div class="col-4 pb-3 text-center">
                                                             <MudButton Variant="Variant.Outlined" DisableElevation="true" Color="Color.Error" @onclick="()=>remove(data.CustomerId)">ลบข้อมูลลูกค้า</MudButton>
                                                         </div>
+                                                        
                                                     }
                                                   
                                                 </div>
@@ -144,7 +146,11 @@
                                                     <MudText Typo="Typo.body1">เมนูจัดการ</MudText>
                                                     <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Edit" Size="Size.Large" Color="Color.Error" @onclick="()=>editCustomer(data.CustomerId)">แก้ไขข้อมูลส่วนตัว</MudButton>
                                                     <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.PostAdd" Size="Size.Large" Color="Color.Error" @onclick="()=>addContract(data.CustomerId,b_id)" Disabled="ck_customer_branch">เพิ่มสัญญา</MudButton>
-
+                                                     @if (userLogin.RoleId != 3)
+                                                    {
+                                                        <MudButton Variant="Variant.Outlined" DisableElevation="true" Color="Color.Error" @onclick="()=>changebranch(data.CustomerId)">ย้ายสาขา</MudButton>
+                                                    }
+                                                    
                                                 </MudStack>
                                             </div>
                                         </div>
@@ -196,11 +202,11 @@
                                                                         <td>@items.Tdate</td>
                                                                         @if (items.ContractType == 1)
                                                                         {
-                                                                            <td>ค่าประกันหนี้</td>
+                                                                            <td>ไฟแนนท์</td>
                                                                         }
                                                                         else
                                                                         {
-                                                                            <td>สัญญาไฟแนนท์</td>
+                                                                            <td>สัญญาเงินกู้</td>
                                                                         }
                                                                         <td>@items.Refcode</td>
                                                                         <td>@items.Product.Name</td>
@@ -279,7 +285,32 @@
     </div>
 </div>
 
+<MudDialog @bind-IsVisible="changebranch_" Options="dialogOptions">
+    <TitleContent>
+        <MudText Typo="Typo.h5" Style="@headertext"><img class="rounded-circle" src="img/icons/research.svg" alt="" style="width:3rem;"> ทำเรื่องย้ายสาขา</MudText>
+    </TitleContent>
+    <DialogContent>
+        <div class="container-fluid mt-4 mb-4">
+            <p>สาขาเดิมของลูกค้า: @cus_for_change.Branch.BranchName</p>
+            <div class="card inner-card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <MudText Typo="Typo.body1">พิมพ์เพือค้นหาจากชื่อหรือรหัสสาขา <span style="color:red;">*</span></MudText>
+                            <MudAutocomplete T="Branch" @bind-Value="selectBranch" SearchFunc="@SearchBranch" ToStringFunc="@(e=> e==null?null : $"{e.BranchName} | {e.BranchCode}")" Margin="Margin.Dense" Variant="Variant.Outlined" Style="background-color:#fff;" />
+                        </div>
+                        <div class="col-md-12 pb-3 text-center">
+                            <MudButton Variant="Variant.Outlined" Size="Size.Large" Color="Color.Error" @onclick="()=>cancel()">กลับ</MudButton>
+                            <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Edit" Size="Size.Large" Style="@buttoncolor1" @onclick="()=>editbranch()">แก้ไขข้อมูล</MudButton>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          
+        </div>
+    </DialogContent>
 
+</MudDialog>
 
 
 
@@ -300,7 +331,7 @@
     public int? cus_id { get; set; }
 
     SingSiamOffice.Models.SingsiamdbContext db = new SingSiamOffice.Models.SingsiamdbContext();
-
+    private DialogOptions dialogOptions = new() { MaxWidth = MaxWidth.Small };
     Branch b_info = new Branch();
     List<Customer> list_customer = new List<Customer>();
     List<Customer> list_customer_show = new List<Customer>();
@@ -327,7 +358,7 @@
 
         b_info = db.Branches.Where(s => s.IsActive == true && s.Id == b_id).FirstOrDefault();
         list_customer = await managements.GetCustomerAll();
-
+        list_brach = db.Branches.Where(s => s.IsActive == true).AsNoTracking().ToList();
         if (cus_id!=null)
         {
 
@@ -435,5 +466,89 @@
         if (string.IsNullOrEmpty(value))
             return list_customer;
         return list_customer.Where(x => x.NatId.Contains(value, StringComparison.InvariantCultureIgnoreCase) || x.FullName.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+
+    }
+    private bool changebranch_;
+    Models.Branch selectBranch = null;
+    Models.Branch _selectBranch
+    {
+        get { return _selectBranch; }
+        set
+        {
+            if (value != null)
+            {
+
+                _selectBranch = value;
+
+            }
+            else
+            {
+
+            }
+        }
+    }
+    private async Task<IEnumerable<Branch>> SearchBranch(string value)
+    {
+        // In real life use an asynchronous function for fetching data from an api.
+        await Task.Delay(5);
+
+        // if text is null or empty, show complete list
+        if (string.IsNullOrEmpty(value))
+            return list_brach;
+        return list_brach.Where(x => x.BranchName.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+    }
+    Models.Customer cus_for_change = new Models.Customer();
+    List<Branch> list_brach = new List<Branch>();
+    void cancel()
+    {
+        changebranch_  =false;
+        cus_for_change = new Models.Customer();
+    }
+    private void changebranch(int id)
+    {
+        changebranch_ = true;
+        cus_for_change = db.Customers.Include(s=>s.Branch).Where(s => s.CustomerId == id).AsNoTracking().FirstOrDefault();
+    }
+    async void editbranch()
+    {
+        changebranch_ = false;
+        if (selectBranch == null)
+        {
+            JSRuntime.InvokeVoidAsync("alert", "ยังอยู่ในสัญญาที่ทำกับสาขาอื่นอยู่ โปรดปิดสัญญาก่อนย้ายสาขา");
+            return;
+        }
+        //check complete promise
+        var promis_check = await managements.GetPromisebyCustomerId(cus_for_change.CustomerId);
+        if (promis_check.Any(s=>s.Status!=2))
+        {
+            JSRuntime.InvokeVoidAsync("alert", "ยังอยู่ในสัญญาที่ทำกับสาขาอื่นอยู่ โปรดปิดสัญญาก่อนย้ายสาขา");
+            return;
+        }
+        else
+        {
+            var confirm = await JSRuntime.InvokeAsync<bool>("confirmSaveData");
+            if (confirm)
+            {
+                try
+                {
+                    cus_for_change.BranchId = selectBranch.Id;
+                    db.Entry(cus_for_change).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                }
+                catch (Exception ex) { await JSRuntime.InvokeVoidAsync("alert_error" + ex); }
+                await JSRuntime.InvokeVoidAsync("confirm");
+                await Task.Delay(200);
+             
+                cus_for_change = new Models.Customer();
+                StateHasChanged();
+            }
+            else
+            {
+            //
+            }
+           
+        }
+     
+       
     }
 }
