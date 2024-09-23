@@ -711,21 +711,21 @@ public partial class SingsiamdbContext : DbContext
                 .ToTable("product_refcode");
 
             entity.Property(e => e.BranchId).HasColumnName("branch_id");
-            entity.Property(e => e.CollateralId).HasColumnName("collateral_id");
-            entity.Property(e => e.RefcodeNv)
+            entity.Property(e => e.RefcodeNvBook)
                 .HasDefaultValueSql("((0))")
-                .HasColumnName("refcode_nv");
+                .HasColumnName("refcode_nv_book");
+            entity.Property(e => e.RefcodeNvCar)
+                .HasDefaultValueSql("((0))")
+                .HasColumnName("refcode_nv_car");
+            entity.Property(e => e.RefcodeNvLand)
+                .HasDefaultValueSql("((0))")
+                .HasColumnName("refcode_nv_land");
             entity.Property(e => e.RefcodeV).HasColumnName("refcode_v");
 
             entity.HasOne(d => d.Branch).WithMany()
                 .HasForeignKey(d => d.BranchId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_product_refcode_branch");
-
-            entity.HasOne(d => d.Collateral).WithMany()
-                .HasForeignKey(d => d.CollateralId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_product_refcode_Collateral");
         });
 
         modelBuilder.Entity<Promise>(entity =>

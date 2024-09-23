@@ -129,69 +129,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
 
             StateHasChanged();
         }
-        //private async void OnInputFileChanged(InputFileChangeEventArgs e)
-        //{
-
-        //    if (e?.File is null)
-        //        return;
-
-        //    ImageFile = await e.File.RequestImageFileAsync("image/jpeg", 400, 400);
-        //    if (ImageFile is null)
-        //        return;
-
-        //    await using var imageStream = ImageFile.OpenReadStream();
-        //    ImageFileData = new byte[ImageFile.Size];
-        //    await imageStream.ReadAsync(ImageFileData);
-
-
-
-        //    // Create a unique folder name based on current date and time
-        //    var folderName = PromiseInfo.Promiseno;
-
-        //    var sub_folderName = _customer.NatId + "_" + folderName;
-        //    // Create the folder inside the wwwroot/Uploads directory
-        //    var folderPath = Path.Combine("UploadsCollateral", folderName);
-
-
-        //    var folderDirectory = Path.Combine(_env.WebRootPath, folderPath);
-        //    if (!Directory.Exists(folderDirectory))
-        //    {
-        //        Directory.CreateDirectory(folderDirectory);
-        //    }
-
-        //    // Generate a unique file name for the uploaded image
-        //    var fileName = sub_folderName + Path.GetExtension(e.File.Name);
-
-
-        //    // Combine the folder path and file name to get the full path of the image
-        //    var file_Path = Path.Combine(folderDirectory, fileName);
-
-
-        //    using (var stream = new FileStream(file_Path, FileMode.Create))
-        //    {
-        //        await e.File.OpenReadStream().CopyToAsync(stream);
-        //    }
-
-        //    int index = file_Path.IndexOf("wwwroot");
-
-        //    if (index != -1)
-        //    {
-        //        // Split the string based on the search text
-
-        //        string[] parts = file_Path.Split(new[] { "wwwroot" }, StringSplitOptions.None);
-
-
-        //        //filePath = parts[2];
-        //        PromiseInfo.UploadImg = parts[1];
-        //    }
-        //    // Save the uploaded image to the specified path
-
-
-        //    StateHasChanged();
-        //}
-
-
-
+   
         #endregion
 
 
@@ -217,6 +155,8 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
         private List<Periodtran> _periodtran = new List<Periodtran>();
         private Promise _promise = new Promise();
         private Periodtran _promise_pay = new Periodtran();
+
+        private payment p = new payment();
         private decimal? intplus { get; set; } = 0;
         private decimal? discount { get; set; } = 0;
         public string pending_totalpayment { get; set; }   
@@ -241,39 +181,76 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
         }
         protected override async void OnInitialized()
         {
+            p = new payment();  
             _periodtran =await managements.GetPeriodtransbyPromiseId(promise_id);
             _promise = await managements.GetPromisebyPromiseId(promise_id);
          
-            _promise_pay.OverPayQty = _periodtran.Where(s=>s.OverPayQty > 0).Count();
+            p.overpay_qty = _periodtran.Where(s=>s.OverPayQty > 0).Count();
           
-            _promise_pay.total_deposit = (decimal)_periodtran.Sum(p => p.Deposit);
-            _promise_pay.total_fee = _periodtran.Sum(p => p.total_fee);
-            totalFee = _promise_pay.total_fee;
-            _promise_pay.total_charge_follow = _periodtran.Sum(p => p.total_charge_follow);
+            p.total_deposit = _periodtran.Sum(p => p.Deposit).Value.ToString("N0");
+            p.origin_fine = _periodtran.Sum(p => p.total_fee).ToString("N0");
+            p.custom_fine = "0";
+           p.total_Charge_follow = _periodtran.Sum(p => p.total_charge_follow).ToString("N0");
 
-            if (_promise_pay.OverPayQty > 0)
+            if (p.overpay_qty > 0)
             {
-                _promise_pay.total_deptAmount = _periodtran.Sum(p => p.amount_remain) + _promise_pay.total_fee;
-                _promise_pay.pending_amount = _promise_pay.total_deptAmount - _promise_pay.total_deposit  + _promise_pay.total_charge_follow;
+                p.base_temp_deptAmount = _periodtran.Sum(p => p.amount_remain);
+                p.total_deptAmount = (_periodtran.Sum(p => p.amount_remain) + Convert.ToInt32(p.origin_fine)).ToString("N0");
+               
+               p.pending_payAmont =(( _promise_pay.total_deptAmount - _promise_pay.total_deposit)  + _promise_pay.total_charge_follow).ToString("N0");
             }
             else 
             {
-                _promise_pay.total_deptAmount = 0;
-                _promise_pay.pending_amount = 0;
+                p.total_deptAmount = "0";
+               p.pending_payAmont = "0";
             }
-            total_deptAmount = _promise_pay.total_deptAmount.ToString("N0");
-            total_deposit = _promise_pay.total_deposit.ToString("N0");
-            totalFee = _promise_pay.total_fee;
-            totalFee_Old = _promise_pay.total_fee;
+     
             var receipt = await managements.Get_Receipt_No(branch_id, "receipt");
-            ReceiptNo = receipt.ToString();
+            p.receipt_no = receipt.ToString();
         }
+        private decimal Amount = 0m;
+
+        // Method to handle input changes and format the number
+        private void OnInputChanged(ChangeEventArgs e)
+        {
+            string inputValue = e.Value.ToString().Replace(",", ""); // Remove existing commas
+            if (decimal.TryParse(inputValue, out decimal result))
+            {
+                Amount = result;
+                p.customerPayAmount = Amount.ToString("N0"); // Format with commas
+            }
+            else
+            {
+                // If parsing fails, keep the original input
+                p.customerPayAmount = inputValue;
+            }
+        }
+
         private void ValueChanged(ChangeEventArgs args)
         {
-           var total_fee_change  = Convert.ToInt32((String)args.Value);
-            totalFee = total_fee_change;
-            _promise_pay.total_deptAmount = _periodtran.Sum(p => p.amount_remain) + total_fee_change;
-            
+            var amount = args.Value.ToString();
+            if (amount == "")
+            {
+                amount = "0";
+            }
+            totalFee = Convert.ToDecimal(amount);
+
+            if (totalFee == 0)
+            {
+                p.total_deptAmount = p.base_temp_deptAmount.ToString("N0");
+                p.p_total_deptAmount = p.base_temp_total_deptAmount.ToString("N0");
+            }
+            else
+            {
+             
+                var total =Convert.ToInt32(p.base_temp_deptAmount);
+                p.total_deptAmount = (total + totalFee).ToString("N0");
+                p.p_total_deptAmount = ((decimal)p.p_paidprincipleAmount + (decimal)p.p_paidinterestAmount).ToString("N0");
+                var p_totalDeptAmount = Convert.ToDecimal(p.p_total_deptAmount);
+                p.p_total_deptAmount = (Convert.ToInt32(p_totalDeptAmount) + totalFee).ToString("N0");
+            }
+          
+
         }
         void SetTab(int index)
         {
@@ -283,41 +260,42 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
             {
                 paidprincipleAmount = 0;
                 paidinterestAmount = 0;
-                _promise_pay.OverPayQty = _periodtran.Where(s => s.OverPayQty > 0).Count();
 
-                _promise_pay.total_deposit = _periodtran.Sum(p => p.total_deposit);
-                _promise_pay.total_fee = _periodtran.Sum(p => p.total_fee);
-                _promise_pay.total_charge_follow = _periodtran.Sum(p => p.total_charge_follow);
+                p.overpay_qty = _periodtran.Where(s => s.OverPayQty > 0).Count();
+                p.total_deposit = _periodtran.Sum(p => p.total_deposit).ToString("N0");
+                p.origin_fine = _periodtran.Sum(p => p.total_fee).ToString("N0");
+                p.total_Charge_follow = _periodtran.Sum(p => p.total_charge_follow).ToString("N0");
 
-                if (_promise_pay.OverPayQty > 0)
+                if (p.overpay_qty > 0)
                 {
-                    _promise_pay.total_deptAmount = _periodtran.Sum(p => p.amount_remain);
-                    _promise_pay.pending_amount = _promise_pay.total_deptAmount - _promise_pay.total_deposit + _promise_pay.total_fee + _promise_pay.total_charge_follow;
+                   p.total_deptAmount= _periodtran.Sum(p => p.amount_remain).ToString("N0");
+                    p.pending_amount = (((_promise_pay.total_deptAmount - _promise_pay.total_deposit) + _promise_pay.total_fee) + _promise_pay.total_charge_follow).ToString("N0");
                 }
                 else
                 {
-                    _promise_pay.total_deptAmount = 0;
-                    _promise_pay.pending_amount = 0;
+                    p.total_deptAmount = "0";
+                    p.pending_amount = "0";
                 }
             }
             else if (activeIndex == 1)
             {
-                _promise_pay.OverPayQty = _periodtran.Where(s => s.Ispaid == false).Count();
+                p.p_overpay_qty = _periodtran.Where(s => s.Ispaid == false).Count();
 
-                _promise_pay.total_deposit = _periodtran.Where(s => s.Ispaid == false).Sum(p => p.total_deposit);
-                _promise_pay.total_fee = _periodtran.Where(s => s.Ispaid == false).Sum(p => p.total_fee);
-                _promise_pay.total_charge_follow = _periodtran.Where(s => s.Ispaid == false).Sum(p => p.total_charge_follow);
-                paidfineAmount = (_promise_pay.total_fee + _promise_pay.total_charge_follow).ToString("N0");
+                p.p_total_deposit = _periodtran.Where(s => s.Ispaid == false).Sum(p => p.total_deposit).ToString("N0");
+                p.p_origin_fine = _periodtran.Where(s => s.Ispaid == false).Sum(p => p.total_fee).ToString("N0");
+                p.p_total_Charge_follow = _periodtran.Where(s => s.Ispaid == false).Sum(p => p.total_charge_follow).ToString("N0");
+                p.p_paidfineAmount = (_promise_pay.total_fee + _promise_pay.total_charge_follow).ToString("N0");
 
 
-                _promise_pay.total_deptAmount = _periodtran.Where(s => s.Ispaid == false).Sum(p => (decimal)p.Amount);
-                _promise_pay.pending_amount = (_promise_pay.total_deptAmount - _promise_pay.total_deposit + _promise_pay.total_fee + _promise_pay.total_charge_follow) * -1;
+                p.p_total_deptAmount = _periodtran.Where(s => s.Ispaid == false).Sum(p => (decimal)p.Amount).ToString("N0");
+                p.base_temp_total_deptAmount = _periodtran.Where(s => s.Ispaid == false).Sum(p => (decimal)p.Amount);
+                p.p_pending_amount = (_promise_pay.total_deptAmount - _promise_pay.total_deposit + _promise_pay.total_fee + _promise_pay.total_charge_follow) * -1;
            
-                    paidprincipleAmount = _periodtran.Where(s => s.Ispaid == false).Sum(p => (decimal)p.Capital);
+                    p.p_paidprincipleAmount = _periodtran.Where(s => s.Ispaid == false).Sum(p => (decimal)p.Capital);
                 var remain_amount = _periodtran.Where(s => s.Ispaid == false).Sum(p => (decimal)p.Paidremain) * -1;
-                paidinterestAmount = _periodtran.Where(s => s.Ispaid == false).Sum(p => (decimal)p.Interest) - remain_amount;
+                p.p_paidinterestAmount = _periodtran.Where(s => s.Ispaid == false).Sum(p => (decimal)p.Interest) - remain_amount;
 
-                _promise_pay.total_deptAmount = ((decimal)paidprincipleAmount + (decimal)paidinterestAmount);
+                p.p_total_deptAmount = ((decimal)p.p_paidprincipleAmount + (decimal)p.p_paidinterestAmount + totalFee).ToString("N0");
             }
             StateHasChanged();
         }
@@ -333,15 +311,15 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
             {
                 if (intplus == 0)
                 {
-                    _promise_pay.total_deptAmount = _periodtran.Where(s => s.Ispaid == false).Sum(p => (decimal)p.Amount);
-                    _promise_pay.pending_amount = (_promise_pay.total_deptAmount - _promise_pay.total_deposit + _promise_pay.total_fee + _promise_pay.total_charge_follow) * -1;
-                    pending_totalpayment = (_promise_pay.pending_amount * -1).ToString();
+                    p.p_total_deptAmount = _periodtran.Where(s => s.Ispaid == false).Sum(p => (decimal)p.Amount).ToString("N0");
+                    p.p_pending_amount = (_promise_pay.total_deptAmount - _promise_pay.total_deposit + _promise_pay.total_fee + _promise_pay.total_charge_follow) * -1;
+                    p.pending_totalpayment = (_promise_pay.pending_amount * -1).ToString();
                 }
                 else
                 {
-                    _promise_pay.total_deptAmount = _promise_pay.total_deptAmount + (decimal)intplus;
+                    p.p_total_deptAmount =( _promise_pay.total_deptAmount + (decimal)intplus).ToString("N0");
                     var intplus_total = (_promise_pay.pending_amount * -1) + (decimal)intplus;
-                    _promise_pay.pending_amount = intplus_total * -1;
+                    p.p_pending_amount = intplus_total * -1;
 
                 }
             }
@@ -383,8 +361,30 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                 amount = "0";
             }
            totalFee = Convert.ToDecimal(amount);
-            _promise_pay.total_deptAmount = _periodtran.Sum(p => p.amount_remain) + totalFee;
-            _promise_pay.pending_amount = _promise_pay.total_deptAmount - _promise_pay.total_deposit;
+
+            if (totalFee == 0)
+            {
+                p.total_deptAmount = _periodtran.Sum(p => p.amount_remain).ToString("N0");
+                p.pending_amount = (Convert.ToInt32(p.total_deptAmount) - Convert.ToInt32(p.total_deposit)).ToString("0");
+            }
+            else
+            {
+                if (p.overpay_qty > 0)
+                {
+                    var total = _periodtran.Sum(p => p.amount_remain);
+                 
+                    p.total_deptAmount = (total+ totalFee).ToString("N0");
+                    p.pending_amount = (Convert.ToInt32(p.total_deptAmount) - Convert.ToInt32(p.total_deposit) + totalFee).ToString("0");
+                }
+                else
+                {
+                    p.total_deptAmount = "0";
+                    p.pending_amount = "0";
+                }
+         
+            }
+
+          
         }
         private async Task delete()
         {

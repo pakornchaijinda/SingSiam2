@@ -230,15 +230,30 @@ namespace SingSiamOffice.Manage
 
             if (vat == 1)
             {
-                next_no = (int)db.ProductRefcodes.AsNoTracking().Where(s => s.BranchId == branch_id && s.CollateralId == product_id).FirstOrDefault().RefcodeV + 1;
+                next_no = (int)db.ProductRefcodes.AsNoTracking().Where(s => s.BranchId == branch_id).FirstOrDefault().RefcodeV + 1;
                 string numberPart = next_no.ToString("D4");
                 result = numberPart + "/" + branch_code;
             }
             else
             {
-                next_no = (int)db.ProductRefcodes.AsNoTracking().Where(s => s.BranchId == branch_id && s.CollateralId == product_id).FirstOrDefault().RefcodeNv + 1;
-                string numberPart = next_no.ToString("D4");
-                result = product_code.Trim() + "-" + numberPart + "/" + branch_code;
+                if (product_id == 1 || product_id == 2 || product_id == 4)
+                {
+                    next_no = (int)db.ProductRefcodes.AsNoTracking().Where(s => s.BranchId == branch_id).FirstOrDefault().RefcodeNvCar + 1;
+                    string numberPart = next_no.ToString("D4");
+                    result = product_code.Trim() + "-" + numberPart + "/" + branch_code;
+                }
+                else if (product_id == 3)
+                {
+                    next_no = (int)db.ProductRefcodes.AsNoTracking().Where(s => s.BranchId == branch_id).FirstOrDefault().RefcodeNvLand + 1;
+                    string numberPart = next_no.ToString("D4");
+                    result = product_code.Trim() + "-" + numberPart + "/" + branch_code;
+                }
+                else if (product_id == 5)
+                {
+                    next_no = (int)db.ProductRefcodes.AsNoTracking().Where(s => s.BranchId == branch_id).FirstOrDefault().RefcodeNvBook + 1;
+                    string numberPart = next_no.ToString("D4");
+                    result = product_code.Trim() + "-" + numberPart + "/" + branch_code;
+                }
             }
            
             return result;

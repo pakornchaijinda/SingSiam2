@@ -313,25 +313,25 @@
                                                                     <div>
                                                                         <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">เลขที่ใบเสร็จ  :</div>
-                                                                            <input type="text" class="form-control text-end" @bind-value="ReceiptNo" style="@boxfield" disabled>
+                                                                            <input type="text" class="form-control text-end" @bind-value="p.receipt_no" style="@boxfield" disabled>
                                                                         </div>
                                                                     </div>
                                                                     <div>
                                                                         <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">งวดที่ค้างชำระ  :</div>
-                                                                            <input type="text" class="form-control text-end" @bind-value="_promise_pay.OverPayQty" style="@boxfieldred" disabled>
+                                                                            <input type="text" class="form-control text-end" @bind-value="p.overpay_qty" style="@boxfieldred" disabled>
                                                                         </div>
                                                                     </div>
                                                                     <div>
                                                                         <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">ยอดที่ต้องชำระ  :</div>
-                                                                            <input type="text" class="form-control text-end" @bind-value="_promise_pay.total_deptAmount" style="@boxfieldred" disabled>
+                                                                            <input type="text" class="form-control text-end" @bind-value="p.total_deptAmount" style="@boxfieldred" disabled>
                                                                         </div>
                                                                     </div>
                                                                     <div>
                                                                         <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">ยอดรับฝากเงิน  :</div>
-                                                                            <input type="text" class="form-control text-end" @bind-value="_promise_pay.total_deposit" style="@boxfieldgreen" disabled>
+                                                                            <input type="text" class="form-control text-end" @bind-value="p.total_deposit" style="@boxfieldgreen" disabled>
                                                                         </div>
                                                                     </div>
 
@@ -348,25 +348,25 @@
                                                                         <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">ค่าปรับ  :</div>
                                                                             <input type="text" class="form-control text-end" style="@imporText"
-                                                                                   @bind-value="@totalFee_Old" readonly>
+                                                                                   @bind-value="@p.origin_fine" readonly>
                                                                             <input type="text" class="form-control text-end" style="@boxfieldred" @bind-value:event="onchange"
-                                                                                   @oninput="CalculateStandardDimensions" @bind-value="@totalFee">
+                                                                                   @oninput="CalculateStandardDimensions" @bind-value="@p.custom_fine">
                                                                         </div>
                                                                     </div>
                                                                     <div>
                                                                         <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">ทวงถาม / ติดตาม  :</div>
-                                                                            <input type="text" class="form-control text-end" @bind-value="_promise_pay.total_charge_follow" style="@boxfieldred">
+                                                                            <input type="text" class="form-control text-end" @bind-value="p.total_Charge_follow" style="@boxfieldred">
                                                                         </div>
                                                                     </div>
                                                                     <div>
                                                                         <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">ยอดที่ชำระ :</div>
-                                                                            <input type="text" class="form-control text-end" @bind-value="customerPayAmount" style="@boxfieldgreen">
+                                                                            <input type="text" class="form-control text-end" @bind-value="p.customerPayAmount" @oninput="OnInputChanged" style="@boxfieldgreen">
                                                                         </div>
                                                                     </div>
 
-                                                                    <MudRadioGroup T="int" @bind-Value="payment_method">
+                                                                    <MudRadioGroup T="int" @bind-Value="p.payment_Menthod">
 
                                                                         <MudRadio Value="1" Color="Color.Success" UnCheckedColor="Color.Default">เงินสด</MudRadio>
                                                                         <MudRadio Value="2" Color="Color.Secondary" UnCheckedColor="Color.Default">เงินโอน</MudRadio>
@@ -378,32 +378,6 @@
                                                                         <div class="col-12 text-center">
                                                                             @if (payment_method == 2)
                                                                             {
-                                                                                @*    <MudFileUpload T="IBrowserFile">
-                                                                            <ButtonTemplate>
-                                                                            <MudButton HtmlTag="label"
-                                                                            Variant="Variant.Filled"
-                                                                            Color="Color.Primary"
-                                                                            for="@context.Id">
-                                                                            รูปภาพประกอบ
-                                                                            </MudButton>
-                                                                            </ButtonTemplate>
-                                                                            <SelectedTemplate>
-                                                                            <div class="row">
-                                                                            <div class="col-12 mt-2">
-                                                                            @if (context != null)
-                                                                            {
-                                                                            <di></di>
-                                                                            <MudText>ไฟล์ชื่อ : @context.Name</MudText>
-                                                                            }
-                                                                            else
-                                                                            {
-                                                                            <MudText>ไม่มีรูปภาพประกอบ</MudText>
-                                                                            }
-                                                                            </div>
-                                                                            </div>
-
-                                                                            </SelectedTemplate>
-                                                                            </MudFileUpload> *@
                                                                                 @if (_formModel.PreviewUrl != null)
                                                                                 {
                                                                                     <img class="uk-border-circle" src="@_formModel.PreviewUrl" alt="Preview Image" style="height:10rem; width:10rem;" />
@@ -430,42 +404,17 @@
                                                                                 <MudStack Spacing="1">
                                                                                     <div class="row">
                                                                                         <div class="col-12">
-                                                                                            <MudTextField @bind-Value="otherReason" Label="ระบุคำอธิบาย" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+                                                                                            <MudTextField @bind-Value="p.otherReason" Label="ระบุคำอธิบาย" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
                                                                                         </div>
                                                                                         <div class="col-6">
                                                                                             <p>ยอดที่ต้องการฝาก</p>
                                                                                         </div>
                                                                                         <div class="col-6">
-                                                                                            <MudTextField @bind-Value="deposotamount" Label="Outlined" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+                                                                                            <MudTextField @bind-Value="p.depositAmount" Label="Outlined" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
                                                                                         </div>
                                                                                         
                                                                                         <div class="col-12 text-center">
-                                                                                            @*   <MudFileUpload T="IBrowserFile">
-                                                                                        <ButtonTemplate>
-                                                                                        <MudButton HtmlTag="label"
-                                                                                        Variant="Variant.Filled"
-                                                                                        Color="Color.Primary"
-                                                                                        for="@context.Id">
-                                                                                        รูปภาพประกอบ
-                                                                                        </MudButton>
-                                                                                        </ButtonTemplate>
-                                                                                        <SelectedTemplate>
-                                                                                        <div class="row">
-                                                                                        <div class="col-12 mt-2">
-                                                                                        @if (context != null)
-                                                                                        {
-                                                                                        <di></di>
-                                                                                        <MudText>ไฟล์ชื่อ : @context.Name</MudText>
-                                                                                        }
-                                                                                        else
-                                                                                        {
-                                                                                        <MudText>ไม่มีรูปภาพประกอบ</MudText>
-                                                                                        }
-                                                                                        </div>
-                                                                                        </div>
-
-                                                                                        </SelectedTemplate>
-                                                                                        </MudFileUpload> *@
+                                                                                           
                                                                                             @if (_formModel.PreviewUrl != null)
                                                                                             {
                                                                                                 <img class="uk-border-circle" src="@_formModel.PreviewUrl" alt="Preview Image" style="height:10rem; width:10rem;" />
@@ -533,25 +482,25 @@
                                                                     <div>
                                                                         <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">ชำระค่าปรับ/ค่าทวงถาม:</div>
-                                                                            <input type="text" class="form-control text-end" @bind-value="paidfineAmount" style="@boxfield" disabled>
+                                                                            <input type="text" class="form-control text-end" @bind-value="p.paidfineAmount" style="@boxfield" disabled>
                                                                         </div>
                                                                     </div>
                                                                     <div>
                                                                         <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">ชำระเงินต้น:</div>
-                                                                            <input type="text" class="form-control text-end" @bind-value="paidprincipleAmount" style="@boxfieldgreen" disabled>
+                                                                            <input type="text" class="form-control text-end" @bind-value="p.paidprincipleAmount" style="@boxfieldgreen" disabled>
                                                                         </div>
                                                                     </div>
                                                                     <div>
                                                                         <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">ชำระดอกเบี้ย:</div>
-                                                                            <input type="text" class="form-control text-end" @bind-value="paidinterestAmount" style="@boxfieldgreen" disabled>
+                                                                            <input type="text" class="form-control text-end" @bind-value="p.paidinterestAmount" style="@boxfieldgreen" disabled>
                                                                         </div>
                                                                     </div>
                                                                     <div>
                                                                         <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">ค้างยอดชำระยกไป:</div>
-                                                                            <input type="text" class="form-control text-end" @bind-value="_promise_pay.pending_amount" style="@boxfieldred" disabled>
+                                                                            <input type="text" class="form-control text-end" @bind-value="p.pending_payAmont" style="@boxfieldred" disabled>
                                                                         </div>
                                                                     </div>
 
@@ -571,25 +520,25 @@
                                                                     <div>
                                                                         <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">เลขที่ใบเสร็จ  :</div>
-                                                                            <input type="text" class="form-control text-end" @bind-value="ReceiptNo" style="@boxfield" disabled>
+                                                                            <input type="text" class="form-control text-end" @bind-value="p.receipt_no" style="@boxfield" disabled>
                                                                         </div>
                                                                     </div>
                                                                     <div>
                                                                         <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">งวดที่ค้างชำระ  :</div>
-                                                                            <input type="text" class="form-control text-end" value="@_promise_pay.OverPayQty.ToString("N0") " style="@boxfieldred" disabled>
+                                                                            <input type="text" class="form-control text-end" value="@p.p_overpay_qty " style="@boxfieldred" disabled>
                                                                         </div>
                                                                     </div>
                                                                     <div>
                                                                         <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">ยอดที่ต้องชำระ  :</div>
-                                                                            <input type="text" class="form-control text-end" value="@total_deptAmount" style="@boxfieldred" disabled>
+                                                                            <input type="text" class="form-control text-end" value="@p.p_total_deptAmount" style="@boxfieldred" disabled>
                                                                         </div>
                                                                     </div>
                                                                     <div>
                                                                         <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">ยอดรับฝากเงิน  :</div>
-                                                                            <input type="text" class="form-control text-end" value="@total_deposit" style="@boxfieldgreen" disabled>
+                                                                            <input type="text" class="form-control text-end" value="@p.p_total_deposit" style="@boxfieldgreen" disabled>
                                                                         </div>
                                                                     </div>
 
@@ -606,38 +555,38 @@
                                                                         <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">ค่าปรับ  :</div>
                                                                             <input type="text" class="form-control text-end" style="@boxfieldred"
-                                                                                   @bind-value="@totalFee_Old" readonly>
+                                                                                   @bind-value="@p.p_origin_fine" readonly>
                                                                             <input type="text" class="form-control text-end" style="@boxfieldred" @bind-value:event="onchange"
-                                                                                   @oninput="ValueChanged" @bind-value="@totalFee">
+                                                                                   @oninput="ValueChanged" @bind-value="@p.p_custom_fine">
                                                                         </div>
                                                                     </div>
                                                                     <div>
                                                                         <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">ทวงถาม / ติดตาม  :</div>
-                                                                            <input type="text" class="form-control text-end" @bind-value="_promise_pay.total_charge_follow" style="@boxfieldred">
+                                                                            <input type="text" class="form-control text-end" @bind-value="p.p_total_Charge_follow" style="@boxfieldred">
                                                                         </div>
                                                                     </div>
                                                                     <div>
                                                                         <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">ดอกเบี้ยที่ลดได้  :</div>
-                                                                            <input type="text" class="form-control text-end" value="@paidinterestAmount.Value.ToString("N0")" style="@boxfieldred" disabled>
+                                                                            <input type="text" class="form-control text-end" value="@p.p_paidinterestAmount.Value.ToString("N0")" style="@boxfieldred" disabled>
                                                                         </div>
                                                                     </div>
                                                                     <div>
                                                                         <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">ยอดที่ชำระ :</div>
-                                                                            <input type="text" class="form-control text-end" @bind-value="customerPayAmount" style="@boxfieldgreen">
+                                                                            <input type="text" class="form-control text-end" @bind-value="p.customerPayAmount" @oninput="OnInputChanged" style="@boxfieldgreen">
                                                                         </div>
                                                                     </div>
 
-                                                                    <MudRadioGroup T="int" @bind-Value="payment_method">
+                                                                    <MudRadioGroup T="int" @bind-Value="p.payment_Menthod">
                                                                     
                                                                         <MudRadio Value="1" Color="Color.Success" UnCheckedColor="Color.Default">เงินสด</MudRadio>
                                                                         <MudRadio Value="2" Color="Color.Secondary" UnCheckedColor="Color.Default">เงินโอน</MudRadio>
                                                                         <MudRadio Value="3" Color="Color.Error" UnCheckedColor="Color.Default">อื่นๆ</MudRadio>
                                                                       
                                                                     </MudRadioGroup>
-                                                                    <MudSelect @bind-Value="close_type_status" Label="ประเภท" Placeholder="กรุณาเลือกประเภท" Variant="Variant.Outlined" Margin="Margin.Dense">
+                                                                    <MudSelect @bind-Value="p.p_close_type_status" Label="ประเภท" Placeholder="กรุณาเลือกประเภท" Variant="Variant.Outlined" Margin="Margin.Dense">
                                                                         <MudSelectItem Value="@("ปกติ")">ปกติ</MudSelectItem>
                                                                         <MudSelectItem Value="@("ยึด")">ยึด</MudSelectItem>
                                                                         <MudSelectItem Value="@("หนี้สูญ")">หนี้สูญ</MudSelectItem>
@@ -646,7 +595,7 @@
                                                                     </MudSelect>
                                                                     <div class="row">
                                                                         <div class="col-12 text-center">
-                                                                            @if (payment_method == 2)
+                                                                            @if (p.payment_Menthod == 2)
                                                                             {
                                                                                 @if (_formModel.PreviewUrl != null)
                                                                                 {
@@ -666,7 +615,7 @@
                                                                                     </ButtonTemplate>
                                                                                 </MudFileUpload>
                                                                             }
-                                                                            @if (payment_method == 3)
+                                                                            @if (p.payment_Menthod == 3)
                                                                             {
                                                                                 <MudStack Spacing="1">
                                                                                     <div class="row">
@@ -723,19 +672,19 @@
                                                                     <div>
                                                                         <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">เงินต้นคงค้าง:</div>
-                                                                            <input type="text" class="form-control text-end" value="@paidprincipleAmount.Value.ToString("N0")" style="@boxfieldgreen" disabled>
+                                                                            <input type="text" class="form-control text-end" value="@p.p_paidprincipleAmount.Value.ToString("N0")" style="@boxfieldgreen" disabled>
                                                                         </div>
                                                                     </div>
                                                                     <div>
                                                                         <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">ดอกเบี้ยคงค้าง:</div>
-                                                                            <input type="text" class="form-control text-end" value="@paidinterestAmount.Value.ToString("N0")" style="@boxfieldgreen" disabled>
+                                                                            <input type="text" class="form-control text-end" value="@p.p_paidinterestAmount.Value.ToString("N0")" style="@boxfieldgreen" disabled>
                                                                         </div>
                                                                     </div>
                                                                     <div>
                                                                         <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">ส่วนต่าง:</div>
-                                                                            <input type="text" class="form-control text-end" value="@total_deptAmount" style="@boxfieldred" disabled>
+                                                                            <input type="text" class="form-control text-end" value="@p.p_total_deptAmount" style="@boxfieldred" disabled>
                                                                         </div>
                                                                     </div>
                                                                    

@@ -51,4 +51,75 @@
         public string period_qty { get; set; }
         public string? period_price { get;set; }
     }
+    public class payment 
+    {
+        //เลขที่ใบเสร็จ
+        public string receipt_no { get; set; }
+        //งวดที่ค้างชำระ
+        public int overpay_qty { get; set; }
+        //ยอดที่ต้องชำระ
+        public string total_deptAmount { get; set; }
+        //ยอดรับเงินฝาก
+        public string total_deposit {  get; set; }
+        //ค่าปรับ
+        public string? origin_fine { get; set; } = "0";
+        //ค่าปรับ กำหนดเอง
+        public string? custom_fine { get; set; } = "0";
+        //ทวงถาม ติดตาม
+        public string total_Charge_follow {  get; set; }
+        //ยอดที่ต้องชำระ
+        public string customerPayAmount { get; set; } = "0";
+        //วิธีการชำระ
+        public int payment_Menthod { get; set; }
+        //ยอดรับฝากเงิน
+        public string depositAmount { get; set; }
+        //เหตุผล
+        public string otherReason { get; set; }
+        //ชำระค่าปรับ
+        public string paidfineAmount {  get; set; }
+        //ชำระเงินต้น
+        public string? paidprincipleAmount { get; set; }
+        //ชำระดอกเบี้ย
+        public string? paidinterestAmount { get; set; }
+        //ค้างยอดชำระยกไป
+        public string pending_payAmont {  get; set; }
+
+        public string pending_amount { get; set; }
+
+        public decimal base_temp_total_deptAmount { get; set; }
+
+        public decimal base_temp_deptAmount { get; set; }
+
+
+        //ปิดศัญญาก่อนกำหนด
+        //งวดที่ค้างชำระ
+        public int p_overpay_qty { get; set; }
+        //ยอดรับเงินฝาก
+        public string p_total_deposit { get; set; }
+
+        //ค่าปรับ
+        public string p_origin_fine { get; set; } = "0";
+        //ค่าปรับ
+        public string p_custom_fine { get; set; } = "0";
+
+        //ทวงถาม ติดตาม
+        public string p_total_Charge_follow { get; set; }
+
+       public string? p_paidfineAmount { get; set; }
+
+        //ยอดที่ต้องชำระ
+        public string p_total_deptAmount { get; set; }
+      
+
+        public decimal p_pending_amount { get; set; }
+
+        public decimal? p_paidprincipleAmount { get; set; }
+        public decimal? p_paidinterestAmount { get; set; }
+
+        public string p_close_type_status { get; set; }
+
+        public decimal? intplus { get; set; } = 0m;
+        public decimal? discount { get; set; } = 0m;
+        public string pending_totalpayment { get; set; }    
+    }
 }
