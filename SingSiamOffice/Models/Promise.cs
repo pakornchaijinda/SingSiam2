@@ -182,4 +182,6 @@ public partial class Promise
     public virtual ICollection<Receiptdesc> Receiptdescs { get; set; } = new List<Receiptdesc>();
 
     public virtual ICollection<Receipttran> Receipttrans { get; set; } = new List<Receipttran>();
+
+    public virtual ICollection<TransectionSlip> TransectionSlips { get; set; } = new List<TransectionSlip>();
 }

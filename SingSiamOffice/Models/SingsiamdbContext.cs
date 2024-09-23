@@ -1799,11 +1799,15 @@ public partial class SingsiamdbContext : DbContext
             entity.Property(e => e.Doc)
                 .IsUnicode(false)
                 .HasDefaultValueSql("('-')");
+            entity.Property(e => e.PromiseId).HasColumnName("promise_id");
             entity.Property(e => e.TransactionHistoryId).HasColumnName("Transaction_history_id");
+
+            entity.HasOne(d => d.Promise).WithMany(p => p.TransectionSlips)
+                .HasForeignKey(d => d.PromiseId)
+                .HasConstraintName("FK_Transection_slip_promise");
 
             entity.HasOne(d => d.TransactionHistory).WithMany(p => p.TransectionSlips)
                 .HasForeignKey(d => d.TransactionHistoryId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Transection_slip_Transaction_history");
         });
 

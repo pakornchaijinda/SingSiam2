@@ -64,6 +64,13 @@ namespace SingSiamOffice.Manage
             var to_del = db.Promises.Where(s=>s.Id == promiseId).FirstOrDefault();
             to_del.IsDelete = true;
             db.Entry(to_del).State = EntityState.Modified;
+
+            var to_edit = db.TransectionSlips.Where(s=>s.PromiseId == promiseId).FirstOrDefault();
+            if (to_edit != null)
+            {
+                db.Entry(to_edit).State = EntityState.Deleted;
+              
+            }
             await db.SaveChangesAsync();
             return true;
         }
@@ -75,10 +82,7 @@ namespace SingSiamOffice.Manage
                 {
                     db.Guarantors.Add(guarantor1);
                     await db.SaveChangesAsync();
-
                 }
-
-              
             }
             catch (Exception ex) {}
         }
