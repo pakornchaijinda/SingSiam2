@@ -45,6 +45,8 @@ namespace SingSiamOffice.Models
         public DateTime tdate_pay { get; set; }
         [NotMapped]
         public string style_color { get; set; }
+        [NotMapped]
+        public List<Periodtran> listPeriodtran_overpay { get; set; }
 
         //จำนวนคงเหลือ
         [NotMapped]

@@ -148,7 +148,7 @@ namespace SingSiamOffice.Manage
                     {
                         if (items.payment_method != 4)
                         {
-                            var amount_remain = to_edit.Amount - to_edit.Paidremain;
+                            var amount_remain = items.Amount;
                             if (to_edit.Amount == (amount_remain * -1))
                             {
                                 to_edit.Ispaid = true;
