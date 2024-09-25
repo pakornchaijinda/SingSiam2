@@ -141,7 +141,15 @@
                                             <td class="">@data.item.Tdate</td>
                                             <td class="">@data.item.Receiptno</td>
                                             <td class="">@data.item.Receiptdesc</td>
-                                            <td class="">@data.item.Amount</td>
+                                            @if (data.item.Netamount != 0)
+                                            {
+                                                <td class="">@data.item.Netamount</td>
+                                            }
+                                            else
+                                            {
+                                                <td class="">@data.item.Amount</td>
+                                            }
+
                                             <td class="">
                                                 @if (data.index == 0)
                                                 {

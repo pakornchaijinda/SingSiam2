@@ -56,6 +56,7 @@ namespace SingSiamOffice.Manage
             var new_add = new TransectionSlip();
             new_add.TransactionHistoryId = Add_expren.TransactionId;
             new_add.Doc = jsonString;
+            new_add.PromiseId = items.promise_id;
             db.TransectionSlips.Add(new_add);
             return true;
         }
@@ -66,6 +67,13 @@ namespace SingSiamOffice.Manage
             db.Entry(to_del).State = EntityState.Modified;
 
             var to_edit = db.TransectionSlips.Where(s=>s.PromiseId == promiseId).FirstOrDefault();
+
+            var to_del_transactiohistory = db.TransactionHistories.Where(s => s.TransactionId == to_edit.TransactionHistoryId).FirstOrDefault();
+            if (to_del_transactiohistory != null)
+            {
+                db.Entry(to_del_transactiohistory).State = EntityState.Deleted;
+
+            }
             if (to_edit != null)
             {
                 db.Entry(to_edit).State = EntityState.Deleted;
@@ -186,6 +194,33 @@ namespace SingSiamOffice.Manage
 
         }
 
+        public async Task updateClosePromise(int promiseId) 
+        {
+            var data = db.Periodtrans.AsNoTracking().Include(s=>s.Promise).Where(s => s.PromiseId == promiseId).ToList();
+            var cnt_finish = data.Where(s=>s.Ispaid == true).Count();
+            var cnt_period = data.FirstOrDefault().Promise.Periods;
+            if (cnt_period == cnt_finish)
+            { 
+                var toEdit = db.Promises.Include(s=>s.Periodtrans).Where(s=>s.Id ==promiseId).FirstOrDefault();
+                toEdit.Status = 2;
+                foreach (var periodTrans in toEdit.Periodtrans)
+                {
+                  
+                    periodTrans.Status = 2;
+                }
+
+              
+                db.Entry(toEdit).State = EntityState.Modified;
+
+             
+                foreach (var periodTrans in toEdit.Periodtrans)
+                {
+                    db.Entry(periodTrans).State = EntityState.Modified;
+                }
+
+             
+            }
+        }
         #region DeletePayment
         public async Task<bool> delete_receiptdesc(int receipttransId) 
         {

@@ -121,5 +121,7 @@
         public decimal? intplus { get; set; } = 0m;
         public decimal? discount { get; set; } = 0m;
         public string pending_totalpayment { get; set; }    
+
+        public decimal? Arbalance { get; set; } 
     }
 }

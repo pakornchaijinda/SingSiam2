@@ -804,6 +804,7 @@ namespace SingSiamOffice.Pages.Contracts
                     LoginId = globalData.login_id,
                     TransectionRef = RefAccNoCode,
                     refcodetrans = b.Refcode,
+                    promise_id = b.Id,  
                 };
 
                 var transactionhistory = await promiseManagement.addTaxPromise(toAdd);

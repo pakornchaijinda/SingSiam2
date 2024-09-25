@@ -100,6 +100,8 @@ namespace SingSiamOffice.Models
     {
         [NotMapped]
         public string refcodetrans { get; set; }
+        [NotMapped]
+        public int promise_id { get; set; }
     }
     public partial class Receipttran 
     {
