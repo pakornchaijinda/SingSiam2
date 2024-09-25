@@ -20,7 +20,7 @@
                         <div class="col-md-6 mt-2">
                             <div class="input-group">
                                 <span class="input-group-text">ยอดเงินที่ต้องการกู้</span>
-                                <input type="text" class="form-control" placeholder="ระบุยอดเงินที่ต้องการกู้" @bind-value="capital" >
+                                <input type="text" class="form-control" placeholder="ระบุยอดเงินที่ต้องการกู้" @bind-value="capital" @oninput="OnInputChanged">
                             </div>
                         </div>
                         <div class="col-md-6 mt-2">
@@ -47,7 +47,7 @@
                         }
                       
                         <div class="col-12 mt-2">
-                            <button type="button" class="btn btn-primary " style="@buttoncolor1" @onclick="()=>Calculate(capital,interate)">คำนวณ</button>
+                            <button type="button" class="btn btn-primary " style="@buttoncolor1" @onclick="()=>Calculate(Convert.ToDecimal(capital),interate)">คำนวณ</button>
                             <button type="button" class="btn btn-warning " style="@buttoncolor1" @onclick="()=>Clear()">ล้าง</button>
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                     <div class="row">
                       
                         <div class="col-md-12 text-center">
-                            <h5>ยอดเงินกู้ : <span style="@money_color"> @capital.ToString("N0")</span> บาท</h5>
+                            <h5>ยอดเงินกู้ : <span style="@money_color"> @capital</span> บาท</h5>
                             <h5>ดอกเบี้ย : <span style="@interest_color">@interte_selected</span> %</h5>
                         </div>
                         <div class="col-md-12">
@@ -115,7 +115,7 @@
     string interest_color = "color:#840012; font-weight:600;";
 
     private double selectInterest { get; set; }
-    private decimal capital { get; set; }
+    private string capital { get; set; }
 
     private decimal interate { get; set; }
     private decimal manual_interate { get; set; }
@@ -148,6 +148,23 @@
         }
 
     }
+
+    private decimal Amount = 0m;
+    private void OnInputChanged(ChangeEventArgs e)
+    {
+        string inputValue = e.Value.ToString().Replace(",", ""); // Remove existing commas
+        if (decimal.TryParse(inputValue, out decimal result))
+        {
+            Amount = result;
+            capital = Amount.ToString("N0"); // Format with commas
+        }
+        else
+        {
+            // If parsing fails, keep the original input
+            capital = inputValue;
+        }
+    }
+
     private void OnManualInterestChanged(ChangeEventArgs e)
     {
         var s = e.Value.ToString();

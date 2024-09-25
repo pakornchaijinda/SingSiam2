@@ -132,8 +132,12 @@ namespace SingSiamOffice.Manage
                 }
                 if (periodtran.Paidremain != 0)
                 {
-                    periodtran.amount_remain = (decimal)periodtran.Amount +     ((decimal)periodtran.Paidremain *-1);
+                    periodtran.amount_remain = (decimal)periodtran.Amount + (decimal)periodtran.Paidremain;
                     periodtran.total_deptAmount = (decimal)periodtran.amount_remain;
+                  
+                        periodtran.Paidremain = (decimal)periodtran.Amount + (decimal)periodtran.Paidremain;
+                    
+                  
                 }
             }
 

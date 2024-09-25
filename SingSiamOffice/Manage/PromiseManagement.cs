@@ -62,23 +62,27 @@ namespace SingSiamOffice.Manage
         }
         public async Task<bool> Delete_Promise(int promiseId) 
         {
-            var to_del = db.Promises.Where(s=>s.Id == promiseId).FirstOrDefault();
-            to_del.IsDelete = true;
-            db.Entry(to_del).State = EntityState.Modified;
+      
 
             var to_edit = db.TransectionSlips.Where(s=>s.PromiseId == promiseId).FirstOrDefault();
-
-            var to_del_transactiohistory = db.TransactionHistories.Where(s => s.TransactionId == to_edit.TransactionHistoryId).FirstOrDefault();
-            if (to_del_transactiohistory != null)
+            if (to_edit == null)
             {
-                db.Entry(to_del_transactiohistory).State = EntityState.Deleted;
 
             }
-            if (to_edit != null)
+            else 
             {
-                db.Entry(to_edit).State = EntityState.Deleted;
-              
+                var to_del_transactiohistory = db.TransactionHistories.Where(s => s.TransactionId == to_edit.TransactionHistoryId).FirstOrDefault();
+                if (to_del_transactiohistory != null)
+                {
+                    db.Entry(to_del_transactiohistory).State = EntityState.Deleted;
+                    db.Entry(to_edit).State = EntityState.Deleted;
+                }
             }
+          
+          
+            var to_del = db.Promises.Where(s => s.Id == promiseId).FirstOrDefault();
+            to_del.IsDelete = true;
+            db.Entry(to_del).State = EntityState.Modified;
             await db.SaveChangesAsync();
             return true;
         }

@@ -95,6 +95,12 @@ namespace SingSiamOffice.Models
         //ตรวจสอบ Slip
         [NotMapped]
         public bool ck_receipt { get; set; }
+        //เช็คยอดเงิน
+        [NotMapped]
+        public bool ck_amount { get; set; }
+        //จำนวนคงเหลือต่องวด
+        [NotMapped]
+        public decimal amount_remain_pay { get; set; }
     }
     public partial class TransactionHistory 
     {
