@@ -1069,7 +1069,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
 
                                     }
                                     //  _receiptdesc_toAdd.pending_amount = globalData.RemainingPaid;
-                                    _receiptdesc_toAdd.Usercode = globalData.username;
+                                    _receiptdesc_toAdd.Usercode = globalData.fullname;
                                     _receiptdesc_toAdd.Chargeamt = totalFee;
 
                                     lst_receiptdescs.Add(_receiptdesc_toAdd);

@@ -53,7 +53,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
             var period_remain_qty = lst_receiptdescs.Select(s => s.Promise).FirstOrDefault();
             var max_period = period_remain_qty.Periods;
             
-            var current_period = lst_receiptdescs.Where(s => s.Id == peroidtran_id).FirstOrDefault().Period;
+            var current_period = lst_receiptdescs.Where(s => s.ReceipttranId == receipttran.Id).FirstOrDefault().Period;
             receipt.peroid_remain = (max_period - current_period).ToString();
             receipt.total_fee = receipttran.Charge1amt.ToString();
             receipt.receive_by = globalData.fullname;
