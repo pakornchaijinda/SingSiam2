@@ -778,7 +778,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                                     _receiptdesc_toAdd.PromiseId = _promise.Id;
                                     _receiptdesc_toAdd.BranchId = _promise.BranchId;
                                     _receiptdesc_toAdd.CustomerId = _promise.CustomerId;
-                                    _receiptdesc_toAdd.Receiptno = ReceiptNo;
+                                    _receiptdesc_toAdd.Receiptno = p.receipt_no;
                                     _receiptdesc_toAdd.ReceipttranId = _receipttran_toAdd.Id;
                                     _receiptdesc_toAdd.PeriodtranId = _receipttran_toAdd.peroidtrans_info[i].Id;
                                     _receiptdesc_toAdd.Tdate = DateTime.Now.AddYears(543).ToString("dd/MM/yyyy");
@@ -790,10 +790,14 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                                     _receiptdesc_toAdd.Perioddate = _receipttran_toAdd.peroidtrans_info[i].Tdateformat;
                                     _receiptdesc_toAdd.Chargeamt = _receipttran_toAdd.Charge1amt;
                                     decimal totalDue = 0;
+
+                                    //ดอกเบี้ยที่จ่ายล่วงหน้า
                                     var intpaid = _receipttran_toAdd.peroidtrans_info[i].Receiptdescs.Where(s=>s.PeriodtranId == _receiptdesc_toAdd.PeriodtranId).Select(s => s.Intpaid).FirstOrDefault();
+
                                     if (intpaid != 0)
                                     {
                                         totalDue = ((decimal)_receipttran_toAdd.peroidtrans_info[i].Capital + (decimal)_receipttran_toAdd.peroidtrans_info[i].Interest) - ((decimal)intpaid *-1);
+                                        _receipttran_toAdd.peroidtrans_info[i].Interest = _receipttran_toAdd.peroidtrans_info[i].Interest + intpaid;
                                     }
                                     else 
                                     {
@@ -808,7 +812,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                                             if (globalData.paymentAmount >= totalDue)
                                             {
                                                 _receiptdesc_toAdd.Cappaid = _receipttran_toAdd.peroidtrans_info[i].Capital * -1;
-                                                _receiptdesc_toAdd.Intpaid = _receipttran_toAdd.peroidtrans_info[i].Interest * -1;
+                                                _receiptdesc_toAdd.Intpaid = (_receipttran_toAdd.peroidtrans_info[i].Interest) * -1;
                                                 var total = _receiptdesc_toAdd.Cappaid + _receiptdesc_toAdd.Intpaid;
                                                 _receiptdesc_toAdd.Amount = total;
                                                 globalData.RemainingPaid = globalData.paymentAmount - ((decimal)_receiptdesc_toAdd.Amount * -1);

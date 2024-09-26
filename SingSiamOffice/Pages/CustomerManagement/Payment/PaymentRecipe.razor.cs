@@ -50,7 +50,11 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
             receipt.paid_by = await GetNumberToText.Paid_By((int)receipttran.PaidBy);
             receipt.total_amount = receipttran.Amount.ToString();
             receipt.amount_text = await GetNumberToText.ConvertNumberToThaiWords(Convert.ToInt32(receipttran.Amount));
-            receipt.peroid_remain = receipttran.Periodremain.ToString();
+            var period_remain_qty = lst_receiptdescs.Select(s => s.Promise).FirstOrDefault();
+            var max_period = period_remain_qty.Periods;
+            
+            var current_period = lst_receiptdescs.Where(s => s.Id == peroidtran_id).FirstOrDefault().Period;
+            receipt.peroid_remain = (max_period - current_period).ToString();
             receipt.total_fee = receipttran.Charge1amt.ToString();
             receipt.receive_by = globalData.fullname;
             receipt.deposit = receipttran.Deposit.ToString();

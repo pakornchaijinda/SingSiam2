@@ -277,7 +277,8 @@
                                             }
                                             else
                                             {
-                                                <tr>
+
+                                              @*   <tr>
                                                     <td style="@items.style_color"></td>
                                                     <td style="@items.style_color">@items.Receiptdescs.Where(s => s.PeriodtranId == items.Id).FirstOrDefault().Tdate</td>
                                                     <td style="@items.style_color">@items.Receiptdescs.Where(s => s.PeriodtranId == items.Id).FirstOrDefault().Cappaid</td>
@@ -285,7 +286,25 @@
 
                                                     <td style="@items.style_color">@items.Receiptdescs.Where(s => s.PeriodtranId == items.Id).FirstOrDefault().Amount</td>
                                                     <td style="@items.style_color">@items.Receiptdescs.Where(s => s.PeriodtranId == items.Id).FirstOrDefault().Amount</td>
-                                                </tr>
+                                                </tr> *@
+                                                foreach (var i in items.Receiptdescs)
+                                                {
+                                                    <tr>
+                                                        <td style="@items.style_color"></td>
+                                                        <td style="@items.style_color">@i.Tdate</td>
+                                                        <td style="@items.style_color">@i.Cappaid.Value.ToString("N0")</td>
+                                                        <td style="@items.style_color">@i.Intpaid.Value.ToString("N0")</td>
+                                                        <td style="@items.style_color">@i.Amount.Value.ToString("N0")</td>
+                                                        <td style="@items.style_color">@i.Amount.Value.ToString("N0")</td>
+                                                        <td style="@items.style_color"></td>
+                                                        <td style="@items.style_color"></td>
+                                                        <td>
+                                                            <MudButton Variant="Variant.Outlined" Color="Color.Success" @onclick="()=>receipt(i.ReceipttranId,type_d)">Print</MudButton>
+                                                            <MudButton Variant="Variant.Outlined" Color="Color.Secondary" Disabled>หลักฐานการโอน</MudButton>
+                                                        </td>
+                                                    </tr>
+
+                                                }
                                             }
                                  
                                         }

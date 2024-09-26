@@ -149,31 +149,48 @@ namespace SingSiamOffice.Manage
         {
             try
             {
+               
                 foreach(var items in receiptdesc) 
                 {
                     db.Receiptdescs.Add(items);
                     await db.SaveChangesAsync();
 
-
-                    var to_edit = db.Periodtrans.Where(s => s.Id == items.PeriodtranId).FirstOrDefault();
+                    decimal amount_receipdesc = 0;
+                  
+                   var  to_edit = db.Periodtrans.Include(s => s.Receiptdescs).Where(s => s.Id == items.PeriodtranId).FirstOrDefault();
                     if (to_edit != null)
                     {
                         if (items.payment_method != 4)
                         {
-                            var amount_remain = items.Amount;
-                            if (to_edit.Amount == (amount_remain * -1))
+                            if (to_edit.Receiptdescs.Count > 0)
                             {
+                                var amountPaid = to_edit.Receiptdescs.OrderByDescending(s => s.Id).FirstOrDefault();
+                                amount_receipdesc = (decimal)amountPaid.Amount * -1;
+                            }
+                            else 
+                            {
+                                amount_receipdesc = (decimal)to_edit.Amount *-1;
+                            }
+                            var amount_remain = items.Amount;
+                           
+                            if (amount_receipdesc == (amount_remain * -1))
+                            {
+                                
+                                to_edit.Cappaid = Math.Abs((decimal)to_edit.Receiptdescs.Sum(s=>s.Cappaid));
+                                to_edit.Intpaid = Math.Abs((decimal)to_edit.Receiptdescs.Sum(s => s.Intpaid));
+                                to_edit.Paidamount = Math.Abs((decimal)to_edit.Receiptdescs.Sum(s => s.Amount));
                                 to_edit.Ispaid = true;
                                 to_edit.Status = 1;
                             }
                             else
                             {
+                                to_edit.Cappaid = Math.Abs((decimal)items.Cappaid);
+                                to_edit.Intpaid = Math.Abs((decimal)items.Intpaid);
+                                to_edit.Paidamount = Math.Abs((decimal)items.Amount);
                                 to_edit.Ispaid = false;
                             }
 
-                            to_edit.Cappaid = Math.Abs((decimal)items.Cappaid);
-                            to_edit.Intpaid = Math.Abs((decimal)items.Intpaid);
-                            to_edit.Paidamount = Math.Abs((decimal)items.Amount);
+                      
                             to_edit.Paidremain = items.pending_amount;
                         }
                         else 
