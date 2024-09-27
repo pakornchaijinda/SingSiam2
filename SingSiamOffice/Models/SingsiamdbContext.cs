@@ -1746,7 +1746,9 @@ public partial class SingsiamdbContext : DbContext
 
             entity.Property(e => e.TransactionId).HasColumnName("Transaction_id");
             entity.Property(e => e.BranchId).HasColumnName("Branch_id");
-            entity.Property(e => e.ConfirmTransection).HasColumnName("confirm_transection");
+            entity.Property(e => e.ConfirmTransection)
+                .HasDefaultValueSql("((0))")
+                .HasColumnName("confirm_transection");
             entity.Property(e => e.CreateAt)
                 .HasColumnType("datetime")
                 .HasColumnName("Create_at");
