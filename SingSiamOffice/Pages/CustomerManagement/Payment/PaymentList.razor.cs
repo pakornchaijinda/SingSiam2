@@ -276,7 +276,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                     p.p_paidprincipleAmount = _periodtran.Where(s => s.Ispaid == false).Sum(p => (decimal)p.Capital);
                     var remain_amount = _periodtran.Where(s => s.Ispaid == false).Sum(p => (decimal)p.Paidremain) * -1;
                     p.p_paidinterestAmount = _periodtran.Where(s => s.Ispaid == false).Sum(p => (decimal)p.Interest) - remain_amount;
-                    var ckoverpay = _periodtran.Where(s => s.Ispaid == false && s.check_overpay == true).Sum(p => (decimal)p.Interest);
+                    var ckoverpay = _periodtran.Where(s => s.Ispaid == false && s.check_overpay == false).Sum(p => (decimal)p.Interest);
                     if (ckoverpay != 0)
                     {
                         p.p_paidinterestAmountDiscount = ckoverpay;
@@ -302,7 +302,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                     p.p_paidprincipleAmount = _periodtran.LastOrDefault().Capital;
 
                     p.p_paidinterestAmount = _periodtran.Where(s=>s.Ispaid == false).Sum(s=>s.Interest);
-                    var ckoverpay = _periodtran.Where(s => s.Ispaid == false && s.check_overpay == true).Sum(p => (decimal)p.Interest);
+                    var ckoverpay = _periodtran.Where(s => s.Ispaid == false && s.check_overpay == false).Sum(p => (decimal)p.Interest);
                     if (ckoverpay != 0)
                     {
                         p.p_paidinterestAmountDiscount = ckoverpay;
