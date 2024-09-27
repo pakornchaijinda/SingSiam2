@@ -222,6 +222,7 @@
                                                 @if (data.SubjectId == 4 || data.SubjectId == 21)
                                                 {
 
+
                                                     <td>
                                                         @data.Subject.SubjectName @data.Detial <strong>
                                                             [ @data.Price.ToString("N0") ]
@@ -229,13 +230,18 @@
                                                             {
                                                                 <span style="text-decoration: underline; color:limegreen"> ยืนยันเรียบร้อย</span>
                                                             }
+                                                            else if (data.ConfirmTransection.Value == null)
+                                                            {
+                                                                <span style="text-decoration: underline;">ยังไม่ได้ยืนยัน</span>
+                                                            }
                                                             else
                                                             {
-                                                                <span style="text-decoration: underline; ">สาขาต้นทางยังไม่ได้ยืนยัน</span>
 
+                                                                <span style="text-decoration: underline;">ปฎิเสธรายการ</span>
                                                             }
                                                         </strong>
                                                     </td>
+
 
                                                 }
                                                 else if (data.Subject.SubjectType > 2)
