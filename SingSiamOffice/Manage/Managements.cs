@@ -66,7 +66,7 @@ namespace SingSiamOffice.Manage
         public async Task<List<Periodtran>> GetPeriodtransbyPromiseId(int promise_id)
         {
             var config = db.Configs.AsNoTracking().Where(s => s.Id == 1).FirstOrDefault();
-            var data = db.Periodtrans.AsNoTracking().Include(s => s.Customer).Include(s => s.Branch).Include(s=>s.Receiptdescs).Where(s => s.PromiseId == promise_id && s.Status != 2 && s.Promise.IsDelete == false).ToList();
+            var data = db.Periodtrans.AsNoTracking().Include(s=>s.Promise).Include(s => s.Customer).Include(s => s.Branch).Include(s=>s.Receiptdescs).Where(s => s.PromiseId == promise_id && s.Status != 2 && s.Promise.IsDelete == false).ToList();
             var receipt = db.Receiptdescs.AsNoTracking().Where(s=>s.PromiseId == promise_id).ToList();
             int cnt_overpayment = 0;
             foreach (var periodtran in data)

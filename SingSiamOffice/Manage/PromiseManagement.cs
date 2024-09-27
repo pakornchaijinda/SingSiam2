@@ -155,8 +155,9 @@ namespace SingSiamOffice.Manage
                     db.Receiptdescs.Add(items);
                     await db.SaveChangesAsync();
 
+
                     decimal amount_receipdesc = 0;
-                  
+                    decimal amount_remain = 0;
                    var  to_edit = db.Periodtrans.Include(s => s.Receiptdescs).Where(s => s.Id == items.PeriodtranId).FirstOrDefault();
                     if (to_edit != null)
                     {
@@ -164,16 +165,22 @@ namespace SingSiamOffice.Manage
                         {
                             if (to_edit.Receiptdescs.Count > 0)
                             {
-                                var amountPaid = to_edit.Receiptdescs.OrderByDescending(s => s.Id).FirstOrDefault();
-                                amount_receipdesc = (decimal)amountPaid.Amount * -1;
+                                var amountPaid = to_edit.Receiptdescs.OrderByDescending(s => s.Id).ToList();
+                                foreach (var item in amountPaid) 
+                                {
+                                    amount_receipdesc += (decimal)item.Amount * -1;
+                                }
+                               
+                                amount_remain = (decimal)items.Periodtran.Amount;
                             }
                             else 
                             {
                                 amount_receipdesc = (decimal)to_edit.Amount *-1;
+                                amount_remain = (decimal)items.Amount;
                             }
-                            var amount_remain = items.Amount;
                            
-                            if (amount_receipdesc == (amount_remain * -1))
+                           
+                            if (amount_receipdesc == (amount_remain))
                             {
                                 
                                 to_edit.Cappaid = Math.Abs((decimal)to_edit.Receiptdescs.Sum(s=>s.Cappaid));
