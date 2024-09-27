@@ -116,6 +116,8 @@
         public decimal? p_paidprincipleAmount { get; set; }
         public decimal? p_paidinterestAmount { get; set; }
 
+        public decimal? p_paidinterestAmountDiscount { get; set; }
+
         public string p_close_type_status { get; set; }
 
         public decimal? intplus { get; set; } = 0m;

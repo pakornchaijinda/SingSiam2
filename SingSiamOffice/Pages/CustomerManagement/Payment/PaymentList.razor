@@ -385,7 +385,7 @@
                                                                         </div>
                                                                     </div>
 
-                                                                    <MudRadioGroup T="int" @bind-Value="p.payment_Menthod">
+                                                                    <MudRadioGroup T="int" @bind-Value="payment_method">
 
                                                                         <MudRadio Value="1" Color="Color.Success" UnCheckedColor="Color.Default">เงินสด</MudRadio>
                                                                         <MudRadio Value="2" Color="Color.Secondary" UnCheckedColor="Color.Default">เงินโอน</MudRadio>
@@ -588,7 +588,7 @@
                                                                     <div>
                                                                         <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">ดอกเบี้ยที่ลดได้  :</div>
-                                                                            <input type="text" class="form-control text-end" value="@p.p_paidinterestAmount.Value.ToString("N0")" style="@boxfieldred" disabled>
+                                                                            <input type="text" class="form-control text-end" value="@p.p_paidinterestAmountDiscount.Value.ToString("N0")" style="@boxfieldred" disabled>
                                                                         </div>
                                                                     </div>
                                                                     <div>
@@ -598,7 +598,7 @@
                                                                         </div>
                                                                     </div>
 
-                                                                    <MudRadioGroup T="int" @bind-Value="p.payment_Menthod">
+                                                                    <MudRadioGroup T="int" @bind-Value="payment_method">
                                                                     
                                                                         <MudRadio Value="1" Color="Color.Success" UnCheckedColor="Color.Default">เงินสด</MudRadio>
                                                                         <MudRadio Value="2" Color="Color.Secondary" UnCheckedColor="Color.Default">เงินโอน</MudRadio>
@@ -614,7 +614,7 @@
                                                                     </MudSelect>
                                                                     <div class="row">
                                                                         <div class="col-12 text-center">
-                                                                            @if (p.payment_Menthod == 2)
+                                                                            @if (payment_method == 2)
                                                                             {
                                                                                 @if (_formModel.PreviewUrl != null)
                                                                                 {
@@ -634,7 +634,7 @@
                                                                                     </ButtonTemplate>
                                                                                 </MudFileUpload>
                                                                             }
-                                                                            @if (p.payment_Menthod == 3)
+                                                                            @if (payment_method == 3)
                                                                             {
                                                                                 <MudStack Spacing="1">
                                                                                     <div class="row">
