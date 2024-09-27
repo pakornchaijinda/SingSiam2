@@ -78,7 +78,7 @@ namespace SingSiamOffice.Pages.Expense
                             CreateAt = DateTime.Now,
                             LoginId = userLogin.Id,
                             Detial = description,
-                            ConfirmTransection = false,
+                            ConfirmTransection = null,
                             PaymentMethod = 2,
                         };
                         db.TransactionHistories.Add(Add_expren);
@@ -92,7 +92,7 @@ namespace SingSiamOffice.Pages.Expense
                             Price = amount,
                             CreateAt = DateTime.Now,
                             LoginId = userLogin.Id,
-                            ConfirmTransection = false,
+                            ConfirmTransection = null,
                             Detial = description1+ " ได้รับเงินโอนเงินจากสาขา: " + my_b.BranchName + " | " + my_b.BranchName,
                             TransectionIdRef = Add_expren.TransactionId,
                             PaymentMethod = 2
