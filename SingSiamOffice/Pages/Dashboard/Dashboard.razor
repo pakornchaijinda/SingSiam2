@@ -457,18 +457,19 @@
     {
 
 
-       // branchService.branch_ID = b_id;
+        // branchService.branch_ID = b_id;
         b_info = db.Branches.Where(s => s.Id == b_id).FirstOrDefault();
         list_transection = db.TransactionHistories.Include(s => s.Subject).Include(s => s.Login).Where(s => s.BranchId == b_id).AsNoTracking().OrderByDescending(s => s.CreateAt).ToList();
         //remove transection not confirm
         //var to_calulate = list_transection.Where(s => !(s.SubjectId == 4 && s.ConfirmTransection == false) && !(s.SubjectId == 21 && s.ConfirmTransection == false) && s.Subject.SubjectType != 34).ToList();
-         var to_calulate = list_transection.Where(s =>  !(s.SubjectId == 21 && s.ConfirmTransection == false) && s.Subject.SubjectType != 34).ToList();
+        var to_calulate = list_transection.Where(s => !(s.SubjectId == 21 && s.ConfirmTransection == false) && s.Subject.SubjectType != 34).ToList();
         var total_income = to_calulate.Where(s => s.Subject.SubjectType == 1);
         var total_expent = to_calulate.Where(s => s.Subject.SubjectType == 2);
+        var false_confirm = total_expent.Where(s => s.SubjectId == 4 && s.ConfirmTransection == false).ToList();
         var deposit = to_calulate.Where(s => s.Subject.SubjectType == 4).Sum(s => s.Price); //ฝาก
         var withdraw = to_calulate.Where(s => s.Subject.SubjectType == 3).Sum(s => s.Price); //ถอน
 
-        total_2 = total_income.Where(s => s.PaymentMethod == 2).Sum(s => s.Price) - total_expent.Where(s => s.PaymentMethod == 2).Sum(s => s.Price) + deposit - withdraw; //ยอดคงเหลือในบัญชี
+        total_2 = total_income.Where(s => s.PaymentMethod == 2).Sum(s => s.Price) - total_expent.Where(s => s.PaymentMethod == 2).Sum(s => s.Price) +false_confirm.Sum(s=>s.Price)+ deposit -withdraw; //ยอดคงเหลือในบัญชี
         total_3 = total_income.Where(s => s.PaymentMethod == 1).Sum(s => s.Price) - total_expent.Where(s => s.PaymentMethod == 1).Sum(s => s.Price) + withdraw - deposit; //ยอดคงเหลือเงินสด
         total_1 = total_2 + total_3;
         total_4 = db.Promises.Where(s => s.BranchId == b_id).Sum(s => s.Capital).Value;
