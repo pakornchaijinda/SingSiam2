@@ -382,7 +382,7 @@ namespace SingSiamOffice.Manage
             toEdit.Paidamount = 0;
             toEdit.Status = 0;
             toEdit.Ispaid = false;
-            toEdit.Deposit = 0;
+          
             toEdit.Paidremain = 0;
             db.Entry(toEdit).State = EntityState.Modified;
           //  await db.SaveChangesAsync();

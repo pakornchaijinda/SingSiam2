@@ -59,7 +59,7 @@ namespace SingSiamOffice.Manage
         public async Task<Receipttran?> GetReceipttran_bypromiseId(int promiseId)
         {
 
-            var data = db.Receipttrans.Include(s => s.Promise).ThenInclude(s => s.Customer).Include(s => s.Branch).Where(s => s.PromiseId == promiseId).AsNoTracking().OrderByDescending(s => s.Id).FirstOrDefault();
+            var data = db.Receipttrans.Include(s => s.Promise).ThenInclude(s=> s.Periodtrans).ThenInclude(s => s.Customer).Include(s => s.Branch).Where(s => s.PromiseId == promiseId).AsNoTracking().OrderByDescending(s => s.Id).FirstOrDefault();
             
             return data;
         }
@@ -314,11 +314,14 @@ namespace SingSiamOffice.Manage
             thaiCulture.DateTimeFormat.Calendar = new ThaiBuddhistCalendar();
 
 
+            var capital = promise.Capital;
+            var amount = promise.Amount;
+
             if (ptype == 1)
             {
                 for (int i = 1; i <= promise.Periods; i++)
                 {
-
+                    var cnt_total_capital = lst_periodtrans.Sum(s => s.Capital);
                     Periodtran p = new Periodtran();
                     p.PromiseId = promise.Id;
                     p.BranchId = promise.BranchId;
@@ -328,8 +331,20 @@ namespace SingSiamOffice.Manage
                     p.Periods = Convert.ToInt32(promise.Daypaid);
                     p.Tdate = promise.FirstDatePay.AddMonths(i).ToString("dd/MM/yyyy", thaiCulture);
                     p.Tdateformat = promise.FirstDatePay.AddMonths(i).ToString("yyyyMMdd");
-                    p.Capital = promise.CapitalCal;
-                    p.Interest = promise.Interest_Service;
+
+                    if (promise.Periods == i)
+                    {
+                        p.Capital =   capital - cnt_total_capital;
+                        p.Interest = amount - p.Capital;
+
+                    }
+                    else 
+                    {
+                        p.Capital = promise.CapitalCal;
+                        p.Interest = promise.Interest_Service;
+
+                    }
+
                     p.Service = promise.Service;
                     p.Amount = promise.Amount;
                     p.Cappaid = 0;
