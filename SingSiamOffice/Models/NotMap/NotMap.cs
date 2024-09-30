@@ -27,7 +27,7 @@ namespace SingSiamOffice.Models
         public string FormatInterest { get; set; }
         [NotMapped]
         public string FormatAmount {  get; set; }
-        [NotMapped]s
+        [NotMapped]
         public string FormatChargeamt { get; set; }
         [NotMapped]
         public double Sum_Externalar { get; set; }
@@ -103,6 +103,12 @@ namespace SingSiamOffice.Models
         //จำนวนคงเหลือต่องวด
         [NotMapped]
         public decimal amount_remain_pay { get; set; }
+        //ยอดที่ชำระ
+        [NotMapped]
+        public decimal amount_paid { get;set; }
+        //เช็ค ReceiptNo
+        [NotMapped]
+        public bool ck_paid { get; set; }
     }
     public partial class TransactionHistory 
     {

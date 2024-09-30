@@ -136,8 +136,8 @@
 
                                     <td>@items.Receiptdescs.Where(s => s.PeriodtranId == items.Id).FirstOrDefault()?.Chargeamt </td>
                                     <td>@items.Receiptdescs.Where(s => s.PeriodtranId == items.Id).FirstOrDefault()?.Lateamt </td>
-                                    <td>@items.Receiptdescs.Where(s => s.PeriodtranId == items.Id).FirstOrDefault()?.Receipttran.Amount</td>
-                                    <td>@items.Receiptdescs.Where(s => s.PeriodtranId == items.Id).FirstOrDefault()?.Receipttran.Capremain</td>
+                                    <td>@items.amount_paid</td>
+                                    <td>@items.amount_remain</td>
                                 </tr>
 
 
@@ -201,7 +201,41 @@
 
 
         _promises.Interest = (decimal)_promises.Periodtrans.Select(s => s.Interest).FirstOrDefault();
-        _periodtrans = db.Periodtrans.Include(s => s.Receiptdescs).ThenInclude(s=>s.Receipttran).Where(s => s.PromiseId == promise_id).ToList();
+        _periodtrans = db.Periodtrans.Include(s=>s.Promise).Include(s => s.Receiptdescs).ThenInclude(s=>s.Receipttran).Where(s => s.PromiseId == promise_id).ToList();
+        decimal CapitalRemain = 0m;
+        List<int> list_receipttrans = new List<int>();
+        list_receipttrans = db.Receiptdescs.AsNoTracking().Where(s => s.PromiseId == promise_id).Select(s => s.ReceipttranId).Distinct().ToList();
+        foreach (var items in _periodtrans )
+        {
+            if (items.Receiptdescs.Where(s => s.PeriodtranId == items.Id).Select(s => s.Receipttran.Receiptdesc).FirstOrDefault() == "ปิดสัญญาก่อนกำหนด")
+            {
+               
+                    items.amount_paid = (decimal)items.Receiptdescs.Where(s => s.PeriodtranId == items.Id && list_receipttrans.Contains(s.ReceipttranId)).Select(s => s.Receipttran.Netamount).FirstOrDefault();
+              
+               
+
+            }
+            else
+            {
+                // var receipttrans_Id = items.Receiptdescs.Where(s => s.PeriodtranId == items.Id).Select(s => s.Receipttran.Id).FirstOrDefault();
+
+                items.amount_paid = (decimal)items.Receiptdescs.Where(s => s.PeriodtranId == items.Id && list_receipttrans.Contains(s.ReceipttranId)).Select(s => s.Receipttran.Amount).FirstOrDefault();
+              
+               
+            }
+            if (items.Period == 1)
+            {
+                items.amount_remain = (decimal)items.Promise.Capital - (decimal)items.Cappaid;
+                CapitalRemain = items.amount_remain;
+            }
+            else
+            {
+                items.amount_remain = (decimal)CapitalRemain - (decimal)items.Cappaid;
+                CapitalRemain = items.amount_remain;
+            }
+
+
+        }
         try
         {
             _guarantor = await Managements.GetGurantorbyPromiseId(promise_id); //ผู้ค้ำ

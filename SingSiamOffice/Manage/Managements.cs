@@ -14,7 +14,7 @@ namespace SingSiamOffice.Manage
         public async Task<List<Promise>> GetPromisebyCustomerId(int customer_id)
         {
             var data = db.Promises.AsNoTracking().Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Product).Include(s => s.Periodtrans).Include(s => s.Province)
-                .Where(s => s.CustomerId == customer_id).OrderBy(s=>s.Promiseno).ToList();
+                .Where(s => s.CustomerId == customer_id && s.IsDelete == false).OrderBy(s=>s.Promiseno).ToList();
             foreach (var promise in data) 
             {
                 promise.StatusName = await text.PromiseStatus((int)promise.Status);

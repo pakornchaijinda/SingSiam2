@@ -215,7 +215,19 @@
                                                                         <td>@items.Capital.Value.ToString("N0")</td>
                                                                         <td>@items.Amount.Value.ToString("N0")</td>
                                                                         <td>@items.Branch.BranchName</td>
-                                                                        <td>@items.StatusName</td>
+                                                                        @if (items.StatusName == "ปิดสัญญา")
+                                                                        {
+                                                                            <td>
+                                                                                <MudChip T="string" Color="Color.Success">@items.StatusName</MudChip>
+                                                                                </td>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <td>
+                                                                                <MudChip T="string" Color="Color.Secondary">@items.StatusName</MudChip>
+                                                                            </td>
+                                                                        }
+
                                                                         <td class="text-end">
                                                                             <MudStack Row="true" Class="mt-2">
                                                                                 <div class="btn-group" role="group">
