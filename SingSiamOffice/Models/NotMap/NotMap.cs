@@ -27,10 +27,12 @@ namespace SingSiamOffice.Models
         public string FormatInterest { get; set; }
         [NotMapped]
         public string FormatAmount {  get; set; }
-        [NotMapped]
+        [NotMapped]s
         public string FormatChargeamt { get; set; }
         [NotMapped]
         public double Sum_Externalar { get; set; }
+        [NotMapped]
+        public string StatusName { get; set; }
     }
     public partial class Periodtran
     {

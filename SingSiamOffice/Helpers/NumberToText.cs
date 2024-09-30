@@ -77,6 +77,20 @@ namespace SingSiamOffice.Helpers
                     return null;
             }
         }
+        public async Task<string> PromiseStatus(int status_number)
+        {
+            switch (status_number)
+            {
+
+                case 0:
+                    return "อยู่ในระหว่างสัญญา";
+                case 2:
+                    return "ปิดสัญญา";
+              
+                default:
+                    return null;
+            }
+        }
         private decimal RoundToNearest(decimal value)
         {
             // ปัดเศษทศนิยม 1 ตำแหน่งและใช้ MidpointRounding.AwayFromZero

@@ -189,6 +189,7 @@
                                                                 <th scope="col">เงินต้น</th>
                                                                 <th scope="col">งวดละ</th>
                                                                 <th scope="col">สาขา</th>
+                                                                <th scope="col">สถานะ</th>
                                                                 <th></th>
                                                             </tr>
                                                         </thead>
@@ -214,7 +215,7 @@
                                                                         <td>@items.Capital.Value.ToString("N0")</td>
                                                                         <td>@items.Amount.Value.ToString("N0")</td>
                                                                         <td>@items.Branch.BranchName</td>
-
+                                                                        <td>@items.StatusName</td>
                                                                         <td class="text-end">
                                                                             <MudStack Row="true" Class="mt-2">
                                                                                 <div class="btn-group" role="group">
@@ -225,7 +226,7 @@
                                                                                         <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>viewContract( items.CustomerId,items.Id,items.BranchId)">ดูข้อมูลสัญญา</a></li>
                                                                                         <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>printContract(items.Id)">พิมพ์สัญญา</a></li>
                                                                                       
-                                                                                        @if (userLogin.RoleId != 3)
+                                                                                        @if (userLogin.RoleId != 3 && items.Status != 2)
                                                                                         {
                                                                                             <li><a style="cursor:pointer; background-color:red; color:#fff;" class="dropdown-item" @onclick="()=>deleteContract(items.Id)">ลบสัญญา</a></li>
                                                                                         }
@@ -238,9 +239,13 @@
                                                                                         ชำระค่างวด
                                                                                     </button>
                                                                                     <ul class="dropdown-menu" aria-labelledby="paymentdropdown">
-                                                                                        <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>goPayment(items.CustomerId,items.Id,items.BranchId)">ชำระค่างวด</a></li>
+                                                                                        @if (items.Status != 2)
+                                                                                        {
+                                                                                            <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>goPayment(items.CustomerId,items.Id,items.BranchId)">ชำระค่างวด</a></li>
+                                                                                        }
+                                                                                      
                                                                                         <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>printPaymentDetail(items.Id)">พิมพ์รายละเอียด</a></li>
-                                                                                        @if (userLogin.RoleId != 3)
+                                                                                        @if (userLogin.RoleId != 3 && items.Status != 2)
                                                                                         {
                                                                                             <li><a style="cursor:pointer; background-color:red; color:#fff;" class="dropdown-item" @onclick="()=>canclePayment(items.Id)">ยกเลิกใบเสร็จ</a></li>
                                                                                         }

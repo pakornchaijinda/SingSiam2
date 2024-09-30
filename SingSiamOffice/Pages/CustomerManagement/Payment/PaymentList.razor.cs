@@ -1094,8 +1094,15 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                                 await JSRuntime.InvokeVoidAsync("paymentsuccess");
                                 await Task.Delay(100);
 
+                                if (activeIndex == 0)
+                                {
+                                    navigationManager.NavigateTo($"/paymentlist/{branch_id}/{c_id}/{promise_id}", forceLoad: true);
+                                }
+                                else 
+                                {
+                                    navigationManager.NavigateTo($"/customerlist/{branch_id}/{c_id}", forceLoad: true);
+                                }
                                
-                                navigationManager.NavigateTo($"/paymentlist/{branch_id}/{c_id}/{promise_id}", forceLoad: true);
                             }
                             else
                             {

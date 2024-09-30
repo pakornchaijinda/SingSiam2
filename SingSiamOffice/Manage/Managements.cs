@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using SingSiamOffice.Helpers;
 using SingSiamOffice.Models;
 using System.ComponentModel;
 using System.Globalization;
@@ -9,13 +10,14 @@ namespace SingSiamOffice.Manage
     public class Managements
     {
         SingsiamdbContext db = new SingsiamdbContext();
-
+        NumberToText text = new NumberToText();
         public async Task<List<Promise>> GetPromisebyCustomerId(int customer_id)
         {
             var data = db.Promises.AsNoTracking().Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Product).Include(s => s.Periodtrans).Include(s => s.Province)
-                .Where(s => s.CustomerId == customer_id && s.Status != 2 && s.IsDelete == false).ToList();
+                .Where(s => s.CustomerId == customer_id).OrderBy(s=>s.Promiseno).ToList();
             foreach (var promise in data) 
             {
+                promise.StatusName = await text.PromiseStatus((int)promise.Status);
                 promise.FormatCapital = promise.Capital.Value.ToString("N0");
                 promise.FormatAmount = promise.Amount.Value.ToString("N0");
                 promise.FormatInterest = promise.Intrate.Value.ToString("N0");
