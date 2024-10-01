@@ -114,6 +114,7 @@ namespace SingSiamOffice.Manage
                         periodtran.amount_remain = (decimal)periodtran.Amount;
                         cnt_overpayment += 1;
                         periodtran.OverPayQty = cnt_overpayment;
+                      
                         if (periodtran.latedate >= 30)
                         {
                             if (cnt_overpayment >0)
@@ -122,7 +123,7 @@ namespace SingSiamOffice.Manage
                             }
                           
                         }
-
+                        periodtran.total_amount_per_period = (decimal)periodtran.Amount + periodtran.total_fee + periodtran.total_charge_follow;
                     }
                     else
                     {

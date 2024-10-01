@@ -109,6 +109,10 @@ namespace SingSiamOffice.Models
         //เช็ค ReceiptNo
         [NotMapped]
         public bool ck_paid { get; set; }
+
+        //ยอดที่ชำระรวมค่าปรับและค่าติดตาม
+        [NotMapped]
+        public decimal total_amount_per_period { get; set; }
     }
     public partial class TransactionHistory 
     {

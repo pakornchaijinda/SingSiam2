@@ -192,7 +192,9 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
             p.origin_fine = _periodtran.Sum(p => p.total_fee).ToString("N0");
             p.custom_fine = _periodtran.Sum(p => p.total_fee).ToString("N0");
             totalFee = Convert.ToDecimal(p.origin_fine);
-           p.total_Charge_follow = _periodtran.Sum(p => p.total_charge_follow).ToString("N0");
+            //p.Minimumfine = _periodtran.Where(s => s.check_overpay == true).Where(s => s.OverPayQty > 0).FirstOrDefault().total_fee;
+            p.Minimumpayment = _periodtran.Where(s => s.check_overpay == true).Where(s => s.OverPayQty > 0).FirstOrDefault().Amount;
+            p.total_Charge_follow = _periodtran.Sum(p => p.total_charge_follow).ToString("N0");
 
             if (p.overpay_qty > 0)
             {
@@ -244,6 +246,8 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
 
                 if (p.overpay_qty > 0)
                 {
+                    //p.Minimumfine = _periodtran.Where(s => s.check_overpay == true).Where(s => s.OverPayQty > 0).FirstOrDefault().total_fee;
+                    p.Minimumpayment = _periodtran.Where(s => s.check_overpay == true).Where(s => s.OverPayQty > 0).FirstOrDefault().Amount;
                     p.base_temp_total_deptAmount = (_periodtran.Where(s => s.check_overpay == true).Sum(p => p.amount_remain) + Convert.ToDecimal(p.origin_fine) + Convert.ToDecimal(p.total_Charge_follow));
                     p.total_deptAmount = (_periodtran.Where(s => s.check_overpay == true).Sum(p => p.amount_remain) + Convert.ToDecimal(p.origin_fine) + Convert.ToDecimal(p.total_Charge_follow)).ToString("N0");
                     p.pending_amount = (((_promise_pay.total_deptAmount - _promise_pay.total_deposit) + _promise_pay.total_fee) + _promise_pay.total_charge_follow).ToString("N0");
@@ -414,11 +418,11 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                    // p.p_total_deptAmount = p.base_temp_total_deptAmount.ToString("N0") ;
                     if (totalFee != 0)
                     {
-                        p.p_total_deptAmount = ((decimal)p.p_paidprincipleAmount + (decimal)p.p_paidinterestAmount + totalFee).ToString("N0");
+                        p.p_total_deptAmount = (((decimal)p.p_paidprincipleAmount + (decimal)p.p_paidinterestAmount + totalFee) - Convert.ToDecimal(p.p_total_deposit)).ToString("N0");
                     }
                     else
                     {
-                        p.p_total_deptAmount = ((decimal)p.p_paidprincipleAmount + (decimal)p.p_paidinterestAmount + Convert.ToDecimal(p.p_origin_fine)).ToString("N0");
+                        p.p_total_deptAmount = ((decimal)p.p_paidprincipleAmount + (decimal)p.p_paidinterestAmount + Convert.ToDecimal(p.p_origin_fine) - Convert.ToDecimal(p.p_total_deposit)).ToString("N0");
                         p.base_temp_total_deptAmount = ((decimal)p.p_paidprincipleAmount + (decimal)p.p_paidinterestAmount + Convert.ToDecimal(p.p_origin_fine));
                     }
                     //p.p_total_deptAmount = _periodtran.Where(s => s.Ispaid == false).Sum(p => (decimal)p.Amount).ToString("N0");
@@ -584,16 +588,22 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                     {
                         if (activeIndex == 0)
                         {
-                            if (Convert.ToDecimal(p.customerPayAmount) >= Convert.ToDecimal(p.total_deptAmount))
+                           
+                            if (Convert.ToDecimal(p.customerPayAmount) >= (p.Minimumpayment))
                             {
-
+                                p.temp_total_deptAmount = Convert.ToDecimal(p.customerPayAmount);
                                 decimal cal_period_pay = ((Convert.ToDecimal(p.customerPayAmount) - totalFee) - Convert.ToDecimal(p.total_Charge_follow)) / (decimal)_promise.Amount;
                                 var period_pay_qty = (int)Math.Ceiling(cal_period_pay);
                                 int remainingInstallments = (int)_periodtran.Where(s => s.Ispaid == false).Count() - (int)Math.Floor(cal_period_pay);
 
+                                //รายการที่ยังไม่ได้ชำระ
                                 var _periodtran_detail =  _periodtran.Where(s => s.Ispaid == false).Take(period_pay_qty).ToList();
 
+                                //รายการงวดที่เลยค้างชำระ 
+                                var amount_per_month_check_overpay = _periodtran.Where(s => s.Ispaid == false && s.check_overpay == true).Take(period_pay_qty).ToList();
+
                                 decimal cus_totalpay = Convert.ToDecimal(p.customerPayAmount) + Convert.ToDecimal(p.total_deposit);
+
                                 foreach (var item in _periodtran_detail)
                                 {
                                     if (item.Deposit != 0)
@@ -661,84 +671,8 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                                 _receipttran_toAdd.Tdateformat = DateTime.Now.ToString("yyyyMMdd");
                                 _receipttran_toAdd.Tdatecal = DateTime.Now.AddYears(543).ToString("dd/MM/yyyy");
                                 _receipttran_toAdd.Tdatecalformat = DateTime.Now.ToString("yyyyMMdd");
+                                //รายการงวดที่จ่าบ
                                 _receipttran_toAdd.peroidtrans_info = _periodtran.Where(s => s.Ispaid == false).Take(period_pay_qty).ToList();
-
-                                if (close_type_status == null)
-                                {
-                                    _receipttran_toAdd.Closecase = "-";
-                                }
-                                else
-                                {
-                                    _receipttran_toAdd.Closecase = close_type_status;
-                                }
-                                if (payment_method != 4)
-                                {
-                                   
-                                    var amount_per_month_check_overpay = _periodtran.Where(s => s.Ispaid == false && s.check_overpay == true).ToList();
-                                    if (amount_per_month_check_overpay.Count() != 0)
-                                    {
-                                        p.Arbalance = amount_per_month_check_overpay.Sum(s=>s.Amount) + amount_per_month_check_overpay.Sum(s=>s.Deposit);
-                                        _receipttran_toAdd.Cappaid = amount_per_month_check_overpay.Sum(s => s.Capital);
-                                        _receipttran_toAdd.Intpaid = amount_per_month_check_overpay.Sum(s => s.Interest);
-                                    }
-                                    else 
-                                    {
-                                       
-                                     
-                                        p.Arbalance = _periodtran_detail.Where(s=>s.ck_amount == true).Sum(s => s.Amount) - _periodtran_detail.Where(s => s.ck_amount == true).Sum(s => s.Intpaid);
-                                       
-                                        _receipttran_toAdd.Cappaid = _periodtran_detail.Where(s=>s.ck_amount == true).Sum(s => s.Capital);
-                                        _receipttran_toAdd.Intpaid = _periodtran_detail.Where(s => s.ck_amount == true).Sum(s => s.Interest) - _periodtran_detail.Where(s => s.ck_amount == true).Sum(s => s.Intpaid);
-                                    }
-
-
-                                    _receipttran_toAdd.Arbalance = p.Arbalance + totalFee + Convert.ToDecimal(p.total_Charge_follow);
-
-
-
-                                  
-                                    Receipttran? Capremain_before = await managements.GetReceipttran_bypromiseId(promise_id);
-                                    if (Capremain_before == null)
-                                    {
-                                        _receipttran_toAdd.Capremain = _promise.Capital - _receipttran_toAdd.Cappaid;
-                                        var sum_interate = _periodtran.Where(s => s.Ispaid == false).Sum(s => s.Interest);
-                                        _receipttran_toAdd.Intremain = sum_interate - _receipttran_toAdd.Intpaid;
-                                    }
-                                    else
-                                    {
-                                        var totalcapital = Capremain_before.Promise.Periodtrans.Sum(s => s.Capital);
-                                        var capremain_amount =totalcapital - Capremain_before.Promise.Periodtrans.Where(s => s.Ispaid == true).Sum(s => s.Cappaid);
-                                        _receipttran_toAdd.Capremain = capremain_amount - _receipttran_toAdd.Cappaid;
-                                        var totalinterate = Capremain_before.Promise.Periodtrans.Sum(s => s.Interest);
-                                        var Interemain_amount =totalinterate - Capremain_before.Promise.Periodtrans.Where(s => s.Ispaid == true).Sum(s => s.Intpaid);
-                                        var sum_interate = Interemain_amount;
-                                        _receipttran_toAdd.Intremain = sum_interate - _receipttran_toAdd.Intpaid;
-                                    }
-
-
-                                    _receipttran_toAdd.Charge1amt = totalFee;
-                                    _receipttran_toAdd.Charge2amt = Convert.ToDecimal(p.total_Charge_follow);
-                                    var count_periodtran = _periodtran.Where(s => s.Ispaid == false).Count();
-                                    if (count_periodtran == _promise.Periods)
-                                    {
-                                        _receipttran_toAdd.Periodremain = _promise.Periods - 1;
-
-                                    }
-                                    else
-                                    {
-                                        _receipttran_toAdd.Periodremain = count_periodtran;
-                                    }
-                                }
-                                else
-                                {
-                                    current_periods = await managements.GetCurrentPeriod(promise_id);
-                                    _receipttran_toAdd.Periodchg = current_periods;
-                                    _receipttran_toAdd.Periodremain = _promise.Periods - 1;
-                                }
-
-
-
-
                                 _receipttran_toAdd.Usercode = globalData.fullname;
 
                                 if (payment_method == 1)
@@ -762,10 +696,136 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                                     _receipttran_toAdd.PaidBy = 4;
                                 }
 
+                                //แสดงงวดปัจจุบัน
                                 _receipttran_toAdd.Currentperiod = _periodtran.Where(s => s.Ispaid == false).Select(s => s.Period).FirstOrDefault();
+
+
+                                //สถานะบัญชี
+                                if (close_type_status == null)
+                                {
+                                    _receipttran_toAdd.Closecase = "-";
+                                }
+                                else
+                                {
+                                    _receipttran_toAdd.Closecase = close_type_status;
+                                }
+
+                                if (payment_method != 4)
+                                {
+                                   
+                                 
+                                    if (amount_per_month_check_overpay.Count() != 0)
+                                    {
+                                        var totalFine = _receipttran_toAdd.peroidtrans_info.Sum(s => s.total_fee);
+                                        var totalFollowCharge = _receipttran_toAdd.peroidtrans_info.Sum(s => s.total_charge_follow);
+                                        var totalInterest = _receipttran_toAdd.peroidtrans_info.Sum(s => s.Interest);
+                                        var totalCapital = _receipttran_toAdd.peroidtrans_info.Sum(s => s.Capital);
+
+                                        p.Arbalance = p.temp_total_deptAmount;
+                                        p.temp_total_deptAmount = (p.temp_total_deptAmount - totalFine) - totalFollowCharge; 
+                                        //ค่าปรับ
+                                        _receipttran_toAdd.Charge1amt = totalFine;
+                                        //ค่าติดตาม ค่าทวงถาม
+                                        _receipttran_toAdd.Charge2amt = totalFollowCharge;
+
+                                        //p.Arbalance = amount_per_month_check_overpay.Sum(s=>s.Amount) + amount_per_month_check_overpay.Sum(s=>s.Deposit);
+                                       
+                                        if (p.temp_total_deptAmount >= totalInterest)
+                                        {
+                                            p.temp_total_deptAmount = p.temp_total_deptAmount - (decimal)totalInterest;
+                                            _receipttran_toAdd.Intpaid = totalInterest;
+                                        }
+                                        else
+                                        {
+                                            var Intpaid = (decimal)totalInterest - p.temp_total_deptAmount;
+                                            _receipttran_toAdd.Intpaid = p.temp_total_deptAmount;
+                                            p.temp_total_deptAmount -= p.temp_total_deptAmount;
+                                        }
+
+                                        if (p.temp_total_deptAmount >= totalCapital)
+                                        {
+                                            p.temp_total_deptAmount = p.temp_total_deptAmount - (decimal)totalCapital;
+                                            if (p.temp_total_deptAmount >= 0)
+                                            {
+                                                _receipttran_toAdd.Cappaid = totalCapital;
+                                            }
+                                            else 
+                                            {
+                                                _receipttran_toAdd.Cappaid = amount_per_month_check_overpay.Sum(s => s.Capital);
+                                            }
+                                       
+                                        }
+                                        else 
+                                        {
+                                          var cappaid= (decimal)totalCapital - p.temp_total_deptAmount;
+                                          
+                                            _receipttran_toAdd.Cappaid = p.temp_total_deptAmount;
+                                            p.temp_total_deptAmount -= p.temp_total_deptAmount;
+                                        }
+
+                                        //receipttran_toAdd.Cappaid = amount_per_month_check_overpay.Sum(s => s.Capital);
+                                        //_receipttran_toAdd.Intpaid = amount_per_month_check_overpay.Sum(s => s.Interest);
+                                        // _receipttran_toAdd.Arbalance = p.Arbalance + totalFee + Convert.ToDecimal(p.total_Charge_follow);
+                                      
+                                    }
+                                    else 
+                                    {
+                                        p.Arbalance = _periodtran_detail.Where(s=>s.ck_amount == true).Sum(s => s.Amount) - _periodtran_detail.Where(s => s.ck_amount == true).Sum(s => s.Intpaid);
+                                       
+                                        _receipttran_toAdd.Cappaid = _periodtran_detail.Where(s=>s.ck_amount == true).Sum(s => s.Capital);
+                                        _receipttran_toAdd.Intpaid = _periodtran_detail.Where(s => s.ck_amount == true).Sum(s => s.Interest) - _periodtran_detail.Where(s => s.ck_amount == true).Sum(s => s.Intpaid);
+                                        _receipttran_toAdd.Arbalance = p.Arbalance + totalFee + Convert.ToDecimal(p.total_Charge_follow);
+                                        //ค่าปรับ
+                                        _receipttran_toAdd.Charge1amt = totalFee;
+
+                                        //ค่าติดตาม ค่าทวงถาม
+                                        _receipttran_toAdd.Charge2amt = Convert.ToDecimal(p.total_Charge_follow);
+                                    }
+                                   
+                                    //ยอดคงเหลือ
+                                    Receipttran? Capremain_before = await managements.GetReceipttran_bypromiseId(promise_id);
+                                    if (Capremain_before == null)
+                                    {
+                                        _receipttran_toAdd.Capremain = _promise.Capital - _receipttran_toAdd.Cappaid;
+                                        var sum_interate = _periodtran.Where(s => s.Ispaid == false).Sum(s => s.Interest);
+                                        _receipttran_toAdd.Intremain = sum_interate - _receipttran_toAdd.Intpaid;
+                                    }
+                                    else
+                                    {
+                                        var totalcapital = Capremain_before.Promise.Periodtrans.Sum(s => s.Capital);
+                                        var capremain_amount =totalcapital - Capremain_before.Promise.Periodtrans.Where(s => s.Ispaid == true).Sum(s => s.Cappaid);
+                                        _receipttran_toAdd.Capremain = capremain_amount - _receipttran_toAdd.Cappaid;
+                                        var totalinterate = Capremain_before.Promise.Periodtrans.Sum(s => s.Interest);
+                                        var Interemain_amount =totalinterate - Capremain_before.Promise.Periodtrans.Where(s => s.Ispaid == true).Sum(s => s.Intpaid);
+                                        var sum_interate = Interemain_amount;
+                                        _receipttran_toAdd.Intremain = sum_interate - _receipttran_toAdd.Intpaid;
+
+                                    }
+
+                                   
+
+                                    var count_periodtran = _periodtran.Where(s => s.Ispaid == false).Count();
+                                    if (count_periodtran == _promise.Periods)
+                                    {
+                                        _receipttran_toAdd.Periodremain = _promise.Periods - 1;
+
+                                    }
+                                    else
+                                    {
+                                        _receipttran_toAdd.Periodremain = count_periodtran;
+                                    }
+                                }
+                                else
+                                {
+                                    current_periods = await managements.GetCurrentPeriod(promise_id);
+                                    _receipttran_toAdd.Periodchg = current_periods;
+                                    _receipttran_toAdd.Periodremain = _promise.Periods - 1;
+                                }
+
                                 //  _receipttran_toAdd.RemainingPrincipal = ((decimal)customerPayAmount - totalFee) - _promise.Amount;
 
 
+                                //บันทึกลง DB Receipttran
                                 await promiseManagement.addReceipttran(_receipttran_toAdd);
 
 
