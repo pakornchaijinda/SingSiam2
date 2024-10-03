@@ -463,6 +463,8 @@ namespace SingSiamOffice.Pages.Contracts
 
         private string RefAccNoCode { get; set; }
         private bool ck_condition { get; set; } = true;
+
+        public int userLogin {  get; set; } 
         private async Task<IEnumerable<Province>> SearchProvince(string value)
         {
             // In real life use an asynchronous function for fetching data from an api.
@@ -506,7 +508,7 @@ namespace SingSiamOffice.Pages.Contracts
             var promiseNo = await Managements.Get_Promise_No(branch_id, "promiseno");
             PromiseInfo.Promiseno = promiseNo.ToString();
             branch = await Managements.GetBranches(branch_id);
-
+            userLogin = globalData.login_id;
             username = globalData.username;
             bk = await Managements.GetBlackList(c_id);
             if (bk != null)
@@ -801,7 +803,7 @@ namespace SingSiamOffice.Pages.Contracts
                     Price = Convert.ToInt32(b.Chargeamt),
                     BranchId = branch_id,
                     Detial = TaxDetail,
-                    LoginId = globalData.login_id,
+                    LoginId = userLogin,
                     TransectionRef = RefAccNoCode,
                     refcodetrans = b.Refcode,
                     promise_id = b.Id,  
