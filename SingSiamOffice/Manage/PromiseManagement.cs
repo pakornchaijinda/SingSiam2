@@ -38,6 +38,7 @@ namespace SingSiamOffice.Manage
                 SubjectId = 7,
                 Price = items.Price,
                 CreateAt = DateTime.Now,
+                Receiptname = items.Receiptname,
                 LoginId = items.LoginId,
                 Detial = items.Detial,
                 PaymentMethod = 1,

@@ -18,7 +18,7 @@ public partial class TransactionHistory
 
     public string? Detial { get; set; }
 
-    public int LoginId { get; set; }
+    public int? LoginId { get; set; }
 
     public DateTime CreateAt { get; set; }
 
@@ -34,9 +34,11 @@ public partial class TransactionHistory
 
     public int? ReceiopttranId { get; set; }
 
+    public string? Receiptname { get; set; }
+
     public virtual Branch Branch { get; set; } = null!;
 
-    public virtual Login Login { get; set; } = null!;
+    public virtual Login? Login { get; set; }
 
     public virtual Receipttran? Receiopttran { get; set; }
 

@@ -462,6 +462,7 @@ namespace SingSiamOffice.Pages.Contracts
         Collateral3 collateral3 = new Collateral3();
 
         private string RefAccNoCode { get; set; }
+        private string receipt_name { get; set; }
         private bool ck_condition { get; set; } = true;
 
         public int userLogin {  get; set; } 
@@ -510,6 +511,7 @@ namespace SingSiamOffice.Pages.Contracts
             branch = await Managements.GetBranches(branch_id);
             userLogin = globalData.login_id;
             username = globalData.username;
+            receipt_name = globalData.fullname;
             bk = await Managements.GetBlackList(c_id);
             if (bk != null)
             {
@@ -803,7 +805,8 @@ namespace SingSiamOffice.Pages.Contracts
                     Price = Convert.ToInt32(b.Chargeamt),
                     BranchId = branch_id,
                     Detial = TaxDetail,
-                    LoginId = userLogin,
+                  Receiptname = receipt_name,
+                  LoginId = userLogin,
                     TransectionRef = RefAccNoCode,
                     refcodetrans = b.Refcode,
                     promise_id = b.Id,  
