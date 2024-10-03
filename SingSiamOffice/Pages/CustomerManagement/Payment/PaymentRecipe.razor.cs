@@ -55,7 +55,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
             
             var current_period = lst_receiptdescs.Where(s => s.ReceipttranId == receipttran.Id).FirstOrDefault().Period;
             receipt.peroid_remain = (max_period - current_period).ToString();
-            receipt.total_fee = receipttran.Charge1amt.ToString();
+            receipt.total_fee = (receipttran.Charge1amt  + receipttran.Charge2amt).ToString();
             receipt.receive_by = globalData.fullname;
             receipt.deposit = receipttran.Deposit.ToString();
             if (receipttran.Receiptdesc == "รับฝากเงินล่วงหน้า")

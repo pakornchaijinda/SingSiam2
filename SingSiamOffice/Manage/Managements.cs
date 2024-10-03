@@ -14,7 +14,7 @@ namespace SingSiamOffice.Manage
         public async Task<List<Promise>> GetPromisebyCustomerId(int customer_id)
         {
             var data = db.Promises.AsNoTracking().Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Product).Include(s => s.Periodtrans).Include(s => s.Province)
-                .Where(s => s.CustomerId == customer_id && s.IsDelete == false).OrderBy(s=>s.Promiseno).ToList();
+                .Where(s => s.CustomerId == customer_id && s.IsDelete == false).OrderByDescending(s=>s.Id).ToList();
             foreach (var promise in data) 
             {
                 promise.StatusName = await text.PromiseStatus((int)promise.Status);
@@ -68,8 +68,8 @@ namespace SingSiamOffice.Manage
         public async Task<List<Periodtran>> GetPeriodtransbyPromiseId(int promise_id)
         {
             var config = db.Configs.AsNoTracking().Where(s => s.Id == 1).FirstOrDefault();
-            var data = db.Periodtrans.AsNoTracking().Include(s=>s.Promise).Include(s => s.Customer).Include(s => s.Branch).Include(s=>s.Receiptdescs).Where(s => s.PromiseId == promise_id && s.Status != 2 && s.Promise.IsDelete == false).ToList();
-            var receipt = db.Receiptdescs.AsNoTracking().Where(s=>s.PromiseId == promise_id).ToList();
+            var data = db.Periodtrans.AsNoTracking().Include(s=>s.Promise).ThenInclude(s=>s.Receipttrans).Include(s => s.Customer).Include(s => s.Branch).Include(s=>s.Receiptdescs).Where(s => s.PromiseId == promise_id && s.Status != 2 && s.Promise.IsDelete == false).ToList();
+            var receipt = db.Receiptdescs.AsNoTracking().Include(s=>s.Receipttran).Where(s=>s.PromiseId == promise_id).ToList();
             int cnt_overpayment = 0;
             foreach (var periodtran in data)
             {
@@ -77,15 +77,7 @@ namespace SingSiamOffice.Manage
                 periodtran.tdate_pay = DateTime.ParseExact(periodtran.Tdateformat, "yyyyMMdd", null);
                 periodtran.currentdate = DateTime.ParseExact(DateTime.Now.ToString("yyyyMMdd"), "yyyyMMdd", null);
                 periodtran.ck_receipt = receipt.Any(s => s.PeriodtranId == periodtran.Id);
-                try
-                {
-                    if (receipt.Any(s => s.PeriodtranId == periodtran.Id))
-                    {
-                        periodtran.Paidremain = receipt.Where(s => s.PeriodtranId == periodtran.Id).FirstOrDefault().Amount;
-                    }
-                  
-                }
-                catch (Exception ex) { periodtran.Paidremain = 0; }
+              
                 if (periodtran.Deposit != 0)
                 { periodtran.ck_deposit = true; }
                 else 
@@ -124,6 +116,8 @@ namespace SingSiamOffice.Manage
                           
                         }
                         periodtran.total_amount_per_period = (decimal)periodtran.Amount + periodtran.total_fee + periodtran.total_charge_follow;
+
+                      
                     }
                     else
                     {
@@ -132,16 +126,38 @@ namespace SingSiamOffice.Manage
                         periodtran.check_overpay = false;
                       
                     }
-                }
-                if (periodtran.Paidremain != 0)
-                {
-                    periodtran.amount_remain = (decimal)periodtran.Amount + (decimal)periodtran.Paidremain;
-                    periodtran.total_deptAmount = (decimal)periodtran.amount_remain;
-                  
+
+                    try
+                    {
+                        if (receipt.Any(s => s.PeriodtranId == periodtran.Id))
+                        {
+                            periodtran.Paidremain = receipt.Where(s => s.PeriodtranId == periodtran.Id).FirstOrDefault().Amount;
+                            //var total_follow_charge = (decimal)receipt.Where(s => s.PeriodtranId == periodtran.Id).Select(s => s.Receipttran.Charge2amt).FirstOrDefault();
+                            //var total_fee = (decimal)receipt.Where(s => s.PeriodtranId == periodtran.Id).Select(s => s.Receipttran.Charge1amt).FirstOrDefault();
+
+                            //if (periodtran.total_charge_follow != 0 && periodtran.total_fee != 0)
+                            //{
+                            //    periodtran.total_charge_follow = periodtran.total_charge_follow - total_follow_charge;
+                            //    periodtran.total_fee = periodtran.total_fee - total_fee;
+                            //}
+
+
+                        }
+
+                    }
+                    catch (Exception ex) { periodtran.Paidremain = 0; }
+
+                    if (periodtran.Paidremain != 0)
+                    {
+                        periodtran.amount_remain = (decimal)periodtran.Amount + (decimal)periodtran.Paidremain;
+                        periodtran.total_deptAmount = (decimal)periodtran.amount_remain;
+
                         periodtran.Paidremain = (decimal)periodtran.Amount + (decimal)periodtran.Paidremain;
-                    
-                  
+
+
+                    }
                 }
+    
             }
 
             return data;

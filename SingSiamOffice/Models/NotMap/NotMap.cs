@@ -113,6 +113,12 @@ namespace SingSiamOffice.Models
         //ยอดที่ชำระรวมค่าปรับและค่าติดตาม
         [NotMapped]
         public decimal total_amount_per_period { get; set; }
+
+        //ค่าปรับ
+        [NotMapped]
+        public decimal charage_origin { get; set; }
+
+
     }
     public partial class TransactionHistory 
     {
@@ -125,6 +131,9 @@ namespace SingSiamOffice.Models
     {
         [NotMapped]
         public List<Periodtran> peroidtrans_info { get; set; }
+        //ค่าปรับ
+        [NotMapped]
+        public decimal charage_origin { get; set; }
     }
     public partial class Receiptdesc
     {
