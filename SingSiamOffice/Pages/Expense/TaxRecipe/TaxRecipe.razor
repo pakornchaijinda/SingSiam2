@@ -306,6 +306,11 @@
         display: flex;
         justify-content: center;
     }
+
+    tr.noBorder th {
+        border-spacing: 0;
+        line-height: 0.3;
+    }
 </style>
 
 
@@ -354,7 +359,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr class="noBorder">
                     <td class="text-start"> @data_json.detail</td>
                     <td class="text-end">@data_json.price.ToString("N0")</td>
                 </tr>

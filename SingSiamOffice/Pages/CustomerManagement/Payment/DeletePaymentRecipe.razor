@@ -299,6 +299,11 @@
         display: flex;
         justify-content: center;
     }
+
+    tr.noBorder th {
+        border-spacing: 0;
+        line-height: 0.3;
+    }
 </style>
 
 
@@ -362,7 +367,7 @@
         <tbody>
             @foreach (var items in lst_receiptdescs)
             {
-                <tr>
+                <tr class="noBorder">
                     @* <th scope="row">@items.Periodtran.Period/@items.Promise.Periods</th> *@
                     <td>@items.Receipttran.Receiptdesc</td>
                     @if (items.Deposit != 0)

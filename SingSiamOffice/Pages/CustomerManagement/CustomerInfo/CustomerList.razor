@@ -255,6 +255,10 @@
                                                                                         {
                                                                                             <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>goPayment(items.CustomerId,items.Id,items.BranchId)">ชำระค่างวด</a></li>
                                                                                         }
+                                                                                        @if (items.Status != 2)
+                                                                                        {
+                                                                                            <li><a style="cursor:pointer;" class="dropdown-item"> พิมพ์ใบเสร็จปิดสัญญา</a></li>
+                                                                                        }
                                                                                       
                                                                                         <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>printPaymentDetail(items.Id)">พิมพ์รายละเอียด</a></li>
                                                                                         @if (userLogin.RoleId != 3 && items.Status != 2)
