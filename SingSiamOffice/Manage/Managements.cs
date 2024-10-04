@@ -14,7 +14,7 @@ namespace SingSiamOffice.Manage
         public async Task<List<Promise>> GetPromisebyCustomerId(int customer_id)
         {
             var data = db.Promises.AsNoTracking().Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Product).Include(s => s.Periodtrans).Include(s => s.Province)
-                .Where(s => s.CustomerId == customer_id && s.IsDelete == false).OrderByDescending(s=>s.Id).ToList();
+                .Where(s => s.CustomerId == customer_id && s.IsDelete == false).OrderBy(s=>s.Status).ThenBy(s=>s.Tdatetime).ToList();
             foreach (var promise in data) 
             {
                 promise.StatusName = await text.PromiseStatus((int)promise.Status);
@@ -166,17 +166,41 @@ namespace SingSiamOffice.Manage
         {
             int receiptran_id = 0;
             List<Receiptdesc> lst_receiptdesc = new List<Receiptdesc>();
-            if (type != "D")
+            lst_receiptdesc = db.Receiptdescs.AsNoTracking().Include(s => s.Promise).ThenInclude(s => s.Product).Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Receipttran).Include(s => s.Periodtran).Where(s => s.ReceipttranId == peroidtran_id).ToList();
+
+            //if (type != "D")
+            //{
+            //    receiptran_id = db.Receiptdescs.AsNoTracking().Where(s => s.PeriodtranId == peroidtran_id).FirstOrDefault().ReceipttranId;
+            //    lst_receiptdesc = db.Receiptdescs.AsNoTracking().Include(s => s.Promise).ThenInclude(s => s.Product).Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Receipttran).Include(s => s.Periodtran).Where(s => s.ReceipttranId == receiptran_id).ToList();
+            //}
+            //else 
+            //{
+            //    lst_receiptdesc = db.Receiptdescs.AsNoTracking().Include(s => s.Promise).ThenInclude(s => s.Product).Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Receipttran).Include(s => s.Periodtran).Where(s => s.ReceipttranId == peroidtran_id).ToList();
+            //}
+
+            foreach (var items in lst_receiptdesc) 
             {
-                receiptran_id = db.Receiptdescs.AsNoTracking().Where(s => s.PeriodtranId == peroidtran_id).FirstOrDefault().ReceipttranId;
-                lst_receiptdesc = db.Receiptdescs.AsNoTracking().Include(s => s.Promise).ThenInclude(s => s.Product).Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Receipttran).Include(s => s.Periodtran).Where(s => s.ReceipttranId == receiptran_id).ToList();
+                items.Amount = items.Amount * -1;
             }
-            else 
-            {
-                lst_receiptdesc = db.Receiptdescs.AsNoTracking().Include(s => s.Promise).ThenInclude(s => s.Product).Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Receipttran).Include(s => s.Periodtran).Where(s => s.ReceipttranId == peroidtran_id).ToList();
-            }
-            
-            foreach(var items in lst_receiptdesc) 
+            return lst_receiptdesc;
+        }
+        public async Task<List<Receiptdesc>> GetReceipttran_Close(int promiseId, string type)
+        {
+            int receiptran_id = 0;
+            List<Receiptdesc> lst_receiptdesc = new List<Receiptdesc>();
+            lst_receiptdesc = db.Receiptdescs.AsNoTracking().Include(s => s.Promise).ThenInclude(s => s.Product).Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Receipttran).Include(s => s.Periodtran).Where(s => s.PromiseId == promiseId && s.Receipttran.Receiptdesc == "ปิดสัญญาก่อนกำหนด").ToList();
+
+            //if (type != "D")
+            //{
+            //    receiptran_id = db.Receiptdescs.AsNoTracking().Where(s => s.PeriodtranId == peroidtran_id).FirstOrDefault().ReceipttranId;
+            //    lst_receiptdesc = db.Receiptdescs.AsNoTracking().Include(s => s.Promise).ThenInclude(s => s.Product).Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Receipttran).Include(s => s.Periodtran).Where(s => s.ReceipttranId == receiptran_id).ToList();
+            //}
+            //else 
+            //{
+            //    lst_receiptdesc = db.Receiptdescs.AsNoTracking().Include(s => s.Promise).ThenInclude(s => s.Product).Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Receipttran).Include(s => s.Periodtran).Where(s => s.ReceipttranId == peroidtran_id).ToList();
+            //}
+
+            foreach (var items in lst_receiptdesc)
             {
                 items.Amount = items.Amount * -1;
             }
@@ -581,6 +605,31 @@ namespace SingSiamOffice.Manage
 
         public string amount { get; set; }
 
-        public string deposit { get; set; } 
+        public string deposit { get; set; }
+
+
+        //ปิดสัญญาก่อนกำหนด
+
+        //งวดคงเหลือ
+        public int peroid_s { get; set; }
+        public int peroid_e { get; set; }
+
+        //ยอดลูกหนี้คงเหลือ
+        public string pending_payment { get; set; }
+        //ชำระค่าปรับ
+        public string payment_fine {  get; set; }
+        //ค่าปิดบัญชี
+
+        public string payment_full { get; set; }
+        //ดอกเบี้ยเพิ่ม
+        public string payment_interest { get; set; }
+        //เงินรับฝากล่วงหน้าตัดบัญชี
+        public string total_deposit { get; set; }
+        //ส่วนลด
+        public string discount { get; set; }
+        //ส่วนต่าง
+        public string pay_difference {  get; set; }
+        //รวม
+        public string total_payment { get; set; }
     }
 }

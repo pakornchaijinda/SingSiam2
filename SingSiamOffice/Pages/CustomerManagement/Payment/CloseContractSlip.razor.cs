@@ -13,7 +13,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
         [Inject]
         IJSRuntime JSRuntime { get; set; }
         [Parameter]
-        public int peroidtran_id { get; set; }
+        public int promise_id { get; set; }
         [Parameter]
         public string type { get; set; }
         [Inject]
@@ -39,7 +39,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
         protected override async void OnInitialized()
         {
 
-            lst_receiptdescs = await Manage.GetReceipttran(peroidtran_id, type);
+            lst_receiptdescs = await Manage.GetReceipttran_Close(promise_id, type);
             receipttran = lst_receiptdescs.Select(s => s.Receipttran).FirstOrDefault();
             receipt.daypaid = receipttran.Tdate;
             receipt.receipt_no = receipttran.Receiptno;
@@ -49,27 +49,37 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
             receipt.product = lst_receiptdescs.FirstOrDefault().Promise.Product.Name;
             receipt.paid_by = await GetNumberToText.Paid_By((int)receipttran.PaidBy);
             receipt.total_amount = receipttran.Amount.ToString();
-            receipt.amount_text = await GetNumberToText.ConvertNumberToThaiWords(Convert.ToInt32(receipttran.Amount));
-            var period_remain_qty = lst_receiptdescs.Select(s => s.Promise).FirstOrDefault();
-            var max_period = period_remain_qty.Periods;
+         //   receipt.amount_text = await GetNumberToText.ConvertNumberToThaiWords(Convert.ToInt32(receipttran.Amount));
+            var period_remain_qty = lst_receiptdescs.FirstOrDefault().Period;
+            var period_s = period_remain_qty;
 
-            var current_period = lst_receiptdescs.Where(s => s.ReceipttranId == receipttran.Id).FirstOrDefault().Period;
-            receipt.peroid_remain = (max_period - current_period).ToString();
+            var period_e = lst_receiptdescs.LastOrDefault().Period;
+            receipt.peroid_remain = (period_e - period_s).ToString();
             receipt.total_fee = (receipttran.Charge1amt + receipttran.Charge2amt).ToString();
             receipt.receive_by = globalData.fullname;
-            receipt.deposit = receipttran.Deposit.ToString();
-            if (receipttran.Receiptdesc == "รับฝากเงินล่วงหน้า")
-            {
-                ck_deposit = true;
-            }
-            else
-            {
-                ck_deposit = false;
-            }
-            if (receipttran.Charge1amt > 0)
-            {
-                receipt.ck_total_fee = true;
-            }
+            receipt.deposit = receipttran.Deposit.Value.ToString("N0");
+
+            receipt.peroid_s = Convert.ToInt32(period_s);
+            receipt.peroid_e = Convert.ToInt32(period_e);
+            receipt.pending_payment = (receipttran.Capremain + receipttran.Intremain).Value.ToString("N0");
+            receipt.payment_interest = receipttran.Intplus.Value.ToString("N0");
+            receipt.payment_full = receipttran.Netamount.Value.ToString("N0");
+            receipt.discount = receipttran.Discount.Value.ToString("N0");
+
+            receipt.total_payment = ( receipttran.Netamount).Value.ToString("N0");
+            receipt.amount_text = await GetNumberToText.ConvertNumberToThaiWords(Convert.ToInt32(receipttran.Netamount));
+            //if (receipttran.Receiptdesc == "รับฝากเงินล่วงหน้า")
+            //{
+            //    ck_deposit = true;
+            //}
+            //else
+            //{
+            //    ck_deposit = false;
+            //}
+            //if (receipttran.Charge1amt > 0)
+            //{
+            //    receipt.ck_total_fee = true;
+            //}
             try
             {
                 var auth = await localStorage.GetItemAsync<string>("authToken");

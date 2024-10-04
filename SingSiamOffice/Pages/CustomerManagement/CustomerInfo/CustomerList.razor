@@ -255,9 +255,9 @@
                                                                                         {
                                                                                             <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>goPayment(items.CustomerId,items.Id,items.BranchId)">ชำระค่างวด</a></li>
                                                                                         }
-                                                                                        @if (items.Status != 2)
+                                                                                        @if (items.Status == 2)
                                                                                         {
-                                                                                            <li><a style="cursor:pointer;" class="dropdown-item"> พิมพ์ใบเสร็จปิดสัญญา</a></li>
+                                                                                            <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>receipt(items.Id,type_p)"> พิมพ์ใบเสร็จปิดสัญญา</a></li>
                                                                                         }
                                                                                       
                                                                                         <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>printPaymentDetail(items.Id)">พิมพ์รายละเอียด</a></li>
@@ -350,6 +350,7 @@
     public int b_id { get; set; }
     [Parameter]
     public int? cus_id { get; set; }
+    public string type_p { get; set; } = "C";
 
     SingSiamOffice.Models.SingsiamdbContext db = new SingSiamOffice.Models.SingsiamdbContext();
     private DialogOptions dialogOptions = new() { MaxWidth = MaxWidth.Small };
@@ -427,6 +428,12 @@
 
             }
         }
+    }
+    private async Task receipt(int? promise_id, string type)
+    {
+        string url = $"/closecontractslip/{promise_id}/{type}";
+        await JSRuntime.InvokeAsync<object>("open", url, "_blank");
+        //navigationManager.NavigateTo("/paymentrecipe");
     }
     async private void fillter()
     {

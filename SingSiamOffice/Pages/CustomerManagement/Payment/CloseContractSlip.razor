@@ -1,4 +1,4 @@
-﻿@page "/closecontractslip/{peroidtran_id:int}/{type}"
+﻿@page "/closecontractslip/{promise_id:int}/{type}"
 
 @* <h3>CloseContractSlip</h3> *@
 
@@ -382,35 +382,35 @@
         <tbody>
             <tr class="noBorder">
                 <th scope="row" colspan="2"> งวดคงเหลือ: @receipt.peroid_remain งวด  งวดที่ :</th>
-                <th> 5 - 12</th>
+                <th> @receipt.peroid_s - @receipt.peroid_e</th>
             </tr>
             <tr class="noBorder">
                 <th scope="row" colspan="2" class="text-end"> ยอดลูกหนี้คงเหลือ :</th>
-                <th> 1,000</th>
+                <th> @receipt.pending_payment</th>
             </tr>
             <tr class="noBorder">
                 <th scope="row" colspan="2" class="text-end"> ชำระค่าปรับ :</th>
-                <th> 1,000</th>
+                <th> @receipt.total_fee</th>
             </tr>
             <tr class="noBorder">
                 <th scope="row" colspan="2" class="text-end"> ค่าปิดบัญชี :</th>
-                <th> 1,000</th>
+                <th> 0</th>
             </tr>
             <tr class="noBorder">
                 <th scope="row" colspan="2" class="text-end"> ดอกเบี้ยเพิ่ม :</th>
-                <th> 1,000</th>
+                <th> @receipt.payment_interest</th>
             </tr>
             <tr class="noBorder">
                 <th scope="row" colspan="2" class="text-end"> เงินรับฝากล่วงหน้าตัดบัญชี :</th>
-                <th> 1,000</th>
+                <th> @receipt.deposit</th>
             </tr>
             <tr class="noBorder">
                 <th scope="row" colspan="2" class="text-end"> ส่วนลด :</th>
-                <th> 1,000</th>
+                <th> @receipt.discount</th>
             </tr>
             <tr class="noBorder">
                 <th scope="row" colspan="2" class="text-end"> ส่วนต่าง :</th>
-                <th> 1,000</th>
+                <th> 0</th>
             </tr >
             <tr>
                 <th colspan="3">
@@ -422,7 +422,7 @@
                         </div>
                         <div class="col-8">
                             <div class="headerSubTitle text-end" style="font-weight:bold; text-align:end;">
-                                <small><strong>รวมเงิน:</strong> @receipt.total_amount บาท</small>
+                                <small><strong>รวมเงิน:</strong> @receipt.total_payment บาท</small>
                             </div>
                         </div>
                     </div>
