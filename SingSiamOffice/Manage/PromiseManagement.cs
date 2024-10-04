@@ -38,6 +38,7 @@ namespace SingSiamOffice.Manage
                 SubjectId = 7,
                 Price = items.Price,
                 CreateAt = DateTime.Now,
+                Receiptname = items.Receiptname,
                 LoginId = items.LoginId,
                 Detial = items.Detial,
                 PaymentMethod = 1,
@@ -233,11 +234,9 @@ namespace SingSiamOffice.Manage
                 toEdit.Status = 2;
                 foreach (var periodTrans in toEdit.Periodtrans)
                 {
-                  
                     periodTrans.Status = 2;
                 }
 
-              
                 db.Entry(toEdit).State = EntityState.Modified;
 
              
@@ -245,8 +244,8 @@ namespace SingSiamOffice.Manage
                 {
                     db.Entry(periodTrans).State = EntityState.Modified;
                 }
+                await db.SaveChangesAsync();
 
-             
             }
         }
         #region DeletePayment
@@ -364,6 +363,9 @@ namespace SingSiamOffice.Manage
                 db.ReceipttranCancles.Add(toAdd);
                //  await db.SaveChangesAsync();
 
+               var toEdit_Promise = db.Promises.Where(s=>s.Id == toEdit.PromiseId).FirstOrDefault();
+                toEdit_Promise.Status = 0;
+                db.Entry(toEdit_Promise).State = EntityState.Modified;
 
                 db.Receipttrans.Remove(toEdit);
                 await db.SaveChangesAsync();
@@ -383,6 +385,7 @@ namespace SingSiamOffice.Manage
             toEdit.Status = 0;
             toEdit.Ispaid = false;
             toEdit.Deposit = 0;
+          
             toEdit.Paidremain = 0;
             db.Entry(toEdit).State = EntityState.Modified;
           //  await db.SaveChangesAsync();

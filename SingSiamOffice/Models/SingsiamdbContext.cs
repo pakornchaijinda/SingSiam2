@@ -1760,6 +1760,10 @@ public partial class SingsiamdbContext : DbContext
                 .HasComment("เงินสด 1 เงินโอน 2")
                 .HasColumnName("Payment_Method");
             entity.Property(e => e.ReceiopttranId).HasColumnName("receiopttran_id");
+            entity.Property(e => e.Receiptname)
+                .HasMaxLength(50)
+                .IsFixedLength()
+                .HasColumnName("receiptname");
             entity.Property(e => e.SlipUrl)
                 .HasMaxLength(255)
                 .IsUnicode(false)
@@ -1778,7 +1782,6 @@ public partial class SingsiamdbContext : DbContext
 
             entity.HasOne(d => d.Login).WithMany(p => p.TransactionHistories)
                 .HasForeignKey(d => d.LoginId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Transaction_history_login");
 
             entity.HasOne(d => d.Receiopttran).WithMany(p => p.TransactionHistories)

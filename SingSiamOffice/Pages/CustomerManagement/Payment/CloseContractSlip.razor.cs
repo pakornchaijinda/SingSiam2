@@ -6,7 +6,7 @@ using SingSiamOffice.Models;
 
 namespace SingSiamOffice.Pages.CustomerManagement.Payment
 {
-    public partial class PaymentRecipe
+    public partial class CloseContractSlip
     {
         [Inject]
         NavigationManager navigationManager { get; set; }
@@ -38,8 +38,8 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
         }
         protected override async void OnInitialized()
         {
-           
-            lst_receiptdescs = await Manage.GetReceipttran(peroidtran_id,type);
+
+            lst_receiptdescs = await Manage.GetReceipttran(peroidtran_id, type);
             receipttran = lst_receiptdescs.Select(s => s.Receipttran).FirstOrDefault();
             receipt.daypaid = receipttran.Tdate;
             receipt.receipt_no = receipttran.Receiptno;
@@ -52,17 +52,17 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
             receipt.amount_text = await GetNumberToText.ConvertNumberToThaiWords(Convert.ToInt32(receipttran.Amount));
             var period_remain_qty = lst_receiptdescs.Select(s => s.Promise).FirstOrDefault();
             var max_period = period_remain_qty.Periods;
-            
+
             var current_period = lst_receiptdescs.Where(s => s.ReceipttranId == receipttran.Id).FirstOrDefault().Period;
             receipt.peroid_remain = (max_period - current_period).ToString();
-            receipt.total_fee = (receipttran.Charge1amt  + receipttran.Charge2amt).ToString();
+            receipt.total_fee = (receipttran.Charge1amt + receipttran.Charge2amt).ToString();
             receipt.receive_by = globalData.fullname;
             receipt.deposit = receipttran.Deposit.ToString();
             if (receipttran.Receiptdesc == "รับฝากเงินล่วงหน้า")
             {
-                ck_deposit = true; 
+                ck_deposit = true;
             }
-            else 
+            else
             {
                 ck_deposit = false;
             }

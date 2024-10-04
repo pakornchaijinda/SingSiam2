@@ -31,6 +31,8 @@ namespace SingSiamOffice.Models
         public string FormatChargeamt { get; set; }
         [NotMapped]
         public double Sum_Externalar { get; set; }
+        [NotMapped]
+        public string StatusName { get; set; }
     }
     public partial class Periodtran
     {
@@ -101,6 +103,22 @@ namespace SingSiamOffice.Models
         //จำนวนคงเหลือต่องวด
         [NotMapped]
         public decimal amount_remain_pay { get; set; }
+        //ยอดที่ชำระ
+        [NotMapped]
+        public decimal amount_paid { get;set; }
+        //เช็ค ReceiptNo
+        [NotMapped]
+        public bool ck_paid { get; set; }
+
+        //ยอดที่ชำระรวมค่าปรับและค่าติดตาม
+        [NotMapped]
+        public decimal total_amount_per_period { get; set; }
+
+        //ค่าปรับ
+        [NotMapped]
+        public decimal charage_origin { get; set; }
+
+
     }
     public partial class TransactionHistory 
     {
@@ -108,11 +126,16 @@ namespace SingSiamOffice.Models
         public string refcodetrans { get; set; }
         [NotMapped]
         public int promise_id { get; set; }
+        [NotMapped]
+        public string fullname { get; set; }
     }
     public partial class Receipttran 
     {
         [NotMapped]
         public List<Periodtran> peroidtrans_info { get; set; }
+        //ค่าปรับ
+        [NotMapped]
+        public decimal charage_origin { get; set; }
     }
     public partial class Receiptdesc
     {

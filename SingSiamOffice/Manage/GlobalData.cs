@@ -91,6 +91,9 @@
         public decimal base_temp_deptAmount { get; set; }
 
 
+        //ยอดที่ต้องชำรชั่วคราว
+        public decimal temp_total_deptAmount { get; set; }
+
         //ปิดศัญญาก่อนกำหนด
         //งวดที่ค้างชำระ
         public int p_overpay_qty { get; set; }
@@ -125,5 +128,10 @@
         public string pending_totalpayment { get; set; }    
 
         public decimal? Arbalance { get; set; } 
+
+        //ชำระขั้นต่ำ
+        public decimal? Minimumpayment { get; set; }
+        //ค่าปรับขั้นต่ำ
+        public decimal? Minimumfine { get; set; }
     }
 }

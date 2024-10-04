@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using SingSiamOffice.Helpers;
 using SingSiamOffice.Models;
 using System.ComponentModel;
 using System.Globalization;
@@ -9,13 +10,14 @@ namespace SingSiamOffice.Manage
     public class Managements
     {
         SingsiamdbContext db = new SingsiamdbContext();
-
+        NumberToText text = new NumberToText();
         public async Task<List<Promise>> GetPromisebyCustomerId(int customer_id)
         {
             var data = db.Promises.AsNoTracking().Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Product).Include(s => s.Periodtrans).Include(s => s.Province)
-                .Where(s => s.CustomerId == customer_id && s.Status != 2 && s.IsDelete == false).ToList();
+                .Where(s => s.CustomerId == customer_id && s.IsDelete == false).OrderByDescending(s=>s.Id).ToList();
             foreach (var promise in data) 
             {
+                promise.StatusName = await text.PromiseStatus((int)promise.Status);
                 promise.FormatCapital = promise.Capital.Value.ToString("N0");
                 promise.FormatAmount = promise.Amount.Value.ToString("N0");
                 promise.FormatInterest = promise.Intrate.Value.ToString("N0");
@@ -59,15 +61,15 @@ namespace SingSiamOffice.Manage
         public async Task<Receipttran?> GetReceipttran_bypromiseId(int promiseId)
         {
 
-            var data = db.Receipttrans.Include(s => s.Promise).ThenInclude(s => s.Customer).Include(s => s.Branch).Where(s => s.PromiseId == promiseId).AsNoTracking().OrderByDescending(s => s.Id).FirstOrDefault();
+            var data = db.Receipttrans.Include(s => s.Promise).ThenInclude(s=> s.Periodtrans).ThenInclude(s => s.Customer).Include(s => s.Branch).Where(s => s.PromiseId == promiseId).AsNoTracking().OrderByDescending(s => s.Id).FirstOrDefault();
             
             return data;
         }
         public async Task<List<Periodtran>> GetPeriodtransbyPromiseId(int promise_id)
         {
             var config = db.Configs.AsNoTracking().Where(s => s.Id == 1).FirstOrDefault();
-            var data = db.Periodtrans.AsNoTracking().Include(s=>s.Promise).Include(s => s.Customer).Include(s => s.Branch).Include(s=>s.Receiptdescs).Where(s => s.PromiseId == promise_id && s.Status != 2 && s.Promise.IsDelete == false).ToList();
-            var receipt = db.Receiptdescs.AsNoTracking().Where(s=>s.PromiseId == promise_id).ToList();
+            var data = db.Periodtrans.AsNoTracking().Include(s=>s.Promise).ThenInclude(s=>s.Receipttrans).Include(s => s.Customer).Include(s => s.Branch).Include(s=>s.Receiptdescs).Where(s => s.PromiseId == promise_id && s.Status != 2 && s.Promise.IsDelete == false).ToList();
+            var receipt = db.Receiptdescs.AsNoTracking().Include(s=>s.Receipttran).Where(s=>s.PromiseId == promise_id).ToList();
             int cnt_overpayment = 0;
             foreach (var periodtran in data)
             {
@@ -75,15 +77,7 @@ namespace SingSiamOffice.Manage
                 periodtran.tdate_pay = DateTime.ParseExact(periodtran.Tdateformat, "yyyyMMdd", null);
                 periodtran.currentdate = DateTime.ParseExact(DateTime.Now.ToString("yyyyMMdd"), "yyyyMMdd", null);
                 periodtran.ck_receipt = receipt.Any(s => s.PeriodtranId == periodtran.Id);
-                try
-                {
-                    if (receipt.Any(s => s.PeriodtranId == periodtran.Id))
-                    {
-                        periodtran.Paidremain = receipt.Where(s => s.PeriodtranId == periodtran.Id).FirstOrDefault().Amount;
-                    }
-                  
-                }
-                catch (Exception ex) { periodtran.Paidremain = 0; }
+              
                 if (periodtran.Deposit != 0)
                 { periodtran.ck_deposit = true; }
                 else 
@@ -112,6 +106,7 @@ namespace SingSiamOffice.Manage
                         periodtran.amount_remain = (decimal)periodtran.Amount;
                         cnt_overpayment += 1;
                         periodtran.OverPayQty = cnt_overpayment;
+                      
                         if (periodtran.latedate >= 30)
                         {
                             if (cnt_overpayment >0)
@@ -120,7 +115,9 @@ namespace SingSiamOffice.Manage
                             }
                           
                         }
+                        periodtran.total_amount_per_period = (decimal)periodtran.Amount + periodtran.total_fee + periodtran.total_charge_follow;
 
+                      
                     }
                     else
                     {
@@ -129,16 +126,38 @@ namespace SingSiamOffice.Manage
                         periodtran.check_overpay = false;
                       
                     }
-                }
-                if (periodtran.Paidremain != 0)
-                {
-                    periodtran.amount_remain = (decimal)periodtran.Amount + (decimal)periodtran.Paidremain;
-                    periodtran.total_deptAmount = (decimal)periodtran.amount_remain;
-                  
+
+                    try
+                    {
+                        if (receipt.Any(s => s.PeriodtranId == periodtran.Id))
+                        {
+                            periodtran.Paidremain = receipt.Where(s => s.PeriodtranId == periodtran.Id).FirstOrDefault().Amount;
+                            //var total_follow_charge = (decimal)receipt.Where(s => s.PeriodtranId == periodtran.Id).Select(s => s.Receipttran.Charge2amt).FirstOrDefault();
+                            //var total_fee = (decimal)receipt.Where(s => s.PeriodtranId == periodtran.Id).Select(s => s.Receipttran.Charge1amt).FirstOrDefault();
+
+                            //if (periodtran.total_charge_follow != 0 && periodtran.total_fee != 0)
+                            //{
+                            //    periodtran.total_charge_follow = periodtran.total_charge_follow - total_follow_charge;
+                            //    periodtran.total_fee = periodtran.total_fee - total_fee;
+                            //}
+
+
+                        }
+
+                    }
+                    catch (Exception ex) { periodtran.Paidremain = 0; }
+
+                    if (periodtran.Paidremain != 0)
+                    {
+                        periodtran.amount_remain = (decimal)periodtran.Amount + (decimal)periodtran.Paidremain;
+                        periodtran.total_deptAmount = (decimal)periodtran.amount_remain;
+
                         periodtran.Paidremain = (decimal)periodtran.Amount + (decimal)periodtran.Paidremain;
-                    
-                  
+
+
+                    }
                 }
+    
             }
 
             return data;
@@ -314,11 +333,14 @@ namespace SingSiamOffice.Manage
             thaiCulture.DateTimeFormat.Calendar = new ThaiBuddhistCalendar();
 
 
+            var capital = promise.Capital;
+            var amount = promise.Amount;
+
             if (ptype == 1)
             {
                 for (int i = 1; i <= promise.Periods; i++)
                 {
-
+                    var cnt_total_capital = lst_periodtrans.Sum(s => s.Capital);
                     Periodtran p = new Periodtran();
                     p.PromiseId = promise.Id;
                     p.BranchId = promise.BranchId;
@@ -328,8 +350,20 @@ namespace SingSiamOffice.Manage
                     p.Periods = Convert.ToInt32(promise.Daypaid);
                     p.Tdate = promise.FirstDatePay.AddMonths(i).ToString("dd/MM/yyyy", thaiCulture);
                     p.Tdateformat = promise.FirstDatePay.AddMonths(i).ToString("yyyyMMdd");
-                    p.Capital = promise.CapitalCal;
-                    p.Interest = promise.Interest_Service;
+
+                    if (promise.Periods == i)
+                    {
+                        p.Capital =   capital - cnt_total_capital;
+                        p.Interest = amount - p.Capital;
+
+                    }
+                    else 
+                    {
+                        p.Capital = promise.CapitalCal;
+                        p.Interest = promise.Interest_Service;
+
+                    }
+
                     p.Service = promise.Service;
                     p.Amount = promise.Amount;
                     p.Cappaid = 0;
