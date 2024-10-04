@@ -151,6 +151,14 @@
                                                 {
                                                     <td class="text-end" style="@banktransfer">เงินโอน</td>
                                                 }
+                                                else if (data.PaymentMethod == 3)
+                                                {
+                                                    <td class="text-end" style="@banktransfer">อื่นๆ</td>
+                                                }
+                                                else if (data.PaymentMethod == 4)
+                                                {
+                                                    <td class="text-end" style="@banktransfer">เงินฝาก</td>
+                                                }
                                                 else
                                                 {
 
@@ -167,8 +175,8 @@
                                                         <ChildContent>
                                                             
                                                             <MudMenuItem @onclick="()=>ViewExpense(data.TransactionId)">ดูข้อมูล</MudMenuItem>
-                                                            @if (data.SubjectId != 4 && data.SubjectId != 21)
-                                                            {
+                                                            @if (data.SubjectId != 4 && data.SubjectId != 21 && data.SubjectId != 31 && data.CreateAt.Date == DateTime.Now.Date )
+                                                            { 
                                                                 <MudMenuItem @onclick="()=>delete(data.TransactionId)">ลบ</MudMenuItem>
                                                             }
                                                            
