@@ -426,7 +426,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
             {
                 if (intplus == 0)
                 {
-                   // p.p_total_deptAmount = p.base_temp_total_deptAmount.ToString("N0") ;
+                
                     if (totalFee != 0)
                     {
                         p.p_total_deptAmount = (((decimal)p.p_paidprincipleAmount + (decimal)p.p_paidinterestAmount + totalFee) - Convert.ToDecimal(p.p_total_deposit)).ToString("N0");
@@ -436,9 +436,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                         p.p_total_deptAmount = ((decimal)p.p_paidprincipleAmount + (decimal)p.p_paidinterestAmount + Convert.ToDecimal(p.p_origin_fine) - Convert.ToDecimal(p.p_total_deposit)).ToString("N0");
                         p.base_temp_total_deptAmount = ((decimal)p.p_paidprincipleAmount + (decimal)p.p_paidinterestAmount + Convert.ToDecimal(p.p_origin_fine));
                     }
-                    //p.p_total_deptAmount = _periodtran.Where(s => s.Ispaid == false).Sum(p => (decimal)p.Amount).ToString("N0");
-                    //p.p_pending_amount = (_promise_pay.total_deptAmount - _promise_pay.total_deposit + _promise_pay.total_fee + _promise_pay.total_charge_follow) * -1;
-                    //p.pending_totalpayment = (_promise_pay.pending_amount * -1).ToString();
+                   
                 }
                 else
                 {
@@ -462,18 +460,17 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
             {
                 if (discount == 0)
                 {
-                    //p.p_total_deptAmount = p.base_temp_total_deptAmount.ToString("N0");
+                   
                     if (totalFee != 0)
                     {
-                        p.p_total_deptAmount = ((decimal)p.p_paidprincipleAmount + (decimal)p.p_paidinterestAmount + totalFee).ToString("N0");
+                        p.p_total_deptAmount = (((decimal)p.p_paidprincipleAmount + (decimal)p.p_paidinterestAmount + totalFee) - Convert.ToDecimal(p.p_total_deposit)).ToString("N0");
                     }
                     else
                     {
-                        p.p_total_deptAmount = ((decimal)p.p_paidprincipleAmount + (decimal)p.p_paidinterestAmount + Convert.ToDecimal(p.p_origin_fine)).ToString("N0");
+                        p.p_total_deptAmount = ((decimal)p.p_paidprincipleAmount + (decimal)p.p_paidinterestAmount + Convert.ToDecimal(p.p_origin_fine) - Convert.ToDecimal(p.p_total_deposit)).ToString("N0");
                         p.base_temp_total_deptAmount = ((decimal)p.p_paidprincipleAmount + (decimal)p.p_paidinterestAmount + Convert.ToDecimal(p.p_origin_fine));
                     }
-                    //p.p_pending_amount = (_promise_pay.total_deptAmount - _promise_pay.total_deposit + _promise_pay.total_fee + _promise_pay.total_charge_follow) * -1;
-                    //pending_totalpayment = (_promise_pay.pending_amount * -1).ToString();
+                 
                 }
                 else
                 {
