@@ -622,11 +622,18 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                                     {
                                         item.ck_deposit = false;
                                     }
+
+
+
                                     if (item.Paidremain != 0)
                                     {
                                         if (cus_totalpay >= item.Paidremain)
                                         {
                                             item.ck_amount = true;
+                                            if (item.ck_deposit == true)
+                                            {
+                                                item.Paidremain =  item.Paidremain - item.Deposit;
+                                            }
                                             item.amount_remain_pay = Convert.ToDecimal(p.customerPayAmount) - (decimal)item.Paidremain;
                                             cus_totalpay = item.amount_remain_pay;
                                         }
@@ -636,8 +643,11 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                                             item.amount_remain_pay = cus_totalpay;
                                         }
                                     }
-                                    else 
+                                    else
                                     {
+                                        //จำนวนเงินที่จ่ายไปแล้ว
+                                        var already_paid = item.Amount - (item.Cappaid + item.Intpaid);
+                                        item.Amount = already_paid;
                                         if (cus_totalpay >= item.Amount)
                                         {
                                             item.ck_amount = true;
@@ -650,7 +660,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                                             item.amount_remain_pay = cus_totalpay;
                                         }
                                     }
-                                  
+
                                 }
 
 
@@ -891,6 +901,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                                     {
                                         if (p.payment_Menthod != 4)
                                         {
+                                            totalDue = totalDue - (decimal)_receipttran_toAdd.peroidtrans_info[i].Deposit;
                                             if (globalData.paymentAmount >= totalDue)
                                             {
 
@@ -1104,61 +1115,36 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                                     _receiptdesc_toAdd.Period = _receipttran_toAdd.peroidtrans_info[i].Period;
                                     _receiptdesc_toAdd.Perioddate = _receipttran_toAdd.peroidtrans_info[i].Tdateformat;
                                     _receiptdesc_toAdd.Chargeamt = _receipttran_toAdd.Charge1amt;
+                                    _receiptdesc_toAdd.Deposit = _receipttran_toAdd.peroidtrans_info[i].Deposit;
 
                                     decimal totalDue = ((decimal)_receipttran_toAdd.peroidtrans_info[i].Capital + (decimal)_receipttran_toAdd.peroidtrans_info[i].Interest) - ((decimal)_receipttran_toAdd.peroidtrans_info[i].Paidremain * -1);
 
+                                    var totalPaidremain = ((decimal)_receipttran_toAdd.peroidtrans_info[i].Paidremain *-1);
 
 
-                                    //while (globalData.paymentAmount > 0)
-                                    //{
-                                    //    if (payment_method != 4)
-                                    //    {
-                                    //        if (globalData.paymentAmount >= totalDue)
-                                    //        {
-                                    //            _receiptdesc_toAdd.Cappaid = _receipttran_toAdd.peroidtrans_info[i].Capital * -1;
-                                    //            _receiptdesc_toAdd.Intpaid = _receipttran_toAdd.peroidtrans_info[i].Interest * -1;
-                                    //            var total = _receiptdesc_toAdd.Cappaid + _receiptdesc_toAdd.Intpaid;
-                                    //            _receiptdesc_toAdd.Amount = total;
-                                    //            globalData.RemainingPaid = globalData.paymentAmount - ((decimal)_receiptdesc_toAdd.Amount * -1);
-                                    //            globalData.paymentAmount -= totalDue;
-                                    //            break;
-                                    //        }
-                                    //        else
-                                    //        {
-                                    //            _receiptdesc_toAdd.pending_amount = globalData.RemainingPaid;
-                                    //            if (_receiptdesc_toAdd.pending_amount >= _receipttran_toAdd.peroidtrans_info[i].Interest)
-                                    //            {
-                                    //                var amount_over_int = _receiptdesc_toAdd.pending_amount - _receipttran_toAdd.peroidtrans_info[i].Interest;
-                                    //                _receiptdesc_toAdd.Intpaid = _receipttran_toAdd.peroidtrans_info[i].Interest * -1;
-                                    //                _receiptdesc_toAdd.Cappaid = (_receipttran_toAdd.peroidtrans_info[i].Capital - amount_over_int) * -1;
-                                    //                var total = _receiptdesc_toAdd.Cappaid + _receiptdesc_toAdd.Intpaid;
-                                    //                _receiptdesc_toAdd.Amount = total * -1;
-                                    //                globalData.RemainingPaid -= _receiptdesc_toAdd.pending_amount;
-                                    //                break;
-                                    //            }
-                                    //            else
-                                    //            {
-                                    //                _receiptdesc_toAdd.Intpaid = _receiptdesc_toAdd.pending_amount * -1;
-                                    //                _receiptdesc_toAdd.Amount = _receiptdesc_toAdd.pending_amount * -1;
-                                    //                globalData.paymentAmount -= _receiptdesc_toAdd.pending_amount;
-                                    //                break;
-                                    //            }
-                                    //        }
-                                    //    }
-                                    //    else
-                                    //    {
-                                    //        _receiptdesc_toAdd.Deposit = (decimal)_receipttran_toAdd.Amount;
-                                    //        _receiptdesc_toAdd.Periodchg = current_periods;
-                                    //        _receiptdesc_toAdd.payment_method = 4;
-                                    //        break;
-                                    //    }
+                                    if (totalPaidremain > 0)
+                                    {
+                                        _receiptdesc_toAdd.Intpaid = (_receipttran_toAdd.peroidtrans_info[i].Interest - totalPaidremain) * -1;
+                                        totalPaidremain = totalPaidremain - (decimal)_receipttran_toAdd.peroidtrans_info[i].Interest;
+                                      
+                                       
+                                    }
+                                    else 
+                                    {
+                                        _receiptdesc_toAdd.Intpaid = (_receipttran_toAdd.peroidtrans_info[i].Interest * -1);
+                                    }
 
-                                    //}
-
-
-                                    _receiptdesc_toAdd.Cappaid = _receipttran_toAdd.peroidtrans_info[i].Capital * -1;
-                                    _receiptdesc_toAdd.Intpaid = _receipttran_toAdd.peroidtrans_info[i].Interest * -1;
-                                    _receiptdesc_toAdd.Amount = _receipttran_toAdd.peroidtrans_info[i].Amount * -1;
+                                    if (totalPaidremain >= _receipttran_toAdd.peroidtrans_info[i].Capital)
+                                    {
+                                        _receiptdesc_toAdd.Cappaid = (_receipttran_toAdd.peroidtrans_info[i].Capital - totalPaidremain) * -1;
+                                        
+                                        totalPaidremain = totalPaidremain + (decimal)_receiptdesc_toAdd.Cappaid;
+                                    }
+                                    else
+                                    {
+                                        _receiptdesc_toAdd.Cappaid = _receipttran_toAdd.peroidtrans_info[i].Capital * -1;
+                                    }
+                                    _receiptdesc_toAdd.Amount =( ((decimal)_receipttran_toAdd.peroidtrans_info[i].Capital + (decimal)_receipttran_toAdd.peroidtrans_info[i].Interest) - ((decimal)_receipttran_toAdd.peroidtrans_info[i].Paidremain * -1)) *-1;
                                     _receiptdesc_toAdd.Usercode = globalData.fullname;
                                     _receiptdesc_toAdd.Chargeamt = totalFee;
 

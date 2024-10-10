@@ -1049,6 +1049,10 @@ public partial class SingsiamdbContext : DbContext
                 .HasDefaultValueSql("((0.00))")
                 .HasColumnType("decimal(10, 2)")
                 .HasColumnName("totaldown");
+            entity.Property(e => e.UpdatedOn)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("updated_on");
             entity.Property(e => e.UploadImg).HasColumnName("upload_img");
             entity.Property(e => e.Usercode)
                 .HasMaxLength(20)

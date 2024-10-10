@@ -13,8 +13,9 @@ namespace SingSiamOffice.Manage
         NumberToText text = new NumberToText();
         public async Task<List<Promise>> GetPromisebyCustomerId(int customer_id)
         {
-            var data = db.Promises.AsNoTracking().Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Product).Include(s => s.Periodtrans).Include(s => s.Province)
-                .Where(s => s.CustomerId == customer_id && s.IsDelete == false).OrderBy(s=>s.Status).ThenBy(s=>s.Tdatetime).ToList();
+            var data = db.Promises.AsNoTracking().Include(s=>s.Receipttrans).Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Product).Include(s => s.Periodtrans).Include(s => s.Province)
+                .Where(s => s.CustomerId == customer_id && s.IsDelete == false).OrderBy(s=>s.Status).ThenByDescending(s=>s.UpdatedOn).ThenByDescending(s => s.Tdatetime).ToList();
+           
             foreach (var promise in data) 
             {
                 promise.StatusName = await text.PromiseStatus((int)promise.Status);
@@ -149,10 +150,10 @@ namespace SingSiamOffice.Manage
 
                     if (periodtran.Paidremain != 0)
                     {
-                        periodtran.amount_remain = (decimal)periodtran.Amount + (decimal)periodtran.Paidremain;
+                        periodtran.amount_remain = ((decimal)periodtran.Amount + (decimal)periodtran.Paidremain ) - (decimal)periodtran.Deposit;
                         periodtran.total_deptAmount = (decimal)periodtran.amount_remain;
 
-                        periodtran.Paidremain = (decimal)periodtran.Amount + (decimal)periodtran.Paidremain;
+                        periodtran.Paidamount =  (decimal)periodtran.Deposit + ((decimal)periodtran.Paidremain *-1);
 
 
                     }

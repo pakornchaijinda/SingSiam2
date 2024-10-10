@@ -40,6 +40,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
         {
 
             lst_receiptdescs = await Manage.GetReceipttran_Close(promise_id, type);
+            var receipno_close_id = lst_receiptdescs.Where(s => s.Receipttran.Receiptdesc == "ปิดสัญญาก่อนกำหนด").FirstOrDefault().ReceipttranId;
             receipttran = lst_receiptdescs.Select(s => s.Receipttran).FirstOrDefault();
             receipt.daypaid = receipttran.Tdate;
             receipt.receipt_no = receipttran.Receiptno;
@@ -61,7 +62,10 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
 
             receipt.peroid_s = Convert.ToInt32(period_s);
             receipt.peroid_e = Convert.ToInt32(period_e);
-            receipt.pending_payment = (receipttran.Capremain + receipttran.Intremain).Value.ToString("N0");
+            //receipt.pending_payment = (receipttran.Capremain + receipttran.Intremain).Value.ToString("N0");
+            var pending = lst_receiptdescs.Where(s=>s.ReceipttranId == receipno_close_id).ToList();
+            receipt.pending_payment = pending.Sum(s=>s.Amount).Value.ToString("N0");
+            receipt.deposit = pending.Sum(s => s.Deposit).Value.ToString("N0");
             receipt.payment_interest = receipttran.Intplus.Value.ToString("N0");
             receipt.payment_full = receipttran.Netamount.Value.ToString("N0");
             receipt.discount = receipttran.Discount.Value.ToString("N0");

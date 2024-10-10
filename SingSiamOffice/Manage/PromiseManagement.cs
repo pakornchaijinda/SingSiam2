@@ -167,12 +167,9 @@ namespace SingSiamOffice.Manage
                             if (to_edit.Receiptdescs.Count > 0)
                             {
                                 var amountPaid = to_edit.Receiptdescs.OrderByDescending(s => s.Id).ToList();
-                                foreach (var item in amountPaid) 
-                                {
-                                    amount_receipdesc += (decimal)item.Amount * -1;
-                                }
-                               
-                                amount_remain = (decimal)items.Periodtran.Amount;
+                                amount_receipdesc = (decimal)amountPaid.Sum(s => s.Amount) * -1;
+
+                                 amount_remain = (decimal)items.Periodtran.Amount;
                             }
                             else 
                             {
@@ -204,6 +201,7 @@ namespace SingSiamOffice.Manage
                         else 
                         {
                             to_edit.Deposit = to_edit.Deposit + items.Deposit;
+                            to_edit.Paidremain = items.pending_amount;
                         }
                      
                      
@@ -232,6 +230,7 @@ namespace SingSiamOffice.Manage
             { 
                 var toEdit = db.Promises.Include(s=>s.Periodtrans).Where(s=>s.Id ==promiseId).FirstOrDefault();
                 toEdit.Status = 2;
+                toEdit.UpdatedOn = DateTime.Now;
                 foreach (var periodTrans in toEdit.Periodtrans)
                 {
                     periodTrans.Status = 2;
@@ -260,7 +259,7 @@ namespace SingSiamOffice.Manage
                 {
                     if (item.ReceipttranId != null)
                     {
-                        update_periodtrans(item.PeriodtranId);
+                        update_periodtrans(item.Id,item.PeriodtranId);
                         Models.ReceiptdescCancle toAdd = new ReceiptdescCancle();
                         toAdd.PromiseId = item.PromiseId;
                         toAdd.BranchId = item.BranchId;
@@ -376,17 +375,37 @@ namespace SingSiamOffice.Manage
                 return false;
             }
         }
-        public async Task update_periodtrans(int periodtransId) 
+        public async Task update_periodtrans(int receiptId,int periodtransId) 
         {
-            var toEdit = db.Periodtrans.Where(s => s.Id == periodtransId).FirstOrDefault();
-            toEdit.Cappaid = 0;
-            toEdit.Intpaid = 0;
-            toEdit.Paidamount = 0;
-            toEdit.Status = 0;
-            toEdit.Ispaid = false;
-            toEdit.Deposit = 0;
+            var Receipttran_info = db.Receiptdescs.Where(s=>s.PeriodtranId == periodtransId && s.Id != receiptId).ToList();
+
+
+
+               var toEdit = db.Periodtrans.Where(s => s.Id == periodtransId).FirstOrDefault();
+
+
+            
+                toEdit.Cappaid = Receipttran_info.Sum(s => s.Cappaid) * -1;
+            
+           
+                toEdit.Intpaid = Receipttran_info.Sum(s => s.Intpaid) * -1; 
+            
+           
+                toEdit.Deposit = Receipttran_info.Sum(s => s.Deposit);
+
+
+            var paidamount = Receipttran_info.Sum(s => s.Amount);
+
+            if (paidamount != toEdit.Amount)
+            {
+                  toEdit.Status = 0;
+                  toEdit.Ispaid = false;
+                  toEdit.Paidamount = 0;
+            }
+
           
-            toEdit.Paidremain = 0;
+          
+          
             db.Entry(toEdit).State = EntityState.Modified;
           //  await db.SaveChangesAsync();
         }
