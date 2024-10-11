@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Pages\Report\EmployeeReport\BankReport.razor" />
+    <Content Remove="Shared\SlipLayout.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.16">
       <PrivateAssets>all</PrivateAssets>
@@ -28,6 +33,25 @@
     <Folder Include="wwwroot\img\branch\" />
     <Folder Include="wwwroot\img\Employee\" />
     <Folder Include="wwwroot\img\vehicle\" />
+    <Folder Include="wwwroot\font\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Shared\SlipLayout.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Report\EmployeeReport\BankReport.razor" />
+    <_ContentIncludedByDefault Remove="Shared\SlipLayout.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\Report\EmployeeReport\BankReport.razor" />
+    <None Include="Shared\SlipLayout.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Report\EmployeeReport\BankReport.razor" />
   </ItemGroup>
 
 </Project>

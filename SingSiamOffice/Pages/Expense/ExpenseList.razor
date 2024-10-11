@@ -163,10 +163,14 @@
                                                 {
 
                                                 }
-
-
-                                                <td>@data.Login.Fullname</td>
-                                               
+                                                
+                                                @if(data.Login == null)
+                                                {
+                                                    <td> - </td>
+                                                }else
+                                                {
+                                                    <td>@data.Login.Fullname</td>
+                                                }
                                                 <td class="text-center">
                                                     <MudMenu FullWidth="true" AnchorOrigin="Origin.TopRight" TransformOrigin="Origin.TopLeft">
                                                         <ActivatorContent>
