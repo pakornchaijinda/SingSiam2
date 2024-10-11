@@ -29,13 +29,25 @@ namespace SingSiamOffice.Manage
         public async Task<Promise> GetPromisebyPromiseId(int promise_id)
         {
             var data = db.Promises.AsNoTracking().Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Product).Include(s => s.Periodtrans).Include(s => s.Province)
-                .Where(s => s.Id == promise_id && s.Status != 2 && s.IsDelete == false).FirstOrDefault();
+                .Where(s => s.Id == promise_id && s.IsDelete == false).FirstOrDefault();
 
             data.FormatCapital = data.Capital.Value.ToString("N0");
             data.FormatAmount = data.Amount.Value.ToString("N0");
             data.FormatInterest = data.Periodtrans.FirstOrDefault().Interest.Value.ToString("N0");
             data.FormatChargeamt = data.Chargeamt.Value.ToString("N0");
             
+            return data;
+        }
+        public async Task<Promise> GetClosePromisebyPromiseId(int promise_id)
+        {
+            var data = db.Promises.AsNoTracking().Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Product).Include(s => s.Periodtrans).Include(s => s.Province)
+                .Where(s => s.Id == promise_id && s.Status == 2 && s.IsDelete == false).FirstOrDefault();
+
+            data.FormatCapital = data.Capital.Value.ToString("N0");
+            data.FormatAmount = data.Amount.Value.ToString("N0");
+            data.FormatInterest = data.Periodtrans.FirstOrDefault().Interest.Value.ToString("N0");
+            data.FormatChargeamt = data.Chargeamt.Value.ToString("N0");
+
             return data;
         }
         public async Task<int?> GetCurrentPeriod(int promise_id) 
@@ -167,7 +179,29 @@ namespace SingSiamOffice.Manage
         {
             int receiptran_id = 0;
             List<Receiptdesc> lst_receiptdesc = new List<Receiptdesc>();
-            lst_receiptdesc = db.Receiptdescs.AsNoTracking().Include(s => s.Promise).ThenInclude(s => s.Product).Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Receipttran).Include(s => s.Periodtran).Where(s => s.ReceipttranId == peroidtran_id).ToList();
+            // lst_receiptdesc = db.Receiptdescs.AsNoTracking().Include(s => s.Promise).ThenInclude(s => s.Product).Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Receipttran).Include(s => s.Periodtran).Where(s => s.ReceipttranId == peroidtran_id).ToList();
+
+            if (type != "D")
+            {
+                receiptran_id = db.Receiptdescs.AsNoTracking().Include(s => s.Receipttran).Where(s => s.PeriodtranId == peroidtran_id).FirstOrDefault().ReceipttranId;
+                lst_receiptdesc = db.Receiptdescs.AsNoTracking().Include(s => s.Promise).ThenInclude(s => s.Product).Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Receipttran).Include(s => s.Periodtran).Where(s => s.ReceipttranId == receiptran_id).ToList();
+            }
+            else
+            {
+                lst_receiptdesc = db.Receiptdescs.AsNoTracking().Include(s => s.Promise).ThenInclude(s => s.Product).Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Receipttran).Include(s => s.Periodtran).Where(s => s.ReceipttranId == peroidtran_id).ToList();
+            }
+
+            foreach (var items in lst_receiptdesc) 
+            {
+                items.Amount = items.Amount * -1;
+            }
+            return lst_receiptdesc;
+        }
+        public async Task<List<Receiptdesc>> GetReceipttran_PeroidtranId(int peroidtran_id, string type)
+        {
+            int receiptran_id = 0;
+            List<Receiptdesc> lst_receiptdesc = new List<Receiptdesc>();
+            lst_receiptdesc = db.Receiptdescs.AsNoTracking().Include(s => s.Promise).ThenInclude(s => s.Product).Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Receipttran).Include(s => s.Periodtran).Where(s => s.PeriodtranId == peroidtran_id).ToList();
 
             //if (type != "D")
             //{
@@ -179,7 +213,7 @@ namespace SingSiamOffice.Manage
             //    lst_receiptdesc = db.Receiptdescs.AsNoTracking().Include(s => s.Promise).ThenInclude(s => s.Product).Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Receipttran).Include(s => s.Periodtran).Where(s => s.ReceipttranId == peroidtran_id).ToList();
             //}
 
-            foreach (var items in lst_receiptdesc) 
+            foreach (var items in lst_receiptdesc)
             {
                 items.Amount = items.Amount * -1;
             }

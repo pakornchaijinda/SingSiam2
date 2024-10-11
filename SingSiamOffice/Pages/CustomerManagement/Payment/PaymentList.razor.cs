@@ -136,6 +136,8 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
 
         public string type_d = "D";
         public string type_p = "P";
+
+       
         public int payment_method { get; set; } = 1;
 
         private string role { get; set; } = "employee";
