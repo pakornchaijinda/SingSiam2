@@ -1,0 +1,151 @@
+﻿@page "/reportportal"
+@* <h3>ReportPortal</h3> *@
+
+
+<Navbar2></Navbar2>
+<!-- Content Start -->
+
+
+<style>
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        cursor:pointer;
+        font-weight:700;
+    }
+
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+
+</style>
+<div class="content">
+    <Header />
+
+    <div class="container mt-4 mb-4">
+        <div class="row">
+            <div class="col-12 mt-4 mb-4">
+                <MudText Typo="Typo.h5" Style="@headertext"><img class="rounded-circle" src="img/icons/report.svg" alt="" style="width:3rem;"> รายงาน</MudText>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-4 mb-4">
+        <div class="row">
+            <div class="col-md-3 mt-4 mb-4">
+              <div class="card">
+                  <div class="card-body">
+                      <div class="row">
+                          <div class="col-12 text-center">
+                                <img class="rounded-circle mb-2" src="img/icons/report.svg" alt="" style="width:3rem;">
+                                <p>01 บัญชีเข้าออกธนาคาร</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+
+            <div class="col-md-3 mt-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <img class="rounded-circle mb-2" src="img/icons/report.svg" alt="" style="width:3rem;">
+                                <p>02 บัญชีรายรับ - รายจ่าย</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 mt-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <img class="rounded-circle mb-2" src="img/icons/report.svg" alt="" style="width:3rem;">
+                                <p>03 รายงานสรุปรายรับประจำเดือน</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 mt-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <img class="rounded-circle mb-2" src="img/icons/report.svg" alt="" style="width:3rem;">
+                                <p>04 สรุปรายการโอนเงิน</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 mt-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <img class="rounded-circle mb-2" src="img/icons/report.svg" alt="" style="width:3rem;">
+                                <p>05 ประวัติการนับเงิน</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 mt-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <img class="rounded-circle mb-2" src="img/icons/report.svg" alt="" style="width:3rem;">
+                                <p>06 สรุปรายการค่าใช้จ่าย</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 mt-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <img class="rounded-circle mb-2" src="img/icons/report.svg" alt="" style="width:3rem;">
+                                <p>08 สรุปรวม</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+
+
+
+@code {
+
+    // style
+    string tableheader = "background-color:#840012; color:#ffff;";
+    string headertext = "color:#840012; font-weight:600;";
+    string buttoncolor1 = "background-color:#840012; color:#FFF; font-weight:600;";
+    string settingbutton = "background-color:#840012; color:#FFF; font-weight:600; ";
+    string buttoncollape = "background-color:#fc928c; color:#840012; font-weight:600;";
+    string imporText = "color:#840012; font-weight:600;";
+    string detailtext = "color:#1C2833 ; font-weight:600; font-style: italic;";
+    [Parameter]
+    public int b_id { get; set; }
+}
