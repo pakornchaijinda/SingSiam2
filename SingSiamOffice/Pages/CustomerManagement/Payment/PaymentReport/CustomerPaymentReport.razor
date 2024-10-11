@@ -49,7 +49,17 @@
                     @if (_promises.ProductId == 1 || _promises.ProductId == 2 || _promises.ProductId == 4)
                     {
                         <p class="contract-detail"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ยี่ห้อรถ &nbsp;&nbsp;<strong>@collateral1.vehicle_brand</strong>, รุ่น &nbsp;&nbsp;<strong>@collateral1.vehicle_ver</strong>, รถปี &nbsp;&nbsp;<strong>@collateral1.vehicle_yr</strong></small></p>
-                        <p class="contract-detail"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; สี &nbsp;&nbsp;<strong>@collateral1.vehicle_color</strong>, เลขทะเบียน &nbsp;&nbsp;<strong>@collateral1.plate</strong>, จังหวัด &nbsp;&nbsp;<strong>@_promises.Province.ProvinceName</strong></small></p>
+                        <p class="contract-detail"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; สี &nbsp;&nbsp;<strong>@collateral1.vehicle_color</strong>, เลขทะเบียน &nbsp;&nbsp;<strong>@collateral1.plate</strong>, จังหวัด &nbsp;&nbsp;
+                            @if(_promises.Province != null)
+                                {
+                                    <strong>@_promises.Province.ProvinceName</strong>
+                                }
+                                else
+                                {
+                                    <strong>-</strong>
+
+                                }
+                            </small></p>
                         <p class="contract-detail"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; เลขตัวรถ &nbsp;&nbsp;<strong>@collateral1.machineNo</strong>, เลขตัวถัง &nbsp;&nbsp;<strong>@collateral1.chassisNo</strong>, วันที่ครบภาษี &nbsp;&nbsp;<strong>@collateral1.tax_issue</strong></small></p>
                     }
                   
@@ -66,7 +76,7 @@
                         <p class="contract-detail"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; เนื้อที่ &nbsp;&nbsp;<strong>@collateral3.fArea</strong>, ผลผลิต &nbsp;&nbsp;<strong>@collateral3.fProduct</strong>, ที่ตั้ง X:Y:Z &nbsp;&nbsp;<strong>@collateral3.fLocate</strong></small></p>
                     }
 
-                    @if(_guarantor.Count > 0)
+                    @if(_guarantor != null)
                     {
                         for (int i = 0; i < _guarantor.Count; i++)
                         {
@@ -204,24 +214,24 @@
         _periodtrans = db.Periodtrans.Include(s=>s.Promise).Include(s => s.Receiptdescs).ThenInclude(s=>s.Receipttran).Where(s => s.PromiseId == promise_id).ToList();
         decimal CapitalRemain = 0m;
         List<int> list_receipttrans = new List<int>();
-        list_receipttrans = db.Receiptdescs.AsNoTracking().Where(s => s.PromiseId == promise_id).Select(s => s.ReceipttranId).Distinct().ToList();
+        list_receipttrans = db.Receiptdescs.AsNoTracking().Where(s => s.PromiseId == promise_id).Select(s => s.ReceipttranId).ToList();
         foreach (var items in _periodtrans )
         {
             if (items.Receiptdescs.Where(s => s.PeriodtranId == items.Id).Select(s => s.Receipttran.Receiptdesc).FirstOrDefault() == "ปิดสัญญาก่อนกำหนด")
             {
-               
-                    items.amount_paid = (decimal)items.Receiptdescs.Where(s => s.PeriodtranId == items.Id && list_receipttrans.Contains(s.ReceipttranId)).Select(s => s.Receipttran.Netamount).FirstOrDefault();
-              
-               
+
+                items.amount_paid = (decimal)items.Receiptdescs.Where(s => s.PeriodtranId == items.Id && list_receipttrans.Contains(s.ReceipttranId)).Select(s => s.Receipttran.Netamount).FirstOrDefault();
+
+
 
             }
             else
             {
                 // var receipttrans_Id = items.Receiptdescs.Where(s => s.PeriodtranId == items.Id).Select(s => s.Receipttran.Id).FirstOrDefault();
 
-                items.amount_paid = (decimal)items.Receiptdescs.Where(s => s.PeriodtranId == items.Id && list_receipttrans.Contains(s.ReceipttranId)).Select(s => s.Receipttran.Amount).FirstOrDefault();
-              
-               
+                items.amount_paid = (decimal)items.Paidamount;
+
+
             }
             if (items.Period == 1)
             {
@@ -241,7 +251,7 @@
             _guarantor = await Managements.GetGurantorbyPromiseId(promise_id); //ผู้ค้ำ
 
         }
-        catch(Exception ex) { }
+        catch (Exception ex) { _guarantor = new List<Guarantor>(); }
         List<int> product_group = new List<int> { 1, 2, 4 };
         if (product_group.Contains(_promises.ProductId))
         {
