@@ -66,25 +66,40 @@
                         <p class="contract-detail"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; เนื้อที่ &nbsp;&nbsp;<strong>@collateral3.fArea</strong>, ผลผลิต &nbsp;&nbsp;<strong>@collateral3.fProduct</strong>, ที่ตั้ง X:Y:Z &nbsp;&nbsp;<strong>@collateral3.fLocate</strong></small></p>
                     }
 
-                    @if(_guarantor.Count > 0)
+                    @if (_guarantor != null)
                     {
-                        for (int i = 0; i < _guarantor.Count; i++)
+                        if (_guarantor.Count > 0)
                         {
-                            if (i == 0)
+                            for (int i = 0; i < _guarantor.Count; i++)
                             {
-                                <p class="contract-detail"><small>ผู้ค้ำประกัน#1 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>@_guarantor[i].GuarantorName</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ความสัมพันธ์ผู้ซื้อ : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>@_guarantor[i].GuarantorRelation</strong></small></p>
-                                <p class="contract-detail"><small>บุคคลอ้างอิง: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>-</strong></small></p>
-                            }
-                            else if(i == 1)
-                            {
-                                <p class="contract-detail"><small>ผู้ค้ำประกัน#2 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>@_guarantor[i].GuarantorName</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ความสัมพันธ์ผู้ซื้อ : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>@_guarantor[i].GuarantorRelation</strong></small></p>
-                                <p class="contract-detail"><small>บุคคลอ้างอิง: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>-</strong></small></p>
+                                if (i == 0)
+                                {
+                                    <p class="contract-detail"><small>ผู้ค้ำประกัน#1 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>@_guarantor[i].GuarantorName</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ความสัมพันธ์ผู้ซื้อ : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>@_guarantor[i].GuarantorRelation</strong></small></p>
+                                    <p class="contract-detail"><small>บุคคลอ้างอิง: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>-</strong></small></p>
+                                }
+                                else if (i == 1)
+                                {
+                                    <p class="contract-detail"><small>ผู้ค้ำประกัน#2 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>@_guarantor[i].GuarantorName</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ความสัมพันธ์ผู้ซื้อ : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>@_guarantor[i].GuarantorRelation</strong></small></p>
+                                    <p class="contract-detail"><small>บุคคลอ้างอิง: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>-</strong></small></p>
+
+                                }
 
                             }
-
                         }
+                        else
+                        {
+                            <p class="contract-detail"><small>ผู้ค้ำประกัน#1 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>ไม่มีคนค้ำประกัน</strong></small></p>
+                            <p class="contract-detail"><small>บุคคลอ้างอิง: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>-</strong></small></p>
+                        }
+
+
                     }
-                  
+                    else
+                    {
+                        <p class="contract-detail"><small>ผู้ค้ำประกัน#1 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>ไม่มีคนค้ำประกัน</strong></small></p>
+                        <p class="contract-detail"><small>บุคคลอ้างอิง: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>-</strong></small></p>
+                    }
+
                        
                       
                     
@@ -123,15 +138,36 @@
                                     <td>@items.Receiptdescs.FirstOrDefault()?.Receiptno </td>
                                     <td>
                                         <p><strong>@items.Amount</strong></p>
-                                        <p><small>-@items.Paidamount</small></p>
+                                       
+                                        <p><small>
+                                                @if (items.Paidamount != 0)
+                                                {
+                                                    @("-" + items.Paidamount.ToString())
+                                                }
+                                        
+                                        </small></p>
                                     </td>
                                     <td>
                                         <p><strong>@items.Capital</strong></p>
-                                        <p><small>-@items.Cappaid</small></p>
+                                        <p><small>
+                                                @if (items.Cappaid != 0){
+                                                
+                                                                            @("-" + items.Cappaid.ToString())
+                                                }
+                                            </small>
+                                        </p>
                                     </td>
                                     <td>
                                         <p><strong>@items.Interest</strong></p>
-                                        <p><small>-@items.Intpaid</small></p>
+                                        <p><small>
+                                                @if (items.Intpaid != 0){
+
+                                                    @("-" + items.Intpaid.ToString())
+
+
+                                                }
+                                            </small>
+                                        </p>
                                     </td>
 
                                     <td>@items.Receiptdescs.Where(s => s.PeriodtranId == items.Id).FirstOrDefault()?.Chargeamt </td>
@@ -209,17 +245,24 @@
         {
             if (items.Receiptdescs.Where(s => s.PeriodtranId == items.Id).Select(s => s.Receipttran.Receiptdesc).FirstOrDefault() == "ปิดสัญญาก่อนกำหนด")
             {
-               
-                    items.amount_paid = (decimal)items.Receiptdescs.Where(s => s.PeriodtranId == items.Id && list_receipttrans.Contains(s.ReceipttranId)).Select(s => s.Receipttran.Netamount).FirstOrDefault();
-              
-               
+
+                items.amount_paid = (decimal)items.Receiptdescs.Where(s => s.PeriodtranId == items.Id && list_receipttrans.Contains(s.ReceipttranId)).Select(s => s.Receipttran.Netamount).FirstOrDefault();
+
+
 
             }
             else
             {
                 // var receipttrans_Id = items.Receiptdescs.Where(s => s.PeriodtranId == items.Id).Select(s => s.Receipttran.Id).FirstOrDefault();
-
-                items.amount_paid = (decimal)items.Receiptdescs.Where(s => s.PeriodtranId == items.Id && list_receipttrans.Contains(s.ReceipttranId)).Select(s => s.Receipttran.Amount).FirstOrDefault();
+                try
+                {
+                    items.amount_paid = (decimal)items.Receiptdescs.Where(s => s.PeriodtranId == items.Id && list_receipttrans.Contains(s.ReceipttranId)).Select(s => s.Receipttran.Amount).FirstOrDefault();
+                }
+                catch
+                {
+                    
+                }
+               
               
                
             }
