@@ -451,7 +451,15 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                 }
                 else
                 {
-
+                    if (totalFee != 0)
+                    {
+                        p.p_total_deptAmount = (((decimal)p.p_paidprincipleAmount + (decimal)p.p_paidinterestAmount + totalFee) - Convert.ToDecimal(p.p_total_deposit)).ToString("N0");
+                    }
+                    else
+                    {
+                        p.p_total_deptAmount = ((decimal)p.p_paidprincipleAmount + (decimal)p.p_paidinterestAmount + Convert.ToDecimal(p.p_origin_fine) - Convert.ToDecimal(p.p_total_deposit)).ToString("N0");
+                        p.base_temp_total_deptAmount = ((decimal)p.p_paidprincipleAmount + (decimal)p.p_paidinterestAmount + Convert.ToDecimal(p.p_origin_fine));
+                    }
                     var total_deptAmount_intplus = (Convert.ToDecimal(p.p_total_deptAmount) + (decimal)intplus);
                     p.p_total_deptAmount = total_deptAmount_intplus.ToString("N0");
                 }
