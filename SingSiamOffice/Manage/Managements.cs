@@ -642,6 +642,7 @@ namespace SingSiamOffice.Manage
 
         public string deposit { get; set; }
 
+        public string paidby_deposit { get; set; }
 
         //ปิดสัญญาก่อนกำหนด
 

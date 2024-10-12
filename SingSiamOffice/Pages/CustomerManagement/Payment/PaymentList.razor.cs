@@ -171,6 +171,8 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
         public string? total_deposit { get; set; }
 
 
+        public int cash_transfer { get; set; } = 1;
+
 
 
         private string ReceiptNo { get; set; } = "";
@@ -536,7 +538,15 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                     }
                     else
                     {
-
+                        if (totalFee != 0)
+                        {
+                            p.p_total_deptAmount = (((decimal)p.p_paidprincipleAmount + (decimal)p.p_paidinterestAmount + totalFee) - Convert.ToDecimal(p.p_total_deposit)).ToString("N0");
+                        }
+                        else
+                        {
+                            p.p_total_deptAmount = ((decimal)p.p_paidprincipleAmount + (decimal)p.p_paidinterestAmount + Convert.ToDecimal(p.p_origin_fine) - Convert.ToDecimal(p.p_total_deposit)).ToString("N0");
+                            p.base_temp_total_deptAmount = ((decimal)p.p_paidprincipleAmount + (decimal)p.p_paidinterestAmount + Convert.ToDecimal(p.p_origin_fine));
+                        }
                         var total_deptAmount_discount = (Convert.ToDecimal(p.p_total_deptAmount) - (decimal)discount);
                         p.p_total_deptAmount = total_deptAmount_discount.ToString("N0");
                         //var discount_total = (_promise_pay.pending_amount * -1) - (decimal)discount;
@@ -653,6 +663,14 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                         _receipttran_toAdd.Periodchg = current_periods;
                         _receipttran_toAdd.Periodremain = _promise.Periods - 1;
                         _receipttran_toAdd.Usercode = globalData.fullname;
+                        if (cash_transfer == 1)
+                        {
+                            _receipttran_toAdd.Cashpaid = 1;
+                        }
+                        else 
+                        {
+                            _receipttran_toAdd.Transferpaid = 1;
+                        }
                         _receipttran_toAdd.Otherpaid = 1;
                         _receipttran_toAdd.PaidBy = 4;
                         _receipttran_toAdd.Currentperiod = _periodtran.Where(s => s.Ispaid == false).Select(s => s.Period).FirstOrDefault();

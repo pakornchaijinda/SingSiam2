@@ -470,7 +470,11 @@
                                                                                 {
                                                                                     <img class="uk-border-circle" src="/img/vehicle/ducati.jpg" alt="Avatar" style="height:10rem; width:10rem;">
                                                                                 }
-
+                                                                                <MudRadioGroup @bind-Value="cash_transfer">
+                                                                                    <MudRadio Value="1" Color="Color.Primary">เงินสด</MudRadio>
+                                                                                    <MudRadio Value="2" Color="Color.Secondary">เงินโอน</MudRadio>
+                                                                                   
+                                                                                </MudRadioGroup>
 
                                                                                 <MudFileUpload T="IBrowserFile" FilesChanged="UploadFiles">
                                                                                     <ButtonTemplate>

@@ -48,6 +48,15 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
             receipt.address = lst_receiptdescs.FirstOrDefault().Customer.Address;
             receipt.product = lst_receiptdescs.FirstOrDefault().Promise.Product.Name;
             receipt.paid_by = await GetNumberToText.Paid_By((int)receipttran.PaidBy);
+            if (receipttran.Cashpaid != 0)
+            {
+                receipt.paidby_deposit = await GetNumberToText.Paid_By(1);
+            }
+            if (receipttran.Transferpaid != 0) 
+            {
+                receipt.paidby_deposit = await GetNumberToText.Paid_By(2);
+            }
+           
             receipt.total_amount = receipttran.Amount.ToString();
             receipt.amount_text = await GetNumberToText.ConvertNumberToThaiWords(Convert.ToInt32(receipttran.Amount));
             var period_remain_qty = lst_receiptdescs.Select(s => s.Promise).FirstOrDefault();

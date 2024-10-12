@@ -417,7 +417,16 @@
             <div class="row">
                 <div class="col-4">
                     <div class="headerSubTitle text-nowrap" style="font-weight:bold; ">
-                        <small><strong>ชำระโดย:</strong> @receipt.paid_by</small>
+                        @if (ck_deposit == true)
+                        {
+
+                            <small><strong>ชำระโดย:</strong> @receipt.paidby_deposit</small>
+                        }
+                        else
+                        {
+                            <small><strong>ชำระโดย:</strong> @receipt.paid_by</small>
+                        }
+             
                     </div>
                 </div>
                 <div class="col-8">
