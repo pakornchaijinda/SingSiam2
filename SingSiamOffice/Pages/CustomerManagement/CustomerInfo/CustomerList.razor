@@ -112,7 +112,8 @@
                                                             <MudText Typo="Typo.body1" Style="@imporText">สถานะลูกค้า</MudText>
                                                             @if (CheckBlacklist(data.CustomerId))
                                                             {
-                                                                <MudChip Variant="Variant.Text" Color="Color.Error">ติด Blacklist</MudChip>
+                                                                <MudChip T="string" Color="Color.Error">ติด Blacklist</MudChip>
+                                                  
                                                             }
                                                             else
                                                             {

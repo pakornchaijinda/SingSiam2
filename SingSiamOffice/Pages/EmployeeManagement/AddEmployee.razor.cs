@@ -182,7 +182,7 @@ namespace SingSiamOffice.Pages.EmployeeManagement
             branches = db.Branches.Where(s => s.IsActive == true).AsNoTracking().ToList();
             Runing_no = db.RunningNos.Where(s => s.Type == "ss").FirstOrDefault();
             New_em.Position = "พนักงานประจำสาขา";
-            New_em.Code = Runing_no.NextNo;
+    
         }
 
         private async Task<IEnumerable<Branch>> SearchBranch(string value)
@@ -215,6 +215,10 @@ namespace SingSiamOffice.Pages.EmployeeManagement
         private async Task submit()
         {
             var confirm = await JSRuntime.InvokeAsync<bool>("confirmSaveData");
+            if (New_em.Code == null)
+            {
+                await JSRuntime.InvokeVoidAsync("alert","กรอกข้อมูลให้ครบถ้วน");
+            }
             if (confirm)
             {
                 if (await Save(New_em))
