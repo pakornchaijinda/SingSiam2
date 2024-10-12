@@ -134,7 +134,14 @@
                             <MudTextField @bind-Value="collateral1.vehicle_yr" Label="รถปี" Placeholder="ระบุรถปี" Variant="Variant.Outlined" Margin="Margin.Dense" ReadOnly></MudTextField>
                         </div>
                         <div class="col-3 pb-3">
-                            <MudTextField @bind-Value="_promises.Province.ProvinceName" Label="จังหวัด" Placeholder="ระบุจังหวัด" Variant="Variant.Outlined" Margin="Margin.Dense" ReadOnly></MudTextField>
+                            @if (_promises.Province != null)
+                            {
+                                <MudTextField @bind-Value="_promises.Province.ProvinceName" Label="จังหวัด" Placeholder="ระบุจังหวัด" Variant="Variant.Outlined" Margin="Margin.Dense" ReadOnly></MudTextField>
+                            }
+                            else
+                            {
+                                <MudTextField @bind-Value="TextValueNull" Label="จังหวัด" Placeholder="ระบุจังหวัด" Variant="Variant.Outlined" Margin="Margin.Dense" ReadOnly></MudTextField>
+                            }
                         </div>
                         <div class="col-3 pb-3">
                             <MudTextField @bind-Value="collateral1.tax_issue" Label="วันเสียภาษี" Placeholder="ระบุวันเสียภาษี" Variant="Variant.Outlined" Margin="Margin.Dense" ReadOnly></MudTextField>
@@ -174,7 +181,15 @@
                             <MudTextField @bind-Value="collateral1.vehicle_yr" Label="รถปี" Placeholder="ระบุรถปี" Variant="Variant.Outlined" Margin="Margin.Dense" ReadOnly></MudTextField>
                         </div>
                         <div class="col-3 pb-3">
-                            <MudTextField @bind-Value="_promises.Province.ProvinceName" Label="จังหวัด" Placeholder="ระบุจังหวัด" Variant="Variant.Outlined" Margin="Margin.Dense" ReadOnly></MudTextField>
+                            @if(_promises.Province != null)
+                            {
+                                <MudTextField @bind-Value="_promises.Province.ProvinceName" Label="จังหวัด" Placeholder="ระบุจังหวัด" Variant="Variant.Outlined" Margin="Margin.Dense" ReadOnly></MudTextField>
+                            }else
+                            {
+                                <MudTextField @bind-Value="TextValueNull" Label="จังหวัด" Placeholder="ระบุจังหวัด" Variant="Variant.Outlined" Margin="Margin.Dense" ReadOnly></MudTextField>
+                            }
+
+                                
                         </div>
                         <div class="col-3 pb-3">
                             <MudTextField @bind-Value="collateral1.tax_issue" Label="วันเสียภาษี" Placeholder="ระบุวันเสียภาษี" Variant="Variant.Outlined" Margin="Margin.Dense" ReadOnly></MudTextField>
@@ -215,7 +230,14 @@
                             <MudTextField @bind-Value="collateral1.vehicle_yr" Label="รถปี" Placeholder="ระบุรถปี" Variant="Variant.Outlined" Margin="Margin.Dense" ReadOnly></MudTextField>
                         </div>
                         <div class="col-3 pb-3">
-                            <MudTextField @bind-Value="_promises.Province.ProvinceName" Label="จังหวัด" Placeholder="ระบุจังหวัด" Variant="Variant.Outlined" Margin="Margin.Dense" ReadOnly></MudTextField>
+                            @if (_promises.Province != null)
+                            {
+                                <MudTextField @bind-Value="_promises.Province.ProvinceName" Label="จังหวัด" Placeholder="ระบุจังหวัด" Variant="Variant.Outlined" Margin="Margin.Dense" ReadOnly></MudTextField>
+                            }
+                            else
+                            {
+                                <MudTextField @bind-Value="TextValueNull" Label="จังหวัด" Placeholder="ระบุจังหวัด" Variant="Variant.Outlined" Margin="Margin.Dense" ReadOnly></MudTextField>
+                            }
                         </div>
                         <div class="col-3 pb-3">
                             <MudTextField @bind-Value="collateral1.tax_issue" Label="วันเสียภาษี" Placeholder="ระบุวันเสียภาษี" Variant="Variant.Outlined" Margin="Margin.Dense" ReadOnly></MudTextField>
@@ -522,6 +544,6 @@
     string detailtextgreen = "color:#1D8348; font-weight:600; font-style: italic;";
     string detailtextred = "color:#922B21; font-weight:600; font-style: italic;";
     string field_box = "background-color:#FFF; color:#020D17; font-weight:600;";
+    public string TextValueNull { get; set; } = "-";
 
-    
 }

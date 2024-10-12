@@ -677,15 +677,19 @@
                                                                     <div>
                                                                         <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">+ ดอกเบี้ยเพิ่ม</div>
-                                                                            <input type="text" class="form-control text-end" @bind-value="intplus" style="@boxfield">
-                                                                            <MudButton Variant="Variant.Filled" Color="Color.Info" Size="Size.Large" OnClick="AdjustIntPlus">ปรับค่าบริการ</MudButton>
+                                                                          @*   <input type="text" class="form-control text-end" @bind-value="intplus" style="@boxfield"> *@
+                                                                           @*  <MudButton Variant="Variant.Filled" Color="Color.Info" Size="Size.Large" OnClick="AdjustIntPlus">ปรับค่าบริการ</MudButton> *@
+                                                                            <input type="text" class="form-control text-end" style="@boxfieldred" @bind-value:event="onchange"
+                                                                                   @oninput="AdjustIntPlusChanged" @bind-value="@intplus" disabled="@ck_intplus">
                                                                         </div>
                                                                     </div>
                                                                     <div>
                                                                         <div class="input-group">
                                                                             <div class="input-group-text" style="@imporText">ส่วนลดดอกเบี้ย</div>
-                                                                            <input type="text" class="form-control text-end" @bind-value="discount" style="@boxfield">
-                                                                            <MudButton Variant="Variant.Filled" Color="Color.Info" Size="Size.Large" OnClick="AdjustDiscount">ปรับค่าบริการ</MudButton>
+                                                                           @*  <input type="text" class="form-control text-end" @bind-value="discount" style="@boxfield"> *@
+                                                                          @*   <MudButton Variant="Variant.Filled" Color="Color.Info" Size="Size.Large" OnClick="AdjustDiscount">ปรับค่าบริการ</MudButton> *@
+                                                                            <input type="text" class="form-control text-end" style="@boxfieldred" @bind-value:event="onchange"
+                                                                                   @oninput="AdjustDiscountChanged" @bind-value="@discount" disabled="@ck_discount">
                                                                         </div>
                                                                     </div>
                                                                     <div>

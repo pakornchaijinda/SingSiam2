@@ -137,7 +137,8 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
         public string type_d = "D";
         public string type_p = "P";
 
-       
+       public bool ck_intplus = false;
+        public bool ck_discount = false;
         public int payment_method { get; set; } = 1;
 
         private string role { get; set; } = "employee";
@@ -415,7 +416,55 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
           
         }
 
+
+
         //เพิ่มดอกเบี้ย
+        private void AdjustIntPlusChanged(ChangeEventArgs args)
+        {
+           
+            if (discount == 0)
+            {
+                ck_discount = true;
+                var amount = args.Value.ToString();
+                if (amount == "")
+                {
+                    amount = "0";
+                }
+                intplus = Convert.ToDecimal(amount);
+
+                if (intplus == 0)
+                {
+                    ck_intplus = false;
+                    ck_discount = false;
+                    if (totalFee != 0)
+                    {
+                        p.p_total_deptAmount = (((decimal)p.p_paidprincipleAmount + (decimal)p.p_paidinterestAmount + totalFee) - Convert.ToDecimal(p.p_total_deposit)).ToString("N0");
+                    }
+                    else
+                    {
+                        p.p_total_deptAmount = ((decimal)p.p_paidprincipleAmount + (decimal)p.p_paidinterestAmount + Convert.ToDecimal(p.p_origin_fine) - Convert.ToDecimal(p.p_total_deposit)).ToString("N0");
+                        p.base_temp_total_deptAmount = ((decimal)p.p_paidprincipleAmount + (decimal)p.p_paidinterestAmount + Convert.ToDecimal(p.p_origin_fine));
+                    }
+
+                }
+                else
+                {
+
+                    var total_deptAmount_intplus = (Convert.ToDecimal(p.p_total_deptAmount) + (decimal)intplus);
+                    p.p_total_deptAmount = total_deptAmount_intplus.ToString("N0");
+                }
+
+            }
+            else 
+            {
+                intplus = 0;
+                Snackbar.Configuration.PositionClass = Defaults.Classes.Position.TopCenter;
+                Snackbar.Add("กรุณาลบข้อมูลส่วนลด", Severity.Error);
+                StateHasChanged();
+            }
+
+        }
+
         private async Task AdjustIntPlus()
         {
             if (intplus == null)
@@ -428,7 +477,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
             {
                 if (intplus == 0)
                 {
-                
+                   
                     if (totalFee != 0)
                     {
                         p.p_total_deptAmount = (((decimal)p.p_paidprincipleAmount + (decimal)p.p_paidinterestAmount + totalFee) - Convert.ToDecimal(p.p_total_deposit)).ToString("N0");
@@ -450,6 +499,64 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
 
         }
         //ลดดอกเบี้ย
+        private void AdjustDiscountChanged(ChangeEventArgs args)
+        {
+          
+            if (intplus == 0)
+            {
+                ck_intplus = true;
+                var amount = args.Value.ToString();
+                if (amount == "")
+                {
+                    amount = "0";
+                }
+                discount = Convert.ToDecimal(amount);
+
+                if (discount == 0)
+                {
+                    ck_discount = false;
+                    ck_intplus = false;
+                    if (totalFee != 0)
+                    {
+                        p.p_total_deptAmount = (((decimal)p.p_paidprincipleAmount + (decimal)p.p_paidinterestAmount + totalFee) - Convert.ToDecimal(p.p_total_deposit)).ToString("N0");
+                    }
+                    else
+                    {
+                        p.p_total_deptAmount = ((decimal)p.p_paidprincipleAmount + (decimal)p.p_paidinterestAmount + Convert.ToDecimal(p.p_origin_fine) - Convert.ToDecimal(p.p_total_deposit)).ToString("N0");
+                        p.base_temp_total_deptAmount = ((decimal)p.p_paidprincipleAmount + (decimal)p.p_paidinterestAmount + Convert.ToDecimal(p.p_origin_fine));
+                    }
+
+                }
+                else
+                {
+                    if (discount > p.p_paidinterestAmount)
+                    {
+                        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.TopCenter;
+                        Snackbar.Add("ไม่สามารถปรับลดดอกเบี้ย เนื่องจากจำนวนเกินดอกเบี้ยที่ลดได้", Severity.Error);
+                    }
+                    else
+                    {
+
+                        var total_deptAmount_discount = (Convert.ToDecimal(p.p_total_deptAmount) - (decimal)discount);
+                        p.p_total_deptAmount = total_deptAmount_discount.ToString("N0");
+                        //var discount_total = (_promise_pay.pending_amount * -1) - (decimal)discount;
+                        //_promise_pay.pending_amount = discount_total * -1;
+                    }
+
+
+                }
+            }
+            else 
+            {
+                discount = 0;
+                Snackbar.Configuration.PositionClass = Defaults.Classes.Position.TopCenter;
+                Snackbar.Add("กรุณาลบข้อมูลเพิ่มดอกเบี้ย", Severity.Error);
+                StateHasChanged();
+            }
+           
+
+
+        }
         private async Task AdjustDiscount()
         {
             if (discount == null)
