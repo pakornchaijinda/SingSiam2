@@ -37,7 +37,7 @@
                         <MudAutocomplete T="Customer" Label="กรอกเลขบัตรหรือชื่อที่ต้องการค้นหา" @bind-Value="selectCustomer" Margin="Margin.Dense" ToStringFunc="@(e=> e==null?null : $"{e.NatId} | {e.FullName} | สาขา: {e.Branch.Code}")" SearchFunc="@SearchValue" Variant="Variant.Outlined" />
 
                     </div>
-                   
+         
                     <div class="col-6 pb-3">
                         <MudStack Row="true" Spacing="1">
                             <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Search" Size="Size.Large" Color="Color.Info" @onclick="()=> fillter()">ค้นหา</MudButton>
@@ -109,15 +109,22 @@
                                                     </div>
                                                     <div class="col-4 pb-3 text-center">
                                                         <MudStack>
-                                                            <MudText Typo="Typo.body1" Style="@imporText">สถานะลูกค้า</MudText>
+                                                            <MudText Typo="Typo.body1" Style="@imporText">สถานะลูกค้า
+                                                                @if (CheckBlacklist(data.CustomerId))
+                                                                {
+                                                                    <img src="img/icons/alarm.gif" class="img-fluid rounded-start" style="width:2rem;">
+
+                                                                }
+                                                               
+                                                                </MudText>
                                                             @if (CheckBlacklist(data.CustomerId))
                                                             {
-                                                                <MudChip T="string" Color="Color.Error">ติด Blacklist</MudChip>
+                                                                  <MudChip T="string" Color="Color.Error" Style="@Blacklistbutton">  ติด BLACKLIST</MudChip>
                                                   
                                                             }
                                                             else
                                                             {
-                                                                <MudChip Variant="Variant.Text" Color="Color.Success">ปกติ</MudChip>
+                                                                <MudChip Color="Color.Success" Style="@Normalbutton">ปกติ</MudChip>
                                                                
                                                             }
 
@@ -347,6 +354,8 @@
     string buttoncollape = "background-color:#fc928c; color:#840012; font-weight:600;";
     string imporText = "color:#840012; font-weight:600;";
     string detailtext = "color:#1C2833 ; font-weight:600; font-style: italic;";
+    string Blacklistbutton = "background-color:#c0392b; color:#fff; font-weight:700;";
+    string Normalbutton = "background-color:#28b463; color:#fff; font-weight:700;";
     [Parameter]
     public int b_id { get; set; }
     [Parameter]
