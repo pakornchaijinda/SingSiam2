@@ -1,5 +1,179 @@
-﻿<h3>ConclusionReport</h3>
+﻿@page "/conclusion-report"
+@* <h3>ConclusionReport</h3> *@
 
+@using System.ComponentModel.DataAnnotations
+@using System.Threading
+@* <h3>AccountExpenseReport</h3> *@
+
+@* 08 รายงานสรุปรวมประจำเดือน*@
+
+
+<Navbar2></Navbar2>
+
+<style>
+
+    th, td {
+        padding: 3px;
+    }
+</style>
+
+<div class="content">
+    <Header />
+
+    <div class="container-fluid mt-4 mb-4">
+        <div class="row">
+            <div class="col-12 mt-4 mb-4">
+                <MudText Typo="Typo.h5" Style="@headertext"><img class="rounded-circle" src="img/icons/budget.svg" alt="" style="width:3rem;"> รายงานสรุปรวมประจำเดือน</MudText>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid mt-4 mb-4">
+        <div class="card outer-card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12 mt-2 mb-2">
+                        <MudText Typo="Typo.body1" Style="@headertext">ค้นหาข้อมูลรายงานสรุปรวมประจำเดือน</MudText>
+                    </div>
+                    <div class="col-md-3">
+                        <MudSelect T="string" Label="ระบุปี" HelperText="ระบุปีที่ต้องการหาข้อมูล" @bind-Value="year_data" Variant="Variant.Outlined" Margin="Margin.Dense" AnchorOrigin="Origin.BottomCenter">
+                            @foreach (var year in years)
+                            {
+                                <MudSelectItem T="string" Value="@year">@year</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </div>
+                    <div class="col-md-3">
+                        <MudSelect T="string" Label="ระบุเดือน" HelperText="ระบุเดือนต้องการหาข้อมูล" @bind-Value="month_data" Variant="Variant.Outlined" Margin="Margin.Dense" AnchorOrigin="Origin.BottomCenter">
+                            @foreach (var month in months)
+                            {
+                                <MudSelectItem T="string" Value="@month">@month</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </div>
+                    <div class="col-md-4">
+                        <MudStack Row="true" Spacing="1">
+                            <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Search" Size="Size.Large" Color="Color.Info">ค้นหา</MudButton>
+                            <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Close" Size="Size.Large" Color="Color.Error">ล้างข้อมูล</MudButton>
+                        </MudStack>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid mt-4 mb-4">
+        <div class="card outer-card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12 mb-2 mt-2 text-center">
+                        <MudText Typo="Typo.body1">รายงานสรุปรวมประจำเดือน : กันยายน 2567</MudText>
+       
+                    </div>
+             
+
+                    <div class="col-md-12">
+                        <table class="table">
+
+                            <thead>
+                                <tr>
+                                    <th scope="col">ที่</th>
+                                    <th scope="col">สาขา</th>
+                                    <th scope="col">บ.เข้า-ออกธนาคาร</th>
+                                    <th scope="col">บ.รายรับ-รายจ่าย</th>
+                                    <th scope="col">ยอดเก็บรวม</th>
+                                    <th scope="col">ปล่อยกู้รวม</th>
+                                    <th scope="col">ค่าใช้จ่ายรวม</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td><span style="@black">CA : เกษตรสมบูรณ์</span></td>
+                                    <td><span style="@green">41,515</span></td>
+                                    <td><span style="@orange">6,609</span></td>
+                                    <td><span style="@blue">301,070</span></td>
+                                    <td><span style="@orange">245,000</span></td>
+                                    <td><span style="@black">19,430</span></td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td><span style="@black">CB : ย่อยหนองบัวระเหว</span></td>
+                                    <td><span style="@green">43,473</span></td>
+                                    <td><span style="@orange">7,676</span></td>
+                                    <td><span style="@blue">350,970</span></td>
+                                    <td><span style="@orange">361,000</span></td>
+                                    <td><span style="@black">19,430</span></td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td><span style="@black">CC : ย่อยบางเขว้า</span></td>
+                                    <td><span style="@green">43,473</span></td>
+                                    <td><span style="@orange">7,676</span></td>
+                                    <td><span style="@blue">350,970</span></td>
+                                    <td><span style="@orange">361,000</span></td>
+                                    <td><span style="@black">19,430</span></td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row">4</th>
+                                    <td><span style="@black">CD : ย่อยพักดีชุมพล</span></td>
+                                    <td><span style="@green">43,473</span></td>
+                                    <td><span style="@orange">7,676</span></td>
+                                    <td><span style="@blue">350,970</span></td>
+                                    <td><span style="@orange">361,000</span></td>
+                                    <td><span style="@black">19,430</span></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">5</th>
+                                    <td><span style="@black">CF : ศูนย์บริการห้วยยาง</span></td>
+                                    <td><span style="@green">43,473</span></td>
+                                    <td><span style="@orange">7,676</span></td>
+                                    <td><span style="@blue">350,970</span></td>
+                                    <td><span style="@orange">361,000</span></td>
+                                    <td><span style="@black">19,430</span></td>
+
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 @code {
+    // style
+    string tableheader = "background-color:#840012; color:#ffff;";
+    string headertext = "color:#840012; font-weight:600;";
+    string buttoncolor1 = "background-color:#840012; color:#FFF; font-weight:600;";
+    string settingbutton = "background-color:#840012; color:#FFF; font-weight:600; ";
+    string buttoncollape = "background-color:#fc928c; color:#840012; font-weight:600;";
+    string imporText = "color:#840012; font-weight:600;";
+    string detailtext = "color:#1C2833 ; font-weight:600; font-style: italic;";
+
+    string green = "color:#00b326; font-weight:600;";
+    string blue = "color:#000eb3; font-weight:600;";
+    string lightblue = "color:#009bb3; font-weight:600;";
+    string orange = "color:#fb4900; font-weight:600;";
+    string black = "font-weight:600;";
+
+    private string year_data { get; set; }
+    private string[] years =
+    {
+        "2565", "2566", "2567", "2568",
+    };
+
+    private string month_data { get; set; }
+    private string[] months =
+    {
+    "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
+    "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+    };
 
 }
