@@ -153,7 +153,11 @@
                                                 <MudStack Row="true">
                                                     <MudText Typo="Typo.body1">เมนูจัดการ</MudText>
                                                     <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Edit" Size="Size.Large" Color="Color.Error" @onclick="()=>editCustomer(data.CustomerId)">แก้ไขข้อมูลส่วนตัว</MudButton>
-                                                    <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.PostAdd" Size="Size.Large" Color="Color.Error" @onclick="()=>addContract(data.CustomerId,b_id)" Disabled="ck_customer_branch">เพิ่มสัญญา</MudButton>
+                                                    @if(!isBlacklisted)
+                                                    {
+                                                        <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.PostAdd" Size="Size.Large" Color="Color.Error" @onclick="()=>addContract(data.CustomerId,b_id)" Disabled="ck_customer_branch">เพิ่มสัญญา</MudButton>
+                                                    }else{}
+                                                 
                                                      @if (userLogin.RoleId != 3)
                                                     {
                                                         <MudButton Variant="Variant.Outlined" DisableElevation="true" Color="Color.Error" @onclick="()=>changebranch(data.CustomerId)">ย้ายสาขา</MudButton>
@@ -368,6 +372,7 @@
     List<Customer> list_customer = new List<Customer>();
     List<Customer> list_customer_show = new List<Customer>();
     Promise _promise = new Promise();
+    public bool isBlacklisted { get; set; } = false;
     protected override async Task OnInitializedAsync()
     {
 
@@ -408,6 +413,11 @@
             _expandedStates[data.CustomerId] = true; // You can set initial state as desired
 
         }
+        if(cus_id != null)
+        {
+            CheckBlacklist((int)cus_id);
+        }
+        
         StateHasChanged();
     }
 
@@ -477,7 +487,7 @@
     private bool CheckBlacklist(int cus_id)
     {
         // Check if there is at least one record with the given customer ID
-        var isBlacklisted =  db.BlackLists.Where(s => s.CustomerId == cus_id).Any();
+         isBlacklisted =  db.BlackLists.Where(s => s.CustomerId == cus_id).Any();
 
         return isBlacklisted;
     }
