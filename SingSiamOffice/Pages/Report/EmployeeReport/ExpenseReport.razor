@@ -1,5 +1,223 @@
-﻿<h3>ExpenseReport</h3>
+﻿@page "/expenses-report"
+@* <h3>ExpenseReport</h3> *@
 
+@* 06 สรุปรายการค่าใช้จ่าย *@
+@using System.ComponentModel.DataAnnotations
+@using System.Threading
+
+
+
+<Navbar2></Navbar2>
+
+<style>
+
+    th, td {
+        padding: 3px;
+    }
+</style>
+
+<div class="content">
+    <Header />
+
+    <div class="container-fluid mt-4 mb-4">
+        <div class="row">
+            <div class="col-12 mt-4 mb-4">
+                <MudText Typo="Typo.h5" Style="@headertext"><img class="rounded-circle" src="img/icons/budget.svg" alt="" style="width:3rem;"> สรุปรายการค่าใช้จ่าย</MudText>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid mt-4 mb-4">
+        <div class="card outer-card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12 mt-2 mb-2">
+                        <MudText Typo="Typo.body1" Style="@headertext">ค้นหาข้อมูลสรุปรายการค่าใช้จ่าย</MudText>
+                    </div>
+                    <div class="col-md-3">
+                        <MudSelect T="string" Label="ระบุปี" HelperText="ระบุปีที่ต้องการหาข้อมูล" @bind-Value="year_data" Variant="Variant.Outlined" Margin="Margin.Dense" AnchorOrigin="Origin.BottomCenter">
+                            @foreach (var year in years)
+                            {
+                                <MudSelectItem T="string" Value="@year">@year</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </div>
+                    <div class="col-md-3">
+                        <MudSelect T="string" Label="ระบุเดือน" HelperText="ระบุเดือนต้องการหาข้อมูล" @bind-Value="month_data" Variant="Variant.Outlined" Margin="Margin.Dense" AnchorOrigin="Origin.BottomCenter">
+                            @foreach (var month in months)
+                            {
+                                <MudSelectItem T="string" Value="@month">@month</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </div>
+                    <div class="col-md-4">
+                        <MudStack Row="true" Spacing="1">
+                            <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Search" Size="Size.Large" Color="Color.Info">ค้นหา</MudButton>
+                            <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Close" Size="Size.Large" Color="Color.Error">ล้างข้อมูล</MudButton>
+                        </MudStack>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid mt-4 mb-4">
+        <div class="card outer-card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12 mb-2 mt-2 text-center">
+                        <MudText Typo="Typo.body1">สรุปรายการค่าใช้จ่าย : กันยายน 2567</MudText>
+                        <MudText Typo="Typo.body1">สาขา : ย่อยบ้านเขว้า</MudText>
+                    </div>
+
+
+                    <div class="col-md-12">
+                        <div class="col-md-12 mb-2 mt-2">
+                            <MudText Typo="Typo.body2" Style="@blue">01 กันยายน 2567</MudText>
+                        </div>
+                        <table class="table">
+                           
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="col-1">ที่</th>
+                                    <th scope="col" class="col-8">รายการ</th>
+                                    <th scope="col" class="col-2 text-end">รายจ่าย</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>ค่าใช้จ่ายอื่นๆ <span style="@orange">: ค่าเก็บขยะมูลฝอยรายปีของเทศบาลตําบลบ้านเขว้า</span></td>
+                                    <td class="text-end"><span style="@orange">120.00</span></td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="col-md-12 mb-2 mt-2">
+                            <MudText Typo="Typo.body2" Style="@blue">02 กันยายน 2567</MudText>
+                        </div>
+                        <table class="table">
+
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="col-1">ที่</th>
+                                    <th scope="col" class="col-8">รายการ</th>
+                                    <th scope="col" class="col-2 text-end">รายจ่าย</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>ค่าใช้จ่ายอื่นๆ <span style="@orange">: ค่าน้ำยาถูพื้นสำนักงาน</span></td>
+                                    <td class="text-end"><span style="@orange">39.00</span></td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>ค่าใช้จ่ายอื่นๆ <span style="@orange">: ค่าน้ำมันรถ</span></td>
+                                    <td class="text-end"><span style="@orange">100.00</span></td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="col-md-12 mb-2 mt-2">
+                            <MudText Typo="Typo.body2" Style="@blue">05 กันยายน 2567</MudText>
+                        </div>
+                        <table class="table">
+
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="col-1">ที่</th>
+                                    <th scope="col" class="col-8">รายการ</th>
+                                    <th scope="col" class="col-2 text-end">รายจ่าย</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>ค่าใช้จ่ายอื่นๆ <span style="@orange">: ค่างวดรถ</span></td>
+                                    <td class="text-end"><span style="@orange">20,000.00</span></td>
+
+                                </tr>
+                             
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="col-md-12 mb-2 mt-2">
+                            <MudText Typo="Typo.body2" Style="@blue">09 กันยายน 2567</MudText>
+                        </div>
+                        <table class="table">
+
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="col-1">ที่</th>
+                                    <th scope="col" class="col-8">รายการ</th>
+                                    <th scope="col" class="col-2 text-end">รายจ่าย</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>ค่าใช้จ่าย <span style="@orange">: ค่านํ้าประปาสํานักงาน</span></td>
+                                    <td class="text-end"><span style="@orange">363.00</span></td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>ค่าใช้จ่ายอื่นๆ <span style="@orange">: ค่าน้ำมันรถ</span></td>
+                                    <td class="text-end"><span style="@orange">100.00</span></td>
+
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 @code {
+    // style
+    string tableheader = "background-color:#840012; color:#ffff;";
+    string headertext = "color:#840012; font-weight:600;";
+    string buttoncolor1 = "background-color:#840012; color:#FFF; font-weight:600;";
+    string settingbutton = "background-color:#840012; color:#FFF; font-weight:600; ";
+    string buttoncollape = "background-color:#fc928c; color:#840012; font-weight:600;";
+    string imporText = "color:#840012; font-weight:600;";
+    string detailtext = "color:#1C2833 ; font-weight:600; font-style: italic;";
+
+    string green = "color:#00b326; font-weight:600;";
+    string blue = "color:#000eb3; font-weight:600;";
+    string lightblue = "color:#009bb3; font-weight:600;";
+    string orange = "color:#fb4900; font-weight:600;";
+    string black = "font-weight:600;";
+
+    private string year_data { get; set; }
+    private string[] years =
+    {
+        "2565", "2566", "2567", "2568",
+    };
+
+    private string month_data { get; set; }
+    private string[] months =
+    {
+    "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
+    "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+    };
 
 }
