@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Pages\Report\EmployeeReport\BankReport.razor" />
     <Content Remove="Shared\SlipLayout.razor" />
   </ItemGroup>
 
@@ -41,17 +40,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <_ContentIncludedByDefault Remove="Pages\Report\EmployeeReport\BankReport.razor" />
     <_ContentIncludedByDefault Remove="Shared\SlipLayout.razor" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Pages\Report\EmployeeReport\BankReport.razor" />
     <None Include="Shared\SlipLayout.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Pages\Report\EmployeeReport\BankReport.razor" />
   </ItemGroup>
 
 </Project>

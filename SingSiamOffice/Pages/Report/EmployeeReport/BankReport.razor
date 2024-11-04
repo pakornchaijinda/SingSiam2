@@ -1,5 +1,305 @@
-﻿<h3>BankReport</h3>
+﻿@page "/bank-report"
+@* <h3>BankReport</h3> *@
 
+@using System.ComponentModel.DataAnnotations
+@using System.Threading
+@* <h3>AccountExpenseReport</h3> *@
+
+@* 02 รายงาน บัญชีเข้า-ออก ธนาคาร*@
+
+
+<Navbar2></Navbar2>
+
+<style>
+
+    th, td {
+        padding: 3px;
+    }
+</style>
+
+<div class="content">
+    <Header />
+
+    <div class="container-fluid mt-4 mb-4">
+        <div class="row">
+            <div class="col-12 mt-4 mb-4">
+                <MudText Typo="Typo.h5" Style="@headertext"><img class="rounded-circle" src="img/icons/budget.svg" alt="" style="width:3rem;"> รายงานบัญชีเข้า - ออก ธนาคาร</MudText>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid mt-4 mb-4">
+        <div class="card outer-card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12 mt-2 mb-2">
+                        <MudText Typo="Typo.body1" Style="@headertext">ค้นหาข้อมูลรายงานบัญชีเข้า - ออก ธนาคาร</MudText>
+                    </div>
+                    <div class="col-md-3">
+                        <MudSelect T="string" Label="ระบุปี" HelperText="ระบุปีที่ต้องการหาข้อมูล" @bind-Value="year_data" Variant="Variant.Outlined" Margin="Margin.Dense" AnchorOrigin="Origin.BottomCenter">
+                            @foreach (var year in years)
+                            {
+                                <MudSelectItem T="string" Value="@year">@year</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </div>
+                    <div class="col-md-3">
+                        <MudSelect T="string" Label="ระบุเดือน" HelperText="ระบุเดือนต้องการหาข้อมูล" @bind-Value="month_data" Variant="Variant.Outlined" Margin="Margin.Dense" AnchorOrigin="Origin.BottomCenter">
+                            @foreach (var month in months)
+                            {
+                                <MudSelectItem T="string" Value="@month">@month</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </div>
+                    <div class="col-md-4">
+                        <MudStack Row="true" Spacing="1">
+                            <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Search" Size="Size.Large" Color="Color.Info">ค้นหา</MudButton>
+                            <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Close" Size="Size.Large" Color="Color.Error">ล้างข้อมูล</MudButton>
+                        </MudStack>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid mt-4 mb-4">
+        <div class="card outer-card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12 mb-2 mt-2 text-center">
+                        <MudText Typo="Typo.body1">บัญชีเข้า - ออก ธนาคาร : กันยายน 2567</MudText>
+                        <MudText Typo="Typo.body1">สาขา : ย่อยบ้านเขว้า</MudText>
+                    </div>
+
+                    <div class="col-md-12 mb-2 mt-2">
+                        <MudText Typo="Typo.body2" Style="@blue">01 กันยายน 2567</MudText>
+                    </div>
+                    <div class="col-md-12">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ที่</th>
+                                    <th scope="col">รายการ</th>
+                                    <th scope="col">เลขที่ใบเสร็จ</th>
+                                    <th scope="col">ค่างวด</th>
+                                    <th scope="col">ค่าปรับ</th>
+                                    <th scope="col">รายรับ</th>
+                                    <th scope="col">รายจ่าย</th>
+                                    <th scope="col">คงเหลือ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>ยอดยกมา</td>
+                                    <td>CCV9724</td>
+                                    <td><span style="@green">30,579.00</span></td>
+                                    <td><span style="@orange">0.00</span></td>
+                                    <td><span style="@blue">30,579.00</span></td>
+                                    <td><span style="@orange">0.00</span></td>
+                                    <td><span style="@black">30,579.00</span></td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>ได้รับชำระค่างวด <span style="@green">: 11-15/15</span></td>
+                                    <td>CCV9724</td>
+                                    <td><span style="@green">30,579.00</span></td>
+                                    <td><span style="@orange">0.00</span></td>
+                                    <td><span style="@blue">30,579.00</span></td>
+                                    <td><span style="@orange">0.00</span></td>
+                                    <td><span style="@black">30,579.00</span></td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>ได้รับชำระค่างวด <span style="@green">: 3/48</span> <span style="@orange">[เงินโอน]</span></td>
+                                    <td>CCV9724</td>
+                                    <td><span style="@green">30,579.00</span></td>
+                                    <td><span style="@orange">0.00</span></td>
+                                    <td><span style="@blue">30,579.00</span></td>
+                                    <td><span style="@orange">0.00</span></td>
+                                    <td><span style="@black">30,579.00</span></td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>ได้รับชำระค่าธรรมเนียมภาษี</td>
+                                    <td>SCCV23351</td>
+                                    <td><span style="@green">30,579.00</span></td>
+                                    <td><span style="@orange">0.00</span></td>
+                                    <td><span style="@blue">30,579.00</span></td>
+                                    <td><span style="@orange">0.00</span></td>
+                                    <td><span style="@black">30,579.00</span></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>จ่ายตั้งสํารองเงนสด-ค่างวด</td>
+                                    <td></td>
+                                    <td><span style="@green">0.00</span></td>
+                                    <td><span style="@orange">0.00</span></td>
+                                    <td><span style="@blue">0.00</span></td>
+                                    <td><span style="@orange">30,579.00</span></td>
+                                    <td><span style="@black">30,579.00</span></td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>ถอนจายตั้งสํารองเงินสด <span style="@green">: 3/48</span></td>
+                                    <td></td>
+                                    <td><span style="@green">0.00</span></td>
+                                    <td><span style="@orange">0.00</span></td>
+                                    <td><span style="@blue">0.00</span></td>
+                                    <td><span style="@orange">30,579.00</span></td>
+                                    <td><span style="@black">30,579.00</span></td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>รับฝากเงินล่วงหน้า <span style="@green">: 7/8</span> <span style="@orange">[เงินโอน]</span></td>
+                                    <td>CCV9724</td>
+                                    <td><span style="@green">30,579.00</span></td>
+                                    <td><span style="@orange">0.00</span></td>
+                                    <td><span style="@blue">30,579.00</span></td>
+                                    <td><span style="@orange">0.00</span></td>
+                                    <td><span style="@black">30,579.00</span></td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="col-md-12 mb-2 mt-2">
+                        <MudText Typo="Typo.body2" Style="@blue">02 กันยายน 2567</MudText>
+                    </div>
+                    <div class="col-md-12">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ที่</th>
+                                    <th scope="col">รายการ</th>
+                                    <th scope="col">เลขที่ใบเสร็จ</th>
+                                    <th scope="col">ค่างวด</th>
+                                    <th scope="col">ค่าปรับ</th>
+                                    <th scope="col">รายรับ</th>
+                                    <th scope="col">รายจ่าย</th>
+                                    <th scope="col">คงเหลือ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>ยอดยกมา</td>
+                                    <td>CCV9724</td>
+                                    <td><span style="@green">30,579.00</span></td>
+                                    <td><span style="@orange">0.00</span></td>
+                                    <td><span style="@blue">30,579.00</span></td>
+                                    <td><span style="@orange">0.00</span></td>
+                                    <td><span style="@black">30,579.00</span></td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>ได้รับชำระค่างวด <span style="@green">: 11-15/15</span></td>
+                                    <td>CCV9724</td>
+                                    <td><span style="@green">30,579.00</span></td>
+                                    <td><span style="@orange">0.00</span></td>
+                                    <td><span style="@blue">30,579.00</span></td>
+                                    <td><span style="@orange">0.00</span></td>
+                                    <td><span style="@black">30,579.00</span></td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>ได้รับชำระค่างวด <span style="@green">: 3/48</span> <span style="@orange">[เงินโอน]</span></td>
+                                    <td>CCV9724</td>
+                                    <td><span style="@green">30,579.00</span></td>
+                                    <td><span style="@orange">0.00</span></td>
+                                    <td><span style="@blue">30,579.00</span></td>
+                                    <td><span style="@orange">0.00</span></td>
+                                    <td><span style="@black">30,579.00</span></td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>ได้รับชำระค่าธรรมเนียมภาษี</td>
+                                    <td>SCCV23351</td>
+                                    <td><span style="@green">30,579.00</span></td>
+                                    <td><span style="@orange">0.00</span></td>
+                                    <td><span style="@blue">30,579.00</span></td>
+                                    <td><span style="@orange">0.00</span></td>
+                                    <td><span style="@black">30,579.00</span></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>จ่ายตั้งสํารองเงนสด-ค่างวด</td>
+                                    <td></td>
+                                    <td><span style="@green">0.00</span></td>
+                                    <td><span style="@orange">0.00</span></td>
+                                    <td><span style="@blue">0.00</span></td>
+                                    <td><span style="@orange">30,579.00</span></td>
+                                    <td><span style="@black">30,579.00</span></td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>ถอนจายตั้งสํารองเงินสด <span style="@green">: 3/48</span></td>
+                                    <td></td>
+                                    <td><span style="@green">0.00</span></td>
+                                    <td><span style="@orange">0.00</span></td>
+                                    <td><span style="@blue">0.00</span></td>
+                                    <td><span style="@orange">30,579.00</span></td>
+                                    <td><span style="@black">30,579.00</span></td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>รับฝากเงินล่วงหน้า <span style="@green">: 7/8</span> <span style="@orange">[เงินโอน]</span></td>
+                                    <td>CCV9724</td>
+                                    <td><span style="@green">30,579.00</span></td>
+                                    <td><span style="@orange">0.00</span></td>
+                                    <td><span style="@blue">30,579.00</span></td>
+                                    <td><span style="@orange">0.00</span></td>
+                                    <td><span style="@black">30,579.00</span></td>
+
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 @code {
+    // style
+    string tableheader = "background-color:#840012; color:#ffff;";
+    string headertext = "color:#840012; font-weight:600;";
+    string buttoncolor1 = "background-color:#840012; color:#FFF; font-weight:600;";
+    string settingbutton = "background-color:#840012; color:#FFF; font-weight:600; ";
+    string buttoncollape = "background-color:#fc928c; color:#840012; font-weight:600;";
+    string imporText = "color:#840012; font-weight:600;";
+    string detailtext = "color:#1C2833 ; font-weight:600; font-style: italic;";
+
+    string green = "color:#00b326; font-weight:600;";
+    string blue = "color:#000eb3; font-weight:600;";
+    string orange = "color:#fb4900; font-weight:600;";
+    string black = "font-weight:600;";
+
+    private string year_data { get; set; }
+    private string[] years =
+    {
+        "2565", "2566", "2567", "2568",
+    };
+
+    private string month_data { get; set; }
+    private string[] months =
+    {
+    "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
+    "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+    };
 
 }
