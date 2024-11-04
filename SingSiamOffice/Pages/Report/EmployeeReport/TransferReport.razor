@@ -1,5 +1,184 @@
-﻿<h3>TransferReport</h3>
+﻿@page "/transfer-report"
+@* <h3>TransferReport</h3> *@
 
+@using System.ComponentModel.DataAnnotations
+@using System.Threading
+@* <h3>AccountExpenseReport</h3> *@
+
+@* 04 รายงานสรุปการโอนเงิน*@
+
+
+<Navbar2></Navbar2>
+
+<style>
+
+    th, td {
+        padding: 3px;
+    }
+</style>
+
+<div class="content">
+    <Header />
+
+    <div class="container-fluid mt-4 mb-4">
+        <div class="row">
+            <div class="col-12 mt-4 mb-4">
+                <MudText Typo="Typo.h5" Style="@headertext"><img class="rounded-circle" src="img/icons/budget.svg" alt="" style="width:3rem;"> รายงานสรุปการโอนเงิน</MudText>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid mt-4 mb-4">
+        <div class="card outer-card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12 mt-2 mb-2">
+                        <MudText Typo="Typo.body1" Style="@headertext">ค้นหาข้อมูลรายงานสรุปการโอนเงิน</MudText>
+                    </div>
+                    <div class="col-md-3">
+                        <MudSelect T="string" Label="ระบุปี" HelperText="ระบุปีที่ต้องการหาข้อมูล" @bind-Value="year_data" Variant="Variant.Outlined" Margin="Margin.Dense" AnchorOrigin="Origin.BottomCenter">
+                            @foreach (var year in years)
+                            {
+                                <MudSelectItem T="string" Value="@year">@year</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </div>
+                    <div class="col-md-3">
+                        <MudSelect T="string" Label="ระบุเดือน" HelperText="ระบุเดือนต้องการหาข้อมูล" @bind-Value="month_data" Variant="Variant.Outlined" Margin="Margin.Dense" AnchorOrigin="Origin.BottomCenter">
+                            @foreach (var month in months)
+                            {
+                                <MudSelectItem T="string" Value="@month">@month</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </div>
+                    <div class="col-md-4">
+                        <MudStack Row="true" Spacing="1">
+                            <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Search" Size="Size.Large" Color="Color.Info">ค้นหา</MudButton>
+                            <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Close" Size="Size.Large" Color="Color.Error">ล้างข้อมูล</MudButton>
+                        </MudStack>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid mt-4 mb-4">
+        <div class="card outer-card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12 mb-2 mt-2 text-center">
+                        <MudText Typo="Typo.body1">รายงานสรุปการโอนเงิน : กันยายน 2567</MudText>
+                        <MudText Typo="Typo.body1">สาขา : ย่อยบ้านเขว้า</MudText>
+                    </div>
+                    <div class="col-md-4 mb-2 mt-2 text-center">
+                        <MudText Typo="Typo.body1">บัญชี เข้า-ออกธนาคาร</MudText>
+                        <MudText Typo="Typo.body1">ยอดคงเหลือ <span style="@green">: 44,001</span></MudText>
+                    </div>
+                      <div class="col-md-4 mb-2 mt-2 text-center">
+                        <MudText Typo="Typo.body1">บัญชี รายรับ-รายจ่าย</MudText>
+                        <MudText Typo="Typo.body1">ยอดคงเหลือ <span style="@green">: 44,001</span></MudText>
+                    </div>
+                    <div class="col-md-4 mb-2 mt-2 text-center">
+                        <MudText Typo="Typo.body1">บัญชี สรุปรวมยอด</MudText>
+                        <MudText Typo="Typo.body1">เก็บ <span style="@green">: 497,001</span> / ปล่อยกู้ <span style="@green">: 650,000</span></MudText>
+                    </div>
+
+                    <div class="col-md-12">
+                        <table class="table">
+                         
+                            <thead>
+                                <tr>
+                                    <th scope="col">วันที่</th>
+                                    <th scope="col">รายการ</th>
+                                    <th scope="col">จำนวนเงิน</th>
+                                    <th scope="col">อ้างอิง</th>
+                                    <th scope="col">วันที่</th>
+                                    <th scope="col">ผู้ทำรายการ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">20 ก.ย. 67 15:58</th>
+                                    <td><span style="@green">[ยอมรับ]</span> รายการโอนจาก <span style="@blue">ศูนย์บริการท่าโป่ง</span></td>
+                                    <td><span style="@green">10,000</span></td>
+                                    <td><span style="@black">GSBD2581</span></td>
+                                    <td>20 ก.ย. 67 16:09</td>
+                                    <td><span style="@black">น.ส.พิยดา เชื้อโนนแดง</span></td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row">20 ก.ย. 67 13:35</th>
+                                    <td><span style="@green">[ยอมรับ]</span> รายการโอนจาก <span style="@blue">ศูนย์บริการกกกะทอน </span></td>
+                                    <td><span style="@green">10,000</span></td>
+                                    <td><span style="@black">BAAC7649</span></td>
+                                    <td>20 ก.ย. 67 13:44</td>
+                                    <td><span style="@black">น.ส.พิยดา เชื้อโนนแดง</span></td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row">20 ก.ย. 67 10:12</th>
+                                    <td><span style="@green">[ยอมรับ]</span> รายการโอนจาก <span style="@blue">ย่อยเกษตรสมบูรณ์</span></td>
+                                    <td><span style="@green">20,000</span></td>
+                                    <td><span style="@black">BAAC5242</span></td>
+                                    <td>20 ก.ย. 67 10:45</td>
+                                    <td><span style="@black">นายวิมล บุญเสนา</span></td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row">14 ก.ย. 67 12:01</th>
+                                    <td><span style="@green">[ยอมรับ]</span> รายการโอนจาก <span style="@blue">ย่อยบำเหน็จณรงค์</span></td>
+                                    <td><span style="@green">10,000</span></td>
+                                    <td><span style="@black">GSBD2581</span></td>
+                                    <td>14 ก.ย. 67 12:01</td>
+                                    <td><span style="@black">น.ส.พิยดา เชื้อโนนแดง</span></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">11 ก.ย. 67 15:02</th>
+                                    <td><span style="@green">[ยอมรับ]</span> รายการโอนจาก <span style="@blue">ย่อยภูเขียว</span></td>
+                                    <td><span style="@green">10,000</span></td>
+                                    <td><span style="@black">GSBD2581</span></td>
+                                    <td>11 ก.ย. 67 15:33</td>
+                                    <td><span style="@black">น.ส.วาสนา โสภาพันธ์</span></td>
+
+                                </tr>
+                 
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 @code {
+    // style
+    string tableheader = "background-color:#840012; color:#ffff;";
+    string headertext = "color:#840012; font-weight:600;";
+    string buttoncolor1 = "background-color:#840012; color:#FFF; font-weight:600;";
+    string settingbutton = "background-color:#840012; color:#FFF; font-weight:600; ";
+    string buttoncollape = "background-color:#fc928c; color:#840012; font-weight:600;";
+    string imporText = "color:#840012; font-weight:600;";
+    string detailtext = "color:#1C2833 ; font-weight:600; font-style: italic;";
+
+    string green = "color:#00b326; font-weight:600;";
+    string blue = "color:#000eb3; font-weight:600;";
+    string lightblue = "color:#009bb3; font-weight:600;";
+    string orange = "color:#fb4900; font-weight:600;";
+    string black = "font-weight:600;";
+
+    private string year_data { get; set; }
+    private string[] years =
+    {
+        "2565", "2566", "2567", "2568",
+    };
+
+    private string month_data { get; set; }
+    private string[] months =
+    {
+    "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
+    "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+    };
 
 }
