@@ -198,6 +198,84 @@
 
                                 </tr>
                             </tbody>
+                            <tfoot >
+                                <tr style="@tablefooter">
+                                    <th scope="row">รวม</th>
+                                    <td>30,579</td>
+                                    <td>220</td>
+                                    <td>30,579</td>
+                                    <td>56,789</td>
+                                    <td>220</td>
+                                    <td>56,789</td>
+                                    <td></td>
+                                    <td>91,610</td>
+                                    <td></td>
+                                    <td>153,000</td>
+
+                                </tr>
+                                <tr class="text-end border-white" style="@totalfooter">
+                                    <th></th>
+                                    <td colspan="2">ยอดเก็บ Vat</td>
+                                    <td>220</td>
+                                    <td>ราย</td>
+                                    <td colspan="2"></td>
+                                    <td colspan="2">ล/ค ประจําเดือนก่อน</td>
+                                    <td>220</td>
+                                    <td>ราย</td>
+                                </tr>
+                                <tr class="text-end border-white" style="@totalfooter">
+                                    <th></th>
+                                    <td colspan="2"> ยอดเก็บ Hide</td>
+                                    <td>220</td>
+                                    <td>ราย</td>
+                                    <td colspan="2"></td>
+                                    <td colspan="2">ล/ค ประจําเดือนนี้</td>
+                                    <td>220</td>
+                                    <td>ราย</td>
+                                </tr>
+                                <tr class="text-end border-white" style="@totalfooter">
+                                    <th></th>
+                                    <td colspan="2">รวม</td>
+                                    <td>220</td>
+                                    <td>บาท</td>
+                                    <td colspan="2"></td>
+                                    <td colspan="2">ยอดเก็บรวม</td>
+                                    <td>220</td>
+                                    <td>บาท</td>
+                                </tr>
+                                <br/>
+                                <tr class="text-end border-white" style="@totalfooter">
+                                    <th></th>
+                                    <td colspan="2">% Vat รวม</td>
+                                    <td>220</td>
+                                    <td>%</td>
+                                    <td colspan="2"></td>
+                                    <td colspan="2">รายรับรวม</td>
+                                    <td>220</td>
+                                    <td>บาท</td>
+                                </tr>
+                                <tr class="text-end border-white" style="@totalfooter">
+                                    <th></th>
+                                    <td colspan="2">% Hide รวม</td>
+                                    <td>220</td>
+                                    <td>%</td>
+                                    <td colspan="2"></td>
+                                    <td colspan="2">รายจ่ายรวม</td>
+                                    <td>220</td>
+                                    <td>บาท</td>
+                                </tr>
+                                <tr class="text-end border-white" style="@totalfooter">
+                                    <th></th>
+                                    <td colspan="2">% รวม</td>
+                                    <td>220</td>
+                                    <td>%</td>
+                                    <td colspan="2"></td>
+                                    <td colspan="2">กำไรขั้นต้น</td>
+                                    <td>220</td>
+                                    <td>บาท</td>
+                                </tr>
+                            </tfoot>
+                    
                         </table>
                     </div>
 
@@ -210,6 +288,8 @@
 @code {
     // style
     string tableheader = "background-color:#840012; color:#ffff;";
+    string tablefooter = "background-color:#840012; color:#ffff;";
+    string totalfooter = "background-color:#ffff;color:#840012;border-bottom: none; border:none; padding: 2px; font-weight:600;";
     string headertext = "color:#840012; font-weight:600;";
     string buttoncolor1 = "background-color:#840012; color:#FFF; font-weight:600;";
     string settingbutton = "background-color:#840012; color:#FFF; font-weight:600; ";
