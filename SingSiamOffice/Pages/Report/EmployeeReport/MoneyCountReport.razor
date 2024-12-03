@@ -1,13 +1,11 @@
-﻿@page "/moneycount-report"
-@* <h3>MoneyCountReport</h3> *@
+﻿@page "/moneycount-report/{b_id:int}"
+
 
 @using System.ComponentModel.DataAnnotations
 @using System.Threading
-@* <h3>AccountExpenseReport</h3> *@
-
-@* 05 รายงานประวัติการนับเงิน*@
-
-
+@using SingSiamOffice.Manage
+@using SingSiamOffice.Models;
+@using Microsoft.EntityFrameworkCore;
 <Navbar2></Navbar2>
 
 <style>
@@ -36,25 +34,12 @@
                         <MudText Typo="Typo.body1" Style="@headertext">ค้นหาข้อมูลรายงานประวัติการนับเงิน</MudText>
                     </div>
                     <div class="col-md-3">
-                        <MudSelect T="string" Label="ระบุปี" HelperText="ระบุปีที่ต้องการหาข้อมูล" @bind-Value="year_data" Variant="Variant.Outlined" Margin="Margin.Dense" AnchorOrigin="Origin.BottomCenter">
-                            @foreach (var year in years)
-                            {
-                                <MudSelectItem T="string" Value="@year">@year</MudSelectItem>
-                            }
-                        </MudSelect>
-                    </div>
-                    <div class="col-md-3">
-                        <MudSelect T="string" Label="ระบุเดือน" HelperText="ระบุเดือนต้องการหาข้อมูล" @bind-Value="month_data" Variant="Variant.Outlined" Margin="Margin.Dense" AnchorOrigin="Origin.BottomCenter">
-                            @foreach (var month in months)
-                            {
-                                <MudSelectItem T="string" Value="@month">@month</MudSelectItem>
-                            }
-                        </MudSelect>
+                        <MudDatePicker Label="เลือกปี เดือนที่ต้องการค้นหา" HelperText="@_monthDay?.ToShortDateString()" @bind-Date="_monthDay" OpenTo="OpenTo.Month"  DateFormat="MM/dd" />
                     </div>
                     <div class="col-md-4">
                         <MudStack Row="true" Spacing="1">
-                            <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Search" Size="Size.Large" Color="Color.Info">ค้นหา</MudButton>
-                            <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Close" Size="Size.Large" Color="Color.Error">ล้างข้อมูล</MudButton>
+                            <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Search" Style="@buttoncolor1" @onclick="()=>Fillter()">ค้นหาข้อมูล</MudButton>
+                            <MudButton Variant="Variant.Outlined" Color="Color.Error" @onclick="()=>Reset()">ล้างค้นหา</MudButton>
                         </MudStack>
                     </div>
                 </div>
@@ -62,18 +47,18 @@
         </div>
     </div>
 
-    <div class="container-fluid mt-4 mb-4">
+    <div class="container-fluid mt-4 mb-4" id="table_data">
         <div class="card outer-card">
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12 mb-2 mt-2 text-center">
                         <MudText Typo="Typo.body1">รายงานประวัติการนับเงิน : กันยายน 2567</MudText>
-                        <MudText Typo="Typo.body1">สาขา : ย่อยบ้านเขว้า</MudText>
+                        <MudText Typo="Typo.body1">สาขา : ย่อยบ้านเขว้า</MudText> <MudButton Variant="Variant.Outlined" Color="Color.Error" @onclick="()=>printdata()">พิมพ์เอกสาร</MudButton>
                     </div>
           
 
-                    <div class="col-md-12">
-                        <table class="table">
+                    <div class="col-md-12" >
+                        <table class="table" id="myTable">
 
                             <thead>
                                 <tr>
@@ -90,69 +75,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">01 ก.ย. 67</th>
-                                   <td><span style="@black">9</span></td>
-                                   <td><span style="@black">7</span></td>
-                                   <td><span style="@black">37</span></td>
-                                    <td><span style="@black">32</span></td>
-                                    <td><span style="@black">25</span></td>
-                                    <td><span style="@black">12</span></td>
-                                    <td><span style="@black">26</span></td>
-                                    <td><span style="@black">0</span></td>
-                                    <td><span style="@black">9</span></td>
+                                @foreach (var data in list_cash)
+                                {
+                                    <tr>
+                                        <td scope="row">@data.DateCreate.ToString("dd/MM/yyyy")</td>
+                                        <td><span style="@black">@data.Log1000</span></td>
+                                        <td><span style="@black">@data.Log500</span></td>
+                                        <td><span style="@black">@data.Log100</span></td>
+                                        <td><span style="@black">@data.Log50</span></td>
+                                        <td><span style="@black">@data.Log20</span></td>
+                                        <td><span style="@black">@data.Log10</span></td>
+                                        <td><span style="@black">@data.Log5</span></td>
+                                        <td><span style="@black">@data.Log2</span></td>
+                                        <td><span style="@black">@data.Log1</span></td>
 
-                                </tr>
-                                <tr>
-                                    <th scope="row">02 ก.ย. 67</th>
-                                    <td><span style="@black">9</span></td>
-                                    <td><span style="@black">7</span></td>
-                                    <td><span style="@black">37</span></td>
-                                    <td><span style="@black">32</span></td>
-                                    <td><span style="@black">25</span></td>
-                                    <td><span style="@black">12</span></td>
-                                    <td><span style="@black">26</span></td>
-                                    <td><span style="@black">0</span></td>
-                                    <td><span style="@black">9</span></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">03 ก.ย. 67</th>
-                                    <td><span style="@black">9</span></td>
-                                    <td><span style="@black">7</span></td>
-                                    <td><span style="@black">37</span></td>
-                                    <td><span style="@black">32</span></td>
-                                    <td><span style="@black">25</span></td>
-                                    <td><span style="@black">12</span></td>
-                                    <td><span style="@black">26</span></td>
-                                    <td><span style="@black">0</span></td>
-                                    <td><span style="@black">9</span></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">04 ก.ย. 67</th>
-                                    <td><span style="@black">9</span></td>
-                                    <td><span style="@black">7</span></td>
-                                    <td><span style="@black">37</span></td>
-                                    <td><span style="@black">32</span></td>
-                                    <td><span style="@black">25</span></td>
-                                    <td><span style="@black">12</span></td>
-                                    <td><span style="@black">26</span></td>
-                                    <td><span style="@black">0</span></td>
-                                    <td><span style="@black">9</span></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">05 ก.ย. 67</th>
-                                    <td><span style="@black">9</span></td>
-                                    <td><span style="@black">7</span></td>
-                                    <td><span style="@black">37</span></td>
-                                    <td><span style="@black">32</span></td>
-                                    <td><span style="@black">25</span></td>
-                                    <td><span style="@black">12</span></td>
-                                    <td><span style="@black">26</span></td>
-                                    <td><span style="@black">0</span></td>
-                                    <td><span style="@black">9</span></td>
-
-                                </tr>
-
+                                    </tr>
+                                }
+   
                             </tbody>
                         </table>
                     </div>
@@ -191,5 +130,46 @@
     "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
     "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
     };
+    [Inject]
+    IJSRuntime JSRuntime { get; set; }
+    [Parameter]
+    public int b_id { get; set; }
+    SingSiamOffice.Models.SingsiamdbContext db = new SingSiamOffice.Models.SingsiamdbContext();
+    List<CashLog> list_cash = new List<CashLog>();
+    private DateTime? _monthDay;
+    private void Fillter()
+    {
 
+        if (_monthDay != null)
+        {
+            list_cash = db.CashLogs.Include(s => s.Branch).Where(s => s.BranchId == b_id && s.DateCreate.Month == _monthDay.Value.Month &&
+                s.DateCreate.Year == _monthDay.Value.Year).ToList();
+        }
+        StateHasChanged();
+    }
+    private void Reset()
+    {
+
+        if (_monthDay != null)
+        {
+            list_cash = db.CashLogs.Include(s => s.Branch).Where(s => s.BranchId == b_id).ToList();
+        }
+        StateHasChanged();
+    }
+
+    private void load_data()
+    {
+        list_cash = db.CashLogs.Include(s => s.Branch).Where(s => s.BranchId == b_id).ToList();
+    }
+    private void printdata()
+    {
+        JSRuntime.InvokeVoidAsync("printDiv", "table_data");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        load_data();
+        StateHasChanged();
+    }
 }

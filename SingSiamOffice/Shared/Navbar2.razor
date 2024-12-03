@@ -71,7 +71,7 @@
     string ExpenseListHref => "/expense-list/" + brach_id.ToString();
     string paymentdeleteHref => "/deletepayment/" + brach_id.ToString();
 
-    string ReportPortal => "/reportportal";
+    string ReportPortal => "/reportportal/" + brach_id.ToString();
     protected override async Task OnInitializedAsync()
     {
 

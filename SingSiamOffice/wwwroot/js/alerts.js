@@ -113,7 +113,45 @@ function deletesuccess() {
         timer: 1500
     })
 }
+function printDiv(divId) {
+    // Get the content of the div
+    const divContent = document.getElementById(divId).innerHTML;
 
+    // Get all styles applied to the current document
+    const styles = Array.from(document.styleSheets)
+        .map(styleSheet => {
+            try {
+                return Array.from(styleSheet.cssRules)
+                    .map(rule => rule.cssText)
+                    .join('\n');
+            } catch (e) {
+                return ''; // Skip inaccessible stylesheets
+            }
+        })
+        .join('\n');
+
+    // Open a new window
+    const printWindow = window.open('', '', 'height=600,width=800');
+
+    // Write the content and styles into the new window
+    printWindow.document.write(`
+                <html>
+                <head>
+                    <title>Print Div</title>
+                    <style>${styles}</style>
+                </head>
+                <body>${divContent}</body>
+                </html>
+            `);
+
+    // Close the document to finish writing
+    printWindow.document.close();
+
+    // Focus and trigger the print dialog
+    printWindow.focus();
+    printWindow.print();
+    printWindow.close();
+}
 function delete_error() {
     Swal.fire({
         position: 'center',

@@ -255,7 +255,6 @@ function printReceipt() {
     });
 }
 
-
 function addPageBreaks(rowCount) {
     const rows = document.querySelectorAll("#printableArea tbody tr");
     const rowsPerPage = rowCount;

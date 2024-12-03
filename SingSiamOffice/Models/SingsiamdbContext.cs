@@ -19,6 +19,8 @@ public partial class SingsiamdbContext : DbContext
 
     public virtual DbSet<Branch> Branches { get; set; }
 
+    public virtual DbSet<CashLog> CashLogs { get; set; }
+
     public virtual DbSet<Collateral> Collaterals { get; set; }
 
     public virtual DbSet<Config> Configs { get; set; }
@@ -138,6 +140,33 @@ public partial class SingsiamdbContext : DbContext
             entity.HasOne(d => d.ProvinceNavigation).WithMany(p => p.Branches)
                 .HasForeignKey(d => d.ProvinceId)
                 .HasConstraintName("FK_branch_province");
+        });
+
+        modelBuilder.Entity<CashLog>(entity =>
+        {
+            entity.HasKey(e => e.LogId);
+
+            entity.ToTable("Cash_Log");
+
+            entity.Property(e => e.LogId).HasColumnName("log_id");
+            entity.Property(e => e.BranchId).HasColumnName("branch_id");
+            entity.Property(e => e.DateCreate)
+                .HasColumnType("datetime")
+                .HasColumnName("date_create");
+            entity.Property(e => e.Log1).HasColumnName("log_1");
+            entity.Property(e => e.Log10).HasColumnName("log_10");
+            entity.Property(e => e.Log100).HasColumnName("log_100");
+            entity.Property(e => e.Log1000).HasColumnName("log_1000");
+            entity.Property(e => e.Log2).HasColumnName("log_2");
+            entity.Property(e => e.Log20).HasColumnName("log_20");
+            entity.Property(e => e.Log5).HasColumnName("log_5");
+            entity.Property(e => e.Log50).HasColumnName("log_50");
+            entity.Property(e => e.Log500).HasColumnName("log_500");
+
+            entity.HasOne(d => d.Branch).WithMany(p => p.CashLogs)
+                .HasForeignKey(d => d.BranchId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Cash_Log_branch");
         });
 
         modelBuilder.Entity<Collateral>(entity =>

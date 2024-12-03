@@ -41,6 +41,8 @@ public partial class Branch
 
     public string? Code { get; set; }
 
+    public virtual ICollection<CashLog> CashLogs { get; set; } = new List<CashLog>();
+
     public virtual ICollection<Customer> Customers { get; set; } = new List<Customer>();
 
     public virtual ICollection<Login> Logins { get; set; } = new List<Login>();

@@ -27,7 +27,7 @@ namespace SingSiamOffice.Pages.Report
         }
         private void moneycountreport()
         {
-            navigation.NavigateTo("/moneycount-report");
+            navigation.NavigateTo("/moneycount-report/" + b_id.ToString());
         }
         private void montlyIncomereport()
         {

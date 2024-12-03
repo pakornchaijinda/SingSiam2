@@ -358,6 +358,10 @@
                                     </th>
                                     <th scope="col" style="@cashbox">
                                         <h6>เหรียญ</h6>
+                                        <h6>2</h6>
+                                    </th>
+                                    <th scope="col" style="@cashbox">
+                                        <h6>เหรียญ</h6>
                                         <h6>1</h6>
                                     </th>
 
@@ -371,6 +375,7 @@
                                     <th><input type="number" class="form-control text-center" id="20" min="1" @bind-value="@_Count.T_20_bath"></th>
                                     <th><input type="number" class="form-control text-center" id="10" min="1" @bind-value="@_Count.C_10_bath"></th>
                                     <th><input type="number" class="form-control text-center" id="5" min="1" @bind-value="@_Count.C_5_bath"></th>
+                                    <th><input type="number" class="form-control text-center" id="2" min="1" @bind-value="@_Count.C_2_bath"></th>
                                     <th><input type="number" class="form-control text-center" id="1" min="1" @bind-value="@_Count.C_1_bath"></th>
                                 </tr>
 
@@ -396,13 +401,19 @@
                                     
                                     @if (cal_total_bath == total_3)
                                     {
-                                    <h3 style="color:#145a32;">@cal_total_bath.ToString("N0")</h3>
-                                    <MudButton Variant="Variant.Filled" Style="@buttoncolor1" @onclick="()=>Fillter()">ปิดยอดประจำวัน</MudButton>
-                                }
-                                else
-                                {
-                                    <h3 style="color:#840012;">@cal_total_bath.ToString("N0")</h3>
-                                }
+                                        <h3 style="color:#145a32;">@cal_total_bath.ToString("N0")</h3>
+                                        @if(non_today_check){
+                                         <h3 style="color:#840012;">พบรายการปิดยอดวันนี้</h3>
+                                        }else{
+                                            <MudButton Variant="Variant.Filled" Style="@buttoncolor1" @onclick="()=>closeDay()">ปิดยอดประจำวัน</MudButton>
+                                            
+                                        }
+                                    
+                                    }
+                                    else
+                                    {
+                                        <h3 style="color:#840012;">@cal_total_bath.ToString("N0")</h3>
+                                    }
                             </div>
                            
                         </div>
@@ -439,7 +450,7 @@
     [Parameter]
     public int b_id { get; set; }
     List<TransactionHistory> list_transection = new List<TransactionHistory>();
-
+    bool non_today_check = true;
     SingsiamdbContext db = new SingsiamdbContext();
     Branch b_info = new Branch();
 
@@ -457,6 +468,7 @@
         public int T_20_bath { get; set; } = 0;
         public int C_10_bath { get; set; } = 0;
         public int C_5_bath { get; set; } = 0;
+        public int C_2_bath { get; set; } = 0;
         public int C_1_bath { get; set; } = 0;
     }
     decimal cal_total_bath { get; set; }
@@ -468,7 +480,7 @@
         // branchService.branch_ID = b_id;
         b_info = db.Branches.Where(s => s.Id == b_id).FirstOrDefault();
         list_transection = db.TransactionHistories.Include(s => s.Subject).Include(s => s.Login).Where(s => s.BranchId == b_id).AsNoTracking().OrderByDescending(s => s.CreateAt).ToList();
-       
+
         //remove transection not confirm
         //var to_calulate = list_transection.Where(s => !(s.SubjectId == 4 && s.ConfirmTransection == false) && !(s.SubjectId == 21 && s.ConfirmTransection == false) && s.Subject.SubjectType != 34).ToList();
         var to_calulate = list_transection.Where(s => !(s.SubjectId == 21 && s.ConfirmTransection == false) && s.Subject.SubjectType != 34).ToList();
@@ -492,6 +504,29 @@
         {
             list_transection = db.TransactionHistories.Include(s => s.Subject).Where(s => s.BranchId == b_id && s.CreateAt.Day == date.Value.Day && s.CreateAt.Month == date.Value.Month && s.CreateAt.Year == date.Value.Year).AsNoTracking().OrderByDescending(s => s.CreateAt).ToList();
         }
+        StateHasChanged();
+    }
+    private async void closeDay()
+    {
+
+        var to_add = new Models.CashLog()
+        {
+            BranchId = b_id,
+            DateCreate = DateTime.Now,
+            Log1000 = _Count.T_1000_bath,
+            Log500 = _Count.T_500_bath,
+            Log100 = _Count.T_100_bath,
+            Log50 = _Count.T_50_bath,
+            Log20 = _Count.T_20_bath,
+            Log10 = _Count.C_10_bath,
+            Log5 = _Count.C_5_bath,
+            Log2 = _Count.C_2_bath,
+            Log1 = _Count.C_1_bath
+        };
+        db.CashLogs.Add(to_add);
+        await db.SaveChangesAsync();
+        await JSRuntime.InvokeVoidAsync("confirm");
+        non_today_check = true;
         StateHasChanged();
     }
     private void Reset()
@@ -524,7 +559,14 @@
                 (_Count.T_20_bath * 20) +
                 (_Count.C_10_bath * 10) +
                  (_Count.C_5_bath * 5) +
+                  (_Count.C_2_bath * 2) +
                   (_Count.C_1_bath * 1);
         StateHasChanged();
+        DateTime today = DateTime.Today; // ได้วันที่ของวันนี้ เวลาเริ่มต้น 00:00:00
+        DateTime tomorrow = today.AddDays(1); // ได้วันถัดไป เวลาเริ่มต้น 00:00:00
+
+        non_today_check = db.CashLogs
+            .Where(s => s.DateCreate >= today && s.DateCreate < tomorrow && s.BranchId == b_id)
+            .Any();
     }
 }
