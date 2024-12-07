@@ -836,7 +836,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                                 }
                                 if (payment_method == 2)
                                 {
-                                    _receipttran_toAdd.Transferdate = "1";
+                                    _receipttran_toAdd.Transferpaid = 1;    
                                     _receipttran_toAdd.PaidBy = 2;
                                 }
                                 if (payment_method == 3)
@@ -1210,7 +1210,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                                 }
                                 if (payment_method == 2)
                                 {
-                                    _receipttran_toAdd.Transferdate = "1";
+                                    _receipttran_toAdd.Transferpaid = 1;
                                     _receipttran_toAdd.PaidBy = 2;
                                 }
                                 if (payment_method == 3)
