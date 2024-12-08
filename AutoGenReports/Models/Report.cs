@@ -10,5 +10,6 @@ namespace AutoGenReports.Models
         public int ReportType { get; set; }
         public string JsonData { get; set; } = null!;
         public DateTime? CreatedAt { get; set; }
+        public string? TransactionDate { get; set; }
     }
 }

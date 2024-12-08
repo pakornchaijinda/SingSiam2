@@ -2133,6 +2133,10 @@ namespace AutoGenReports.Models
                 entity.Property(e => e.JsonData).HasColumnName("Json_data");
 
                 entity.Property(e => e.ReportType).HasColumnName("report_type");
+
+                entity.Property(e => e.TransactionDate)
+                    .HasMaxLength(50)
+                    .HasColumnName("transaction_date");
             });
 
             modelBuilder.Entity<Role>(entity =>
