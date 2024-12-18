@@ -215,25 +215,28 @@ namespace SingSiamOffice.Pages.EmployeeManagement
         private async Task submit()
         {
             var confirm = await JSRuntime.InvokeAsync<bool>("confirmSaveData");
-            if (New_em.Code == null)
-            {
-                await JSRuntime.InvokeVoidAsync("alert","กรอกข้อมูลให้ครบถ้วน");
-            }
+           
+       
             if (confirm)
             {
-                if (await Save(New_em))
+                if (New_em.Code == null)
                 {
-                    await JSRuntime.InvokeVoidAsync("confirm");
-                    await Task.Delay(100);
-
-                    navigationManager.NavigateTo("/employee-list");
+                    await JSRuntime.InvokeVoidAsync("alert", "กรอกข้อมูลให้ครบถ้วน เลขรหัสพนักงาน");
                 }
                 else
                 {
-                    await JSRuntime.InvokeVoidAsync("alert_error");
-                }
+                    if (await Save(New_em))
+                    {
+                        await JSRuntime.InvokeVoidAsync("confirm");
+                        await Task.Delay(100);
 
-                    
+                        navigationManager.NavigateTo("/employee-list");
+                    }
+                    else
+                    {
+                        await JSRuntime.InvokeVoidAsync("alert_error");
+                    }
+                }
             }
             else
             {
