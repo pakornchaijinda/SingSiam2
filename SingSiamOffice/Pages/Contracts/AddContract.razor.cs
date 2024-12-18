@@ -805,14 +805,29 @@ namespace SingSiamOffice.Pages.Contracts
                     Price = Convert.ToInt32(b.Chargeamt),
                     BranchId = branch_id,
                     Detial = TaxDetail,
-                  Receiptname = receipt_name,
-                  LoginId = userLogin,
+                    Receiptname = receipt_name,
+                    LoginId = userLogin,
                     TransectionRef = RefAccNoCode,
                     refcodetrans = b.Refcode,
                     promise_id = b.Id,  
                 };
 
+          
+                TransactionHistory toAdd2 = new TransactionHistory()
+                {
+                    Price = Convert.ToInt32(b.Capital),
+                    BranchId = branch_id,
+                    Detial = TaxDetail,
+                    Receiptname = receipt_name,
+                    LoginId = userLogin,
+                    refcodetrans = b.Refcode,
+                    promise_id = b.Id,
+                };
+
+
+
                 var transactionhistory = await promiseManagement.addTaxPromise(toAdd);
+                await promiseManagement.AddPromiseTransaction(toAdd2);
                 var periodtran = await Managements.Add_Periodtrans(b, contract_type);
                 var ck_save = await promiseManagement.addPeriodtran(periodtran);
 

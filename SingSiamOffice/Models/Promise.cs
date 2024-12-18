@@ -165,6 +165,8 @@ public partial class Promise
 
     public DateTime? UpdatedOn { get; set; }
 
+    public int? TransectionIdRef { get; set; }
+
     public virtual Branch Branch { get; set; } = null!;
 
     public virtual Customer Customer { get; set; } = null!;
