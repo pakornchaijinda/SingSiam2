@@ -28,6 +28,41 @@ namespace SingSiamOffice.Manage
                 return null;
             }
         }
+        public async Task AddPromiseTransaction(TransactionHistory items) 
+        {
+     
+            int next_no = 0;
+            string result = "";
+
+            var branch_info = db.Branches.AsNoTracking().Where(s => s.Id == items.BranchId).FirstOrDefault();
+
+            next_no = (int)branch_info.Accdocno + 1;
+            string numberPart = branch_info.Code + "." + next_no.ToString("D7");
+            result = numberPart;
+
+            TransactionHistory toAdd = new TransactionHistory()
+            {
+                BranchId = items.BranchId,
+                TransectionRef = result,
+                SubjectId = 36,
+                Price = items.Price,
+                CreateAt = DateTime.Now,
+                Receiptname = items.Receiptname,
+                LoginId = items.LoginId,
+                Detial = items.Detial,
+                PaymentMethod = 1,
+            };
+            db.TransactionHistories.Add(toAdd);
+
+           
+            await db.SaveChangesAsync();
+
+
+            var permitInfo = db.Promises.Where(s => s.Id == items.promise_id).FirstOrDefault();
+            permitInfo.TransectionIdRef = toAdd.TransactionId;
+            db.Entry(permitInfo).State = EntityState.Modified;
+            await db.SaveChangesAsync();
+        }
         public async Task<bool> addTaxPromise(TransactionHistory items) 
         {
 
@@ -68,10 +103,23 @@ namespace SingSiamOffice.Manage
             var to_edit = db.TransectionSlips.Where(s=>s.PromiseId == promiseId).FirstOrDefault();
             if (to_edit == null)
             {
-
+                var promise_Id = db.Promises.Where(s=>s.Id == promiseId).FirstOrDefault();
+                var to_del_transactiohistory = db.TransactionHistories.Where(s => s.TransactionId == promise_Id.TransectionIdRef).FirstOrDefault();
+                if (to_del_transactiohistory != null)
+                {
+                    db.Entry(to_del_transactiohistory).State = EntityState.Deleted;
+                    db.Entry(to_edit).State = EntityState.Deleted;
+                }
             }
             else 
             {
+                var promise_Id = db.Promises.Where(s => s.Id == promiseId).FirstOrDefault();
+                var to_del_trans = db.TransactionHistories.Where(s => s.TransactionId == promise_Id.TransectionIdRef && s.SubjectId == 36).FirstOrDefault();
+                if (to_del_trans != null)
+                {
+                    db.Entry(to_del_trans).State = EntityState.Deleted;
+                    db.Entry(to_edit).State = EntityState.Deleted;
+                }
                 var to_del_transactiohistory = db.TransactionHistories.Where(s => s.TransactionId == to_edit.TransactionHistoryId).FirstOrDefault();
                 if (to_del_transactiohistory != null)
                 {

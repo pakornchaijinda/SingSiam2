@@ -1080,6 +1080,7 @@ public partial class SingsiamdbContext : DbContext
                 .HasDefaultValueSql("((0.00))")
                 .HasColumnType("decimal(10, 2)")
                 .HasColumnName("totaldown");
+            entity.Property(e => e.TransectionIdRef).HasColumnName("transection_id_ref");
             entity.Property(e => e.UpdatedOn)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime")

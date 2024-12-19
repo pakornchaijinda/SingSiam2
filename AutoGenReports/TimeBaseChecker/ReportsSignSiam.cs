@@ -16,13 +16,19 @@ namespace AutoGenReports.TimeBaseChecker
             Models.singsiamdbContext db = new Models.singsiamdbContext();
 
         }
-        public static async Task Report1(int Month,int branch_id)
+        public static async Task Report1(int branch_id)
         {
             Models.singsiamdbContext db = new Models.singsiamdbContext();
-          
+
+            if (db.Reports.AsNoTracking().Any(a => (a.ReportType == 1 ) && a.BranchId == branch_id && a.TransactionDate == DateTime.Now.Date.ToString()))
+            {
+                return;
+            }
+
+            var transaction_date = DateTime.Now.Date;
             List<int> num = new List<int> { 2, 4 };
-            var list_transaction_history = db.TransactionHistories.AsNoTracking().Include(s => s.Branch).Include(s => s.Receiopttran).ThenInclude(s => s.Receiptdescs).Include(s=>s.Subject).Where(s=>s.CreateAt.Month ==  Month && num.Contains(s.PaymentMethod) && s.BranchId == branch_id).OrderBy(s=>s.Subject.SubjectType).ToList();
-         //   var subject_code_income = db.SubjectCosts.AsNoTracking().Where(s => s.SubjectType == 1).Select(s=>s.SubjectId).ToList();
+            var list_transaction_history = db.TransactionHistories.AsNoTracking().Include(s => s.Branch).Include(s => s.Receiopttran).ThenInclude(s => s.Receiptdescs).Include(s=>s.Subject).Where(s=>s.CreateAt.Date ==  transaction_date && num.Contains(s.PaymentMethod) && s.BranchId == branch_id).OrderBy(s=>s.Subject.SubjectType).ToList();
+       
             if (list_transaction_history.Count != 0)
             {
                 var json_head3 = new jsonModel
@@ -31,7 +37,7 @@ namespace AutoGenReports.TimeBaseChecker
                     branch_id = branch_id,
                     branch_name = list_transaction_history.FirstOrDefault().Branch.BranchName,
                     report_type = 1,
-                    transaction_date_format = list_transaction_history.FirstOrDefault().CreateAt.ToString("yyyy-MM"),
+                    transaction_date_format = list_transaction_history.FirstOrDefault().CreateAt.ToString("yyyy-MM-dd"),
                     report1_Income_Outcome_s = new List<report1_income_outcome_transferonly>()
                 };
                 int i = 1;
@@ -166,7 +172,7 @@ namespace AutoGenReports.TimeBaseChecker
                                 json_report1.expenses = items.Price;
                             }
                         }
-
+                        json_report1.transaction_data = items.CreateAt.Date;
                        
                         i++;
                         json_head3.report1_Income_Outcome_s.Add(json_report1);
@@ -194,11 +200,60 @@ namespace AutoGenReports.TimeBaseChecker
             }
           
         }
+        public static async Task Report6(int branch_id) 
+        {
+            var transaction_date = DateTime.Now.Date;
+            Models.singsiamdbContext db = new Models.singsiamdbContext();
+            if (db.Reports.AsNoTracking().Any(a => (a.ReportType == 6) && a.BranchId == branch_id && a.TransactionDate == DateTime.Now.Date.ToString()))
+            {
+                return;
+            }
+            List<int> subject_id_cost = new List<int> { 11, 12, 13, 14, 15, 16, 17 };
 
+            var list_transaction_history = db.TransactionHistories.AsNoTracking().Include(s => s.Branch).Include(s => s.Receiopttran).ThenInclude(s => s.Receiptdescs).Include(s => s.Subject).Where(s => s.CreateAt.Date ==transaction_date  && subject_id_cost.Contains(s.SubjectId) && s.BranchId == branch_id).OrderBy(s => s.Subject.SubjectType).ToList();
 
-        public class report1_income_outcome_transferonly //report4//20200227
+            if (list_transaction_history.Count != 0)
+            {
+                var json_head6 = new jsonModel6
+                {
+                    transaction_date = DateTime.Now.Date,
+                    branch_id = branch_id,
+                    branch_name = list_transaction_history.FirstOrDefault().Branch.BranchName,
+                    report_type = 6,
+                    transaction_date_format = list_transaction_history.FirstOrDefault().CreateAt.ToString("yyyy-MM-dd"),
+                    report6_Summary_Expenses = new List<report6_summary_expenses>()
+                };
+                int i = 1;
+                foreach (var items in list_transaction_history)
+                {
+                    report6_summary_expenses data = new report6_summary_expenses();
+                    data.rowNumber = i;
+                    data.detail = items.Subject.SubjectName;
+                    data.expenses_amount = items.Price;
+                    i++;
+                    json_head6.report6_Summary_Expenses.Add(data);
+                }
+                string json_data = Newtonsoft.Json.JsonConvert.SerializeObject(json_head6);
+                Models.Report toAdd = new Report
+                {
+                    BranchId = json_head6.branch_id,
+                    ReportType = json_head6.report_type,
+                    JsonData = json_data,
+                    CreatedAt = json_head6.transaction_date,
+                    TransactionDate = json_head6.transaction_date_format,
+                };
+                db.Reports.Add(toAdd);
+                await db.SaveChangesAsync();
+            }
+            else { }
+
+            }
+
+        public class report1_income_outcome_transferonly 
         {
             public int rowNumber { get; set; }
+
+            public DateTime transaction_data { get; set; }  
             public string detail { get; set; }
             public string detail_desc { get; set; }
             public string payment_type { get; set; }
@@ -211,6 +266,38 @@ namespace AutoGenReports.TimeBaseChecker
             public decimal expenses { get; set; }
             public decimal remain { get; set; }
         }
+        public class report6_summary_expenses 
+        {
+            public int rowNumber { get; set; }
+            public string detail { get; set; }
+            public string detail_desc { get; set; }
+            public decimal expenses_amount { get; set; }
+
+        }
+        public class report3_summary_of_month
+        {
+         
+            public string transactiondate { get; set; }
+            public decimal amount_vat { get; set; }
+            public decimal amount_charge_vat { get; set; }
+            public decimal total_vat { get; set; }
+
+            public decimal amount_novat { get; set; }
+            public decimal amount_charge_novat { get; set; }
+            public decimal total_novat { get; set; }
+
+            public decimal total_sum_amount { get; set; }
+            public decimal total_accumulate { get; set; }
+
+            public decimal total_promise { get; set; }
+            public decimal total_accumulate_promise { get; set; }
+           
+
+
+
+            public decimal expenses_amount { get; set; }
+
+        }
         public class jsonModel
         {
             public int branch_id { get; set; }
@@ -220,8 +307,33 @@ namespace AutoGenReports.TimeBaseChecker
             public string transaction_date_format { get; set; }
 
             public List<report1_income_outcome_transferonly> report1_Income_Outcome_s { get; set; }
-        
+
         }
+        public class jsonModel3
+        {
+            public int branch_id { get; set; }
+            public string branch_name { get; set; }
+            public int report_type { get; set; }
+            public DateTime transaction_date { get; set; }
+            public string transaction_date_format { get; set; }
+            public List<report3_summary_of_month> report3_Summary_Of_Months { get; set; }
+
+        }
+        public class jsonModel6
+        {
+            public int branch_id { get; set; }
+            public string branch_name { get; set; }
+            public int report_type { get; set; }
+            public DateTime transaction_date { get; set; }
+            public string transaction_date_format { get; set; }
+
+            public List<report6_summary_expenses> report6_Summary_Expenses { get; set; }
+
+        }
+
+      
+
+
 
     }
 }

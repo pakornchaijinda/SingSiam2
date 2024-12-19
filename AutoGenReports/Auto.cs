@@ -21,12 +21,25 @@ namespace AutoGenReports
                 var all_branch = db.Branches.AsNoTracking().ToList();
                 foreach (var branch in all_branch) 
                 {
-                    await TimeBaseChecker.ReportsSignSiam.Report1(10,branch.Id);
+                    await TimeBaseChecker.ReportsSignSiam.Report1(branch.Id);
                 }
                
                 Console.WriteLine("Update autoReport1 is completed " + DateTime.Now);
             }
             catch (Exception ex) { Console.WriteLine("Update autoReport1 is error " + ex, ToString()); }
+
+            try
+            {
+
+                var all_branch = db.Branches.AsNoTracking().ToList();
+                foreach (var branch in all_branch)
+                {
+                    await TimeBaseChecker.ReportsSignSiam.Report6(branch.Id);
+                }
+
+                Console.WriteLine("Update autoReport6 is completed " + DateTime.Now);
+            }
+            catch (Exception ex) { Console.WriteLine("Update autoReport6 is error " + ex, ToString()); }
 
             #endregion
         }
