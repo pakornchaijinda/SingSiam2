@@ -91,12 +91,14 @@
                                                     <td>
                                                         @data.Subject.SubjectName @data.Detial <strong>
                                                             [ @data.Price.ToString("N0") ]
-                                                            @if (data.ConfirmTransection.Value)
+                                                            @if (data.ConfirmTransection == null)
+                                                            {
+                                                                <span style="text-decoration: underline; color:#9502c4">รอกดยืนยันรายการ</span>
+                                                            }
+                                                            else if (data.ConfirmTransection.Value)
                                                             {
                                                                 <span style="text-decoration: underline; color:limegreen"> ยืนยันเรียบร้อย</span>
-                                                            }else if (data.ConfirmTransection.Value == null)
-                                                            {
-                                                                <span style="text-decoration: underline;">ยังไม่ได้ยืนยัน</span>
+
                                                             }
                                                             else
                                                             {

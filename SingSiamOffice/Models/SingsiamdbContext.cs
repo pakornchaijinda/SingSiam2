@@ -51,6 +51,8 @@ public partial class SingsiamdbContext : DbContext
 
     public virtual DbSet<ReceipttranCancle> ReceipttranCancles { get; set; }
 
+    public virtual DbSet<Report> Reports { get; set; }
+
     public virtual DbSet<Role> Roles { get; set; }
 
     public virtual DbSet<RunningNo> RunningNos { get; set; }
@@ -1714,6 +1716,23 @@ public partial class SingsiamdbContext : DbContext
                 .HasConstraintName("FK_receipttran_cancle_customer");
         });
 
+        modelBuilder.Entity<Report>(entity =>
+        {
+            entity.ToTable("reports");
+
+            entity.Property(e => e.ReportId).HasColumnName("report_id");
+            entity.Property(e => e.BranchId).HasColumnName("branch_id");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("created_at");
+            entity.Property(e => e.JsonData).HasColumnName("Json_data");
+            entity.Property(e => e.ReportType).HasColumnName("report_type");
+            entity.Property(e => e.TransactionDate)
+                .HasMaxLength(50)
+                .HasColumnName("transaction_date");
+        });
+
         modelBuilder.Entity<Role>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__role__3213E83FF8DD49E5");
@@ -1779,9 +1798,7 @@ public partial class SingsiamdbContext : DbContext
 
             entity.Property(e => e.TransactionId).HasColumnName("Transaction_id");
             entity.Property(e => e.BranchId).HasColumnName("Branch_id");
-            entity.Property(e => e.ConfirmTransection)
-                .HasDefaultValueSql("((0))")
-                .HasColumnName("confirm_transection");
+            entity.Property(e => e.ConfirmTransection).HasColumnName("confirm_transection");
             entity.Property(e => e.CreateAt)
                 .HasColumnType("datetime")
                 .HasColumnName("Create_at");

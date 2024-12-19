@@ -102,7 +102,7 @@
         {
             Models.Login userLogin = db.Logins.Where(s => s.Username == auth).AsNoTracking().FirstOrDefault();
             brach_id = userLogin.BranchId;
-            if (userLogin.RoleId != 3)
+            if (userLogin.RoleId == 1 || userLogin.RoleId == 9)
             {
                 DashboardHref = "/dashboard-admin/";
             }
