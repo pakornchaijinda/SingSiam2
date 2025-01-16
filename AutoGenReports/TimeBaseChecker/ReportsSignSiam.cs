@@ -249,6 +249,8 @@ namespace AutoGenReports.TimeBaseChecker
 
             }
 
+
+
         public class report1_income_outcome_transferonly 
         {
             public int rowNumber { get; set; }
@@ -298,6 +300,26 @@ namespace AutoGenReports.TimeBaseChecker
             public decimal expenses_amount { get; set; }
 
         }
+        public class report2_income_outcome_cashonly
+        {
+            public int rowNumber { get; set; }
+
+            public DateTime transaction_data { get; set; }
+            public string detail { get; set; }
+            public string detail_desc { get; set; }
+            public string payment_type { get; set; }
+
+            public bool vat { get; set; }
+            public string receiptno { get; set; }
+            public decimal amount { get; set; }
+            public decimal amount_charge { get; set; }
+            public decimal income { get; set; }
+            public decimal expenses { get; set; }
+            public decimal remain { get; set; }
+        }
+
+
+
         public class jsonModel
         {
             public int branch_id { get; set; }
