@@ -1,0 +1,13 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace SingSiamOffice.Models.SingSiamOld2;
+
+public partial class ZzRaw1Cdv
+{
+    public string? PromiseNo { get; set; }
+
+    public int? Ptype { get; set; }
+
+    public string? Customer { get; set; }
+}

@@ -1,1 +1,4 @@
  Scaffold-DbContext "Server=103.91.204.106;Database=singsiamdb;user id=sqlserver;password=singsiamP@ssw0rd;Trusted_Connection=false;MultipleActiveResultSets=true;TrustServerCertificate=true" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -F
+
+
+ Scaffold-DbContext "server=103.91.204.106;port=3307;user=root;password=OudIaNolEGalEAT;database=01singsiam"  Pomelo.EntityFrameworkCore.MySql -OutputDir Models/SingSiamOld -f
