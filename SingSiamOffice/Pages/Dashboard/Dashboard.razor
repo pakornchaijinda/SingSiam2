@@ -19,18 +19,18 @@
 
 <style>
     .sticky {
-        position: -webkit-sticky;
-        position: sticky;
-        bottom: 0;
-        
+    position: -webkit-sticky;
+    position: sticky;
+    bottom: 0;
+
     }
 
     .centerbox {
-        display: grid;
-        align-items: center;
+    display: grid;
+    align-items: center;
     }
     th h6{
-        color:#fff;
+    color:#fff;
     }
 </style>
 <Navbar2></Navbar2>
@@ -57,26 +57,26 @@
             </div>
             <div class="col-3 text-end mt-4 mb-4">
                 <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Calculate" Style="@buttoncolor1" @onclick="()=>moneyCalculate()">คำนวนค่างวด</MudButton>
-                </div>
+            </div>
         </div>
 
     </div>
     <div class="container-fluid mt-4 mb-4">
 
-            <div class="row">
-              <div class="col-md-3 pb-3">
-                    <div class="card outer-card">
-                        <div class="row no-gutters">
-                            <div class="col-4">
-                                <div class="card-body">
-                                    <img  src="img/icons/totalmoney.svg" alt="" style="width:5rem;">
-                                </div>
-                                
+        <div class="row">
+            <div class="col-md-3 pb-3">
+                <div class="card outer-card">
+                    <div class="row no-gutters">
+                        <div class="col-4">
+                            <div class="card-body">
+                                <img  src="img/icons/totalmoney.svg" alt="" style="width:5rem;">
                             </div>
-                            <div class="col-8">
-                                <div class="card-body text-center">
-                                   <MudStack>
-                                        <MudText Typo="Typo.body1" Style="@imporText">ยอดเงินคงเหลือทั้งหมดของสาขา</MudText>
+
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body text-center">
+                                <MudStack>
+                                    <MudText Typo="Typo.body1" Style="@imporText">ยอดเงินคงเหลือทั้งหมดของสาขา</MudText>
                                     @if (total_1 == 0)
                                     {
                                         <MudText Typo="Typo.body1">@total_1 บาท</MudText>
@@ -85,27 +85,27 @@
                                     {
                                         <MudText Typo="Typo.body1">@total_1.ToString("N0") บาท</MudText>
                                     }
-                             
-                                   </MudStack>
-                                </div>
+
+                                </MudStack>
                             </div>
                         </div>
                     </div>
-              </div>
-                <div class="col-md-3 pb-3">
-                    <div class="card outer-card">
-                        <div class="row no-gutters">    
-                            <div class="col-4">
-                                <div class="card-body">
-                                    <img  src="img/icons/branchmoney.svg" alt="" style="width:5rem;">
-                                </div>
-
+                </div>
+            </div>
+            <div class="col-md-3 pb-3">
+                <div class="card outer-card">
+                    <div class="row no-gutters">    
+                        <div class="col-4">
+                            <div class="card-body">
+                                <img  src="img/icons/branchmoney.svg" alt="" style="width:5rem;">
                             </div>
-                            <div class="col-8">
-                                <div class="card-body text-center">
-                                    <MudStack>
-                                        <MudText Typo="Typo.body1" Style="@imporText">ยอดคงเหลือในบัญชีสาขา</MudText>
-                                
+
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body text-center">
+                                <MudStack>
+                                    <MudText Typo="Typo.body1" Style="@imporText">ยอดคงเหลือในบัญชีสาขา</MudText>
+
                                     @if (total_2 == 0)
                                     {
                                         <MudText Typo="Typo.body1">@total_2 บาท</MudText>
@@ -114,26 +114,26 @@
                                     {
                                         <MudText Typo="Typo.body1">@total_2.ToString("N0") บาท</MudText>
                                     }
-                                    </MudStack>
-                                </div>
+                                </MudStack>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 pb-3">
-                    <div class="card outer-card">
-                        <div class="row no-gutters">
-                            <div class="col-4">
-                                <div class="card-body">
-                                    <img  src="img/icons/cash.svg" alt="" style="width:5rem;">
-                                </div>
-
+            </div>
+            <div class="col-md-3 pb-3">
+                <div class="card outer-card">
+                    <div class="row no-gutters">
+                        <div class="col-4">
+                            <div class="card-body">
+                                <img  src="img/icons/cash.svg" alt="" style="width:5rem;">
                             </div>
-                            <div class="col-8">
-                                <div class="card-body text-center">
-                                    <MudStack>
-                                        <MudText Typo="Typo.body1" Style="@imporText">ยอดคงเหลือเงินสดสาขา</MudText>
-      
+
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body text-center">
+                                <MudStack>
+                                    <MudText Typo="Typo.body1" Style="@imporText">ยอดคงเหลือเงินสดสาขา</MudText>
+
                                     @if (total_3 == 0)
                                     {
                                         <MudText Typo="Typo.body1">@total_3 บาท</MudText>
@@ -142,26 +142,26 @@
                                     {
                                         <MudText Typo="Typo.body1">@total_3.ToString("N0") บาท</MudText>
                                     }
-                                    </MudStack>
-                                </div>
+                                </MudStack>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 pb-3">
-                    <div class="card outer-card">
-                        <div class="row no-gutters">
-                            <div class="col-4">
-                                <div class="card-body ">
-                                    <img  src="img/icons/lone.svg" alt="" style="width:5rem;">
-                                </div>
-
+            </div>
+            <div class="col-md-3 pb-3">
+                <div class="card outer-card">
+                    <div class="row no-gutters">
+                        <div class="col-4">
+                            <div class="card-body ">
+                                <img  src="img/icons/lone.svg" alt="" style="width:5rem;">
                             </div>
-                            <div class="col-8">
-                                <div class="card-body text-center">
-                                    <MudStack>
-                                        <MudText Typo="Typo.body1" Style="@imporText">ยอดปล่อยกู้รวม</MudText>
-                       
+
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body text-center">
+                                <MudStack>
+                                    <MudText Typo="Typo.body1" Style="@imporText">ยอดปล่อยกู้รวม</MudText>
+
                                     @if (total_4 == 0)
                                     {
                                         <MudText Typo="Typo.body1">@total_4 บาท</MudText>
@@ -170,34 +170,34 @@
                                     {
                                         <MudText Typo="Typo.body1">@total_4.ToString("N0") บาท</MudText>
                                     }
-                                    </MudStack>
-                                </div>
+                                </MudStack>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
 
+    </div>
+
     <div class="container-fluid mt-4 mb-4">
-            <div class="row">
-                <div class="col-md-8">
-                    <MudStack Row="true">
-                        <MudDatePicker @bind-Date="date" Label="วัน/เดือน/ปี" Culture="@GetThaiCulture()" PickerVariant="PickerVariant.Dialog" UseShortNames="false" TitleDateFormat="dddd, dd MMMM" Margin="Margin.Dense" Variant="Variant.Outlined" Style="background-color:#fff;" Required RequiredError="กรุณาระบุวัน/เดือน/ปีเกิด" />
+        <div class="row">
+            <div class="col-md-8">
+                <MudStack Row="true">
+                    <MudDatePicker @bind-Date="date" Label="วัน/เดือน/ปี" Culture="@GetThaiCulture()" PickerVariant="PickerVariant.Dialog" UseShortNames="false" TitleDateFormat="dddd, dd MMMM" Margin="Margin.Dense" Variant="Variant.Outlined" Style="background-color:#fff;" Required RequiredError="กรุณาระบุวัน/เดือน/ปีเกิด" />
                     <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Search" Style="@buttoncolor1" @onclick="()=>Fillter()">ค้นหาข้อมูล</MudButton>
                     <MudButton Variant="Variant.Outlined" Color="Color.Error" @onclick="()=>Reset()">ล้างค้นหา</MudButton>
-                 </MudStack>
-                </div>
-              
+                </MudStack>
             </div>
 
         </div>
-     <div class="container-fluid mt-4 mb-4">
-         <div class="card outer-card">
-             <div class="card-body">
-                 <div class="row">
-                     <div class="col-md-12">
+
+    </div>
+    <div class="container-fluid mt-4 mb-4">
+        <div class="card outer-card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <thead>
@@ -233,7 +233,7 @@
                                                             else if (data.ConfirmTransection.Value)
                                                             {
                                                                 <span style="text-decoration: underline; color:limegreen"> ยืนยันเรียบร้อย</span>
-                                                               
+
                                                             }
                                                             else
                                                             {
@@ -253,8 +253,8 @@
                                                 {
                                                     <td>@data.Subject.SubjectName @data.Detial</td>
                                                 }
-                                                
-                                                
+
+
                                                 @if (data.Subject.SubjectType == 1)
                                                 {
 
@@ -279,7 +279,7 @@
                                                     }
                                                     else
                                                     {
-                                                        
+
                                                     }
                                                 }
                                                 @if (data.PaymentMethod == 1 && data.Subject.SubjectType != 4 && data.Subject.SubjectType != 3)
@@ -301,12 +301,12 @@
 
                                                 else
                                                 {
-                                                   
+
                                                 }
 
 
                                                 <td class="text-end">@data.Receiptname</td>
-                                             
+
 
                                             </tr>
                                         }
@@ -317,14 +317,14 @@
 
                             </table>
                         </div>
-                     </div>
+                    </div>
 
-                 </div>
-             </div>
-         </div>
-       
+                </div>
+            </div>
+        </div>
 
-     </div>
+
+    </div>
     <div class="container-fluid mt-4 mb-4 sticky">
         <div class="card outer-card">
             <div class="card-body">
@@ -385,45 +385,45 @@
                     </div>
                     <div class="col-3 centerbox">
                         <div class="row">
-                                <div class="col-4 text-center">
+                            <div class="col-4 text-center">
                                 <MudTooltip Text="นับเงิน">
                                     <MudIconButton Icon="@Icons.Material.Filled.Calculate" Variant="Variant.Outlined" Style="@calbutton" Size="Size.Large" @onclick="()=>Calculator()" />
                                 </MudTooltip>
-                      
+
 
                                 @* <MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="()=>Calculator()" Style="height: 50px;">
                                     <MudIcon Icon="@Icons.Material.Filled.Calculate" />
                                     ปุ่มนับเงิน
                                 </MudButton> *@
 
-                                </div>
-                            <div class="col-8 text-center" >
-                                    <h3>นับเงินสด</h3>
-                                    
-                                    @if (cal_total_bath == total_3)
-                                    {
-                                        <h3 style="color:#145a32;">@cal_total_bath.ToString("N0")</h3>
-                                        @if(non_today_check){
-                                         <h3 style="color:#840012;">พบรายการปิดยอดวันนี้</h3>
-                                        }else{
-                                            <MudButton Variant="Variant.Filled" Style="@buttoncolor1" @onclick="()=>closeDay()">ปิดยอดประจำวัน</MudButton>
-                                            
-                                        }
-                                    
-                                    }
-                                    else
-                                    {
-                                        <h3 style="color:#840012;">@cal_total_bath.ToString("N0")</h3>
-                                    }
                             </div>
-                           
+                            <div class="col-8 text-center" >
+                                <h3>นับเงินสด</h3>
+
+                                @if (cal_total_bath == total_3)
+                                {
+                                    <h3 style="color:#145a32;">@cal_total_bath.ToString("N0")</h3>
+                                    @if(non_today_check){
+                                        <h3 style="color:#840012;">พบรายการปิดยอดวันนี้</h3>
+                                    }else{
+                                        <MudButton Variant="Variant.Filled" Style="@buttoncolor1" @onclick="()=>closeDay()">ปิดยอดประจำวัน</MudButton>
+
+                                    }
+
+                                }
+                                else
+                                {
+                                    <h3 style="color:#840012;">@cal_total_bath.ToString("N0")</h3>
+                                }
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
 
         </div>
-     
+
     </div>
 </div>
 
@@ -453,6 +453,7 @@
     List<TransactionHistory> list_transection = new List<TransactionHistory>();
     bool non_today_check = true;
     SingsiamdbContext db = new SingsiamdbContext();
+    
     Branch b_info = new Branch();
 
     decimal total_1 { get; set; } 
