@@ -11,17 +11,17 @@ public partial class Customer
 
     public string FullName { get; set; } = null!;
 
-    public DateTime Bdate { get; set; }
+    public DateTime? Bdate { get; set; }
 
     public string Religion { get; set; } = null!;
 
     public string Address { get; set; } = null!;
 
-    public string CardCreate { get; set; } = null!;
+    public string? CardCreate { get; set; }
 
-    public string CardExprite { get; set; } = null!;
+    public string? CardExprite { get; set; }
 
-    public string Phone { get; set; } = null!;
+    public string? Phone { get; set; }
 
     public string Job { get; set; } = null!;
 

@@ -425,7 +425,7 @@ public partial class SingsiamdbContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("orther_debt");
             entity.Property(e => e.Phone)
-                .HasMaxLength(20)
+                .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("phone");
             entity.Property(e => e.Religion)
