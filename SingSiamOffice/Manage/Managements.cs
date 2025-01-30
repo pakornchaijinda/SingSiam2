@@ -412,11 +412,16 @@ namespace SingSiamOffice.Manage
 
             var capital = promise.Capital;
             var amount = promise.Amount;
-
+            int count_p = 1;
             if (ptype == 1)
             {
                 for (int i =0; i < promise.Periods; i++)
                 {
+                    if (i != 0)
+                    { 
+                        count_p++;
+                    }
+                   
                     var cnt_total_capital = lst_periodtrans.Sum(s => s.Capital);
                     Models.Periodtran p = new Models.Periodtran();
                     p.PromiseId = promise.Id;
@@ -431,7 +436,7 @@ namespace SingSiamOffice.Manage
                   
                   
 
-                    if (promise.Periods == i)
+                    if (promise.Periods == count_p)
                     {
                         p.Capital =   capital - cnt_total_capital;
                         p.Interest = amount - p.Capital;
