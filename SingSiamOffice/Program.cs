@@ -37,6 +37,8 @@ builder.Services.AddSingleton<SingSiamOffice.Helpers.NumberToText>();
 builder.Services.AddSingleton<SingSiamOffice.Helpers.calamount>();
 
 builder.Services.AddDbContext<SingSiamOffice.Models.SingsiamdbContext>();
+builder.Services.AddDbContext<SingSiamOffice.Models.SingSiamOld._01singsiamContext>();
+builder.Services.AddDbContext<SingSiamOffice.Models.SingSiamOld2._02singsiamContext>();
 builder.Services.AddScoped<UserLoginService>();
 builder.Services.AddSingleton<SingSiamOffice.Manage.BranchService>();
 builder.Services.AddHttpClient();

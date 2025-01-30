@@ -106,6 +106,7 @@
                     globalData.username = username;
                     globalData.fullname = brach.Fullname;
                     globalData.branch_name = brach.Branch.BranchName;
+                 
                     branchService.branch_ID = brach.Branch.Id;
                     globalData.login_id = brach.Id;
                     eventLog.Update_by = await _userManager.GetUserId(userLogin);

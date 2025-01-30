@@ -769,7 +769,7 @@
 
     public double? PaidAmount { get; set; }
     public string otherReason { get; set; }
-    DateTime date { get; set; } = DateTime.UtcNow;
+    public string date { get; set; } = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss");
     public string nat { get; set; } = "12345678998";
     public string name { get; set; } = "สุรี ศรีเย็น";
     public string collateral_type { get; set; } = "3 โฉนดที่ดิน";

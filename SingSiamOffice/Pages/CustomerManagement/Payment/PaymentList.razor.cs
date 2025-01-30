@@ -36,6 +36,8 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
         Manage.GlobalData globalData { get; set; }
         [Inject]
         Manage.PromiseManagement promiseManagement { get; set; }
+        [Inject]
+        Manage.BranchService branchService { get; set; }
         public bool paid_status { get; set; } = true;
 
 
@@ -177,6 +179,8 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
 
         private string ReceiptNo { get; set; } = "";
         int activeIndex = 0;
+
+       
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
@@ -187,6 +191,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
         }
         protected override async void OnInitialized()
         {
+            
             p = new payment();
             _periodtran = await managements.GetPeriodtransbyPromiseId(promise_id);
             _promise = await managements.GetPromisebyPromiseId(promise_id);
@@ -656,7 +661,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                         Receipttran _receipttran_toAdd = new Receipttran();
 
                         _receipttran_toAdd.PromiseId = _promise.Id;
-                        _receipttran_toAdd.BranchId = _promise.BranchId;
+                        _receipttran_toAdd.BranchId = branchService.branch_ID;
                         _receipttran_toAdd.CustomerId = _promise.CustomerId;
                         _receipttran_toAdd.Receiptno = p.receipt_no;
                         _receipttran_toAdd.Amount = Convert.ToDecimal(p.customerPayAmount);
@@ -802,7 +807,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                                 Receipttran _receipttran_toAdd = new Receipttran();
 
                                 _receipttran_toAdd.PromiseId = _promise.Id;
-                                _receipttran_toAdd.BranchId = _promise.BranchId;
+                                _receipttran_toAdd.BranchId = branchService.branch_ID;
                                 _receipttran_toAdd.CustomerId = _promise.CustomerId;
                                 _receipttran_toAdd.Receiptno = p.receipt_no;
                                 _receipttran_toAdd.Intplus = intplus;
@@ -991,7 +996,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                                 {
                                     Receiptdesc _receiptdesc_toAdd = new Receiptdesc();
                                     _receiptdesc_toAdd.PromiseId = _promise.Id;
-                                    _receiptdesc_toAdd.BranchId = _promise.BranchId;
+                                    _receiptdesc_toAdd.BranchId = branchService.branch_ID;
                                     _receiptdesc_toAdd.CustomerId = _promise.CustomerId;
                                     _receiptdesc_toAdd.Receiptno = p.receipt_no;
                                     _receiptdesc_toAdd.ReceipttranId = _receipttran_toAdd.Id;
@@ -1119,7 +1124,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                                 Receipttran _receipttran_toAdd = new Receipttran();
 
                                 _receipttran_toAdd.PromiseId = _promise.Id;
-                                _receipttran_toAdd.BranchId = _promise.BranchId;
+                                _receipttran_toAdd.BranchId = branchService.branch_ID;
                                 _receipttran_toAdd.CustomerId = _promise.CustomerId;
                                 _receipttran_toAdd.Receiptno = p.receipt_no;
                               
@@ -1238,7 +1243,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                                 {
                                     Receiptdesc _receiptdesc_toAdd = new Receiptdesc();
                                     _receiptdesc_toAdd.PromiseId = _promise.Id;
-                                    _receiptdesc_toAdd.BranchId = _promise.BranchId;
+                                    _receiptdesc_toAdd.BranchId = branchService.branch_ID;
                                     _receiptdesc_toAdd.CustomerId = _promise.CustomerId;
                                     _receiptdesc_toAdd.Receiptno = p.receipt_no;
                                     _receiptdesc_toAdd.ReceipttranId = _receipttran_toAdd.Id;

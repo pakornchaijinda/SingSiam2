@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SingSiamOffice", "SingSiamOffice\SingSiamOffice.csproj", "{8A28FF37-0C2E-42FE-99A2-C3C32FA41685}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoGenReports", "AutoGenReports\AutoGenReports.csproj", "{171BC421-FE48-4030-9E2F-AE2D77A62B7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoGenReports", "AutoGenReports\AutoGenReports.csproj", "{171BC421-FE48-4030-9E2F-AE2D77A62B7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

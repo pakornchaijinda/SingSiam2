@@ -764,81 +764,91 @@ namespace SingSiamOffice.Pages.Contracts
                 PromiseInfo.Guarantor = false;
             }
 
+
             var confirm = await JSRuntime.InvokeAsync<bool>("confirmSaveData");
             if (confirm)
             {
 
-                var b = await promiseManagement.addPromise(PromiseInfo);
-
-                if(guarantor == 1) 
+                if (guarantor == 1 && selectCustomer == null)
                 {
-                    Models.Guarantor g = new Guarantor();
-                    g.GuarantorName = selectCustomer.FullName;
-                    g.GuarantorNatId = selectCustomer.NatId;
-                    g.GuarantorRelation = relationA == null ? "-" : relationA;
-                    g.Phone = selectCustomer.Phone == null ? "-" : selectCustomer.Phone; 
-                    g.Address = selectCustomer.Address == null ? "-" : selectCustomer.Address;
-                    g.CustomerId = selectCustomer.CustomerId;
-                    g.PromiseId = b.Id;
-                    List_Guarantors.Add(g);
+                    await JSRuntime.InvokeVoidAsync("alert_error");
+                }
+                else 
+                {
+                    var b = await promiseManagement.addPromise(PromiseInfo);
 
-                    if (addGuarantor == true)
+                    if (guarantor == 1)
                     {
-                        Guarantor gg = new Guarantor();
+                        Models.Guarantor g = new Guarantor();
+                        g.GuarantorName = selectCustomer.FullName;
+                        g.GuarantorNatId = selectCustomer.NatId;
+                        g.GuarantorRelation = relationA == null ? "-" : relationA;
+                        g.Phone = selectCustomer.Phone == null ? "-" : selectCustomer.Phone;
+                        g.Address = selectCustomer.Address == null ? "-" : selectCustomer.Address;
+                        g.CustomerId = selectCustomer.CustomerId;
+                        g.PromiseId = b.Id;
+                        List_Guarantors.Add(g);
 
-                        gg.GuarantorName = guarantorNameB;
-                        gg.GuarantorNatId = guarantorBNatId;
-                        gg.GuarantorRelation = relationB == null ? "-" : relationB;
-                        gg.Phone = phoneB == null ? "-" : phoneB; ;
-                        gg.Address = addressB == null ? "-" : addressB;
-                        gg.PromiseId = b.Id;
-                        List_Guarantors.Add(gg);
+                        if (addGuarantor == true)
+                        {
+                            Guarantor gg = new Guarantor();
 
+                            gg.GuarantorName = guarantorNameB;
+                            gg.GuarantorNatId = guarantorBNatId;
+                            gg.GuarantorRelation = relationB == null ? "-" : relationB;
+                            gg.Phone = phoneB == null ? "-" : phoneB; ;
+                            gg.Address = addressB == null ? "-" : addressB;
+                            gg.PromiseId = b.Id;
+                            List_Guarantors.Add(gg);
+
+                        }
+                        await promiseManagement.addGuarantor(List_Guarantors);
                     }
-                    await promiseManagement.addGuarantor(List_Guarantors);
+
+                    RefAccNoCode = await Managements.Get_Ref_AccCode(b.BranchId);
+                    string TaxDetail = _customer.FullName + " " + b.Refcode;
+                    TransactionHistory toAdd = new TransactionHistory()
+                    {
+                        Price = Convert.ToInt32(b.Chargeamt),
+                        BranchId = branch_id,
+                        Detial = TaxDetail,
+                        Receiptname = receipt_name,
+                        LoginId = userLogin,
+                        TransectionRef = RefAccNoCode,
+                        refcodetrans = b.Refcode,
+                        promise_id = b.Id,
+                    };
+
+
+                    TransactionHistory toAdd2 = new TransactionHistory()
+                    {
+                        Price = Convert.ToInt32(b.Capital),
+                        BranchId = branch_id,
+                        Detial = TaxDetail,
+                        Receiptname = receipt_name,
+                        LoginId = userLogin,
+                        refcodetrans = b.Refcode,
+                        promise_id = b.Id,
+                    };
+
+
+
+                    var transactionhistory = await promiseManagement.addTaxPromise(toAdd);
+                    await promiseManagement.AddPromiseTransaction(toAdd2);
+                    var periodtran = await Managements.Add_Periodtrans(b, contract_type);
+                    var ck_save = await promiseManagement.addPeriodtran(periodtran);
+
+                    if (ck_save)
+                    {
+                        await JSRuntime.InvokeVoidAsync("confirm");
+
+                        await Task.Delay(100);
+
+                        navigationManager.NavigateTo($"/customerlist/{_customer.BranchId}/{_customer.CustomerId}");
+                    }
                 }
 
-                RefAccNoCode = await Managements.Get_Ref_AccCode(b.BranchId);
-                string TaxDetail = _customer.FullName + " " + b.Refcode;
-                TransactionHistory toAdd = new TransactionHistory()
-                {
-                    Price = Convert.ToInt32(b.Chargeamt),
-                    BranchId = branch_id,
-                    Detial = TaxDetail,
-                    Receiptname = receipt_name,
-                    LoginId = userLogin,
-                    TransectionRef = RefAccNoCode,
-                    refcodetrans = b.Refcode,
-                    promise_id = b.Id,  
-                };
-
-          
-                TransactionHistory toAdd2 = new TransactionHistory()
-                {
-                    Price = Convert.ToInt32(b.Capital),
-                    BranchId = branch_id,
-                    Detial = TaxDetail,
-                    Receiptname = receipt_name,
-                    LoginId = userLogin,
-                    refcodetrans = b.Refcode,
-                    promise_id = b.Id,
-                };
-
-
-
-                var transactionhistory = await promiseManagement.addTaxPromise(toAdd);
-                await promiseManagement.AddPromiseTransaction(toAdd2);
-                var periodtran = await Managements.Add_Periodtrans(b, contract_type);
-                var ck_save = await promiseManagement.addPeriodtran(periodtran);
-
-                if (ck_save)
-                {
-                    await JSRuntime.InvokeVoidAsync("confirm");
-
-                    await Task.Delay(100);
-
-                    navigationManager.NavigateTo($"/customerlist/{_customer.BranchId}/{_customer.CustomerId}");
-                }
+              
 
               
 

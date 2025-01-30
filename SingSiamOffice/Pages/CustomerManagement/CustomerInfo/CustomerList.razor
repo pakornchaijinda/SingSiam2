@@ -306,8 +306,127 @@
                                                 </MudStack>
                                             </MudPaper>
                                         </MudTabPanel>
-                                        <MudTabPanel Text="สัญญาเก่า">
-                                            <MudText>Content Two</MudText>
+                                        <MudTabPanel Text="สัญญาเก่า No Vat">
+                                            <MudPaper Class="pa-4">
+                                                <MudStack Spacing="2">
+                                                    <MudButton OnClick="() => OnExpandCollapseClick(data.CustomerId)" Variant="Variant.Filled" Style="@buttoncollape">
+                                                        @if (_expandedStates[data.CustomerId])
+                                                        {
+                                                            <MudText Typo="Typo.body1">รายการสัญญาที่ทำ <MudIcon Icon="@Icons.Material.Filled.KeyboardArrowDown" Style="@buttoncollape" /></MudText>
+                                                        }
+                                                        else
+                                                        {
+                                                            <MudText Typo="Typo.body1">รายการสัญญาที่ทำ <MudIcon Icon="@Icons.Material.Filled.KeyboardArrowUp" Style="@buttoncollape" /></MudText>
+
+                                                        }
+
+
+                                                    </MudButton>
+
+                                                    <MudDivider />
+                                                    <MudCollapse Expanded="true">
+                                                        <div class="table-responsive">
+                                                            <table class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th scope="col">ว/ด/ป</th>
+                                                                        <th scope="col">ประเภท</th>
+                                                                        <th scope="col">อ้างอิง</th>
+                                                                        <th scope="col">หลักประกัน</th>
+                                                                        <th scope="col">เลขที่สัญญา</th>
+                                                                        <th scope="col">เงินต้น</th>
+                                                                        <th scope="col">งวดละ</th>
+                                                                        <th scope="col">สาขา</th>
+                                                                        <th scope="col">สถานะ</th>
+                                                                        <th></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @if (lst_promiseold_nv.Count() != 0)
+                                                                    {
+                                                                        @foreach (var items in lst_promiseold_nv)
+                                                                        {
+                                                                            <tr>
+
+                                                                                <td>@items.Tdatetime</td>
+                                                                                <td>@items.Type</td>
+                                                                                <td>@items.Refcode</td>
+                                                                                <td>@items.Name</td>
+                                                                                <td>@items.Promiseno</td>
+                                                                                <td>@items.Capital.Value.ToString("N0")</td>
+                                                                                <td>@items.Amount.Value.ToString("N0")</td>
+                                                                                <td>@items.BranchName</td>
+                                                                                @if (items.Status == 2)
+                                                                                {
+                                                                                    <td>
+                                                                                        <MudChip T="string" Color="Color.Success">ปิดสัญญา</MudChip>
+                                                                                    </td>
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <td>
+                                                                                        <MudChip T="string" Color="Color.Secondary">อยู่ในระหว่างสัญญา</MudChip>
+                                                                                    </td>
+                                                                                }
+
+                                                                                <td class="text-end">
+                                                                                    <MudStack Row="true" Class="mt-2">
+                                                                                        <div class="btn-group" role="group">
+                                                                                            <button id="contractdropdown" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                                                ข้อมูลสัญญา
+                                                                                            </button>
+                                                                                            <ul class="dropdown-menu" aria-labelledby="contractdropdown">
+                                                                                                <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>viewContractOld_NV( data.CustomerId,items.Promiseno,items.Code)">ดูข้อมูลสัญญา</a></li>
+                                                                                          @*       <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>printContract(items.Id)">พิมพ์สัญญา</a></li> *@
+
+                                                                                               
+
+                                                                                            </ul>
+                                                                                        </div>
+
+                                                                                        <div class="btn-group" role="group">
+                                                                                            <button id="paymentdropdown" type="button" style="@buttoncolor1" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                                                ชำระค่างวด
+                                                                                            </button>
+                                                                                           @*  <ul class="dropdown-menu" aria-labelledby="paymentdropdown">
+                                                                                                @if (items.Status != 2)
+                                                                                                {
+                                                                                                    <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>goPayment(items.CustomerId,items.Id,items.BranchId)">ชำระค่างวด</a></li>
+                                                                                                }
+                                                                                                @if (items.Status == 2)
+                                                                                                {
+                                                                                                    <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>receipt(items.Id,type_p)"> พิมพ์ใบเสร็จปิดสัญญา</a></li>
+                                                                                                }
+
+                                                                                                <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>printPaymentDetail(items.Id)">พิมพ์รายละเอียด</a></li>
+                                                                                                @if (userLogin.RoleId != 3 && items.Status != 2)
+                                                                                                {
+                                                                                                    <li><a style="cursor:pointer; background-color:red; color:#fff;" class="dropdown-item" @onclick="()=>canclePayment(items.Id)">ยกเลิกใบเสร็จ</a></li>
+                                                                                                }
+
+
+                                                                                            </ul> *@
+                                                                                        </div>
+                                                                                      @*   <MudButton Variant="Variant.Outlined" Size="Size.Large" Style="@buttoncolor2" @onclick="()=>goCustomerDept(data.CustomerId,items.Id)">หนี้อื่นๆ ยอดค้าง @items.Sum_Externalar.ToString("N0") บาท</MudButton>
+                                                                                       *@
+                                                                                    </MudStack>
+                                                                                </td>
+                                                                            </tr>
+                                                                        }
+
+                                                                    }
+
+
+                                                                </tbody>
+
+                                                            </table>
+                                                        </div>
+                                                    </MudCollapse>
+                                                </MudStack>
+                                            </MudPaper>
+                                        </MudTabPanel>
+                                        <MudTabPanel Text="สัญญาเก่า Vat">
+                                            <MudText>Content Three</MudText>
                                         </MudTabPanel>
                                     </MudTabs>
                                     
@@ -409,10 +528,15 @@
 
             list_customer_show = list_customer.Where(s => s.CustomerId == cus_id).ToList();
             lst_Promises = await managements.GetPromisebyCustomerId(cus_id.Value);
+
             foreach (var data in lst_Promises)
             {
                 data.Sum_Externalar = db.Externalars.Where(s => s.PromiseId == data.Id && s.PaidComplete == false).Sum(s => s.Aramount).Value;
             }
+
+            //ข้อมูลสัญญาเก่า
+            var cus_natId = list_customer.Where(s => s.CustomerId == cus_id).FirstOrDefault().NatId;
+            lst_promiseold_nv = await managements.GetPromiseNVbyCustomerId(cus_natId);
 
 
         }
@@ -488,6 +612,9 @@
             {
                 data.Sum_Externalar =   db.Externalars.Where(s => s.PromiseId == data.Id && s.PaidComplete == false ).Sum(s => s.Aramount).Value;
             }
+            //ข้อมูลสัญญาเก่า
+            var cus_natId = list_customer.Where(s => s.CustomerId == selectCustomer.CustomerId).FirstOrDefault().NatId;
+            lst_promiseold_nv = await managements.GetPromiseNVbyCustomerId(cus_natId);
             StateHasChanged();
         }
 

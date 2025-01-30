@@ -6,6 +6,7 @@ using SingSiamOffice.Authentication;
 using SingSiamOffice.Manage;
 using SingSiamOffice.Models;
 using System;
+using System.Diagnostics.Contracts;
 using static SingSiamOffice.Pages.CustomerManagement.CustomerInfo.AddCustomer;
 
 namespace SingSiamOffice.Pages.CustomerManagement.CustomerInfo
@@ -49,7 +50,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.CustomerInfo
 
 
         private List<Promise> lst_Promises = new List<Promise>();
-
+        private List<Models.SingSiamOld.ListPromise> lst_promiseold_nv = new List<Models.SingSiamOld.ListPromise>();
         async private void remove(int cus_id)
         {
             var confirm = await JSRuntime.InvokeAsync<bool>("confirmdelete");
@@ -149,6 +150,11 @@ namespace SingSiamOffice.Pages.CustomerManagement.CustomerInfo
         private void viewContract(int cus_id,int promise_id,int branch_id)
         {
             navigationManager.NavigateTo($"/view-contract/{branch_id}/{cus_id}/{promise_id}");
+        }
+        private void viewContractOld_NV(int cus_id, string promise_no, string branch_code)
+        {
+            promise_no = promise_no.Replace("#", "_");
+            navigationManager.NavigateTo($"/view-contract_nv/{branch_code}/{cus_id}?promiseno="+ promise_no);
         }
         private void canclePayment(int promise_id)
         {

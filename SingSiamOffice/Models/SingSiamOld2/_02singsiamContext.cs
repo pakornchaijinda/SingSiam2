@@ -27,6 +27,8 @@ public partial class _02singsiamContext : DbContext
 
     public virtual DbSet<Customer> Customers { get; set; }
 
+    public virtual DbSet<DetailPromise> DetailPromises { get; set; }
+
     public virtual DbSet<Expincome> Expincomes { get; set; }
 
     public virtual DbSet<Externalar> Externalars { get; set; }
@@ -36,6 +38,8 @@ public partial class _02singsiamContext : DbContext
     public virtual DbSet<Insurance> Insurances { get; set; }
 
     public virtual DbSet<Lateconfig> Lateconfigs { get; set; }
+
+    public virtual DbSet<ListPromise2> ListPromise2s { get; set; }
 
     public virtual DbSet<Logfile201301> Logfile201301s { get; set; }
 
@@ -212,6 +216,8 @@ public partial class _02singsiamContext : DbContext
     public virtual DbSet<Logfile202412> Logfile202412s { get; set; }
 
     public virtual DbSet<Periodtran> Periodtrans { get; set; }
+
+    public virtual DbSet<PeriodtranContract> PeriodtranContracts { get; set; }
 
     public virtual DbSet<Product> Products { get; set; }
 
@@ -988,6 +994,420 @@ public partial class _02singsiamContext : DbContext
                 .HasColumnName("telephone");
         });
 
+        modelBuilder.Entity<DetailPromise>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("detail_promise");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("amount");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("branch")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("branch_name")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Cancelno)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)")
+                .HasColumnName("cancelno");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("capital");
+            entity.Property(e => e.Capitalofmonth)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("capitalofmonth");
+            entity.Property(e => e.Chargeamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("chargeamt");
+            entity.Property(e => e.Clientno)
+                .HasMaxLength(5)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("clientno")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Closecase)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("closecase")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Closedocno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("closedocno")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Closeresult)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("closeresult");
+            entity.Property(e => e.Coldata1)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata1")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Coldata2)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata2")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Coldata3)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata3")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Coldata4)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata4")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Coldata5)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata5")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Coldata6)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata6")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Coldata7)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata7")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Coldata8)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata8")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Coldata9)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata9")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Colname1)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname1")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Colname2)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname2")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Colname3)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname3")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Colname4)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname4")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Colname5)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname5")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Colname6)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname6")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Colname7)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname7")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Colname8)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname8")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Colname9)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname9")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Compromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("compromise");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("customer")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Dateclose)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("dateclose")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Dateclosecal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("dateclosecal")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Dateclosecalformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("dateclosecalformat")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Datecloseformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("datecloseformat")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Datewarn)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("datewarn")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Datewarnformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("datewarnformat")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Daypaid)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("daypaid")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("deposit");
+            entity.Property(e => e.Downamount)
+                .HasDefaultValueSql("'0.00'")
+                .HasColumnType("double(10,2)")
+                .HasColumnName("downamount");
+            entity.Property(e => e.Firstdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("firstdate")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("id");
+            entity.Property(e => e.Insurance)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("insurance");
+            entity.Property(e => e.Insurance1)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("insurance1")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Insurance1relation)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("insurance1relation")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Insurance2)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("insurance2")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Insurance2relation)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("insurance2relation")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Interestofmonth)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("interestofmonth");
+            entity.Property(e => e.Intrate)
+                .HasDefaultValueSql("'0.00'")
+                .HasColumnType("double(10,2)")
+                .HasColumnName("intrate");
+            entity.Property(e => e.Latepc)
+                .HasDefaultValueSql("'0.00'")
+                .HasColumnType("double(10,2)")
+                .HasColumnName("latepc");
+            entity.Property(e => e.Nampa)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("nampa");
+            entity.Property(e => e.Periods)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)")
+                .HasColumnName("periods");
+            entity.Property(e => e.Person1)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("person1")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Person2)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("person2")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Person3)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("person3")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Person4)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("person4")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Person5)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("person5")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Prddesc)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("prddesc")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Promiseno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("promiseno")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("ptype");
+            entity.Property(e => e.Refcode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("refcode")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Service)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("service");
+            entity.Property(e => e.Serviceofmonth)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("serviceofmonth");
+            entity.Property(e => e.Specialtaxpromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("specialtaxpromise");
+            entity.Property(e => e.Status)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("status");
+            entity.Property(e => e.Stockcode)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("stockcode")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Sumcharge1)
+                .HasDefaultValueSql("'0.00'")
+                .HasColumnType("double(10,2)")
+                .HasColumnName("sumcharge1");
+            entity.Property(e => e.Sumcharge2)
+                .HasDefaultValueSql("'0.00'")
+                .HasColumnType("double(10,2)")
+                .HasColumnName("sumcharge2");
+            entity.Property(e => e.Sumstatus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("sumstatus");
+            entity.Property(e => e.Taxpromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("taxpromise");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdate")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Tdateformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdateformat")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Tdatetime)
+                .HasDefaultValueSql("'0000-00-00 00:00:00'")
+                .HasColumnName("tdatetime");
+            entity.Property(e => e.Totaldown)
+                .HasDefaultValueSql("'0.00'")
+                .HasColumnType("double(10,2)")
+                .HasColumnName("totaldown");
+            entity.Property(e => e.Usercode)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("usercode")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Warndesc)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("warndesc")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+        });
+
         modelBuilder.Entity<Expincome>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
@@ -1210,6 +1630,70 @@ public partial class _02singsiamContext : DbContext
                 .HasDefaultValueSql("'0'")
                 .HasColumnType("double(10,0)")
                 .HasColumnName("rangeto");
+        });
+
+        modelBuilder.Entity<ListPromise2>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("list_promise2");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("amount");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("branch_name")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("capital");
+            entity.Property(e => e.Code)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("code")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("customer")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Name)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("name")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Promiseno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("promiseno")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Refcode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("refcode")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Status)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("status");
+            entity.Property(e => e.Tdatetime)
+                .HasDefaultValueSql("'0000-00-00 00:00:00'")
+                .HasColumnName("tdatetime");
+            entity.Property(e => e.Type)
+                .HasMaxLength(12)
+                .HasColumnName("type")
+                .UseCollation("utf8mb4_general_ci")
+                .HasCharSet("utf8mb4");
         });
 
         modelBuilder.Entity<Logfile201301>(entity =>
@@ -5597,6 +6081,36 @@ public partial class _02singsiamContext : DbContext
                 .HasMaxLength(20)
                 .HasDefaultValueSql("'-'")
                 .HasColumnName("usercode");
+        });
+
+        modelBuilder.Entity<PeriodtranContract>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("periodtran_contract");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("amount");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("capital");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("interest");
+            entity.Property(e => e.Promiseno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("promiseno")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Service)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("service");
         });
 
         modelBuilder.Entity<Product>(entity =>

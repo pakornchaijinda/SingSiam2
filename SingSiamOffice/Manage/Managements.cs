@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SingSiamOffice.Helpers;
 using SingSiamOffice.Models;
+using SingSiamOffice.Models.SingSiamOld;
 using System.ComponentModel;
 using System.Globalization;
 
@@ -10,8 +11,9 @@ namespace SingSiamOffice.Manage
     public class Managements
     {
         SingsiamdbContext db = new SingsiamdbContext();
+        _01singsiamContext db_nv = new _01singsiamContext();
         NumberToText text = new NumberToText();
-        public async Task<List<Promise>> GetPromisebyCustomerId(int customer_id)
+        public async Task<List<Models.Promise>> GetPromisebyCustomerId(int customer_id)
         {
             var data = db.Promises.AsNoTracking().Include(s=>s.Receipttrans).Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Product).Include(s => s.Periodtrans).Include(s => s.Province)
                 .Where(s => s.CustomerId == customer_id && s.IsDelete == false).OrderBy(s=>s.Status).ThenByDescending(s=>s.UpdatedOn).ThenByDescending(s => s.Tdatetime).ToList();
@@ -26,7 +28,17 @@ namespace SingSiamOffice.Manage
             }
             return data;
         }
-        public async Task<Promise> GetPromisebyPromiseId(int promise_id)
+        public async Task<List<Models.SingSiamOld.ListPromise>> GetPromiseNVbyCustomerId(string customer_natId)
+        {
+            var list_data = db_nv.ListPromises.Where(s => s.Customer == customer_natId).ToList();
+            return list_data;
+        }
+        public async Task<Models.SingSiamOld.DetailPromise> GetPromiseDetailNVbyPermiseNo(string permiseNo)
+        {
+            var list_data = db_nv.DetailPromises.Where(s => s.Promiseno == permiseNo).FirstOrDefault();
+            return list_data;
+        }
+        public async Task<Models.Promise> GetPromisebyPromiseId(int promise_id)
         {
             var data = db.Promises.AsNoTracking().Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Product).Include(s => s.Periodtrans).Include(s => s.Province)
                 .Where(s => s.Id == promise_id && s.IsDelete == false).FirstOrDefault();
@@ -38,7 +50,7 @@ namespace SingSiamOffice.Manage
             
             return data;
         }
-        public async Task<Promise> GetClosePromisebyPromiseId(int promise_id)
+        public async Task<Models.Promise> GetClosePromisebyPromiseId(int promise_id)
         {
             var data = db.Promises.AsNoTracking().Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Product).Include(s => s.Periodtrans).Include(s => s.Province)
                 .Where(s => s.Id == promise_id && s.Status == 2 && s.IsDelete == false).FirstOrDefault();
@@ -58,7 +70,7 @@ namespace SingSiamOffice.Manage
             
             return current_period.Period;
         }
-        public async Task<List<Receipttran>> GetReceipttran(int promise_id)
+        public async Task<List<Models.Receipttran>> GetReceipttran(int promise_id)
         {
             var data = db.Receipttrans.Include(s=>s.Promise).ThenInclude(s=>s.Customer).Include(s=>s.Branch).Where(s => s.PromiseId == promise_id).AsNoTracking().OrderByDescending(s=>s.Id).ToList();
                 
@@ -66,19 +78,19 @@ namespace SingSiamOffice.Manage
 
             return data;
         }
-        public async Task<List<Receipttran>> GetReceipttran_ById(int Receipttran_Id)
+        public async Task<List<Models.Receipttran>> GetReceipttran_ById(int Receipttran_Id)
         {
             var data = db.Receipttrans.Include(s => s.Promise).ThenInclude(s => s.Customer).Include(s => s.Branch).Where(s => s.Id == Receipttran_Id).AsNoTracking().OrderByDescending(s => s.Id).ToList();
             return data;
         }
-        public async Task<Receipttran?> GetReceipttran_bypromiseId(int promiseId)
+        public async Task<Models.Receipttran?> GetReceipttran_bypromiseId(int promiseId)
         {
 
             var data = db.Receipttrans.Include(s => s.Promise).ThenInclude(s=> s.Periodtrans).ThenInclude(s => s.Customer).Include(s => s.Branch).Where(s => s.PromiseId == promiseId).AsNoTracking().OrderByDescending(s => s.Id).FirstOrDefault();
             
             return data;
         }
-        public async Task<List<Periodtran>> GetPeriodtransbyPromiseId(int promise_id)
+        public async Task<List<Models.Periodtran>> GetPeriodtransbyPromiseId(int promise_id)
         {
             var config = db.Configs.AsNoTracking().Where(s => s.Id == 1).FirstOrDefault();
             var data = db.Periodtrans.AsNoTracking().Include(s=>s.Promise).ThenInclude(s=>s.Receipttrans).Include(s => s.Customer).Include(s => s.Branch).Include(s=>s.Receiptdescs).Where(s => s.PromiseId == promise_id && s.Status != 2 && s.Promise.IsDelete == false).ToList();
@@ -175,10 +187,10 @@ namespace SingSiamOffice.Manage
 
             return data;
         }
-        public async Task<List<Receiptdesc>> GetReceipttran(int peroidtran_id,string type) 
+        public async Task<List<Models.Receiptdesc>> GetReceipttran(int peroidtran_id,string type) 
         {
             int receiptran_id = 0;
-            List<Receiptdesc> lst_receiptdesc = new List<Receiptdesc>();
+            List<Models.Receiptdesc> lst_receiptdesc = new List<Models.Receiptdesc>();
             // lst_receiptdesc = db.Receiptdescs.AsNoTracking().Include(s => s.Promise).ThenInclude(s => s.Product).Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Receipttran).Include(s => s.Periodtran).Where(s => s.ReceipttranId == peroidtran_id).ToList();
 
             if (type != "D")
@@ -197,10 +209,10 @@ namespace SingSiamOffice.Manage
             }
             return lst_receiptdesc;
         }
-        public async Task<List<Receiptdesc>> GetReceipttran_PeroidtranId(int peroidtran_id, string type)
+        public async Task<List<Models.Receiptdesc>> GetReceipttran_PeroidtranId(int peroidtran_id, string type)
         {
             int receiptran_id = 0;
-            List<Receiptdesc> lst_receiptdesc = new List<Receiptdesc>();
+            List<Models.Receiptdesc> lst_receiptdesc = new List<Models.Receiptdesc>();
             lst_receiptdesc = db.Receiptdescs.AsNoTracking().Include(s => s.Promise).ThenInclude(s => s.Product).Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Receipttran).Include(s => s.Periodtran).Where(s => s.PeriodtranId == peroidtran_id).ToList();
 
             //if (type != "D")
@@ -219,10 +231,10 @@ namespace SingSiamOffice.Manage
             }
             return lst_receiptdesc;
         }
-        public async Task<List<Receiptdesc>> GetReceipttran_Close(int promiseId, string type)
+        public async Task<List<Models.Receiptdesc>> GetReceipttran_Close(int promiseId, string type)
         {
             int receiptran_id = 0;
-            List<Receiptdesc> lst_receiptdesc = new List<Receiptdesc>();
+            List<Models.Receiptdesc> lst_receiptdesc = new List<Models.Receiptdesc>();
             lst_receiptdesc = db.Receiptdescs.AsNoTracking().Include(s => s.Promise).ThenInclude(s => s.Product).Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Receipttran).Include(s => s.Periodtran).Where(s => s.PromiseId == promiseId && s.Receipttran.Receiptdesc == "ปิดสัญญาก่อนกำหนด").ToList();
 
             //if (type != "D")
@@ -259,15 +271,21 @@ namespace SingSiamOffice.Manage
             var data = db.Guarantors.AsNoTracking().Where(s => s.PromiseId == promise_id).ToList();
             return data;
         }
-        public async Task<List<Customer>> GetCustomerbyBranch(int branch_id)
+        public async Task<List<Models.Customer>> GetCustomerbyBranch(int branch_id)
         {
             var customer = db.Customers.AsNoTracking().Include(s => s.Branch).Where(s => s.BranchId == branch_id && s.Status == 1).ToList();
 
             return customer;
         }
-        public async Task<List<Customer>> GetCustomerAll()
+        public async Task<List<Models.Customer>> GetCustomerAll()
         {
             var customer = db.Customers.AsNoTracking().Include(s => s.Branch).Where(s =>  s.Status == 1).ToList();
+
+            return customer;
+        }
+        public async Task<Models.Customer> GetCustomerbyId(int cus_id)
+        {
+            var customer = db.Customers.AsNoTracking().Include(s => s.Branch).Where(s => s.Status == 1 && s.CustomerId == cus_id).FirstOrDefault();
 
             return customer;
         }
@@ -359,7 +377,7 @@ namespace SingSiamOffice.Manage
             var info = db.BlackLists.AsNoTracking().Where(s => s.CustomerId == cus_id).FirstOrDefault();
             return info;
         }
-        public async Task<Customer> GetCustomerInfo(int cus_id)
+        public async Task<Models.Customer> GetCustomerInfo(int cus_id)
         {
             var info = db.Customers.AsNoTracking().Where(s => s.CustomerId == cus_id).FirstOrDefault();
             return info;
@@ -374,7 +392,7 @@ namespace SingSiamOffice.Manage
             var collaterals = db.Collaterals.AsNoTracking().ToList();
             return collaterals;
         }
-        public async Task<Branch> GetBranches(int b_id)
+        public async Task<Models.Branch> GetBranches(int b_id)
         {
             var branch_info = db.Branches.AsNoTracking().Where(s => s.Id == b_id).FirstOrDefault();
             return branch_info;
@@ -385,9 +403,9 @@ namespace SingSiamOffice.Manage
             return number.ToString("N0", CultureInfo.InvariantCulture);
         }
 
-        public async Task<List<Periodtran>> Add_Periodtrans(Promise promise, int ptype)
+        public async Task<List<Models.Periodtran>> Add_Periodtrans(Models.Promise promise, int ptype)
         {
-            List<Periodtran> lst_periodtrans = new List<Periodtran>();
+            List<Models.Periodtran> lst_periodtrans = new List<Models.Periodtran>();
             CultureInfo thaiCulture = new CultureInfo("th-TH");
             thaiCulture.DateTimeFormat.Calendar = new ThaiBuddhistCalendar();
 
@@ -397,18 +415,21 @@ namespace SingSiamOffice.Manage
 
             if (ptype == 1)
             {
-                for (int i = 1; i <= promise.Periods; i++)
+                for (int i =0; i < promise.Periods; i++)
                 {
                     var cnt_total_capital = lst_periodtrans.Sum(s => s.Capital);
-                    Periodtran p = new Periodtran();
+                    Models.Periodtran p = new Models.Periodtran();
                     p.PromiseId = promise.Id;
                     p.BranchId = promise.BranchId;
                     p.Ptype = 1;
                     p.CustomerId = promise.CustomerId;
-                    p.Period = i;
+                    p.Period = i+1;
                     p.Periods = Convert.ToInt32(promise.Daypaid);
                     p.Tdate = promise.FirstDatePay.AddMonths(i).ToString("dd/MM/yyyy", thaiCulture);
                     p.Tdateformat = promise.FirstDatePay.AddMonths(i).ToString("yyyyMMdd");
+                    
+                  
+                  
 
                     if (promise.Periods == i)
                     {
@@ -433,7 +454,7 @@ namespace SingSiamOffice.Manage
 
                     lst_periodtrans.Add(p);
 
-
+                    
                 }
             }
             if (ptype == 2)
@@ -441,15 +462,25 @@ namespace SingSiamOffice.Manage
                 for (int i = 1; i <= promise.Periods; i++)
                 {
 
-                    Periodtran p = new Periodtran();
+                    Models.Periodtran p = new Models.Periodtran();
                     p.PromiseId = promise.Id;
                     p.BranchId = promise.BranchId;
                     p.Ptype = 2;
                     p.CustomerId = promise.CustomerId;
                     p.Period = i;
                     p.Periods = Convert.ToInt32(promise.Daypaid);
-                    p.Tdate = promise.FirstDatePay.AddMonths(i).ToString("dd/MM/yyyy", thaiCulture);
-                    p.Tdateformat = promise.FirstDatePay.AddMonths(i).ToString("yyyyMMdd");
+                    if (i == 1)
+                    {
+                        p.Tdate = promise.FirstDatePay.ToString("dd/MM/yyyy", thaiCulture);
+                        p.Tdateformat = promise.FirstDatePay.ToString("yyyyMMdd");
+                    }
+                    else
+                    {
+                        p.Tdate = promise.FirstDatePay.AddMonths(i).ToString("dd/MM/yyyy", thaiCulture);
+                        p.Tdateformat = promise.FirstDatePay.AddMonths(i).ToString("yyyyMMdd");
+                    }
+                    //p.Tdate = promise.FirstDatePay.AddMonths(i).ToString("dd/MM/yyyy", thaiCulture);
+                    //p.Tdateformat = promise.FirstDatePay.AddMonths(i).ToString("yyyyMMdd");
                     if (i == promise.Periods)
                     {
                         p.Capital = promise.Capital;
@@ -491,7 +522,7 @@ namespace SingSiamOffice.Manage
         }
 
         // คำนวณงวดการชำระเงิน
-        public List<Periodtran> CalculateInstallments(decimal loanAmount, decimal interestRate, int termMonths)
+        public List<Models.Periodtran> CalculateInstallments(decimal loanAmount, decimal interestRate, int termMonths)
         {
             // คำนวณอัตราดอกเบี้ยต่อเดือน
             decimal monthlyInterestRate = interestRate / 12 / 100;
@@ -500,7 +531,7 @@ namespace SingSiamOffice.Manage
             decimal monthlyPayment = loanAmount * monthlyInterestRate / (1 - (decimal)Math.Pow((double)(1 + monthlyInterestRate), -termMonths));
 
             // สร้างรายการงวดการชำระเงิน
-            List<Periodtran> installments = new List<Periodtran>();
+            List<Models.Periodtran> installments = new List<Models.Periodtran>();
             decimal remainingPrincipal = loanAmount;
 
             // วนลูปเพื่อสร้างงวดการชำระเงินแต่ละเดือน
@@ -528,7 +559,7 @@ namespace SingSiamOffice.Manage
         }
 
         // การชำระเงิน
-        public void MakePayment(decimal paymentAmount, List<Periodtran> installments)
+        public void MakePayment(decimal paymentAmount, List<Models.Periodtran> installments)
         {
             // เก็บยอดเงินที่เหลือจากการชำระ
             decimal remainingPayment = paymentAmount;
@@ -559,64 +590,64 @@ namespace SingSiamOffice.Manage
         }
 
         // บันทึกการชำระเงินลงฐานข้อมูล
-        public async Task RecordPayment(decimal paymentAmount, DateTime paymentDate, string receiptNo)
-        {
-            // เริ่ม transaction ใหม่
-            using var transaction = await db.Database.BeginTransactionAsync();
+        //public async Task RecordPayment(decimal paymentAmount, DateTime paymentDate, string receiptNo)
+        //{
+        //    // เริ่ม transaction ใหม่
+        //    using var transaction = await db.Database.BeginTransactionAsync();
 
-            try
-            {
-                // ดึงข้อมูลสินเชื่อและรายละเอียดการชำระเงินตามงวด
-                var loans = await db.Promises.ToListAsync();
-                var installments = await db.Periodtrans.ToListAsync();
+        //    try
+        //    {
+        //        // ดึงข้อมูลสินเชื่อและรายละเอียดการชำระเงินตามงวด
+        //        var loans = await db.Promises.ToListAsync();
+        //        var installments = await db.Periodtrans.ToListAsync();
+              
+        //        // ทำการชำระเงิน
+        //        MakePayment(paymentAmount, installments);
 
-                // ทำการชำระเงิน
-                MakePayment(paymentAmount, installments);
+        //        // สร้างรายการการชำระเงินใหม่
+        //        var payment = new Models.Receipttran
+        //        {
+        //            Amount = paymentAmount,
+        //            Tdate = paymentDate.AddYears(543).ToString("dd/MM/yyyyy"),
+        //            Receiptno = receiptNo
+        //        };
 
-                // สร้างรายการการชำระเงินใหม่
-                var payment = new Receipttran
-                {
-                    Amount = paymentAmount,
-                    Tdate = paymentDate.AddYears(543).ToString("dd/MM/yyyyy"),
-                    Receiptno = receiptNo
-                };
+        //        // เพิ่มข้อมูลการชำระเงินลงในฐานข้อมูล
+        //        db.Receipttrans.Add(payment);
+        //        await db.SaveChangesAsync();
 
-                // เพิ่มข้อมูลการชำระเงินลงในฐานข้อมูล
-                db.Receipttrans.Add(payment);
-                await db.SaveChangesAsync();
+        //        // สร้างรายละเอียดการชำระเงินในแต่ละงวด
+        //        List<Models.Receiptdesc> paymentDetails = new List<Models.Receiptdesc>();
+        //        foreach (var installment in installments)
+        //        {
+        //            //paymentDetails.Add(new Receiptdesc
+        //            //{
+        //            //    r = payment.PaymentID,
+        //            //    InstallmentID = installment.InstallmentID,
+        //            //    PrincipalAmount = installment.PrincipalAmount,
+        //            //    InterestAmount = installment.InterestAmount,
+        //            //    TotalAmount = installment.PrincipalAmount + installment.InterestAmount,
+        //            //    PaymentDate = paymentDate,
+        //            //    RemainingBalance = installment.TotalAmount,
+        //            //    RemainingPrincipal = installment.PrincipalAmount,
+        //            //    RemainingInterest = installment.InterestAmount
+        //            //});
+        //        }
 
-                // สร้างรายละเอียดการชำระเงินในแต่ละงวด
-                List<Receiptdesc> paymentDetails = new List<Receiptdesc>();
-                foreach (var installment in installments)
-                {
-                    //paymentDetails.Add(new Receiptdesc
-                    //{
-                    //    r = payment.PaymentID,
-                    //    InstallmentID = installment.InstallmentID,
-                    //    PrincipalAmount = installment.PrincipalAmount,
-                    //    InterestAmount = installment.InterestAmount,
-                    //    TotalAmount = installment.PrincipalAmount + installment.InterestAmount,
-                    //    PaymentDate = paymentDate,
-                    //    RemainingBalance = installment.TotalAmount,
-                    //    RemainingPrincipal = installment.PrincipalAmount,
-                    //    RemainingInterest = installment.InterestAmount
-                    //});
-                }
+        //        // เพิ่มรายละเอียดการชำระเงินลงในฐานข้อมูล
+        //        db.Receiptdescs.AddRange(paymentDetails);
+        //        await db.SaveChangesAsync();
 
-                // เพิ่มรายละเอียดการชำระเงินลงในฐานข้อมูล
-                db.Receiptdescs.AddRange(paymentDetails);
-                await db.SaveChangesAsync();
-
-                // ยืนยันการทำ transaction
-                await transaction.CommitAsync();
-            }
-            catch
-            {
-                // ยกเลิก transaction หากเกิดข้อผิดพลาด
-                await transaction.RollbackAsync();
-                throw;
-            }
-        }
+        //        // ยืนยันการทำ transaction
+        //        await transaction.CommitAsync();
+        //    }
+        //    catch
+        //    {
+        //        // ยกเลิก transaction หากเกิดข้อผิดพลาด
+        //        await transaction.RollbackAsync();
+        //        throw;
+        //    }
+        //}
        
     }
     public class Receipt
