@@ -95,6 +95,7 @@ namespace SingSiamOffice.Pages.Contracts
 
         #region Parameter
 
+        public string customer_desc { get; set; }
         private string role { get; set; } = "employee";
 
         //ประเภทสัญญา
@@ -755,6 +756,7 @@ namespace SingSiamOffice.Pages.Contracts
             PromiseInfo.Interest_Service = (c.total_interate_service > 0)?c.total_interate_service : c.interate;
             PromiseInfo.CapitalCal = c.capital;
             PromiseInfo.ContractType = contract_type;
+            PromiseInfo.Warndesc = customer_desc;
             if (guarantor == 1)
             {
                 PromiseInfo.Guarantor = true;

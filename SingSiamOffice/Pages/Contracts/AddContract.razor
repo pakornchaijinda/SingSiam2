@@ -561,6 +561,15 @@
                                         <div class="col-md-4 pb-3">
                                             <MudTextField Style="@field_box" @bind-Value="c.chargement" Label="ค่าธรรมเนียม" Placeholder="ระบุค่าธรรมเนียม" Variant="Variant.Outlined" Margin="Margin.Dense" ReadOnly></MudTextField>
                                         </div>
+                                        <div class="col-md-4 pb-3">
+                                            <MudSelect T="string" @bind-Value="customer_desc" Style="@field_box" Label="กรุณาเลือกประเภทการกู้" Variant="Variant.Outlined" Dense="true">
+                                                <MudSelectItem Value="@("ลูกค้าใหม่")" />
+                                                <MudSelectItem Value="@("ลูกค้าเก่ากลับมากู้")" />
+                                                <MudSelectItem Value="@("ลูกค้ารีไฟแนนซ์")" />
+                                                <MudSelectItem Value="@("ลูกค้าใปิดเงินสดกู้ต่อ")" />
+
+                                            </MudSelect>
+                                        </div>
                                      </div>
                                  </div>
                              </div>
@@ -611,6 +620,17 @@
                                          <div class="col-md-4 pb-3">
                                             <MudTextField Style="@field_box" @bind-Value="c.chargement" Label="ค่าธรรมเนียมภาษี" Placeholder="ระบุค่าธรรมเนียมภาษี" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
                                          </div>
+                                        <div class="col-md-4 pb-3">
+                                            <div class="col-md-4 pb-3">
+                                                <MudSelect T="string" @bind-Value="customer_desc" Style="@field_box" Label="กรุณาเลือกประเภทการกู้" Variant="Variant.Outlined" Dense="true">
+                                                    <MudSelectItem Value="@("ลูกค้าใหม่")" />
+                                                    <MudSelectItem Value="@("ลูกค้าเก่ากลับมากู้")" />
+                                                    <MudSelectItem Value="@("ลูกค้ารีไฟแนนซ์")" />
+                                                    <MudSelectItem Value="@("ลูกค้าใปิดเงินสดกู้ต่อ")" />
+
+                                                </MudSelect>
+                                            </div>
+                                        </div>
                                        @*   <div class="col-md-4 pb-3">
                                              <MudTextField Style="@field_box" @bind-Value="carryingCost" Label="ค่านำพา" Placeholder="ระบุค่านำพา" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
                                          </div> *@
