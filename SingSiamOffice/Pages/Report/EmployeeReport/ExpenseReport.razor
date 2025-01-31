@@ -187,7 +187,6 @@
 							</tbody>
 						</table>
 					</div> *@
-
 					@foreach (Report report in records)
 					{
 						if (report.JsonData == null || report.TransactionDate == null) continue;
@@ -280,17 +279,25 @@
 	{
 		year_data = "";
 		month_data = "";
-		DateTime now = new DateTime();
+		DateTime now = DateTime.Now;
+		int year = now.Year;
 		int month = now.Month;
-		List<Report> reportList = db.Reports.Where((report) => report.ReportType == 6 && report.TransactionDate != null && report.TransactionDate.Contains($"-{month}-")).ToList();
+		string monthText = month.ToString().PadLeft(2, '0');
+		List<Report> reportList = db.Reports.Where((report) => report.ReportType == 6 && report.TransactionDate != null && report.TransactionDate.Contains($"{year}-{monthText}-")).ToList();
 		records = reportList;
 	}
 
 	private void Search()
 	{
+		if (string.IsNullOrEmpty(year_data) || string.IsNullOrEmpty(month_data))
+		{
+			return;
+		}
+		total_expenses = 0;
 		int year = YearTextToNumber(year_data);
 		int month = MonthTextToNumber(month_data);
-		List<Report> reportList = db.Reports.Where((report) => report.ReportType == 6 && report.TransactionDate != null && report.TransactionDate.Contains($"{year}-{month}-")).ToList();
+		string monthText = month.ToString().PadLeft(2, '0');
+		List<Report> reportList = db.Reports.Where((report) => report.ReportType == 6 && report.TransactionDate != null && report.TransactionDate.Contains($"{year}-{monthText}-")).ToList();
 		records = reportList;
 	}
 
@@ -298,6 +305,12 @@
 	{
 		Initialize();
 		StateHasChanged();
+	}
+
+	protected override void OnAfterRender(bool firstRender)
+	{
+		total_expenses = 0;
+		base.OnAfterRender(firstRender);
 	}
 
 	protected override void OnInitialized()

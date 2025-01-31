@@ -1,6 +1,11 @@
 ﻿@page "/branchexpense-report"
 @using System.ComponentModel.DataAnnotations
 @using System.Threading
+@using AutoGenReports.TimeBaseChecker
+@using SingSiamOffice.Models
+@using System.Data
+@using System.Text.Json;
+@using System.Globalization;
 @* <h3>AccountExpenseReport</h3> *@
 
 @* 02 รายงาน บัญชีรายรับ - รายจ่าย *@
@@ -9,9 +14,9 @@
 <Navbar2></Navbar2>
 
 <style>
- 
+
     th, td {
-        padding: 3px;
+    padding: 3px;
     }
 </style>
 
@@ -33,14 +38,14 @@
                     <div class="col-md-12 mt-2 mb-2">
                         <MudText Typo="Typo.body1" Style="@headertext">ค้นหาข้อมูลรายงาน บัญชีรายรับ - รายจ่าย</MudText>
                     </div>
-                  <div class="col-md-3">
+                    <div class="col-md-3">
                         <MudSelect T="string" Label="ระบุปี" HelperText="ระบุปีที่ต้องการหาข้อมูล" @bind-Value="year_data" Variant="Variant.Outlined" Margin="Margin.Dense" AnchorOrigin="Origin.BottomCenter">
                             @foreach (var year in years)
                             {
                                 <MudSelectItem T="string" Value="@year">@year</MudSelectItem>
                             }
                         </MudSelect>
-                  </div>
+                    </div>
                     <div class="col-md-3">
                         <MudSelect T="string" Label="ระบุเดือน" HelperText="ระบุเดือนต้องการหาข้อมูล" @bind-Value="month_data" Variant="Variant.Outlined" Margin="Margin.Dense" AnchorOrigin="Origin.BottomCenter">
                             @foreach (var month in months)
@@ -51,8 +56,8 @@
                     </div>
                     <div class="col-md-4">
                         <MudStack Row="true" Spacing="1">
-                            <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Search" Size="Size.Large" Color="Color.Info" >ค้นหา</MudButton>
-                            <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Close" Size="Size.Large" Color="Color.Error">ล้างข้อมูล</MudButton>
+                            <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Search" Size="Size.Large" Color="Color.Info" @onclick="()=>Search()" >ค้นหา</MudButton>
+                            <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Close" Size="Size.Large" Color="Color.Error" @onclick="()=>Reset()">ล้างข้อมูล</MudButton>
                         </MudStack>
                     </div>
                 </div>
@@ -68,175 +73,114 @@
                         <MudText Typo="Typo.body1">บัญชี รายรับ-รายจ่าย : กันยายน 2567</MudText>
                         <MudText Typo="Typo.body1">สาขา : ย่อยบ้านเขว้า</MudText>
                     </div>
+                    @foreach(Report report in records)
+                    {
+                        if (report.JsonData == null || report.TransactionDate == null) continue;
+                        jsonModel2? json = JsonSerializer.Deserialize<jsonModel2>(report.JsonData);
+                        CultureInfo culture = new CultureInfo("en-US");
+                        DateTime transactionDate = DateTime.Parse(report.TransactionDate, culture);
 
-                    <div class="col-md-12 mb-2 mt-2">
-                        <MudText Typo="Typo.body2" Style="@blue">01 กันยายน 2567</MudText>
-                    </div>
-                    <div class="col-md-12">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">ที่</th>
-                                    <th scope="col">รายการ</th>
-                                    <th scope="col">ตรวจสอบ</th>
-                                    <th scope="col">รายรับ</th>
-                                    <th scope="col">รายจ่าย</th>
-                                    <th scope="col">คงเหลือ</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>ยอดยกมา</td>
-                                    <td><MudChip T="string" Icon="@Icons.Material.Filled.CheckCircle" Variant="Variant.Outlined" Color="Color.Success" Size="Size.Small">ผ่านการตรวจสอบ</MudChip></td>
-                                    <td>30,579.00</td>
-                                    <td style="color:#fb4900;">0.00</td>
-                                    <td>30,579.00</td>
-                                 
-                                </tr>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>ได้รับเงินสด-ค่างวด</td>
-                                    <td><MudChip T="string" Icon="@Icons.Material.Filled.CheckCircle" Variant="Variant.Outlined" Color="Color.Success" Size="Size.Small">ผ่านการตรวจสอบ</MudChip></td>
-                                    <td>30,579.00</td>
-                                    <td style="color:#fb4900;">0.00</td>
-                                    <td>30,579.00</td>
+                        <div class="col-md-12 mb-2 mt-2">
+                            <MudText Typo="Typo.body2" Style="@blue">@transactionDate.Day @NumberToMonthText(transactionDate.Month) @(transactionDate.Year + 543)</MudText>
+                        </div>
+                        <div class="col-md-12">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ที่</th>
+                                        <th scope="col">รายการ</th>
+                                        @* <th scope="col">ตรวจสอบ</th> *@
+                                        <th scope="col">รายรับ</th>
+                                        <th scope="col">รายจ่าย</th>
+                                        <th scope="col">คงเหลือ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @* <tr>
+                                        <th scope="row"></th>
+                                        <td>ยอดยกมา</td>
+                                        <td><MudChip T="string" Icon="@Icons.Material.Filled.CheckCircle" Variant="Variant.Outlined" Color="Color.Success" Size="Size.Small">ผ่านการตรวจสอบ</MudChip></td>
+                                        <td>30,579.00</td>
+                                        <td style="color:#fb4900;">0.00</td>
+                                        <td>30,579.00</td>
 
-                                </tr>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>ได้รับเงินสด-ค่าธรรมเนียมภาษี</td>
-                                    <td><MudChip T="string" Icon="@Icons.Material.Filled.CheckCircle" Variant="Variant.Outlined" Color="Color.Success" Size="Size.Small">ผ่านการตรวจสอบ</MudChip></td>
-                                    <td>30,579.00</td>
-                                    <td style="color:#fb4900;">0.00</td>
-                                    <td>30,579.00</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>ได้รับเงินสด-ค่างวด</td>
+                                        <td><MudChip T="string" Icon="@Icons.Material.Filled.CheckCircle" Variant="Variant.Outlined" Color="Color.Success" Size="Size.Small">ผ่านการตรวจสอบ</MudChip></td>
+                                        <td>30,579.00</td>
+                                        <td style="color:#fb4900;">0.00</td>
+                                        <td>30,579.00</td>
 
-                                </tr>
-                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td>ได้รับเงินสด-ถอนจากธนาคาร <span style="@green">BAAC1212</span> </td>
-                                    <td><MudChip T="string" Icon="@Icons.Material.Filled.CheckCircle" Variant="Variant.Outlined" Color="Color.Success" Size="Size.Small">ผ่านการตรวจสอบ</MudChip></td>
-                                    <td>30,579.00</td>
-                                    <td style="color:#fb4900;">0.00</td>
-                                    <td>30,579.00</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>ได้รับเงินสด-ค่าธรรมเนียมภาษี</td>
+                                        <td><MudChip T="string" Icon="@Icons.Material.Filled.CheckCircle" Variant="Variant.Outlined" Color="Color.Success" Size="Size.Small">ผ่านการตรวจสอบ</MudChip></td>
+                                        <td>30,579.00</td>
+                                        <td style="color:#fb4900;">0.00</td>
+                                        <td>30,579.00</td>
 
-                                </tr>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>ปล่อยเงินกู้ <span style="@green">• นายสุรเชษฎ์ ยวงทอง</span> <span style="@blue">: 1823/3</span> <span style="@orange">: ลูกค้ารีไฟแนนซ์</span></td>
-                                    <td><MudChip T="string" Icon="@Icons.Material.Filled.CheckCircle" Variant="Variant.Outlined" Color="Color.Success" Size="Size.Small">ผ่านการตรวจสอบ</MudChip></td>
-                                    <td>30,579.00</td>
-                                    <td style="color:#fb4900;">0.00</td>
-                                    <td>30,579.00</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>ได้รับเงินสด-ถอนจากธนาคาร <span style="@green">BAAC1212</span> </td>
+                                        <td><MudChip T="string" Icon="@Icons.Material.Filled.CheckCircle" Variant="Variant.Outlined" Color="Color.Success" Size="Size.Small">ผ่านการตรวจสอบ</MudChip></td>
+                                        <td>30,579.00</td>
+                                        <td style="color:#fb4900;">0.00</td>
+                                        <td>30,579.00</td>
 
-                                </tr>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>ปล่อยเงินกู้ <span style="@green">• นางผัน ลาดเหลา</span> <span style="@blue">: 111-1494/3</span> <span style="@orange">: ลูกค้าใหม่</span></td>
-                                    <td><MudChip T="string" Icon="@Icons.Material.Filled.CheckCircle" Variant="Variant.Outlined" Color="Color.Success" Size="Size.Small">ผ่านการตรวจสอบ</MudChip></td>
-                                    <td>30,579.00</td>
-                                    <td style="color:#fb4900;">0.00</td>
-                                    <td>30,579.00</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>ปล่อยเงินกู้ <span style="@green">• นายสุรเชษฎ์ ยวงทอง</span> <span style="@blue">: 1823/3</span> <span style="@orange">: ลูกค้ารีไฟแนนซ์</span></td>
+                                        <td><MudChip T="string" Icon="@Icons.Material.Filled.CheckCircle" Variant="Variant.Outlined" Color="Color.Success" Size="Size.Small">ผ่านการตรวจสอบ</MudChip></td>
+                                        <td>30,579.00</td>
+                                        <td style="color:#fb4900;">0.00</td>
+                                        <td>30,579.00</td>
 
-                                </tr>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>ปล่อยเงินกู้ <span style="@green">• นางผัน ลาดเหลา</span> <span style="@blue">: 111-1494/3</span> <span style="@orange">: ลูกค้าใหม่</span></td>
+                                        <td><MudChip T="string" Icon="@Icons.Material.Filled.CheckCircle" Variant="Variant.Outlined" Color="Color.Success" Size="Size.Small">ผ่านการตรวจสอบ</MudChip></td>
+                                        <td>30,579.00</td>
+                                        <td style="color:#fb4900;">0.00</td>
+                                        <td>30,579.00</td>
 
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>คาใชจายอื่นๆ  <span style="@orange">: ค่าเก็บขยะมูลฝอยรายปีของเทศบาลตําบลบ้านเขว้า</span></td>
-                                    <td><MudChip T="string" Icon="@Icons.Material.Filled.CheckCircle" Variant="Variant.Outlined" Color="Color.Success" Size="Size.Small">ผ่านการตรวจสอบ</MudChip></td>
-                                    <td>30,579.00</td>
-                                    <td style="color:#fb4900;">0.00</td>
-                                    <td>30,579.00</td>
+                                    </tr>
 
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>คาใชจายอื่นๆ  <span style="@orange">: ค่าเก็บขยะมูลฝอยรายปีของเทศบาลตําบลบ้านเขว้า</span></td>
+                                        <td><MudChip T="string" Icon="@Icons.Material.Filled.CheckCircle" Variant="Variant.Outlined" Color="Color.Success" Size="Size.Small">ผ่านการตรวจสอบ</MudChip></td>
+                                        <td>30,579.00</td>
+                                        <td style="color:#fb4900;">0.00</td>
+                                        <td>30,579.00</td>
 
-                    <div class="col-md-12 mb-2 mt-2">
-                        <MudText Typo="Typo.body2" Style="@blue">02 กันยายน 2567</MudText>
-                    </div>
-                    <div class="col-md-12">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">ที่</th>
-                                    <th scope="col">รายการ</th>
-                                    <th scope="col">ตรวจสอบ</th>
-                                    <th scope="col">รายรับ</th>
-                                    <th scope="col">รายจ่าย</th>
-                                    <th scope="col">คงเหลือ</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>ยอดยกมา</td>
-                                    <td><MudChip T="string" Icon="@Icons.Material.Filled.CheckCircle" Variant="Variant.Outlined" Color="Color.Success" Size="Size.Small">ผ่านการตรวจสอบ</MudChip></td>
-                                    <td>30,579.00</td>
-                                    <td style="color:#fb4900;">0.00</td>
-                                    <td>30,579.00</td>
+                                    </tr> *@
 
-                                </tr>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>ได้รับเงินสด-ค่างวด</td>
-                                    <td><MudChip T="string" Icon="@Icons.Material.Filled.CheckCircle" Variant="Variant.Outlined" Color="Color.Success" Size="Size.Small">ผ่านการตรวจสอบ</MudChip></td>
-                                    <td>30,579.00</td>
-                                    <td style="color:#fb4900;">0.00</td>
-                                    <td>30,579.00</td>
+                                    @if (json == null || json.report2_Income_Outcome_cashonly == null) continue;
+                                    @foreach (var reportDetails in json.report2_Income_Outcome_cashonly)
+                                    {
+                                        remain -= reportDetails.expenses;
+                                        remain += reportDetails.income;
+                                        <tr>
+                                            <th scope="row">@reportDetails.rowNumber</th>
+                                            <td>@reportDetails.detail @reportDetails.detail_desc</td>
+                                            @* <td><MudChip T="string" Icon="@Icons.Material.Filled.CheckCircle" Variant="Variant.Outlined" Color="Color.Success" Size="Size.Small">ผ่านการตรวจสอบ</MudChip></td> *@
+                                            <td>@reportDetails.income</td>
+                                            <td style="color:#fb4900;">@reportDetails.expenses</td>
 
-                                </tr>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>ได้รับเงินสด-ค่าธรรมเนียมภาษี</td>
-                                    <td><MudChip T="string" Icon="@Icons.Material.Filled.CheckCircle" Variant="Variant.Outlined" Color="Color.Success" Size="Size.Small">ผ่านการตรวจสอบ</MudChip></td>
-                                    <td>30,579.00</td>
-                                    <td style="color:#fb4900;">0.00</td>
-                                    <td>30,579.00</td>
+                                            <td>@(remain)</td>
 
-                                </tr>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>ได้รับเงินสด-ถอนจากธนาคาร <span style="@green">BAAC1212</span> </td>
-                                    <td><MudChip T="string" Icon="@Icons.Material.Filled.CheckCircle" Variant="Variant.Outlined" Color="Color.Success" Size="Size.Small">ผ่านการตรวจสอบ</MudChip></td>
-                                    <td>30,579.00</td>
-                                    <td style="color:#fb4900;">0.00</td>
-                                    <td>30,579.00</td>
-
-                                </tr>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>ปล่อยเงินกู้ <span style="@green">• นายสุรเชษฎ์ ยวงทอง</span> <span style="@blue">: 1823/3</span> <span style="@orange">: ลูกค้ารีไฟแนนซ์</span></td>
-                                    <td><MudChip T="string" Icon="@Icons.Material.Filled.CheckCircle" Variant="Variant.Outlined" Color="Color.Success" Size="Size.Small">ผ่านการตรวจสอบ</MudChip></td>
-                                    <td>30,579.00</td>
-                                    <td style="color:#fb4900;">0.00</td>
-                                    <td>30,579.00</td>
-
-                                </tr>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>ปล่อยเงินกู้ <span style="@green">• นางผัน ลาดเหลา</span> <span style="@blue">: 111-1494/3</span> <span style="@orange">: ลูกค้าใหม่</span></td>
-                                    <td><MudChip T="string" Icon="@Icons.Material.Filled.CheckCircle" Variant="Variant.Outlined" Color="Color.Success" Size="Size.Small">ผ่านการตรวจสอบ</MudChip></td>
-                                    <td>30,579.00</td>
-                                    <td style="color:#fb4900;">0.00</td>
-                                    <td>30,579.00</td>
-
-                                </tr>
-
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>คาใชจายอื่นๆ  <span style="@orange">: ค่าเก็บขยะมูลฝอยรายปีของเทศบาลตําบลบ้านเขว้า</span></td>
-                                    <td><MudChip T="string" Icon="@Icons.Material.Filled.CheckCircle" Variant="Variant.Outlined" Color="Color.Success" Size="Size.Small">ผ่านการตรวจสอบ</MudChip></td>
-                                    <td>30,579.00</td>
-                                    <td style="color:#fb4900;">0.00</td>
-                                    <td>30,579.00</td>
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                 
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
@@ -257,7 +201,7 @@
     string blue = "color:#000eb3; font-weight:600;";
     string orange = "color:#fb4900; font-weight:600;";
 
-
+    private const int REPORT_NUMBER = 2;
     private string year_data { get; set; }
     private string[] years =
     {
@@ -271,4 +215,122 @@
     "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
     };
 
+    List<Report> records = new List<Report>();
+    SingsiamdbContext db = new SingsiamdbContext();
+    private decimal remain = 0;
+
+    private void Initialize()
+    {
+        year_data = "";
+        month_data = "";
+        DateTime now = DateTime.Now;
+        int year = now.Year;
+        int month = now.Month;
+        string monthText = month.ToString().PadLeft(2, '0');
+        List<Report> reportList = db.Reports.Where((report) => report.ReportType == REPORT_NUMBER && report.TransactionDate != null && report.TransactionDate.Contains($"{year}-{monthText}-")).ToList();
+        records = reportList;
+    }
+
+    private void Search()
+    {
+		if (string.IsNullOrEmpty(year_data) || string.IsNullOrEmpty(month_data))
+		{
+			return;
+		}
+        int year = YearTextToNumber(year_data);
+        int month = MonthTextToNumber(month_data);
+        string monthText = month.ToString().PadLeft(2, '0');
+        List<Report> reportList = db.Reports.Where((report) => report.ReportType == REPORT_NUMBER && report.TransactionDate != null && report.TransactionDate.Contains($"{year}-{monthText}-")).ToList();
+        records = reportList;
+    }
+
+    private void Reset()
+    {
+        Initialize();
+        StateHasChanged();
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        remain = 0;
+        base.OnAfterRender(firstRender);
+    }
+
+    protected override void OnInitialized()
+    {
+        Initialize();
+        StateHasChanged();
+    }
+
+    private int MonthTextToNumber(string month)
+    {
+        switch (month)
+        {
+            case "มกราคม":
+                return 1;
+            case "กุมภาพันธ์":
+                return 2;
+            case "มีนาคม":
+                return 3;
+            case "เมษายน":
+                return 4;
+            case "พฤษภาคม":
+                return 5;
+            case "มิถุนายน":
+                return 6;
+            case "กรกฎาคม":
+                return 7;
+            case "สิงหาคม":
+                return 8;
+            case "กันยายน":
+                return 9;
+            case "ตุลาคม":
+                return 10;
+            case "พฤศจิกายน":
+                return 11;
+            case "ธันวาคม":
+                return 12;
+            default:
+                return 0;
+        }
+    }
+
+    private string NumberToMonthText(int monthText)
+    {
+        // generate month number
+        switch (monthText)
+        {
+            case 1:
+                return "มกราคม";
+            case 2:
+                return "กุมภาพันธ์";
+            case 3:
+                return "มีนาคม";
+            case 4:
+                return "เมษายน";
+            case 5:
+                return "พฤษภาคม";
+            case 6:
+                return "มิถุนายน";
+            case 7:
+                return "กรกฎาคม";
+            case 8:
+                return "สิงหาคม";
+            case 9:
+                return "กันยายน";
+            case 10:
+                return "ตุลาคม";
+            case 11:
+                return "พฤศจิกายน";
+            case 12:
+                return "ธันวาคม";
+            default:
+                return "";
+        }
+    }
+
+    private int YearTextToNumber(string year)
+    {
+        return int.Parse(year) - 543;
+    }
 }
