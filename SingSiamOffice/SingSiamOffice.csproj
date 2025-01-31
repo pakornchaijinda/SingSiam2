@@ -48,4 +48,8 @@
     <None Include="Shared\SlipLayout.razor" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AutoGenReports\AutoGenReports.csproj" />
+  </ItemGroup>
+
 </Project>

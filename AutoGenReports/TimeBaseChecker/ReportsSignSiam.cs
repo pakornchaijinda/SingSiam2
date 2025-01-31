@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static AutoGenReports.TimeBaseChecker.ReportsSignSiam;
 
 namespace AutoGenReports.TimeBaseChecker
 {
@@ -318,55 +319,43 @@ namespace AutoGenReports.TimeBaseChecker
             public decimal remain { get; set; }
         }
 
-
-
-        public class jsonModel
-        {
-            public int branch_id { get; set; }
-            public string branch_name { get; set; }
-            public int report_type { get; set; }
-            public DateTime transaction_date { get; set; }
-            public string transaction_date_format { get; set; }
-
-            public List<report1_income_outcome_transferonly> report1_Income_Outcome_s { get; set; }
-
-        }
-        public class jsonModel2
-        {
-            public int branch_id { get; set; }
-            public string branch_name { get; set; }
-            public int report_type { get; set; }
-            public DateTime transaction_date { get; set; }
-            public string transaction_date_format { get; set; }
-
-            public List<report2_income_outcome_cashonly> report2_Income_Outcome_s { get; set; }
-
-        }
-        public class jsonModel3
-        {
-            public int branch_id { get; set; }
-            public string branch_name { get; set; }
-            public int report_type { get; set; }
-            public DateTime transaction_date { get; set; }
-            public string transaction_date_format { get; set; }
-            public List<report3_summary_of_month> report3_Summary_Of_Months { get; set; }
-
-        }
-        public class jsonModel6
-        {
-            public int branch_id { get; set; }
-            public string branch_name { get; set; }
-            public int report_type { get; set; }
-            public DateTime transaction_date { get; set; }
-            public string transaction_date_format { get; set; }
-
-            public List<report6_summary_expenses> report6_Summary_Expenses { get; set; }
-
-        }
-
       
 
 
 
     }
+
+    public class jsonModel
+    {
+        public int branch_id { get; set; }
+        public string branch_name { get; set; }
+        public int report_type { get; set; }
+        public DateTime transaction_date { get; set; }
+        public string transaction_date_format { get; set; }
+
+        public List<report1_income_outcome_transferonly> report1_Income_Outcome_s { get; set; }
+
+    }
+    public class jsonModel3
+    {
+        public int branch_id { get; set; }
+        public string branch_name { get; set; }
+        public int report_type { get; set; }
+        public DateTime transaction_date { get; set; }
+        public string transaction_date_format { get; set; }
+        public List<report3_summary_of_month> report3_Summary_Of_Months { get; set; }
+
+    }
+    public class jsonModel6
+    {
+        public int branch_id { get; set; }
+        public string branch_name { get; set; }
+        public int report_type { get; set; }
+        public DateTime transaction_date { get; set; }
+        public string transaction_date_format { get; set; }
+
+        public List<report6_summary_expenses> report6_Summary_Expenses { get; set; }
+
+    }
+
 }
