@@ -808,7 +808,7 @@ namespace SingSiamOffice.Pages.Contracts
                     }
 
                     RefAccNoCode = await Managements.Get_Ref_AccCode(b.BranchId);
-                    string TaxDetail = _customer.FullName + " " + b.Refcode;
+                    string TaxDetail = _customer.FullName + " " + b.Refcode + ":" + b.Warndesc;
                     TransactionHistory toAdd = new TransactionHistory()
                     {
                         Price = Convert.ToInt32(b.Chargeamt),

@@ -27,7 +27,18 @@ namespace AutoGenReports
                 Console.WriteLine("Update autoReport1 is completed " + DateTime.Now);
             }
             catch (Exception ex) { Console.WriteLine("Update autoReport1 is error " + ex, ToString()); }
+            try
+            {
 
+                var all_branch = db.Branches.AsNoTracking().ToList();
+                foreach (var branch in all_branch)
+                {
+                    await TimeBaseChecker.ReportsSignSiam.Report2(branch.Id);
+                }
+
+                Console.WriteLine("Update autoReport2 is completed " + DateTime.Now);
+            }
+            catch (Exception ex) { Console.WriteLine("Update autoReport6 is error " + ex, ToString()); }
             try
             {
 
