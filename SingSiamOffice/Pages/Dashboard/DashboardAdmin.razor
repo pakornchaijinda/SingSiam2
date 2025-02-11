@@ -115,7 +115,13 @@
                     <MudAutocomplete T="string" Label="ระบุสาขา" @bind-Value="branchs" SearchFunc="@SearchBranch" Margin="Margin.Dense" Variant="Variant.Outlined" />
              </div>
                 <div class="col-md-4">
-                        <MudDatePicker @bind-Date="filter_date" Label="วัน/เดือน/ปี" Culture="@GetThaiCulture()" PickerVariant="PickerVariant.Dialog" UseShortNames="false" TitleDateFormat="dddd, dd MMMM" Margin="Margin.Dense" Variant="Variant.Outlined" Style="background-color:#fff;" Required RequiredError="กรุณาระบุวัน/เดือน/ปีเกิด" />
+                <MudSelect T="int" Margin="Margin.Dense" Variant="Variant.Outlined" @bind-Value="selectedYear" SelectedValuesChanged="HandleSelectedYearChanged">
+                    <MudSelectItem Value="0">ไม่ระบุ</MudSelectItem>
+                    @foreach (var year in years)
+                    {
+                        <MudSelectItem Value="year">@year.ToString()</MudSelectItem>
+                    }
+                </MudSelect>
              </div>
              <div class="col-md-4">
                  <MudStack Row="true">

@@ -116,6 +116,18 @@ namespace SingSiamOffice.Helpers
             return c;
         }
 
+        public string MonthNumberToText(int monthNumber)
+        {
+            string[] thaiMonths = { "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม" };
+
+            if (monthNumber < 1 || monthNumber > 12)
+            {
+                throw new ArgumentOutOfRangeException(nameof(monthNumber), "Month number must be between 1 and 12.");
+            }
+
+            return thaiMonths[monthNumber - 1];
+        }
+
         public async Task<List<CalculatePaymentPeriod>> CalculatePaymentPeriods(decimal capital,decimal interate) 
         {
             List<CalculatePaymentPeriod> list_calculatePaymentPeriods = new List<CalculatePaymentPeriod>();

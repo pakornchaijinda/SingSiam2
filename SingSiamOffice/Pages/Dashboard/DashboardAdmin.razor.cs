@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System.Globalization;
+using SingSiamOffice.Models;
+using Microsoft.EntityFrameworkCore;
+using SingSiamOffice.Helpers;
 
 namespace SingSiamOffice.Pages.Dashboard
 {
@@ -11,10 +14,49 @@ namespace SingSiamOffice.Pages.Dashboard
 
         private string role { get; set; } = "admin";
 
-        
+        private List<int> years = new List<int>();
+        private int selectedYear;
 
         string date = DateTime.Now.AddYears(543).ToString("dd/MM/yyyy");
         DateTime? filter_date { get; set; }
+
+        SingsiamdbContext db = new SingsiamdbContext();
+
+        NumberToText helper = new NumberToText();
+
+        private async void HandleSelectedYearChanged()
+        {
+            var promises = await db.Promises
+                .Where(promise => promise.Tdatetime!.Value.Year == selectedYear)
+                .GroupBy(promise => promise.Tdatetime!.Value.Month).Select(g => new
+                {
+                    Month = g.Key,
+                    TotalSales = g.Sum(promise => promise.Amount) ?? 0m,
+                    TotalPromises = g.Count()
+                }).ToListAsync();
+
+            // Fill empty months with TotalSales = 0 and TotalPromises = 0
+            for (int month = 1; month <= 12; month++)
+            {
+                if (!promises.Any(p => p.Month == month))
+                {
+                    promises.Add(new
+                    {
+                        Month = month,
+                        TotalSales = 0m,
+                        TotalPromises = 0
+                    });
+                }
+            }
+
+            promises = promises.OrderBy(promise => promise.Month).ToList();
+
+            var TotalSales = promises.Select(promise => promise.TotalSales);
+            var TotalPromises = promises.Select(promise => promise.TotalPromises);
+            var monthNames = promises.Select(promise => helper.MonthNumberToText(promise.Month));
+
+            await JSRuntime.InvokeVoidAsync("linechart", monthNames, TotalPromises, TotalSales);
+        }
 
 
         public CultureInfo GetThaiCulture()
@@ -40,13 +82,35 @@ namespace SingSiamOffice.Pages.Dashboard
         {
             if (firstRender)
             {
-                
+                var promises = await db.Promises.GroupBy(promise => promise.Tdatetime!.Value.Year).Select(g => new
+                {
+                    Year = g.Key,
+                    TotalSales = g.Sum(promise => promise.Amount),
+                    TotalPromises = g.Count()
+                }).ToListAsync();
+
+                int startYear = 2024;
+                int currentYear = DateTime.Now.Year;
+
+                for (int year = startYear; year <= currentYear; year++)
+                {
+                    years.Add(year);
+                }
+
+                var TotalSales = promises.Select(promise => promise.TotalSales);
+                var TotalPromises = promises.Select(promise => promise.TotalPromises);
+                var Years = promises.Select(promise => promise.Year);
+
                 await JSRuntime.InvokeVoidAsync("sideBar");
-                await JSRuntime.InvokeVoidAsync("linechart");
+                await JSRuntime.InvokeVoidAsync("linechart", Years, TotalPromises, TotalSales);
             }
         }
 
-
+        private void Reset()
+        {
+            selectedYear = 0;
+            branchs = "";
+        }
 
         private string branchs;
         private string[] branchlists =
