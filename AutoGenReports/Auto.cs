@@ -38,7 +38,7 @@ namespace AutoGenReports
 
                 Console.WriteLine("Update autoReport2 is completed " + DateTime.Now);
             }
-            catch (Exception ex) { Console.WriteLine("Update autoReport6 is error " + ex, ToString()); }
+            catch (Exception ex) { Console.WriteLine("Update autoReport2 is error " + ex, ToString()); }
             try
             {
 
