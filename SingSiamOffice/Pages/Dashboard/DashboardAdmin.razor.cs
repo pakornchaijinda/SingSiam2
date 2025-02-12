@@ -16,7 +16,7 @@ namespace SingSiamOffice.Pages.Dashboard
 
         private string role { get; set; } = "admin";
 
-        private List<int> years = new List<int>();
+        private Branch? selectedBranch;
         private int selectedYear;
 
         string date = DateTime.Now.AddYears(543).ToString("dd/MM/yyyy");
@@ -104,14 +104,6 @@ namespace SingSiamOffice.Pages.Dashboard
                     TotalPromises = g.Count()
                 }).ToListAsync();
 
-                int startYear = 2024;
-                int currentYear = DateTime.Now.Year;
-
-                for (int year = startYear; year <= currentYear; year++)
-                {
-                    years.Add(year);
-                }
-
                 var TotalSales = promises.Select(promise => promise.TotalSales);
                 var TotalPromises = promises.Select(promise => promise.TotalPromises);
                 var Years = promises.Select(promise => promise.Year);
@@ -146,26 +138,93 @@ namespace SingSiamOffice.Pages.Dashboard
         private void Reset()
         {
             selectedYear = 0;
-            branchs = "";
         }
 
-        private string branchs;
-        private string[] branchlists =
+        private async Task<IEnumerable<Branch>> SearchBranch(string value)
         {
-        "1001 | สาขาเชียงใหม่", "1002 | สาขาลำพูน", "1003 | สาขาดอนเมือง", "1004 | สาขาตลาดไทย",
+            SingsiamdbContext db = new SingsiamdbContext();
+            if (string.IsNullOrWhiteSpace(value))
+                return await db.Branches.ToListAsync();
 
+            return await db.Branches.Where(branch => branch.BranchName.Contains(value, StringComparison.OrdinalIgnoreCase)).ToListAsync();
+        }
 
-    };
-
-        private async Task<IEnumerable<string>> SearchBranch(string value)
+        private async Task<IEnumerable<int>> SearchYear(string value)
         {
-            // In real life use an asynchronous function for fetching data from an api.
-            await Task.Delay(5);
+            SingsiamdbContext db = new SingsiamdbContext();
+            if (value == "0")
+                return await db.Promises.Select(promise => promise.Tdatetime!.Value.Year).Distinct().ToListAsync();
 
-            // if text is null or empty, show complete list
-            if (string.IsNullOrEmpty(value))
-                return branchlists;
-            return branchlists.Where(x => x.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+            return await db.Promises.Where(promise => promise.Tdatetime!.Value.Year.ToString().Contains(value)).Select(promise => promise.Tdatetime!.Value.Year).Distinct().ToListAsync();
+        }
+
+        private async Task Search()
+        {
+            SingsiamdbContext db = new SingsiamdbContext();
+            IQueryable<Promise> promisesQuery = db.Promises;
+            List<decimal> totalSales;
+            List<int> totalPromises;
+            List<string> xLabels;
+
+            if (selectedBranch != null)
+            {
+                promisesQuery = db.Promises.Where(promise => promise.BranchId == selectedBranch.Id);
+            }
+
+            if (selectedYear != 0)
+            {
+                var promises = await promisesQuery
+                    .Where(promise => promise.Tdatetime!.Value.Year == selectedYear)
+                    .GroupBy(promise => promise.Tdatetime!.Value.Month).Select(g => new
+                    {
+                        Month = g.Key,
+                        TotalSales = g.Sum(promise => promise.Amount) ?? 0m,
+                        TotalPromises = g.Count()
+                    }).ToListAsync();
+
+                // Fill empty months with TotalSales = 0 and TotalPromises = 0
+                for (int month = 1; month <= 12; month++)
+                {
+                    if (!promises.Any(p => p.Month == month))
+                    {
+                        promises.Add(new
+                        {
+                            Month = month,
+                            TotalSales = 0m,
+                            TotalPromises = 0
+                        });
+                    }
+                }
+
+                promises = promises.OrderBy(promise => promise.Month).ToList();
+
+                totalSales = promises.Select(promise => promise.TotalSales).ToList();
+                totalPromises = promises.Select(promise => promise.TotalPromises).ToList();
+                xLabels = promises.Select(promise => helper.MonthNumberToText(promise.Month)).ToList();
+            }
+            else
+            {
+                var promises = await promisesQuery.GroupBy(promise => promise.Tdatetime!.Value.Year).Select(g => new
+                {
+                    Year = g.Key,
+                    TotalSales = g.Sum(promise => promise.Amount) ?? 0m,
+                    TotalPromises = g.Count()
+                }).ToListAsync();
+
+                totalSales = promises.Select(promise => promise.TotalSales).ToList();
+                totalPromises = promises.Select(promise => promise.TotalPromises).ToList();
+                xLabels = promises.Select(promise => promise.Year.ToString()).ToList();
+            }
+
+            await JSRuntime.InvokeVoidAsync("sideBar");
+            await JSRuntime.InvokeVoidAsync("linechart", xLabels, totalPromises, totalSales);
+        }
+
+        private async Task ResetSearch()
+        {
+            selectedBranch = null;
+            selectedYear = 0;
+            await Search();
         }
 
         class TotalNumberOfContractsSummary

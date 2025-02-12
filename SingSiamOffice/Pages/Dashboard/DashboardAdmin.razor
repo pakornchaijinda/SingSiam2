@@ -2,6 +2,7 @@
 @* <h3>Dashboard_Admin</h3> *@
 @using System.Globalization
 @using System.Reflection
+@using SingSiamOffice.Models;
 
 
 <Navbar></Navbar>
@@ -114,21 +115,15 @@
 	<div class="container mt-4 mb-4">
 		<div class="row">
 			<div class="col-md-4">
-				<MudAutocomplete T="string" Label="ระบุสาขา" @bind-Value="branchs" SearchFunc="@SearchBranch" Margin="Margin.Dense" Variant="Variant.Outlined" />
+				<MudAutocomplete T="Branch" Label="ระบุสาขา" @bind-Value="selectedBranch" SearchFunc="@SearchBranch" ToStringFunc="@(branch => branch?.BranchName)" Margin="Margin.Dense" Variant="Variant.Outlined" />
 			</div>
 			<div class="col-md-4">
-				<MudSelect T="int" Margin="Margin.Dense" Variant="Variant.Outlined" @bind-Value="selectedYear" SelectedValuesChanged="HandleSelectedYearChanged">
-					<MudSelectItem Value="0">ไม่ระบุ</MudSelectItem>
-					@foreach (var year in years)
-					{
-						<MudSelectItem Value="year">@year.ToString()</MudSelectItem>
-					}
-				</MudSelect>
+				<MudAutocomplete T="int" Label="ระบุปี" @bind-Value="selectedYear" SearchFunc="@SearchYear" ToStringFunc="@(year => year.ToString())" Margin="Margin.Dense" Variant="Variant.Outlined" />
 			</div>
 			<div class="col-md-4">
 				<MudStack Row="true">
-					<MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Search" Size="Size.Large" Style="@buttoncolor1">ค้นหาข้อมูล</MudButton>
-					<MudButton Variant="Variant.Filled" Size="Size.Large" Style="@buttoncolor1">ข้อมูลรวมทุกสาขา</MudButton>
+					<MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Search" Size="Size.Large" Style="@buttoncolor1" OnClick="Search">ค้นหาข้อมูล</MudButton>
+					<MudButton Variant="Variant.Filled" Size="Size.Large" Style="@buttoncolor1" OnClick="ResetSearch">ข้อมูลรวม</MudButton>
 				</MudStack>
 			</div>
 		</div>
