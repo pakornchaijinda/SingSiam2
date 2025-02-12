@@ -4,6 +4,8 @@ using System.Globalization;
 using SingSiamOffice.Models;
 using Microsoft.EntityFrameworkCore;
 using SingSiamOffice.Helpers;
+using System.Diagnostics.Contracts;
+using SingSiamOffice.Manage;
 
 namespace SingSiamOffice.Pages.Dashboard
 {
@@ -20,12 +22,16 @@ namespace SingSiamOffice.Pages.Dashboard
         string date = DateTime.Now.AddYears(543).ToString("dd/MM/yyyy");
         DateTime? filter_date { get; set; }
 
-        SingsiamdbContext db = new SingsiamdbContext();
-
         NumberToText helper = new NumberToText();
+
+        decimal totalRevenueSummary;
+        TotalNumberOfContractsSummary totalNumberOfContractsSummary = new TotalNumberOfContractsSummary();
+        TotalLoanDisbursementSummary totalLoanDisbursementSummary = new TotalLoanDisbursementSummary();
 
         private async void HandleSelectedYearChanged()
         {
+            SingsiamdbContext db = new SingsiamdbContext();
+
             var promises = await db.Promises
                 .Where(promise => promise.Tdatetime!.Value.Year == selectedYear)
                 .GroupBy(promise => promise.Tdatetime!.Value.Month).Select(g => new
@@ -78,10 +84,19 @@ namespace SingSiamOffice.Pages.Dashboard
             return culture;
         }
 
+        protected override async Task OnInitializedAsync()
+        {
+            totalRevenueSummary = await CalculateTotalRevenueSummary();
+            totalNumberOfContractsSummary = await CalculateTotalNumberOfContractsSummary();
+            totalLoanDisbursementSummary = await CalculateTotalLoanDisbursementSummary();
+        }
+
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
             {
+                SingsiamdbContext db = new SingsiamdbContext();
+
                 var promises = await db.Promises.GroupBy(promise => promise.Tdatetime!.Value.Year).Select(g => new
                 {
                     Year = g.Key,
@@ -104,6 +119,28 @@ namespace SingSiamOffice.Pages.Dashboard
                 await JSRuntime.InvokeVoidAsync("sideBar");
                 await JSRuntime.InvokeVoidAsync("linechart", Years, TotalPromises, TotalSales);
             }
+        }
+
+        async Task<decimal> CalculateTotalRevenueSummary()
+        {
+            SingsiamdbContext db = new SingsiamdbContext();
+            return await db.Promises.SumAsync(promise => promise.Amount) ?? 0;
+        }
+
+        async Task<TotalNumberOfContractsSummary> CalculateTotalNumberOfContractsSummary()
+        {
+            SingsiamdbContext db = new SingsiamdbContext();
+            int finance = await db.Promises.CountAsync(promise => promise.Ptype == 1);
+            int loan = await db.Promises.CountAsync(promise => promise.Ptype == 2);
+            return new TotalNumberOfContractsSummary { Finance = finance, Loan = loan };
+        }
+
+        async Task<TotalLoanDisbursementSummary> CalculateTotalLoanDisbursementSummary()
+        {
+            SingsiamdbContext db = new SingsiamdbContext();
+            decimal finance = await db.Promises.Where(promise => promise.Ptype == 1).SumAsync(promise => promise.Capital) ?? 0;
+            decimal loan = await db.Promises.Where(promise => promise.Ptype == 2).SumAsync(promise => promise.Capital) ?? 0;
+            return new TotalLoanDisbursementSummary { Finance = finance, Loan = loan };
         }
 
         private void Reset()
@@ -129,6 +166,32 @@ namespace SingSiamOffice.Pages.Dashboard
             if (string.IsNullOrEmpty(value))
                 return branchlists;
             return branchlists.Where(x => x.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+        }
+
+        class TotalNumberOfContractsSummary
+        {
+            public int Finance { get; set; }
+            public int Loan { get; set; }
+
+            public TotalNumberOfContractsSummary() { }
+
+            public TotalNumberOfContractsSummary(int finance, int loan)
+            {
+                Finance = finance;
+                Loan = loan;
+            }
+        }
+
+        class TotalLoanDisbursementSummary
+        {
+            public decimal Finance { get; set; }
+            public decimal Loan { get; set; }
+            public TotalLoanDisbursementSummary() { }
+            public TotalLoanDisbursementSummary(decimal finance, decimal loan)
+            {
+                Finance = finance;
+                Loan = loan;
+            }
         }
     }
 }
