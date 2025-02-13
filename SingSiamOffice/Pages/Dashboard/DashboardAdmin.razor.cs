@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using SingSiamOffice.Helpers;
 using System.Diagnostics.Contracts;
 using SingSiamOffice.Manage;
+using Microsoft.Extensions.Primitives;
 
 namespace SingSiamOffice.Pages.Dashboard
 {

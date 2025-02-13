@@ -1,6 +1,11 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System.Globalization;
+using SingSiamOffice.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Transactions;
+using SingSiamOffice.Shared;
+using SingSiamOffice.Helpers;
 
 namespace SingSiamOffice.Pages.Report
 {
@@ -9,13 +14,16 @@ namespace SingSiamOffice.Pages.Report
         [Inject]
         IJSRuntime JSRuntime { get; set; }
 
+        private Branch? selectedBranch;
+        private int selectedYear;
         private string role { get; set; } = "admin";
 
-
+        NumberToText helper = new NumberToText();
 
         string date = DateTime.Now.AddYears(543).ToString("dd/MM/yyyy");
         DateTime? filter_date { get; set; }
 
+        string graphTitle = "รายรับ - รายจ่าย";
 
         public CultureInfo GetThaiCulture()
         {
@@ -40,31 +48,114 @@ namespace SingSiamOffice.Pages.Report
         {
             if (firstRender)
             {
-                
+                SingsiamdbContext db = new SingsiamdbContext();
+                var transactionsHistories = await db.TransactionHistories.GroupBy(transaction => transaction.CreateAt.Year).Select(g => new
+                {
+                    Year = g.Key,
+                    TotalRevenue = g.Where(transaction => transaction.Subject.SubjectType == 1).Sum(transaction => transaction.Price),
+                    TotalExpense = g.Where(transaction => transaction.Subject.SubjectType == 2).Sum(transaction => transaction.Price)
+                }).ToListAsync();
+
+                var totalRevenue = transactionsHistories.Select(transaction => transaction.TotalRevenue);
+                var totalExpense = transactionsHistories.Select(transaction => transaction.TotalExpense);
+                var years = transactionsHistories.Select(transaction => transaction.Year.ToString());
+
                 await JSRuntime.InvokeVoidAsync("sideBar");
-                await JSRuntime.InvokeVoidAsync("barchart");
+                await RenderGraph(years, totalRevenue, totalExpense);
             }
         }
 
-
-
-        private string branchs;
-        private string[] branchlists =
+        private async Task<IEnumerable<Branch>> SearchBranch(string value)
         {
-        "1001 | สาขาเชียงใหม่", "1002 | สาขาลำพูน", "1003 | สาขาดอนเมือง", "1004 | สาขาตลาดไทย",
+            SingsiamdbContext db = new SingsiamdbContext();
+            if (string.IsNullOrWhiteSpace(value))
+                return await db.Branches.ToListAsync();
 
+            return await db.Branches.Where(branch => branch.BranchName.Contains(value, StringComparison.OrdinalIgnoreCase)).ToListAsync();
+        }
 
-    };
-
-        private async Task<IEnumerable<string>> SearchBranch(string value)
+        private async Task<IEnumerable<int>> SearchYear(string value)
         {
-            // In real life use an asynchronous function for fetching data from an api.
-            await Task.Delay(5);
+            SingsiamdbContext db = new SingsiamdbContext();
+            if (value == "0")
+                return await db.Promises.Select(promise => promise.Tdatetime!.Value.Year).Distinct().ToListAsync();
 
-            // if text is null or empty, show complete list
-            if (string.IsNullOrEmpty(value))
-                return branchlists;
-            return branchlists.Where(x => x.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+            return await db.Promises.Where(promise => promise.Tdatetime!.Value.Year.ToString().Contains(value)).Select(promise => promise.Tdatetime!.Value.Year).Distinct().ToListAsync();
+        }
+
+        private async Task Search()
+        {
+            SingsiamdbContext db = new SingsiamdbContext();
+            IQueryable<TransactionHistory> transactionsQuery = db.TransactionHistories;
+            List<int> totalRevenue;
+            List<int> totalExpense;
+            List<string> xLabels;
+
+            if (selectedBranch != null)
+            {
+                transactionsQuery = db.TransactionHistories.Where(transaction => transaction.BranchId == selectedBranch.Id);
+                graphTitle = $"รายรับ - รายจ่าย สาขา {selectedBranch.BranchName}";
+            }
+
+            if (selectedYear != 0)
+            {
+                var transactions = await transactionsQuery
+                    .Where(transaction => transaction.CreateAt.Year == selectedYear)
+                    .GroupBy(transaction => transaction.CreateAt.Month).Select(g => new
+                    {
+                        Month = g.Key,
+                        TotalRevenue = g.Where(transaction => transaction.Subject.SubjectType == 1).Sum(transaction => transaction.Price),
+                        TotalExpense = g.Where(transaction => transaction.Subject.SubjectType == 2).Sum(transaction => transaction.Price)
+                    }).ToListAsync();
+
+                // Fill empty months with TotalRevenue = 0 and TotalExpense = 0
+                for (int month = 1; month <= 12; month++)
+                {
+                    if (!transactions.Any(p => p.Month == month))
+                    {
+                        transactions.Add(new
+                        {
+                            Month = month,
+                            TotalRevenue = 0,
+                            TotalExpense = 0
+                        });
+                    }
+                }
+
+                transactions = transactions.OrderBy(transaction => transaction.Month).ToList();
+
+                totalRevenue = transactions.Select(transaction => transaction.TotalRevenue).ToList();
+                totalExpense = transactions.Select(transaction => transaction.TotalExpense).ToList();
+                xLabels = transactions.Select(transaction => helper.MonthNumberToText(transaction.Month)).ToList();
+            }
+            else
+            {
+                var transactions = await transactionsQuery.GroupBy(transaction => transaction.CreateAt.Year).Select(g => new
+                {
+                    Year = g.Key,
+                    TotalRevenue = g.Where(transaction => transaction.Subject.SubjectType == 1).Sum(transaction => transaction.Price),
+                    TotalExpense = g.Where(transaction => transaction.Subject.SubjectType == 2).Sum(transaction => transaction.Price)
+                }).ToListAsync();
+
+                totalRevenue= transactions.Select(transaction => transaction.TotalRevenue).ToList();
+                totalExpense = transactions.Select(transaction => transaction.TotalExpense).ToList();
+                xLabels = transactions.Select(transaction => transaction.Year.ToString()).ToList();
+            }
+
+            await RenderGraph(xLabels, totalRevenue, totalExpense);
+        }
+
+        private async Task ResetSearch()
+        {
+            graphTitle = "รายรับ - รายจ่าย";
+            selectedBranch = null;
+            selectedYear = 0;
+            await Search();
+        }
+
+        private async Task RenderGraph(IEnumerable<string> labels,  IEnumerable<int> totalRevenue, IEnumerable<int> totalExpense)
+        {
+            await JSRuntime.InvokeVoidAsync("barchart", labels, "รายรับ", totalRevenue, "รายจ่าย", totalExpense);
         }
     }
 }

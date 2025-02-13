@@ -2,7 +2,7 @@
 
 var myChart2
 
-function linechart(labels,data1, data2) {
+function linechart(labels, data1, data2) {
     var ctx2 = $("#salse-revenue").get(0).getContext("2d");
 
     if (myChart2) {
@@ -85,22 +85,29 @@ function initChart(labels, data1, data2) {
 }
 
 
-function barchart() {
+function barchart(labels, data1label, data1, data2label, data2) {
     var ctx2 = $("#salse-revenue").get(0).getContext("2d");
-    var myChart2 = new Chart(ctx2, {
+
+    if (myChart2) {
+        myChart2.destroy();
+    }
+
+    myChart2 = new Chart(ctx2, {
         type: "bar",
         data: {
-            labels: ["2016", "2017", "2018", "2019", "2020", "2021", "2022"],
+            labels: labels,
             datasets: [{
-                label: "Salse",
-                data: [15, 30, 55, 45, 70, 65, 85],
-                backgroundColor: "rgba(0, 156, 255, .5)",
+                label: data1label,
+                data: data1,
+                backgroundColor: "rgba(34, 153, 84, .4)",
+                borderColor: "rgba(34, 153, 84, 1)",
                 fill: true
             },
             {
-                label: "Revenue",
-                data: [99, 135, 170, 130, 190, 180, 270],
-                backgroundColor: "rgba(0, 156, 255, .3)",
+                label: data2label,
+                data: data2,
+                backgroundColor: "rgba(235, 40, 20, .4)",
+                borderColor: "rgba(235, 40, 20, 1)",
                 fill: true
             }
             ]
