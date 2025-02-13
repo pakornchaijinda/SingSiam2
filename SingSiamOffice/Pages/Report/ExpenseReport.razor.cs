@@ -25,6 +25,7 @@ namespace SingSiamOffice.Pages.Report
         DateTime? filter_date { get; set; }
 
         string graphTitle = "รายรับ - รายจ่าย";
+        string graphTitleYear = "";
 
         public CultureInfo GetThaiCulture()
         {
@@ -122,6 +123,8 @@ namespace SingSiamOffice.Pages.Report
                 totalRevenue = transactions.Select(transaction => transaction.TotalRevenue).ToList();
                 totalExpense = transactions.Select(transaction => transaction.TotalExpense).ToList();
                 xLabels = transactions.Select(transaction => helper.MonthNumberToText(transaction.Month)).ToList();
+
+                graphTitleYear = $"ปี {selectedYear + 543}";
             }
             else
             {
@@ -143,6 +146,7 @@ namespace SingSiamOffice.Pages.Report
         private async Task ResetSearch()
         {
             graphTitle = "รายรับ - รายจ่าย";
+            graphTitleYear = "";
             selectedBranch = null;
             selectedYear = 0;
             await Search();
