@@ -29,43 +29,6 @@ namespace SingSiamOffice.Pages.Dashboard
         TotalNumberOfContractsSummary totalNumberOfContractsSummary = new TotalNumberOfContractsSummary();
         TotalLoanDisbursementSummary totalLoanDisbursementSummary = new TotalLoanDisbursementSummary();
 
-        private async void HandleSelectedYearChanged()
-        {
-            SingsiamdbContext db = new SingsiamdbContext();
-
-            var promises = await db.Promises
-                .Where(promise => promise.Tdatetime!.Value.Year == selectedYear)
-                .GroupBy(promise => promise.Tdatetime!.Value.Month).Select(g => new
-                {
-                    Month = g.Key,
-                    TotalSales = g.Sum(promise => promise.Amount) ?? 0m,
-                    TotalPromises = g.Count()
-                }).ToListAsync();
-
-            // Fill empty months with TotalSales = 0 and TotalPromises = 0
-            for (int month = 1; month <= 12; month++)
-            {
-                if (!promises.Any(p => p.Month == month))
-                {
-                    promises.Add(new
-                    {
-                        Month = month,
-                        TotalSales = 0m,
-                        TotalPromises = 0
-                    });
-                }
-            }
-
-            promises = promises.OrderBy(promise => promise.Month).ToList();
-
-            var TotalSales = promises.Select(promise => promise.TotalSales);
-            var TotalPromises = promises.Select(promise => promise.TotalPromises);
-            var monthNames = promises.Select(promise => helper.MonthNumberToText(promise.Month));
-
-            await JSRuntime.InvokeVoidAsync("linechart", monthNames, TotalPromises, TotalSales);
-        }
-
-
         public CultureInfo GetThaiCulture()
         {
             var culture = new CultureInfo("th-TH");
@@ -136,27 +99,16 @@ namespace SingSiamOffice.Pages.Dashboard
             return new TotalLoanDisbursementSummary { Finance = finance, Loan = loan };
         }
 
-        private void Reset()
-        {
-            selectedYear = 0;
-        }
-
         private async Task<IEnumerable<Branch>> SearchBranch(string value)
         {
             SingsiamdbContext db = new SingsiamdbContext();
-            if (string.IsNullOrWhiteSpace(value))
-                return await db.Branches.ToListAsync();
-
-            return await db.Branches.Where(branch => branch.BranchName.Contains(value, StringComparison.OrdinalIgnoreCase)).ToListAsync();
+            return await db.Branches.ToListAsync();
         }
 
         private async Task<IEnumerable<int>> SearchYear(string value)
         {
             SingsiamdbContext db = new SingsiamdbContext();
-            if (value == "0")
-                return await db.Promises.Select(promise => promise.Tdatetime!.Value.Year).Distinct().ToListAsync();
-
-            return await db.Promises.Where(promise => promise.Tdatetime!.Value.Year.ToString().Contains(value)).Select(promise => promise.Tdatetime!.Value.Year).Distinct().ToListAsync();
+            return await db.Promises.Select(promise => promise.Tdatetime!.Value.Year).Distinct().ToListAsync();
         }
 
         private async Task Search()
@@ -226,6 +178,12 @@ namespace SingSiamOffice.Pages.Dashboard
             selectedBranch = null;
             selectedYear = 0;
             await Search();
+        }
+
+        private string YearToString(int value)
+        {
+            if (value == 0) return "ไม่ระบุปี";
+            return value.ToString();
         }
 
         class TotalNumberOfContractsSummary

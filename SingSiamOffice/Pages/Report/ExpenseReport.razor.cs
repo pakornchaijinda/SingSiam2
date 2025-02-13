@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Transactions;
 using SingSiamOffice.Shared;
 using SingSiamOffice.Helpers;
+using Microsoft.Extensions.Primitives;
 
 namespace SingSiamOffice.Pages.Report
 {
@@ -68,19 +69,13 @@ namespace SingSiamOffice.Pages.Report
         private async Task<IEnumerable<Branch>> SearchBranch(string value)
         {
             SingsiamdbContext db = new SingsiamdbContext();
-            if (string.IsNullOrWhiteSpace(value))
-                return await db.Branches.ToListAsync();
-
-            return await db.Branches.Where(branch => branch.BranchName.Contains(value, StringComparison.OrdinalIgnoreCase)).ToListAsync();
+            return await db.Branches.ToListAsync();
         }
 
         private async Task<IEnumerable<int>> SearchYear(string value)
         {
             SingsiamdbContext db = new SingsiamdbContext();
-            if (value == "0")
-                return await db.Promises.Select(promise => promise.Tdatetime!.Value.Year).Distinct().ToListAsync();
-
-            return await db.Promises.Where(promise => promise.Tdatetime!.Value.Year.ToString().Contains(value)).Select(promise => promise.Tdatetime!.Value.Year).Distinct().ToListAsync();
+            return await db.Promises.Select(promise => promise.Tdatetime!.Value.Year).Distinct().ToListAsync();
         }
 
         private async Task Search()
@@ -137,7 +132,7 @@ namespace SingSiamOffice.Pages.Report
                     TotalExpense = g.Where(transaction => transaction.Subject.SubjectType == 2).Sum(transaction => transaction.Price)
                 }).ToListAsync();
 
-                totalRevenue= transactions.Select(transaction => transaction.TotalRevenue).ToList();
+                totalRevenue = transactions.Select(transaction => transaction.TotalRevenue).ToList();
                 totalExpense = transactions.Select(transaction => transaction.TotalExpense).ToList();
                 xLabels = transactions.Select(transaction => transaction.Year.ToString()).ToList();
             }
@@ -153,9 +148,15 @@ namespace SingSiamOffice.Pages.Report
             await Search();
         }
 
-        private async Task RenderGraph(IEnumerable<string> labels,  IEnumerable<int> totalRevenue, IEnumerable<int> totalExpense)
+        private async Task RenderGraph(IEnumerable<string> labels, IEnumerable<int> totalRevenue, IEnumerable<int> totalExpense)
         {
             await JSRuntime.InvokeVoidAsync("barchart", labels, "รายรับ", totalRevenue, "รายจ่าย", totalExpense);
+        }
+
+        private string YearToString(int value)
+        {
+            if (value == 0) return "ไม่ระบุปี";
+            return value.ToString();
         }
     }
 }

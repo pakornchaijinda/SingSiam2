@@ -27,7 +27,7 @@
 				<MudAutocomplete T="Branch" Label="ระบุสาขา" @bind-Value="selectedBranch" SearchFunc="@SearchBranch" ToStringFunc="@(branch => branch?.BranchName)" Margin="Margin.Dense" Variant="Variant.Outlined" />
 			</div>
 			<div class="col-md-4">
-				<MudAutocomplete T="int" Label="ระบุปี" @bind-Value="selectedYear" SearchFunc="@SearchYear" ToStringFunc="@(year => year.ToString())" Margin="Margin.Dense" Variant="Variant.Outlined" />
+				<MudAutocomplete T="int" Label="ระบุปี" @bind-Value="selectedYear" SearchFunc="@SearchYear" ToStringFunc="YearToString" Margin="Margin.Dense" Variant="Variant.Outlined" />
 			</div>
 			<div class="col-md-4">
 				<MudStack Row="true">
@@ -44,7 +44,7 @@
 			<div class="card-body">
 				<div class="row">
 					<div class="col-md-12 mt-4 mb-4 text-center">
-						<MudText Typo="Typo.h6" Style="@imporText">@gra</MudText>
+						<MudText Typo="Typo.h6" Style="@imporText">@graphTitle</MudText>
 					</div>
 					<div class="col-md-12 mt-4 mb-4">
 						<canvas id="salse-revenue"></canvas>
