@@ -26,7 +26,7 @@
 	<div class="container mt-4 mb-4">
 
 		<div class="row">
-			<div class="col-md-3 pb-3">
+			<div class="col-md-4 pb-3">
 				<div class="card outer-card">
 					<div class="row no-gutters">
 						<div class="col-4">
@@ -46,7 +46,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-3 pb-3">
+			<div class="col-md-4 pb-3">
 				<div class="card outer-card">
 					<div class="row no-gutters">
 						<div class="col-4">
@@ -59,15 +59,15 @@
 							<div class="card-body">
 								<MudStack>
 									<MudText Typo="Typo.body1" Style="@imporText">สรุปจำนวนสัญญาทั้งหมด</MudText>
-									<MudText Typo="Typo.body2">สัญญาไฟแนนซ์: @totalNumberOfContractsSummary.Finance</MudText>
-									<MudText Typo="Typo.body2">สัญญาเงินกู้: @totalNumberOfContractsSummary.Loan</MudText>
+									<MudText Typo="Typo.body2"><span style="color: #2e86c1">สัญญาไฟแนนซ์:</span> @totalNumberOfContractsSummary.Finance สัญญา</MudText>
+									<MudText Typo="Typo.body2"><span style="color: #ab5c1f">สัญญาเงินกู้:</span> @totalNumberOfContractsSummary.Loan สัญญา</MudText>
 								</MudStack>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-md-3 pb-3">
+			<div class="col-md-4 pb-3">
 				<div class="card outer-card">
 					<div class="row no-gutters">
 						<div class="col-4">
@@ -80,8 +80,8 @@
 							<div class="card-body">
 								<MudStack>
 									<MudText Typo="Typo.body1" Style="@imporText">สรุปปล่อยกู้ทั้งหมด</MudText>
-									<MudText Typo="Typo.body2">สัญญาไฟแนนซ์: @totalLoanDisbursementSummary.Finance.ToString("N0")</MudText>
-									<MudText Typo="Typo.body2">สัญญาเงินกู้: @totalLoanDisbursementSummary.Loan.ToString("N0")</MudText>
+									<MudText Typo="Typo.body2"><span style="color: #2e86c1">สัญญาไฟแนนซ์:</span> @totalLoanDisbursementSummary.Finance.ToString("N0") บาท</MudText>
+									<MudText Typo="Typo.body2"><span style="color: #ab5c1f">สัญญาเงินกู้:</span> @totalLoanDisbursementSummary.Loan.ToString("N0") บาท</MudText>
 								</MudStack>
 							</div>
 						</div>

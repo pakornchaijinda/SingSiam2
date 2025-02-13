@@ -16,7 +16,7 @@ function linechart(labels,data1, data2) {
             datasets: [{
                 label: "จำนวนสัญญา",
                 data: data1,
-                backgroundColor: "rgba(0, 156, 255, 1)",
+                backgroundColor: "rgba(0, 156, 255, .4)",
                 borderColor: "rgba(0, 156, 255, 1)",
                 pointStyle: 'circle',
                 pointRadius: 6,
@@ -25,7 +25,8 @@ function linechart(labels,data1, data2) {
             {
                 label: "รายได้รวม",
                 data: data2,
-                backgroundColor: "rgba(0, 156, 255, .3)",
+                backgroundColor: "rgba(40, 180, 99, .4)",
+                borderColor: "rgba(40, 180, 99, 1)",
                 fill: true
             }
             ]
