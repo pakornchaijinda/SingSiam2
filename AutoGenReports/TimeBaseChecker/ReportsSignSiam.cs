@@ -15,7 +15,6 @@ namespace AutoGenReports.TimeBaseChecker
         public static async Task autoReport1()
         {
             Models.singsiamdbContext db = new Models.singsiamdbContext();
-
         }
         public static async Task Report1(int branch_id)
         {
@@ -201,7 +200,6 @@ namespace AutoGenReports.TimeBaseChecker
             }
 
         }
-
         public static async Task Report2(int branch_id)
         {
             Models.singsiamdbContext db = new Models.singsiamdbContext();
@@ -347,7 +345,84 @@ namespace AutoGenReports.TimeBaseChecker
 
         }
 
+        public static async Task Report4(int branch_id) 
+        {
+            Models.singsiamdbContext db = new Models.singsiamdbContext();
 
+            if (db.Reports.AsNoTracking().Any(a => (a.ReportType == 4) && a.BranchId == branch_id && a.TransactionDate == DateTime.Now.Date.ToString()))
+            {
+                return;
+            }
+            var transaction_date = DateTime.Now.Date;
+
+            var list_transaction_history = db.TransactionHistories.AsNoTracking().Include(s => s.Branch).Include(s => s.Receiopttran).ThenInclude(s => s.Receiptdescs).Include(s => s.Subject).Where(s => s.CreateAt.Date == transaction_date && s.SubjectId == 4 && s.BranchId == branch_id).OrderBy(s => s.Subject.SubjectType).ToList();
+            if (list_transaction_history.Count != 0)
+            {
+                var json_head4 = new jsonModel4
+                {
+                    transaction_date = DateTime.Now,
+                    branch_id = branch_id,
+                    branch_name = list_transaction_history.FirstOrDefault().Branch.BranchName,
+                    report_type = 4,
+                    transaction_date_format = list_transaction_history.FirstOrDefault().CreateAt.ToString("yyyy-MM-dd"),
+                    report4_MoneyTransferrings = new List<report4_moneyTransferring>()
+                };
+                int i = 1;
+                foreach (var items in list_transaction_history)
+                {
+                    try
+                    {
+
+                     report4_moneyTransferring json_report4 = new report4_moneyTransferring();
+                    json_report4.rowNumber = i;
+                    json_report4.transactiondate = items.CreateAt.ToString("yyyy-MM-dd");
+
+                        if (items.ConfirmTransection == null)
+                        {
+                            json_report4.status_transfer = "[รอการกดยืนยัน]";
+                        }
+                        else if (items.ConfirmTransection == true)
+                        {
+                            json_report4.status_transfer = "[ยอมรับ]";
+
+                        }
+                        else 
+                        {
+                            json_report4.status_transfer = "[ไม่ยอมรับ]";
+                        }
+                        json_report4.transfer_detail = items.Detial;
+                        json_report4.amount = items.Price;
+                        json_report4.ref_tranfer = items.TransectionRef;
+                        json_report4.transactiondate_accept = items.CreateAt.ToString("yyyy-MM-dd HH:mm:ss");
+                        json_report4.respond_by = items.Login.Fullname;
+
+
+                    i++;
+                    json_head4.report4_MoneyTransferrings.Add(json_report4);
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+                }
+                string json_data = Newtonsoft.Json.JsonConvert.SerializeObject(json_head4);
+                Models.Report toAdd = new Report
+                {
+                    BranchId = json_head4.branch_id,
+                    ReportType = json_head4.report_type,
+                    JsonData = json_data,
+                    CreatedAt = json_head4.transaction_date,
+                    TransactionDate = json_head4.transaction_date_format,
+                };
+                db.Reports.Add(toAdd);
+                await db.SaveChangesAsync();
+            }
+            else
+            {
+
+            }
+
+        }
         public static async Task Report6(int branch_id)
         {
             var transaction_date = DateTime.Now.Date;
@@ -416,13 +491,22 @@ namespace AutoGenReports.TimeBaseChecker
             public decimal expenses { get; set; }
             public decimal remain { get; set; }
         }
-        public class report6_summary_expenses
+        public class report2_income_outcome_cashonly
         {
             public int rowNumber { get; set; }
+
+            public DateTime transaction_data { get; set; }
             public string detail { get; set; }
             public string detail_desc { get; set; }
-            public decimal expenses_amount { get; set; }
+            public string payment_type { get; set; }
 
+            public bool vat { get; set; }
+            public string receiptno { get; set; }
+            public decimal amount { get; set; }
+            public decimal amount_charge { get; set; }
+            public decimal income { get; set; }
+            public decimal expenses { get; set; }
+            public decimal remain { get; set; }
         }
         public class report3_summary_of_month
         {
@@ -441,34 +525,29 @@ namespace AutoGenReports.TimeBaseChecker
 
             public decimal total_promise { get; set; }
             public decimal total_accumulate_promise { get; set; }
-
-
-
-
             public decimal expenses_amount { get; set; }
 
         }
-        public class report2_income_outcome_cashonly
+        public class report4_moneyTransferring
+    {
+        public int rowNumber { get; set; }
+        public string transactiondate { get; set; }
+            public string  transfer_detail { get; set; }
+            public string status_transfer { get; set; }
+            public decimal amount { get; set; }
+            public string ref_tranfer { get; set; }
+            public string transactiondate_accept { get; set; }
+            public string respond_by { get; set; }  
+        }
+        public class report6_summary_expenses
         {
             public int rowNumber { get; set; }
-
-            public DateTime transaction_data { get; set; }
             public string detail { get; set; }
             public string detail_desc { get; set; }
-            public string payment_type { get; set; }
+            public decimal expenses_amount { get; set; }
 
-            public bool vat { get; set; }
-            public string receiptno { get; set; }
-            public decimal amount { get; set; }
-            public decimal amount_charge { get; set; }
-            public decimal income { get; set; }
-            public decimal expenses { get; set; }
-            public decimal remain { get; set; }
         }
-
-
-
-
+       
 
     }
 
@@ -502,6 +581,16 @@ namespace AutoGenReports.TimeBaseChecker
         public DateTime transaction_date { get; set; }
         public string transaction_date_format { get; set; }
         public List<report3_summary_of_month> report3_Summary_Of_Months { get; set; }
+
+    }
+    public class jsonModel4 
+    {
+        public int branch_id { get; set; }
+        public string branch_name { get; set; }
+        public int report_type { get; set; }
+        public DateTime transaction_date { get; set; }
+        public string transaction_date_format { get; set; }
+        public List<report4_moneyTransferring> report4_MoneyTransferrings { get; set; }
 
     }
     public class jsonModel6
