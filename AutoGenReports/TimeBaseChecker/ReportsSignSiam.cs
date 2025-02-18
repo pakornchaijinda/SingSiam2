@@ -355,7 +355,7 @@ namespace AutoGenReports.TimeBaseChecker
             }
             var transaction_date = DateTime.Now.Date;
 
-            var list_transaction_history = db.TransactionHistories.AsNoTracking().Include(s => s.Branch).Include(s => s.Receiopttran).ThenInclude(s => s.Receiptdescs).Include(s => s.Subject).Where(s => s.CreateAt.Date == transaction_date && s.SubjectId == 4 && s.BranchId == branch_id).OrderBy(s => s.Subject.SubjectType).ToList();
+            var list_transaction_history = db.TransactionHistories.AsNoTracking().Include(s=>s.Login).Include(s => s.Branch).Include(s => s.Receiopttran).ThenInclude(s => s.Receiptdescs).Include(s => s.Subject).Where(s => s.CreateAt.Date == transaction_date && s.SubjectId == 4 && s.BranchId == branch_id).OrderBy(s => s.Subject.SubjectType).ToList();
             if (list_transaction_history.Count != 0)
             {
                 var json_head4 = new jsonModel4
