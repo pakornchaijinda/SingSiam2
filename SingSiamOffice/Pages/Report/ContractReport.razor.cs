@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System.Globalization;
+using SingSiamOffice.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace SingSiamOffice.Pages.Report
 {
@@ -8,6 +10,9 @@ namespace SingSiamOffice.Pages.Report
     {
         [Inject]
         IJSRuntime JSRuntime { get; set; }
+
+        private Branch? selectedBranch;
+        private int selectedYear;
 
         private string role { get; set; } = "admin";
 
@@ -40,31 +45,29 @@ namespace SingSiamOffice.Pages.Report
         {
             if (firstRender)
             {
-                
+                SingsiamdbContext db = new SingsiamdbContext();
+
+                var promises = await db.Promises.GroupBy(promise => promise.Branch).Select(g => new
+                {
+                    Branch = g.Key,
+                    TotalSales = g.Sum(promise => promise.Amount),
+                    TotalPromises = g.Count(),
+                    TotalFinancePromises = g.Count(promise => promise.Ptype == 1),
+                    TotalLoanPromises = g.Count(promise => promise.Ptype == 2)
+                }).ToListAsync();
+
+                var totalFinancePromises = promises.Select(promise => promise.TotalFinancePromises);
+                var totalLoanPromises = promises.Select(promise => promise.TotalLoanPromises);
+                var branchs = promises.Select(promise => promise.Branch.BranchName);
+
                 await JSRuntime.InvokeVoidAsync("sideBar");
-                await JSRuntime.InvokeVoidAsync("barchart");
+                await RenderGraph(branchs, totalFinancePromises, totalLoanPromises);
             }
         }
 
-
-
-        private string branchs;
-        private string[] branchlists =
+        private async Task RenderGraph(IEnumerable<string> labels, IEnumerable<int> totalFinancePromises, IEnumerable<int> totalLoanPromises)
         {
-        "1001 | สาขาเชียงใหม่", "1002 | สาขาลำพูน", "1003 | สาขาดอนเมือง", "1004 | สาขาตลาดไทย",
-
-
-    };
-
-        private async Task<IEnumerable<string>> SearchBranch(string value)
-        {
-            // In real life use an asynchronous function for fetching data from an api.
-            await Task.Delay(5);
-
-            // if text is null or empty, show complete list
-            if (string.IsNullOrEmpty(value))
-                return branchlists;
-            return branchlists.Where(x => x.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+            await JSRuntime.InvokeVoidAsync("barchart", labels, "จำนวนสัญญาไฟแนนซ์", totalFinancePromises, "จำนวนสัญญาเงินกู้", totalLoanPromises);
         }
     }
 }

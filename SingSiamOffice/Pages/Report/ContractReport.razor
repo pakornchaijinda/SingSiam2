@@ -1,5 +1,5 @@
 ﻿@page "/contract-report"
-@* <h3>ContractReport</h3> *@
+@using SingSiamOffice.Models;
 
 <Navbar></Navbar>
 
@@ -11,7 +11,7 @@
 
         <div class="row">
             <div class="col-12 mt-4 mb-4">
-                <MudText Typo="Typo.h5" Style="@headertext"><img class="rounded-circle" src="img/icons/report.svg" alt="" style="width:3rem;"> รายงานสัญญา ยอดเงินกู้แต่ละสาขา</MudText>
+                <MudText Typo="Typo.h5" Style="@headertext"><img class="rounded-circle" src="img/icons/report.svg" alt="" style="width:3rem;"> รายงานสัญญาแต่ละสาขา</MudText>
             </div>
             <div class="col-12 mt-4 mb-4">
                 <MudText Typo="Typo.h6"><img src="img/icons/calendar.svg" alt="" style="width:2rem;"> วันที่ @date</MudText>
@@ -24,7 +24,7 @@
         <div class="container mt-4 mb-4">
             <div class="row">
                 <div class="col-md-4">
-                    <MudAutocomplete T="string" Label="ระบุสาขา" @bind-Value="branchs" SearchFunc="@SearchBranch" Margin="Margin.Dense" Variant="Variant.Outlined" />
+                    <MudAutocomplete T="string" Label="ระบุสาขา" Margin="Margin.Dense" Variant="Variant.Outlined" />
                 </div>
                 <div class="col-md-4">
                     <MudDatePicker @bind-Date="filter_date" Label="วัน/เดือน/ปี" Culture="@GetThaiCulture()" PickerVariant="PickerVariant.Dialog" UseShortNames="false" TitleDateFormat="dddd, dd MMMM" Margin="Margin.Dense" Variant="Variant.Outlined" Style="background-color:#fff;" Required RequiredError="กรุณาระบุวัน/เดือน/ปีเกิด" />
