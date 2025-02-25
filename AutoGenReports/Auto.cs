@@ -58,7 +58,7 @@ namespace AutoGenReports
                 var all_branch = db.Branches.AsNoTracking().ToList();
                 foreach (var branch in all_branch)
                 {
-                    await TimeBaseChecker.ReportsSignSiam.Report4(branch.Id);
+                    await TimeBaseChecker.ReportsSignSiam.Report3(branch.Id);
                 }
 
                 Console.WriteLine("Update autoReport4 is completed " + DateTime.Now);

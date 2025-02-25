@@ -3,6 +3,7 @@ using FluentScheduler;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -345,6 +346,151 @@ namespace AutoGenReports.TimeBaseChecker
 
         }
 
+        public static async Task Report3(int branch_id)
+        {
+            Models.singsiamdbContext db = new Models.singsiamdbContext();
+
+            if (db.Reports.AsNoTracking().Any(a => (a.ReportType == 3) && a.BranchId == branch_id && a.TransactionDate == DateTime.Now.Date.ToString()))
+            {
+                return;
+            }
+            DateTime specificDate = new DateTime(2024, 10, 1);
+            var transaction_date = specificDate;
+
+            //DateTime firstDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            DateTime firstDay = new DateTime(specificDate.Year, specificDate.Month, 1);
+            var fd = firstDay.ToString("yyyyMMdd");
+            var list_transaction_history_receivetotal = db.Receipttrans.AsNoTracking().Include(s => s.Receiptdescs).Include(s => s.Branch).Where(s => s.BranchId == branch_id && string.Compare(s.Tdateformat, firstDay.ToString("yyyyMMdd")) >= 0 &&
+                string.Compare(s.Tdateformat, transaction_date.ToString("yyyyMMdd")) <= 0).ToList();
+
+            var list_transaction_history_totalpromise = db.TransactionHistories.AsNoTracking().Include(s => s.Branch).Include(s => s.Receiopttran).ThenInclude(s => s.Receiptdescs).Include(s => s.Subject).Where(s => s.CreateAt >= firstDay && s.CreateAt <= transaction_date && s.BranchId == branch_id && s.SubjectId == 36).ToList();
+           
+            
+            var list_transaction_history_receive = db.Receipttrans.AsNoTracking().Include(s=>s.Receiptdescs).Include(s=>s.Branch).Where(s=>s.BranchId == branch_id && s.Tdateformat == transaction_date.ToString("yyyyMMdd")).ToList();
+
+            var list_transaction_history_lendmoney = db.TransactionHistories.AsNoTracking().Include(s => s.Branch).Include(s => s.Receiopttran).ThenInclude(s => s.Receiptdescs).Include(s => s.Subject).Where(s => s.CreateAt.Date == transaction_date && s.BranchId == branch_id && s.SubjectId == 36).OrderBy(s => s.Subject.SubjectType).ToList();
+           
+            
+            
+            if (list_transaction_history_receive.Count != 0 && list_transaction_history_lendmoney.Count != 0)
+            {
+                var json_head3 = new jsonModel3
+                {
+                    transaction_date = DateTime.Now,
+                    branch_id = branch_id,
+                    branch_name = list_transaction_history_receive.FirstOrDefault().Branch.BranchName,
+                    report_type = 3,
+                    transaction_date_format = transaction_date.ToString("yyyy-MM-dd"),
+                    report3_Summary_Of_Months = new List<report3_summary_of_month>()
+                };
+                
+                    try
+                    {
+                       
+                        report3_summary_of_month json_report3 = new report3_summary_of_month();
+                        CultureInfo thaiCulture = new CultureInfo("th-TH");
+                        json_report3.transactiondate = transaction_date.ToString("dd MMM yy", thaiCulture);
+                        json_report3.amount_vat = (decimal)list_transaction_history_receive.Where(s => s.Ptype == 1).Sum(s => s.Amount) - ((decimal)list_transaction_history_receive.Where(s => s.Ptype == 1).Sum(s => s.Charge1amt) + (decimal)list_transaction_history_receive.Where(s => s.Ptype == 1).Sum(s => s.Charge1amt));
+                        json_report3.amount_charge_vat = (decimal)list_transaction_history_receive.Where(s => s.Ptype == 1).Sum(s => s.Charge1amt) + (decimal)list_transaction_history_receive.Where(s => s.Ptype == 1).Sum(s => s.Charge1amt);
+                        json_report3.total_vat = json_report3.amount_vat + json_report3.amount_charge_vat;
+                        json_report3.amount_novat = (decimal)list_transaction_history_receive.Where(s => s.Ptype == 2).Sum(s => s.Amount) - ((decimal)list_transaction_history_receive.Where(s => s.Ptype == 2).Sum(s => s.Charge1amt) + (decimal)list_transaction_history_receive.Where(s => s.Ptype == 2).Sum(s => s.Charge1amt)) ;
+                        json_report3.amount_charge_novat = (decimal)list_transaction_history_receive.Where(s => s.Ptype == 2).Sum(s => s.Charge1amt) + (decimal)list_transaction_history_receive.Where(s => s.Ptype == 2).Sum(s => s.Charge1amt);
+                        json_report3.total_novat = json_report3.amount_novat + json_report3.amount_charge_novat;
+                        json_report3.total_sum_amount = json_report3.total_vat + json_report3.total_novat;
+                        json_report3.total_accumulate = (decimal)list_transaction_history_receivetotal.Sum(s => s.Amount);
+                        json_report3.total_promise = (decimal)list_transaction_history_lendmoney.Sum(s => s.Price);
+                        json_report3.total_accumulate_promise = (decimal)list_transaction_history_totalpromise.Sum(s => s.Price);
+
+
+                    json_head3.report3_Summary_Of_Months.Add(json_report3);
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+                
+                string json_data = Newtonsoft.Json.JsonConvert.SerializeObject(json_head3);
+                Models.Report toAdd = new Report
+                {
+                    BranchId = json_head3.branch_id,
+                    ReportType = json_head3.report_type,
+                    JsonData = json_data,
+                    CreatedAt = json_head3.transaction_date,
+                    TransactionDate = json_head3.transaction_date_format,
+                };
+                db.Reports.Add(toAdd);
+                await db.SaveChangesAsync();
+            }
+            else
+            {
+                var branch_name = db.Branches.AsNoTracking().Where(s => s.Id == branch_id).FirstOrDefault().BranchName;
+                var json_head3 = new jsonModel3
+                {
+                    transaction_date = DateTime.Now,
+                    branch_id = branch_id,
+                    branch_name = branch_name,
+                    report_type = 3,
+                    transaction_date_format = transaction_date.ToString("yyyy-MM-dd"),
+                    report3_Summary_Of_Months = new List<report3_summary_of_month>()
+                };
+
+                try
+                {
+
+                    report3_summary_of_month json_report3 = new report3_summary_of_month();
+                    CultureInfo thaiCulture = new CultureInfo("th-TH");
+                    json_report3.transactiondate = transaction_date.ToString("dd MMM yy", thaiCulture);
+                    json_report3.amount_vat = 0;
+                    json_report3.amount_charge_vat = 0;
+                    json_report3.total_vat = 0;
+                    json_report3.amount_novat = 0;
+                    json_report3.amount_charge_novat =0;
+                    json_report3.total_novat = 0;
+                    json_report3.total_sum_amount = 0;
+                    if (list_transaction_history_receivetotal.Count != 0)
+                    {
+                        json_report3.total_accumulate = (decimal)list_transaction_history_receivetotal.Sum(s => s.Amount);
+                    }
+                    else 
+                    {
+                        json_report3.total_accumulate = 0;
+                    }
+        
+                    json_report3.total_promise = 0;
+
+                    if (list_transaction_history_totalpromise.Count != 0)
+                    {
+                        json_report3.total_accumulate_promise = (decimal)list_transaction_history_totalpromise.Sum(s => s.Price);
+                    }
+                    else 
+                    {
+                        json_report3.total_accumulate_promise = 0;
+                    }
+                    
+
+
+                    json_head3.report3_Summary_Of_Months.Add(json_report3);
+                }
+                catch (Exception ex)
+                {
+
+                }
+
+                string json_data = Newtonsoft.Json.JsonConvert.SerializeObject(json_head3);
+                Models.Report toAdd = new Report
+                {
+                    BranchId = json_head3.branch_id,
+                    ReportType = json_head3.report_type,
+                    JsonData = json_data,
+                    CreatedAt = json_head3.transaction_date,
+                    TransactionDate = json_head3.transaction_date_format,
+                };
+                db.Reports.Add(toAdd);
+                await db.SaveChangesAsync();
+            }
+
+        }
+
         public static async Task Report4(int branch_id) 
         {
             Models.singsiamdbContext db = new Models.singsiamdbContext();
@@ -510,7 +656,10 @@ namespace AutoGenReports.TimeBaseChecker
         }
         public class report3_summary_of_month
         {
+            public int rowNumber { get; set; }
 
+            public DateTime transaction_data { get; set; }
+            public string detail { get; set; }
             public string transactiondate { get; set; }
             public decimal amount_vat { get; set; }
             public decimal amount_charge_vat { get; set; }
@@ -530,8 +679,8 @@ namespace AutoGenReports.TimeBaseChecker
         }
         public class report4_moneyTransferring
     {
-        public int rowNumber { get; set; }
-        public string transactiondate { get; set; }
+            public int rowNumber { get; set; }
+            public string transactiondate { get; set; }
             public string  transfer_detail { get; set; }
             public string status_transfer { get; set; }
             public decimal amount { get; set; }
