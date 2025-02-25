@@ -65,59 +65,68 @@
 					<div class="col-md-12 mb-3">
 						<div class="table-responsive">
 							<table class="table">
-								<thead style="@tableheader">
+								@if (promiseGroups != null && promiseGroups.Count != 0)
+								{
+									<thead style="@tableheader">
+										<tr>
+											<th scope="col">ลำดับ</th>
+											@if (promiseGroups.First().Branch != null)
+											{
+												<th scope="col">สาขา</th>
+											}
+											@if (promiseGroups.First().Month != null)
+											{
+												<th scope="col">เดือน</th>
+											}
+											<th scope="col">จำนวนสัญญาไฟแนนซ์</th>
+											<th scope="col">มูลค่าสัญญาไฟแนนซ์</th>
+											<th scope="col">จำนวนสัญญาเงินกู้</th>
+											<th scope="col">มูลสัญญาค่าเงินกู้</th>
+										</tr>
+									</thead>
+									<tbody>
+
+										@if (promiseGroups.First().Branch != null)
+										{
+											@for (int i = 0; i < promiseGroups.Count; i++)
+											{
+												PromiseGroup promiseGroup = promiseGroups.ElementAt(i);
+												<tr>
+													<td>@(i + 1)</td>
+													<td>@promiseGroup.Branch!.BranchName</td>
+													<td>@promiseGroup.TotalFinancePromises</td>
+													<td>@promiseGroup.TotalFinanceSales</td>
+													<td>@promiseGroup.TotalLoanPromises</td>
+													<td>@promiseGroup.TotalLoanSales</td>
+												</tr>
+											}
+										}
+										@if (promiseGroups.First().Month != null)
+										{
+											@for (int i = 0; i < promiseGroups.Count; i++)
+											{
+												PromiseGroup promiseGroup = promiseGroups.ElementAt(i);
+												<tr>
+													<td>@(i + 1)</td>
+													<td>@(helper.MonthNumberToText(promiseGroup.Month ?? 1))</td>
+													<td>@promiseGroup.TotalFinancePromises</td>
+													<td>@promiseGroup.TotalFinanceSales</td>
+													<td>@promiseGroup.TotalLoanPromises</td>
+													<td>@promiseGroup.TotalLoanSales</td>
+												</tr>
+											}
+										}
+
+									</tbody>
+								}
+								else
+								{
 									<tr>
-										<th scope="col">ลำดับ</th>
-										<th scope="col">วัน/เดือน/ปี</th>
-										<th scope="col">เวลา</th>
-										<th scope="col">ธุรกรรม</th>
-										<th scope="col">จำนวนเงิน</th>
-										<th scope="col">อ้างอิง</th>
-										<th scope="col">ผู้ทำรายการ</th>
+										<td colspan="6" class="text-center">ไม่พบข้อมูล</td>
 									</tr>
-								</thead>
-								<tbody>
-									<tr>
-
-										<td>10/12/2566</td>
-										<td>ค่าประกันหนี้</td>
-										<td>12221</td>
-										<td>รถยนต์</td>
-										<td>12232</td>
-										<td>30000</td>
-										<td>2000</td>
-
-									</tr>
-									<tr>
-
-										<td>10/12/2566</td>
-										<td>ค่าประกันหนี้</td>
-										<td>12221</td>
-										<td>รถยนต์</td>
-										<td>12232</td>
-										<td>30000</td>
-										<td>2000</td>
-
-									</tr>
-									<tr>
-
-										<td>10/12/2566</td>
-										<td>ค่าประกันหนี้</td>
-										<td>12221</td>
-										<td>รถยนต์</td>
-										<td>12232</td>
-										<td>30000</td>
-										<td>2000</td>
-
-									</tr>
-								</tbody>
-
+								}
 							</table>
 						</div>
-					</div>
-
-					<div class="col-md-12 mb-3 text-end">
-						<MudButton Variant="Variant.Filled" Size="Size.Large" Style="@buttoncolor1">ดึ่งข้อมูล Excel</MudButton>
 					</div>
 				</div>
 			</div>

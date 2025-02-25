@@ -18,11 +18,13 @@ namespace SingSiamOffice.Pages.Report
 
         private string role { get; set; } = "admin";
 
-        string date = DateTime.Now.AddYears(543).ToString("dd/MM/yyyy");
+        string date = DateTime.Now.ToString("dd/MM/yyyy");
         DateTime? filter_date { get; set; }
 
         string graphTitle = "จำนวนสัญญาแต่ละสาขา";
         string graphTitleYear = $"ปี";
+
+        List<PromiseGroup> promiseGroups = new List<PromiseGroup>();
 
         public CultureInfo GetThaiCulture()
         {
@@ -88,18 +90,20 @@ namespace SingSiamOffice.Pages.Report
                     .Where(promise => promise.Tdatetime!.Value.Year == selectedYear);
 
             graphTitleYear = $"ปี {selectedYear}";
-            
+
             if (selectedBranch != null)
             {
                 graphTitle = $"จำนวนสัญญา สาขา {selectedBranch.BranchName}";
 
                 var promises = await yearFilterPromises
                     .Where(promise => promise.Branch == selectedBranch)
-                    .GroupBy(promise => promise.Tdatetime!.Value.Month).Select(g => new
+                    .GroupBy(promise => promise.Tdatetime!.Value.Month).Select(g => new PromiseGroup
                     {
                         Month = g.Key,
                         TotalFinancePromises = g.Count(promise => promise.Ptype == 1),
-                        TotalLoanPromises = g.Count(promises => promises.Ptype == 2)
+                        TotalLoanPromises = g.Count(promises => promises.Ptype == 2),
+                        TotalFinanceSales = g.Where(promise => promise.Ptype == 1).Sum(promise => promise.Amount) ?? 0,
+                        TotalLoanSales = g.Where(promise => promise.Ptype == 2).Sum(promise => promise.Amount) ?? 0
                     }).ToListAsync();
 
                 // Fill empty months with TotalFinancePromises = 0 and TotalLoanPromises = 0
@@ -107,11 +111,13 @@ namespace SingSiamOffice.Pages.Report
                 {
                     if (!promises.Any(p => p.Month == month))
                     {
-                        promises.Add(new
+                        promises.Add(new PromiseGroup
                         {
                             Month = month,
                             TotalFinancePromises = 0,
-                            TotalLoanPromises = 0
+                            TotalLoanPromises = 0,
+                            TotalFinanceSales = 0,
+                            TotalLoanSales = 0
                         });
                     }
                 }
@@ -120,26 +126,31 @@ namespace SingSiamOffice.Pages.Report
 
                 totalFinancePromises = promises.Select(promise => promise.TotalFinancePromises).ToList();
                 totalLoanPromises = promises.Select(promise => promise.TotalLoanPromises).ToList();
-                xLabels = promises.Select(promise => helper.MonthNumberToText(promise.Month)).ToList();
+                xLabels = promises.Select(promise => helper.MonthNumberToText(promise.Month ?? 1)).ToList();
+
+                promiseGroups = promises;
             }
             else
             {
-                var promises = await yearFilterPromises.GroupBy(promise => promise.Branch).Select(g => new
+                var promises = await yearFilterPromises.GroupBy(promise => promise.Branch).Select(g => new PromiseGroup
                 {
                     Branch = g.Key,
-                    TotalSales = g.Sum(promise => promise.Amount),
-                    TotalPromises = g.Count(),
                     TotalFinancePromises = g.Count(promise => promise.Ptype == 1),
-                    TotalLoanPromises = g.Count(promise => promise.Ptype == 2)
+                    TotalLoanPromises = g.Count(promise => promise.Ptype == 2),
+                    TotalFinanceSales = g.Where(promise => promise.Ptype == 1).Sum(promise => promise.Amount) ?? 0,
+                    TotalLoanSales = g.Where(promise => promise.Ptype == 2).Sum(promise => promise.Amount) ?? 0
                 }).ToListAsync();
 
                 totalFinancePromises = promises.Select(promise => promise.TotalFinancePromises).ToList();
                 totalLoanPromises = promises.Select(promise => promise.TotalLoanPromises).ToList();
-                xLabels = promises.Select(promise => promise.Branch.BranchName).ToList();
+                xLabels = promises.Select(promise => promise.Branch!.BranchName ).ToList();
+
+                promiseGroups = promises;
             }
 
             await JSRuntime.InvokeVoidAsync("sideBar");
             await RenderGraph(xLabels, totalFinancePromises, totalLoanPromises);
+            StateHasChanged();
         }
 
         private async Task ResetSearch()
@@ -155,5 +166,36 @@ namespace SingSiamOffice.Pages.Report
         {
             await JSRuntime.InvokeVoidAsync("barchart", labels, "จำนวนสัญญาไฟแนนซ์", totalFinancePromises, "จำนวนสัญญาเงินกู้", totalLoanPromises);
         }
+
+        class PromiseGroup
+        {
+            public PromiseGroup() { }
+
+            public PromiseGroup(int totalFinancePromises, int totalLoanPromises, decimal totalFinanceSales, decimal totalLoanSales, Branch branch)
+            {
+                Branch = branch;
+                TotalFinancePromises = totalFinancePromises;
+                TotalLoanPromises = totalLoanPromises;
+                TotalFinanceSales = totalFinanceSales;
+                TotalLoanSales = totalLoanSales;
+            }
+
+            public PromiseGroup(int totalFinancePromises, int totalLoanPromises, decimal totalFinanceSales, decimal totalLoanSales, int month)
+            {
+                Month = month;
+                TotalFinancePromises = totalFinancePromises;
+                TotalLoanPromises = totalLoanPromises;
+                TotalFinanceSales = totalFinanceSales;
+                TotalLoanSales = totalLoanSales;
+            }
+
+            public Branch? Branch { get; set; }
+            public int? Month { get; set; }
+            public int TotalFinancePromises { get; set; }
+            public int TotalLoanPromises { get; set; }
+            public decimal TotalFinanceSales { get; set; }
+            public decimal TotalLoanSales { get; set; }
+        }
+
     }
 }
