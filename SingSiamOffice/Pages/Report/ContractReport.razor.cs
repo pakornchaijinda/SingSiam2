@@ -13,7 +13,7 @@ namespace SingSiamOffice.Pages.Report
         IJSRuntime JSRuntime { get; set; }
 
         private Branch? selectedBranch;
-        private int selectedYear = 2025;
+        private int selectedYear = DateTime.Now.Year;
         NumberToText helper = new NumberToText();
 
         private string role { get; set; } = "admin";
@@ -156,7 +156,7 @@ namespace SingSiamOffice.Pages.Report
         private async Task ResetSearch()
         {
             selectedBranch = null;
-            selectedYear = 2025;
+            selectedYear = DateTime.Now.Year;
             graphTitle = "จำนวนสัญญาแต่ละสาขา";
             graphTitleYear = $"ปี {selectedYear}";
             await Search();
