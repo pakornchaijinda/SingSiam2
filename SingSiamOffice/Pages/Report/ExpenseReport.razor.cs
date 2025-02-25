@@ -21,7 +21,7 @@ namespace SingSiamOffice.Pages.Report
 
         NumberToText helper = new NumberToText();
 
-        string date = DateTime.Now.AddYears(543).ToString("dd/MM/yyyy");
+        string date = DateTime.Now.ToString("dd/MM/yyyy", new CultureInfo("th-TH"));
         DateTime? filter_date { get; set; }
 
         string graphTitle = "รายรับ - รายจ่าย";

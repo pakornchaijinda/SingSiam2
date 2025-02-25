@@ -20,7 +20,7 @@ namespace SingSiamOffice.Pages.Dashboard
         private Branch? selectedBranch;
         private int selectedYear;
 
-        string date = DateTime.Now.AddYears(543).ToString("dd/MM/yyyy");
+        string date = DateTime.Now.ToString("dd/MM/yyyy", new CultureInfo("th-TH"));
         DateTime? filter_date { get; set; }
 
         NumberToText helper = new NumberToText();

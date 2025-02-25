@@ -18,7 +18,7 @@ namespace SingSiamOffice.Pages.Report
 
         private string role { get; set; } = "admin";
 
-        string date = DateTime.Now.ToString("dd/MM/yyyy");
+        string date = DateTime.Now.ToString("dd/MM/yyyy", new CultureInfo("th-TH"));
         DateTime? filter_date { get; set; }
 
         string graphTitle = "จำนวนสัญญาแต่ละสาขา";
