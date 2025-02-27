@@ -95,9 +95,9 @@
 													<td>@(i + 1)</td>
 													<td>@promiseGroup.Branch!.BranchName</td>
 													<td>@promiseGroup.TotalFinancePromises</td>
-													<td>@promiseGroup.TotalFinanceSales</td>
+													<td>@promiseGroup.TotalFinanceSales.ToString("N0")</td>
 													<td>@promiseGroup.TotalLoanPromises</td>
-													<td>@promiseGroup.TotalLoanSales</td>
+													<td>@promiseGroup.TotalLoanSales.ToString("N0")</td>
 												</tr>
 											}
 										}
@@ -110,9 +110,9 @@
 													<td>@(i + 1)</td>
 													<td>@(helper.MonthNumberToText(promiseGroup.Month ?? 1))</td>
 													<td>@promiseGroup.TotalFinancePromises</td>
-													<td>@promiseGroup.TotalFinanceSales</td>
+													<td>@promiseGroup.TotalFinanceSales.ToString("N0")</td>
 													<td>@promiseGroup.TotalLoanPromises</td>
-													<td>@promiseGroup.TotalLoanSales</td>
+													<td>@promiseGroup.TotalLoanSales.ToString("N0")</td>
 												</tr>
 											}
 										}
