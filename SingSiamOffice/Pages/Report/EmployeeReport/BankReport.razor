@@ -178,6 +178,7 @@
 
 	private void Search()
 	{
+		monthYearText = new DateTime(selectedYear, selectedMonth, 1).ToString("Y");
 		string monthText = selectedMonth.ToString().PadLeft(2, '0');
 		List<Report> reportList = db.Reports.Where((report) => report.ReportType == REPORT_NUMBER && report.TransactionDate != null && report.TransactionDate.Contains($"{selectedYear}-{monthText}-")).ToList();
 		records = reportList;
