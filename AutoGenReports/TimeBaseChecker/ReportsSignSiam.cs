@@ -354,7 +354,7 @@ namespace AutoGenReports.TimeBaseChecker
             {
                 return;
             }
-            DateTime specificDate = new DateTime(2024, 10, 1);
+            DateTime specificDate = new DateTime(2024, 10, 17);
             var transaction_date = specificDate;
 
             //DateTime firstDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
@@ -364,15 +364,15 @@ namespace AutoGenReports.TimeBaseChecker
                 string.Compare(s.Tdateformat, transaction_date.ToString("yyyyMMdd")) <= 0).ToList();
 
             var list_transaction_history_totalpromise = db.TransactionHistories.AsNoTracking().Include(s => s.Branch).Include(s => s.Receiopttran).ThenInclude(s => s.Receiptdescs).Include(s => s.Subject).Where(s => s.CreateAt >= firstDay && s.CreateAt <= transaction_date && s.BranchId == branch_id && s.SubjectId == 36).ToList();
-           
-            
-            var list_transaction_history_receive = db.Receipttrans.AsNoTracking().Include(s=>s.Receiptdescs).Include(s=>s.Branch).Where(s=>s.BranchId == branch_id && s.Tdateformat == transaction_date.ToString("yyyyMMdd")).ToList();
 
-            var list_transaction_history_lendmoney = db.TransactionHistories.AsNoTracking().Include(s => s.Branch).Include(s => s.Receiopttran).ThenInclude(s => s.Receiptdescs).Include(s => s.Subject).Where(s => s.CreateAt.Date == transaction_date && s.BranchId == branch_id && s.SubjectId == 36).OrderBy(s => s.Subject.SubjectType).ToList();
+            var td = transaction_date.ToString("yyyyMMdd");
+            var list_transaction_history_receive = db.Receipttrans.AsNoTracking().Include(s=>s.Receiptdescs).Include(s=>s.Branch).Include(s=>s.Promise).Where(s=>s.BranchId == branch_id && s.Tdateformat == td).ToList();
+
+            var list_transaction_history_lendmoney = db.TransactionHistories.AsNoTracking().Include(s => s.Branch).Include(s => s.Receiopttran).ThenInclude(s => s.Receiptdescs).Include(s => s.Subject).Where(s => s.CreateAt.Date == transaction_date.Date && s.BranchId == branch_id && s.SubjectId == 36).OrderBy(s => s.Subject.SubjectType).ToList();
            
             
             
-            if (list_transaction_history_receive.Count != 0 && list_transaction_history_lendmoney.Count != 0)
+            if (list_transaction_history_receive.Count != 0 || list_transaction_history_lendmoney.Count != 0)
             {
                 var json_head3 = new jsonModel3
                 {
@@ -390,11 +390,11 @@ namespace AutoGenReports.TimeBaseChecker
                         report3_summary_of_month json_report3 = new report3_summary_of_month();
                         CultureInfo thaiCulture = new CultureInfo("th-TH");
                         json_report3.transactiondate = transaction_date.ToString("dd MMM yy", thaiCulture);
-                        json_report3.amount_vat = (decimal)list_transaction_history_receive.Where(s => s.Ptype == 1).Sum(s => s.Amount) - ((decimal)list_transaction_history_receive.Where(s => s.Ptype == 1).Sum(s => s.Charge1amt) + (decimal)list_transaction_history_receive.Where(s => s.Ptype == 1).Sum(s => s.Charge1amt));
-                        json_report3.amount_charge_vat = (decimal)list_transaction_history_receive.Where(s => s.Ptype == 1).Sum(s => s.Charge1amt) + (decimal)list_transaction_history_receive.Where(s => s.Ptype == 1).Sum(s => s.Charge1amt);
+                        json_report3.amount_vat = (decimal)list_transaction_history_receive.Where(s => s.Promise.Ptype == 1).Sum(s => s.Amount) - ((decimal)list_transaction_history_receive.Where(s => s.Promise.Ptype == 1).Sum(s => s.Charge1amt) + (decimal)list_transaction_history_receive.Where(s => s.Promise.Ptype == 1).Sum(s => s.Charge1amt));
+                        json_report3.amount_charge_vat = (decimal)list_transaction_history_receive.Where(s => s.Promise.Ptype == 1).Sum(s => s.Charge1amt) + (decimal)list_transaction_history_receive.Where(s => s.Promise.Ptype == 1).Sum(s => s.Charge1amt);
                         json_report3.total_vat = json_report3.amount_vat + json_report3.amount_charge_vat;
-                        json_report3.amount_novat = (decimal)list_transaction_history_receive.Where(s => s.Ptype == 2).Sum(s => s.Amount) - ((decimal)list_transaction_history_receive.Where(s => s.Ptype == 2).Sum(s => s.Charge1amt) + (decimal)list_transaction_history_receive.Where(s => s.Ptype == 2).Sum(s => s.Charge1amt)) ;
-                        json_report3.amount_charge_novat = (decimal)list_transaction_history_receive.Where(s => s.Ptype == 2).Sum(s => s.Charge1amt) + (decimal)list_transaction_history_receive.Where(s => s.Ptype == 2).Sum(s => s.Charge1amt);
+                        json_report3.amount_novat = (decimal)list_transaction_history_receive.Where(s => s.Promise.Ptype == 2).Sum(s => s.Amount) - ((decimal)list_transaction_history_receive.Where(s => s.Promise.Ptype == 2).Sum(s => s.Charge1amt) + (decimal)list_transaction_history_receive.Where(s => s.Promise.Ptype == 2).Sum(s => s.Charge1amt)) ;
+                        json_report3.amount_charge_novat = (decimal)list_transaction_history_receive.Where(s => s.Promise.Ptype == 2).Sum(s => s.Charge1amt) + (decimal)list_transaction_history_receive.Where(s => s.Promise.Ptype == 2).Sum(s => s.Charge1amt);
                         json_report3.total_novat = json_report3.amount_novat + json_report3.amount_charge_novat;
                         json_report3.total_sum_amount = json_report3.total_vat + json_report3.total_novat;
                         json_report3.total_accumulate = (decimal)list_transaction_history_receivetotal.Sum(s => s.Amount);
