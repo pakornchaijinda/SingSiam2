@@ -6,6 +6,8 @@
 @using SingSiamOffice.Models;
 @using AutoGenReports.TimeBaseChecker;
 @using System.Text.Json;
+@using Blazored.LocalStorage
+@inject ILocalStorageService localStorage
 
 <Navbar2></Navbar2>
 
@@ -68,7 +70,7 @@
 				<div class="row">
 					<div class="col-md-12 mb-2 mt-2 text-center">
 						<MudText Typo="Typo.body1">บัญชีเข้า - ออก ธนาคาร : @(monthYearText)</MudText>
-						<MudText Typo="Typo.body1">สาขา : ย่อยบ้านเขว้า</MudText>
+						<MudText Typo="Typo.body1">สาขา : @branch.BranchName</MudText>
 					</div>
 					@if (records.Count == 0)
 					{
@@ -144,6 +146,7 @@
 	string black = "font-weight:600;";
 
 	private const int REPORT_NUMBER = 1;
+	private Branch branch = new Branch();
 
 	private int selectedYear;
 	private int selectedMonth;
@@ -158,13 +161,17 @@
 	List<Report> records = new List<Report>();
 	SingsiamdbContext db = new SingsiamdbContext();
 
-	private void Initialize(bool first = false)
+	private async Task Initialize(bool first = false)
 	{
 		selectedYear = DateTime.Now.Year;
 		selectedMonth = DateTime.Now.Month;
 		monthYearText = new DateTime(selectedYear, selectedMonth, 1).ToString("Y");
 		if (first)
 		{
+			var auth = await localStorage.GetItemAsync<string>("authToken");
+			Login? userLogin = db.Logins.Where(s => s.Username == auth).First();
+			if (userLogin == null) return;
+			branch = db.Branches.Where(s => s.Id == userLogin.BranchId).First();
 			allYears = new List<int>();
 
 			for (int i = INITIAL_YEAR; i <= DateTime.Now.Year; i++)
@@ -174,9 +181,9 @@
 		}
 	}
 
-	protected override void OnInitialized()
+	protected override async Task OnInitializedAsync()
 	{
-		Initialize(true);
+		await Initialize(true);
 		Search();
 	}
 
@@ -188,9 +195,9 @@
 		records = reportList;
 	}
 
-	private void Reset()
+	private async Task Reset()
 	{
-		Initialize();
+		await Initialize();
 		Search();
 	}
 }
