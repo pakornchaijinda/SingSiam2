@@ -74,7 +74,9 @@
 					</div>
 					@if (records.Count == 0)
 					{
-						<div class="text-center">ไม่มีข้อมูล</div>
+						<div class="col-md-12 text-center">
+							<MudText Typo="Typo.body1" Style="@imporText">ไม่พบข้อมูล</MudText>
+						</div>
 					}
 					@foreach (Report report in records)
 					{
