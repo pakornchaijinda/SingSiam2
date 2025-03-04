@@ -14,7 +14,7 @@
 <style>
 
 	th, td {
-	padding: 3px;
+		padding: 3px;
 	}
 </style>
 
@@ -106,7 +106,8 @@
 									{
 										<tr>
 											<th scope="row">@reportDetails.rowNumber</th>
-											<td>@reportDetails.detail <span style="@green">: @reportDetails.detail_desc</span> 
+											<td>
+												@reportDetails.detail <span style="@green">: @reportDetails.detail_desc</span>
 												@if (reportDetails.payment_type != null)
 												{
 													<span style="@orange"> [@reportDetails.payment_type]</span>
@@ -191,7 +192,10 @@
 	{
 		monthYearText = new DateTime(selectedYear, selectedMonth, 1).ToString("Y");
 		string monthText = selectedMonth.ToString().PadLeft(2, '0');
-		List<Report> reportList = db.Reports.Where((report) => report.ReportType == REPORT_NUMBER && report.TransactionDate != null && report.TransactionDate.Contains($"{selectedYear}-{monthText}-")).ToList();
+		List<Report> reportList = db.Reports.Where((report) => report.ReportType == REPORT_NUMBER && 
+			report.BranchId == branch.Id && 
+			report.TransactionDate != null && 
+			report.TransactionDate.Contains($"{selectedYear}-{monthText}-")).ToList();
 		records = reportList;
 	}
 
