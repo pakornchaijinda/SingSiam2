@@ -6,10 +6,8 @@
 @using System.Data
 @using System.Text.Json;
 @using System.Globalization;
-@* <h3>AccountExpenseReport</h3> *@
-
-@* 02 รายงาน บัญชีรายรับ - รายจ่าย *@
-
+@using Blazored.LocalStorage
+@inject ILocalStorageService localStorage
 
 <Navbar2></Navbar2>
 
@@ -39,18 +37,19 @@
                         <MudText Typo="Typo.body1" Style="@headertext">ค้นหาข้อมูลรายงาน บัญชีรายรับ - รายจ่าย</MudText>
                     </div>
                     <div class="col-md-3">
-                        <MudSelect T="string" Label="ระบุปี" HelperText="ระบุปีที่ต้องการหาข้อมูล" @bind-Value="year_data" Variant="Variant.Outlined" Margin="Margin.Dense" AnchorOrigin="Origin.BottomCenter">
-                            @foreach (var year in years)
+                        <MudSelect T="int" Label="ระบุปี" HelperText="ระบุปีที่ต้องการหาข้อมูล" @bind-Value="selectedYear" Variant="Variant.Outlined" Margin="Margin.Dense" AnchorOrigin="Origin.BottomCenter">
+                            @foreach (var year in allYears)
                             {
-                                <MudSelectItem T="string" Value="@year">@year</MudSelectItem>
+                                <MudSelectItem T="int" Value="@year">@(new DateTime(year, 1, 1).ToString("yyyy"))</MudSelectItem>
                             }
                         </MudSelect>
                     </div>
                     <div class="col-md-3">
-                        <MudSelect T="string" Label="ระบุเดือน" HelperText="ระบุเดือนต้องการหาข้อมูล" @bind-Value="month_data" Variant="Variant.Outlined" Margin="Margin.Dense" AnchorOrigin="Origin.BottomCenter">
-                            @foreach (var month in months)
+                        <MudSelect T="int" Label="ระบุเดือน" HelperText="ระบุเดือนต้องการหาข้อมูล" @bind-Value="selectedMonth" Variant="Variant.Outlined" Margin="Margin.Dense" AnchorOrigin="Origin.BottomCenter">
+                            @foreach (var month in dtfi.MonthNames)
                             {
-                                <MudSelectItem T="string" Value="@month">@month</MudSelectItem>
+                                if (String.IsNullOrEmpty(month)) continue;
+                                <MudSelectItem T="int" Value="Array.IndexOf(dtfi.MonthNames, month) + 1">@month</MudSelectItem>
                             }
                         </MudSelect>
                     </div>
@@ -70,8 +69,8 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12 mb-2 mt-2 text-center">
-                        <MudText Typo="Typo.body1">บัญชี รายรับ-รายจ่าย : กันยายน 2567</MudText>
-                        <MudText Typo="Typo.body1">สาขา : ย่อยบ้านเขว้า</MudText>
+                        <MudText Typo="Typo.body1">บัญชี รายรับ-รายจ่าย : @(monthYearText)</MudText>
+                        <MudText Typo="Typo.body1">สาขา : @branch.BranchName</MudText>
                     </div>
                     @foreach(Report report in records)
                     {
@@ -81,7 +80,7 @@
                         DateTime transactionDate = DateTime.Parse(report.TransactionDate, culture);
 
                         <div class="col-md-12 mb-2 mt-2">
-                            <MudText Typo="Typo.body2" Style="@blue">@transactionDate.Day @NumberToMonthText(transactionDate.Month) @(transactionDate.Year + 543)</MudText>
+                            <MudText Typo="Typo.body2" Style="@blue">@transactionDate.ToString("D")</MudText>
                         </div>
                         <div class="col-md-12">
                             <table class="table">
@@ -96,71 +95,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @* <tr>
-                                        <th scope="row"></th>
-                                        <td>ยอดยกมา</td>
-                                        <td><MudChip T="string" Icon="@Icons.Material.Filled.CheckCircle" Variant="Variant.Outlined" Color="Color.Success" Size="Size.Small">ผ่านการตรวจสอบ</MudChip></td>
-                                        <td>30,579.00</td>
-                                        <td style="color:#fb4900;">0.00</td>
-                                        <td>30,579.00</td>
-
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>ได้รับเงินสด-ค่างวด</td>
-                                        <td><MudChip T="string" Icon="@Icons.Material.Filled.CheckCircle" Variant="Variant.Outlined" Color="Color.Success" Size="Size.Small">ผ่านการตรวจสอบ</MudChip></td>
-                                        <td>30,579.00</td>
-                                        <td style="color:#fb4900;">0.00</td>
-                                        <td>30,579.00</td>
-
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>ได้รับเงินสด-ค่าธรรมเนียมภาษี</td>
-                                        <td><MudChip T="string" Icon="@Icons.Material.Filled.CheckCircle" Variant="Variant.Outlined" Color="Color.Success" Size="Size.Small">ผ่านการตรวจสอบ</MudChip></td>
-                                        <td>30,579.00</td>
-                                        <td style="color:#fb4900;">0.00</td>
-                                        <td>30,579.00</td>
-
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>ได้รับเงินสด-ถอนจากธนาคาร <span style="@green">BAAC1212</span> </td>
-                                        <td><MudChip T="string" Icon="@Icons.Material.Filled.CheckCircle" Variant="Variant.Outlined" Color="Color.Success" Size="Size.Small">ผ่านการตรวจสอบ</MudChip></td>
-                                        <td>30,579.00</td>
-                                        <td style="color:#fb4900;">0.00</td>
-                                        <td>30,579.00</td>
-
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>ปล่อยเงินกู้ <span style="@green">• นายสุรเชษฎ์ ยวงทอง</span> <span style="@blue">: 1823/3</span> <span style="@orange">: ลูกค้ารีไฟแนนซ์</span></td>
-                                        <td><MudChip T="string" Icon="@Icons.Material.Filled.CheckCircle" Variant="Variant.Outlined" Color="Color.Success" Size="Size.Small">ผ่านการตรวจสอบ</MudChip></td>
-                                        <td>30,579.00</td>
-                                        <td style="color:#fb4900;">0.00</td>
-                                        <td>30,579.00</td>
-
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>ปล่อยเงินกู้ <span style="@green">• นางผัน ลาดเหลา</span> <span style="@blue">: 111-1494/3</span> <span style="@orange">: ลูกค้าใหม่</span></td>
-                                        <td><MudChip T="string" Icon="@Icons.Material.Filled.CheckCircle" Variant="Variant.Outlined" Color="Color.Success" Size="Size.Small">ผ่านการตรวจสอบ</MudChip></td>
-                                        <td>30,579.00</td>
-                                        <td style="color:#fb4900;">0.00</td>
-                                        <td>30,579.00</td>
-
-                                    </tr>
-
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>คาใชจายอื่นๆ  <span style="@orange">: ค่าเก็บขยะมูลฝอยรายปีของเทศบาลตําบลบ้านเขว้า</span></td>
-                                        <td><MudChip T="string" Icon="@Icons.Material.Filled.CheckCircle" Variant="Variant.Outlined" Color="Color.Success" Size="Size.Small">ผ่านการตรวจสอบ</MudChip></td>
-                                        <td>30,579.00</td>
-                                        <td style="color:#fb4900;">0.00</td>
-                                        <td>30,579.00</td>
-
-                                    </tr> *@
-
                                     @if (json == null || json.report2_Income_Outcome_cashonly == null) continue;
                                     @foreach (var reportDetails in json.report2_Income_Outcome_cashonly)
                                     {
@@ -202,52 +136,47 @@
     string orange = "color:#fb4900; font-weight:600;";
 
     private const int REPORT_NUMBER = 2;
-    private string year_data { get; set; }
-    private string[] years =
-    {
-        "2565", "2566", "2567", "2568",
-    };
+    private Branch branch = new Branch();
 
-    private string month_data { get; set; }
-    private string[] months =
-    {
-    "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
-    "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
-    };
+    private int selectedYear;
+    private int selectedMonth;
+    private string monthYearText = "";
+
+    private List<int> allYears = new List<int>();
+    private const int INITIAL_YEAR = 2022;
+    
+    DateTimeFormatInfo dtfi = DateTimeFormatInfo.CurrentInfo;
+    ThaiBuddhistCalendar thaiBuddhistCalendar = new ThaiBuddhistCalendar();
 
     List<Report> records = new List<Report>();
     SingsiamdbContext db = new SingsiamdbContext();
+
     private decimal remain = 0;
 
-    private void Initialize()
+    private async Task Initialize(bool first = false)
     {
-        year_data = "";
-        month_data = "";
-        DateTime now = DateTime.Now;
-        int year = now.Year;
-        int month = now.Month;
-        string monthText = month.ToString().PadLeft(2, '0');
-        List<Report> reportList = db.Reports.Where((report) => report.ReportType == REPORT_NUMBER && report.TransactionDate != null && report.TransactionDate.Contains($"{year}-{monthText}-")).ToList();
-        records = reportList;
+        selectedYear = DateTime.Now.Year;
+        selectedMonth = DateTime.Now.Month;
+        monthYearText = new DateTime(selectedYear, selectedMonth, 1).ToString("Y");
+        if (first)
+        {
+            var auth = await localStorage.GetItemAsync<string>("authToken");
+            Login? userLogin = db.Logins.Where(s => s.Username == auth).First();
+            if (userLogin == null) return;
+            branch = db.Branches.Where(s => s.Id == userLogin.BranchId).First();
+            allYears = new List<int>();
+
+            for (int i = INITIAL_YEAR; i <= DateTime.Now.Year; i++)
+            {
+                allYears.Add(i);
+            }
+        }
     }
 
-    private void Search()
+    protected override async Task OnInitializedAsync()
     {
-		if (string.IsNullOrEmpty(year_data) || string.IsNullOrEmpty(month_data))
-		{
-			return;
-		}
-        int year = YearTextToNumber(year_data);
-        int month = MonthTextToNumber(month_data);
-        string monthText = month.ToString().PadLeft(2, '0');
-        List<Report> reportList = db.Reports.Where((report) => report.ReportType == REPORT_NUMBER && report.TransactionDate != null && report.TransactionDate.Contains($"{year}-{monthText}-")).ToList();
-        records = reportList;
-    }
-
-    private void Reset()
-    {
-        Initialize();
-        StateHasChanged();
+        await Initialize(true);
+        Search();
     }
 
     protected override void OnAfterRender(bool firstRender)
@@ -256,81 +185,20 @@
         base.OnAfterRender(firstRender);
     }
 
-    protected override void OnInitialized()
+    private void Search()
     {
-        Initialize();
-        StateHasChanged();
+        monthYearText = new DateTime(selectedYear, selectedMonth, 1).ToString("Y");
+        string monthText = selectedMonth.ToString().PadLeft(2, '0');
+        List<Report> reportList = db.Reports.Where((report) => report.ReportType == REPORT_NUMBER &&
+            report.BranchId == branch.Id &&
+            report.TransactionDate != null &&
+            report.TransactionDate.Contains($"{selectedYear}-{monthText}-")).ToList();
+        records = reportList;
     }
 
-    private int MonthTextToNumber(string month)
+    private async Task Reset()
     {
-        switch (month)
-        {
-            case "มกราคม":
-                return 1;
-            case "กุมภาพันธ์":
-                return 2;
-            case "มีนาคม":
-                return 3;
-            case "เมษายน":
-                return 4;
-            case "พฤษภาคม":
-                return 5;
-            case "มิถุนายน":
-                return 6;
-            case "กรกฎาคม":
-                return 7;
-            case "สิงหาคม":
-                return 8;
-            case "กันยายน":
-                return 9;
-            case "ตุลาคม":
-                return 10;
-            case "พฤศจิกายน":
-                return 11;
-            case "ธันวาคม":
-                return 12;
-            default:
-                return 0;
-        }
-    }
-
-    private string NumberToMonthText(int monthText)
-    {
-        // generate month number
-        switch (monthText)
-        {
-            case 1:
-                return "มกราคม";
-            case 2:
-                return "กุมภาพันธ์";
-            case 3:
-                return "มีนาคม";
-            case 4:
-                return "เมษายน";
-            case 5:
-                return "พฤษภาคม";
-            case 6:
-                return "มิถุนายน";
-            case 7:
-                return "กรกฎาคม";
-            case 8:
-                return "สิงหาคม";
-            case 9:
-                return "กันยายน";
-            case 10:
-                return "ตุลาคม";
-            case 11:
-                return "พฤศจิกายน";
-            case 12:
-                return "ธันวาคม";
-            default:
-                return "";
-        }
-    }
-
-    private int YearTextToNumber(string year)
-    {
-        return int.Parse(year) - 543;
+        await Initialize();
+        Search();
     }
 }
