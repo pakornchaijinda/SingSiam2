@@ -84,44 +84,48 @@
 					</div>
 
 					<div class="col-md-12">
-						<table class="table">
+						@if (report != null && report.JsonData != null)
+						{
+							jsonModel4? json = JsonSerializer.Deserialize<jsonModel4>(report.JsonData);
+							<table class="table">
 
-							<thead>
-								<tr>
-									<th scope="col">วันที่</th>
-									<th scope="col">รายการ</th>
-									<th scope="col">จำนวนเงิน</th>
-									<th scope="col">อ้างอิง</th>
-									<th scope="col">วันที่</th>
-									<th scope="col">ผู้ทำรายการ</th>
-								</tr>
-							</thead>
-							<tbody>
-								@{
-									@if (report != null && report.JsonData != null)
+								<thead>
+									<tr>
+										<th scope="col">วันที่</th>
+										<th scope="col">รายการ</th>
+										<th scope="col">จำนวนเงิน</th>
+										<th scope="col">อ้างอิง</th>
+										<th scope="col">วันที่</th>
+										<th scope="col">ผู้ทำรายการ</th>
+									</tr>
+								</thead>
+								<tbody>
+									@if (json != null && json.report4_MoneyTransferrings != null)
 									{
-										jsonModel4? json = JsonSerializer.Deserialize<jsonModel4>(report.JsonData);
-										@if (json != null && json.report4_MoneyTransferrings != null)
+										foreach (var reportDetails in json.report4_MoneyTransferrings)
 										{
-											foreach (var reportDetails in json.report4_MoneyTransferrings)
-											{
-												string transferDetailBranch = reportDetails.transfer_detail.Split("|")[1].Trim();
-												string transferDetailTitle = reportDetails.transfer_detail.Split("|")[0].Replace(transferDetailBranch, "").Trim();
-												<tr>
-													<th scope="row">@(DateTime.Parse(reportDetails.transactiondate).ToString("dd MMM yy HH:mm"))</th>
-													<td><span style="@green">@reportDetails.status_transfer</span> @transferDetailTitle <span style="@blue">@transferDetailBranch</span></td>
-													<td><span style="@green">@reportDetails.amount</span></td>
-													<td><span style="@black">@reportDetails.ref_tranfer</span></td>
-													<td>@(DateTime.Parse(reportDetails.transactiondate_accept).ToString("dd MMM yy HH:mm"))</td>
-													<td><span style="@black">@reportDetails.respond_by</span></td>
+											string transferDetailBranch = reportDetails.transfer_detail.Split("|")[1].Trim();
+											string transferDetailTitle = reportDetails.transfer_detail.Split("|")[0].Replace(transferDetailBranch, "").Trim();
+											<tr>
+												<th scope="row">@(DateTime.Parse(reportDetails.transactiondate).ToString("dd MMM yy HH:mm"))</th>
+												<td><span style="@green">@reportDetails.status_transfer</span> @transferDetailTitle <span style="@blue">@transferDetailBranch</span></td>
+												<td><span style="@green">@reportDetails.amount</span></td>
+												<td><span style="@black">@reportDetails.ref_tranfer</span></td>
+												<td>@(DateTime.Parse(reportDetails.transactiondate_accept).ToString("dd MMM yy HH:mm"))</td>
+												<td><span style="@black">@reportDetails.respond_by</span></td>
 
-												</tr>
-											}
+											</tr>
 										}
 									}
-								}
-							</tbody>
-						</table>
+								</tbody>
+							</table>
+						}
+						else
+						{
+							<div class="col-md-12 text-center">
+								<MudText Typo="Typo.body1" Style="@imporText">ไม่พบข้อมูล</MudText>
+							</div>
+						}
 					</div>
 
 				</div>
