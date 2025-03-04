@@ -70,6 +70,10 @@
 						<MudText Typo="Typo.body1">บัญชีเข้า - ออก ธนาคาร : @(monthYearText)</MudText>
 						<MudText Typo="Typo.body1">สาขา : ย่อยบ้านเขว้า</MudText>
 					</div>
+					@if (records.Count == 0)
+					{
+						<div class="text-center">ไม่มีข้อมูล</div>
+					}
 					@foreach (Report report in records)
 					{
 						if (report.JsonData == null || report.TransactionDate == null) continue;
