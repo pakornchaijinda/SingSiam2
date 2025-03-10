@@ -116,11 +116,11 @@
 												}
 											</td>
 											<td>@reportDetails.receiptno</td>
-											<td><span style="@green">@reportDetails.amount</span></td>
-											<td><span style="@orange">@reportDetails.amount_charge</span></td>
-											<td><span style="@blue">@reportDetails.income</span></td>
-											<td><span style="@orange">@reportDetails.expenses</span></td>
-											<td><span style="@black">@reportDetails.remain</span></td>
+											<td><span style="@green">@reportDetails.amount.ToString("N2")</span></td>
+											<td><span style="@orange">@reportDetails.amount_charge.ToString("N2")</span></td>
+											<td><span style="@blue">@reportDetails.income.ToString("N2")</span></td>
+											<td><span style="@orange">@reportDetails.expenses.ToString("N2")</span></td>
+											<td><span style="@black">@reportDetails.remain.ToString("N2")</span></td>
 
 										</tr>
 									}
