@@ -110,10 +110,10 @@
                                             <th scope="row">@reportDetails.rowNumber</th>
                                             <td>@reportDetails.detail @reportDetails.detail_desc</td>
                                             @* <td><MudChip T="string" Icon="@Icons.Material.Filled.CheckCircle" Variant="Variant.Outlined" Color="Color.Success" Size="Size.Small">ผ่านการตรวจสอบ</MudChip></td> *@
-                                            <td>@reportDetails.income</td>
-                                            <td style="color:#fb4900;">@reportDetails.expenses</td>
+                                            <td>@reportDetails.income.ToString("N2")</td>
+                                            <td style="color:#fb4900;">@reportDetails.expenses.ToString("N2")</td>
 
-                                            <td>@(remain)</td>
+                                            <td>@(remain.ToString("N2"))</td>
 
                                         </tr>
                                     }
