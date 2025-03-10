@@ -1,7 +1,5 @@
 ﻿@page "/expenses-report"
-@* <h3>ExpenseReport</h3> *@
 
-@* 06 สรุปรายการค่าใช้จ่าย *@
 @using System.ComponentModel.DataAnnotations
 @using System.Threading
 @using AutoGenReports.TimeBaseChecker
@@ -9,6 +7,8 @@
 @using System.Data
 @using System.Text.Json;
 @using System.Globalization;
+@using Blazored.LocalStorage
+@inject ILocalStorageService localStorage
 
 <Navbar2></Navbar2>
 
@@ -38,18 +38,19 @@
 						<MudText Typo="Typo.body1" Style="@headertext">ค้นหาข้อมูลสรุปรายการค่าใช้จ่าย</MudText>
 					</div>
 					<div class="col-md-3">
-						<MudSelect T="string" Label="ระบุปี" HelperText="ระบุปีที่ต้องการหาข้อมูล" @bind-Value="year_data" Variant="Variant.Outlined" Margin="Margin.Dense" AnchorOrigin="Origin.BottomCenter">
-							@foreach (var year in years)
+						<MudSelect T="int" Label="ระบุปี" HelperText="ระบุปีที่ต้องการหาข้อมูล" @bind-Value="selectedYear" Variant="Variant.Outlined" Margin="Margin.Dense" AnchorOrigin="Origin.BottomCenter">
+							@foreach (var year in allYears)
 							{
-								<MudSelectItem T="string" Value="@year">@year</MudSelectItem>
+								<MudSelectItem T="int" Value="@year">@(new DateTime(year, 1, 1).ToString("yyyy"))</MudSelectItem>
 							}
 						</MudSelect>
 					</div>
 					<div class="col-md-3">
-						<MudSelect T="string" Label="ระบุเดือน" HelperText="ระบุเดือนต้องการหาข้อมูล" @bind-Value="month_data" Variant="Variant.Outlined" Margin="Margin.Dense" AnchorOrigin="Origin.BottomCenter">
-							@foreach (var month in months)
+						<MudSelect T="int" Label="ระบุเดือน" HelperText="ระบุเดือนต้องการหาข้อมูล" @bind-Value="selectedMonth" Variant="Variant.Outlined" Margin="Margin.Dense" AnchorOrigin="Origin.BottomCenter">
+							@foreach (var month in dtfi.MonthNames)
 							{
-								<MudSelectItem T="string" Value="@month">@month</MudSelectItem>
+								if (String.IsNullOrEmpty(month)) continue;
+								<MudSelectItem T="int" Value="Array.IndexOf(dtfi.MonthNames, month) + 1">@month</MudSelectItem>
 							}
 						</MudSelect>
 					</div>
@@ -69,134 +70,20 @@
 			<div class="card-body">
 				<div class="row">
 					<div class="col-md-12 mb-2 mt-2 text-center">
-						<MudText Typo="Typo.body1">สรุปรายการค่าใช้จ่าย : กันยายน 2567</MudText>
-						<MudText Typo="Typo.body1">สาขา : ย่อยบ้านเขว้า</MudText>
+						<MudText Typo="Typo.body1">สรุปรายการค่าใช้จ่าย : @(monthYearText)</MudText>
+						<MudText Typo="Typo.body1">สาขา : @branch.BranchName</MudText>
 					</div>
-
-
-					@* <div class="col-md-12">
-						<div class="col-md-12 mb-2 mt-2">
-							<MudText Typo="Typo.body2" Style="@blue">01 กันยายน 2567</MudText>
-						</div>
-						<table class="table">
-
-							<thead>
-								<tr>
-									<th scope="col" class="col-1">ที่</th>
-									<th scope="col" class="col-8">รายการ</th>
-									<th scope="col" class="col-2 text-end">รายจ่าย</th>
-
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<th scope="row">1</th>
-									<td>ค่าใช้จ่ายอื่นๆ <span style="@orange">: ค่าเก็บขยะมูลฝอยรายปีของเทศบาลตําบลบ้านเขว้า</span></td>
-									<td class="text-end"><span style="@orange">120.00</span></td>
-
-								</tr>
-							</tbody>
-						</table>
-					</div>
-
-					<div class="col-md-12">
-						<div class="col-md-12 mb-2 mt-2">
-							<MudText Typo="Typo.body2" Style="@blue">02 กันยายน 2567</MudText>
-						</div>
-						<table class="table">
-
-							<thead>
-								<tr>
-									<th scope="col" class="col-1">ที่</th>
-									<th scope="col" class="col-8">รายการ</th>
-									<th scope="col" class="col-2 text-end">รายจ่าย</th>
-
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<th scope="row">1</th>
-									<td>ค่าใช้จ่ายอื่นๆ <span style="@orange">: ค่าน้ำยาถูพื้นสำนักงาน</span></td>
-									<td class="text-end"><span style="@orange">39.00</span></td>
-
-								</tr>
-								<tr>
-									<th scope="row">2</th>
-									<td>ค่าใช้จ่ายอื่นๆ <span style="@orange">: ค่าน้ำมันรถ</span></td>
-									<td class="text-end"><span style="@orange">100.00</span></td>
-
-								</tr>
-							</tbody>
-						</table>
-					</div>
-
-					<div class="col-md-12">
-						<div class="col-md-12 mb-2 mt-2">
-							<MudText Typo="Typo.body2" Style="@blue">05 กันยายน 2567</MudText>
-						</div>
-						<table class="table">
-
-							<thead>
-								<tr>
-									<th scope="col" class="col-1">ที่</th>
-									<th scope="col" class="col-8">รายการ</th>
-									<th scope="col" class="col-2 text-end">รายจ่าย</th>
-
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<th scope="row">1</th>
-									<td>ค่าใช้จ่ายอื่นๆ <span style="@orange">: ค่างวดรถ</span></td>
-									<td class="text-end"><span style="@orange">20,000.00</span></td>
-
-								</tr>
-
-							</tbody>
-						</table>
-					</div>
-
-					<div class="col-md-12">
-						<div class="col-md-12 mb-2 mt-2">
-							<MudText Typo="Typo.body2" Style="@blue">09 กันยายน 2567</MudText>
-						</div>
-						<table class="table">
-
-							<thead>
-								<tr>
-									<th scope="col" class="col-1">ที่</th>
-									<th scope="col" class="col-8">รายการ</th>
-									<th scope="col" class="col-2 text-end">รายจ่าย</th>
-
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<th scope="row">1</th>
-									<td>ค่าใช้จ่าย <span style="@orange">: ค่านํ้าประปาสํานักงาน</span></td>
-									<td class="text-end"><span style="@orange">363.00</span></td>
-
-								</tr>
-								<tr>
-									<th scope="row">2</th>
-									<td>ค่าใช้จ่ายอื่นๆ <span style="@orange">: ค่าน้ำมันรถ</span></td>
-									<td class="text-end"><span style="@orange">100.00</span></td>
-
-								</tr>
-
-							</tbody>
-						</table>
-					</div> *@
 					@foreach (Report report in records)
 					{
 						if (report.JsonData == null || report.TransactionDate == null) continue;
 						jsonModel6? json = JsonSerializer.Deserialize<jsonModel6>(report.JsonData);
 						CultureInfo culture = new CultureInfo("en-US");
 						DateTime transactionDate = DateTime.Parse(report.TransactionDate, culture);
+						decimal total_expenses = 0;
 
 						<div class="col-md-12">
 							<div class="col-md-12 mb-2 mt-2">
-								<MudText Typo="Typo.body2" Style="@blue">@transactionDate.Day @NumberToMonthText(transactionDate.Month) @(transactionDate.Year + 543)</MudText>
+								<MudText Typo="Typo.body2" Style="@blue">@transactionDate.ToString("dd MMMM yyyy")</MudText>
 							</div>
 							<table class="table">
 
@@ -258,136 +145,62 @@
 	string orange = "color:#fb4900; font-weight:600;";
 	string black = "font-weight:600;";
 
+	private const int REPORT_NUMBER = 6;
+	private Branch branch = new Branch();
+
+	private int selectedYear;
+	private int selectedMonth;
+	private string monthYearText = "";
+
+	private List<int> allYears = new List<int>();
+	private const int INITIAL_YEAR = 2022;
+
+	DateTimeFormatInfo dtfi = DateTimeFormatInfo.CurrentInfo;
+	ThaiBuddhistCalendar thaiBuddhistCalendar = new ThaiBuddhistCalendar();
+
 	List<Report> records = new List<Report>();
 	SingsiamdbContext db = new SingsiamdbContext();
-	decimal total_expenses = 0;
 
-	private string year_data { get; set; }
-	private string[] years =
+	private async Task Initialize(bool first = false)
 	{
-		"2565", "2566", "2567", "2568",
-	};
+		selectedYear = DateTime.Now.Year;
+		selectedMonth = DateTime.Now.Month;
+		monthYearText = new DateTime(selectedYear, selectedMonth, 1).ToString("Y");
+		if (first)
+		{
+			var auth = await localStorage.GetItemAsync<string>("authToken");
+			Login? userLogin = db.Logins.Where(s => s.Username == auth).First();
+			if (userLogin == null) return;
+			branch = db.Branches.Where(s => s.Id == userLogin.BranchId).First();
+			allYears = new List<int>();
 
-	private string month_data { get; set; }
-	private string[] months =
-	{
-		"มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
-		"กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
-	};
+			for (int i = INITIAL_YEAR; i <= DateTime.Now.Year; i++)
+			{
+				allYears.Add(i);
+			}
+		}
+	}
 
-	private void Initialize()
+	protected override async Task OnInitializedAsync()
 	{
-		year_data = "";
-		month_data = "";
-		DateTime now = DateTime.Now;
-		int year = now.Year;
-		int month = now.Month;
-		string monthText = month.ToString().PadLeft(2, '0');
-		List<Report> reportList = db.Reports.Where((report) => report.ReportType == 6 && report.TransactionDate != null && report.TransactionDate.Contains($"{year}-{monthText}-")).ToList();
-		records = reportList;
+		await Initialize(true);
+		Search();
 	}
 
 	private void Search()
 	{
-		if (string.IsNullOrEmpty(year_data) || string.IsNullOrEmpty(month_data))
-		{
-			return;
-		}
-		total_expenses = 0;
-		int year = YearTextToNumber(year_data);
-		int month = MonthTextToNumber(month_data);
-		string monthText = month.ToString().PadLeft(2, '0');
-		List<Report> reportList = db.Reports.Where((report) => report.ReportType == 6 && report.TransactionDate != null && report.TransactionDate.Contains($"{year}-{monthText}-")).ToList();
+		monthYearText = new DateTime(selectedYear, selectedMonth, 1).ToString("Y");
+		string monthText = selectedMonth.ToString().PadLeft(2, '0');
+		List<Report> reportList = db.Reports.Where((report) => report.ReportType == REPORT_NUMBER &&
+			report.BranchId == branch.Id &&
+			report.TransactionDate != null &&
+			report.TransactionDate.Contains($"{selectedYear}-{monthText}-")).ToList();
 		records = reportList;
 	}
 
-	private void Reset()
+	private async Task Reset()
 	{
-		Initialize();
-		StateHasChanged();
-	}
-
-	protected override void OnAfterRender(bool firstRender)
-	{
-		total_expenses = 0;
-		base.OnAfterRender(firstRender);
-	}
-
-	protected override void OnInitialized()
-	{
-		Initialize();
-		StateHasChanged();
-	}
-
-	private int MonthTextToNumber(string month)
-	{
-		switch (month)
-		{
-			case "มกราคม":
-				return 1;
-			case "กุมภาพันธ์":
-				return 2;
-			case "มีนาคม":
-				return 3;
-			case "เมษายน":
-				return 4;
-			case "พฤษภาคม":
-				return 5;
-			case "มิถุนายน":
-				return 6;
-			case "กรกฎาคม":
-				return 7;
-			case "สิงหาคม":
-				return 8;
-			case "กันยายน":
-				return 9;
-			case "ตุลาคม":
-				return 10;
-			case "พฤศจิกายน":
-				return 11;
-			case "ธันวาคม":
-				return 12;
-			default:
-				return 0;
-		}
-	}
-
-	private string NumberToMonthText(int monthText)
-	{
-		// generate month number
-		switch (monthText)
-		{
-			case 1:
-				return "มกราคม";
-			case 2:
-				return "กุมภาพันธ์";
-			case 3:
-				return "มีนาคม";
-			case 4:
-				return "เมษายน";
-			case 5:
-				return "พฤษภาคม";
-			case 6:
-				return "มิถุนายน";
-			case 7:
-				return "กรกฎาคม";
-			case 8:
-				return "สิงหาคม";
-			case 9:
-				return "กันยายน";
-			case 10:
-				return "ตุลาคม";
-			case 11:
-				return "พฤศจิกายน";
-			case 12:
-				return "ธันวาคม";
-			default:
-				return "";
-		}
-	}
-
-	private int YearTextToNumber(string year)
-	{
-		return int.Parse(year) - 543;
+		await Initialize();
+		Search();
 	}
 }
