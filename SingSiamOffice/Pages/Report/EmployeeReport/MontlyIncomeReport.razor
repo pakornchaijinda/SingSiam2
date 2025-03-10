@@ -14,7 +14,7 @@
 <style>
 
 	th, td {
-		padding: 3px;
+	padding: 3px;
 	}
 </style>
 
@@ -117,6 +117,8 @@
 									decimal totalTotalNoVat = 0;
 									decimal totalTotalSumAmount = 0;
 									decimal totalTotalAccumulate = 0;
+									decimal totalTotalPromise = 0;
+									decimal totalTotalAccumulatePromise = 0;
 
 									int numberOfVat = 0;
 									int numberOfNoVat = 0;
@@ -132,16 +134,16 @@
 									{
 										<tr>
 											<th scope="row">@reportDetails.transaction_data.ToString("dd MMM yy")</th>
-											<td><span style="@lightblue">@reportDetails.amount_vat</span></td>
-											<td><span style="@lightblue">@reportDetails.amount_charge_vat</span></td>
-											<td><span style="@lightblue">@reportDetails.total_vat</span></td>
-											<td><span style="@orange">@reportDetails.amount_novat</span></td>
-											<td><span style="@orange">@reportDetails.amount_charge_novat</span></td>
-											<td><span style="@orange">@reportDetails.total_novat</span></td>
-											<td><span style="@blue">@reportDetails.total_sum_amount</span></td>
-											<td><span style="@blue">@reportDetails.total_accumulate</span></td>
-											<td><span style="@orange">@reportDetails.total_promise</span></td>
-											<td><span style="@orange">@reportDetails.total_accumulate_promise</span></td>
+											<td><span style="@lightblue">@reportDetails.amount_vat.ToString("N2")</span></td>
+											<td><span style="@lightblue">@reportDetails.amount_charge_vat.ToString("N2")</span></td>
+											<td><span style="@lightblue">@reportDetails.total_vat.ToString("N2")</span></td>
+											<td><span style="@orange">@reportDetails.amount_novat.ToString("N2")</span></td>
+											<td><span style="@orange">@reportDetails.amount_charge_novat.ToString("N2")</span></td>
+											<td><span style="@orange">@reportDetails.total_novat.ToString("N2")</span></td>
+											<td><span style="@blue">@reportDetails.total_sum_amount.ToString("N2")</span></td>
+											<td><span style="@blue">@reportDetails.total_accumulate.ToString("N2")</span></td>
+											<td><span style="@orange">@reportDetails.total_promise.ToString("N2")</span></td>
+											<td><span style="@orange">@reportDetails.total_accumulate_promise.ToString("N2")</span></td>
 										</tr>
 										totalAmountVat += reportDetails.amount_vat;
 										totalAmountChargeVat += reportDetails.amount_charge_vat;
@@ -154,6 +156,9 @@
 										totalTotalSumAmount += reportDetails.total_sum_amount;
 										totalTotalAccumulate = reportDetails.total_accumulate;
 
+										totalTotalPromise += reportDetails.total_promise;
+										totalTotalAccumulatePromise = reportDetails.total_accumulate_promise;
+
 										if (reportDetails.amount_vat != 0) numberOfVat++;
 										if (reportDetails.amount_novat != 0) numberOfNoVat++;
 									}
@@ -162,16 +167,16 @@
 							<tfoot>
 								<tr style="@tablefooter">
 									<th scope="row">รวม</th>
-									<td>@totalAmountVat</td>
-									<td>@totalAmountChargeVat</td>
-									<td>@totalTotalVat</td>
-									<td>@totalAmountNoVat</td>
-									<td>@totalAmountChargeNoVat</td>
-									<td>@totalTotalNoVat</td>
-									<td>@totalTotalSumAmount</td>
-									<td>@totalTotalAccumulate</td>
-									<td></td>
-									<td>153,000</td>
+									<td>@totalAmountVat.ToString("N2")</td>
+									<td>@totalAmountChargeVat.ToString("N2")</td>
+									<td>@totalTotalVat.ToString("N2")</td>
+									<td>@totalAmountNoVat.ToString("N2")</td>
+									<td>@totalAmountChargeNoVat.ToString("N2")</td>
+									<td>@totalTotalNoVat.ToString("N2")</td>
+									<td>@totalTotalSumAmount.ToString("N2")</td>
+									<td>@totalTotalAccumulate.ToString("N2")</td>
+									<td>@totalTotalPromise.ToString("N2")</td>
+									<td>@totalTotalAccumulatePromise.ToString("N2")</td>
 
 								</tr>
 								<tr class="text-end border-white" style="@totalfooter">
@@ -212,7 +217,7 @@
 									<td></td>
 									<td colspan="2"></td>
 									<td colspan="2">รายรับรวม</td>
-									<td>@totalTotalSumAmount</td>
+									<td>@totalTotalSumAmount.ToString("N2")</td>
 									<td>บาท</td>
 								</tr>
 								<tr class="text-end border-white" style="@totalfooter">
@@ -222,7 +227,7 @@
 									<td></td>
 									<td colspan="2"></td>
 									<td colspan="2">รายจ่ายรวม</td>
-									<td>@expense</td>
+									<td>@expense.ToString("N2")</td>
 									<td>บาท</td>
 								</tr>
 								<tr class="text-end border-white" style="@totalfooter">
@@ -232,7 +237,7 @@
 									<td></td>
 									<td colspan="2"></td>
 									<td colspan="2">กำไรขั้นต้น</td>
-									<td>@(totalTotalSumAmount - expense)</td>
+									<td>@((totalTotalSumAmount - expense).ToString("N2"))</td>
 									<td>บาท</td>
 								</tr>
 							</tfoot>
