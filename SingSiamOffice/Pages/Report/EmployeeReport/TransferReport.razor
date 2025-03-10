@@ -6,6 +6,7 @@
 @using SingSiamOffice.Models;
 @using AutoGenReports.TimeBaseChecker;
 @using System.Text.Json;
+@using Microsoft.EntityFrameworkCore;
 @using Blazored.LocalStorage
 @inject ILocalStorageService localStorage
 
@@ -14,7 +15,7 @@
 <style>
 
 	th, td {
-		padding: 3px;
+	padding: 3px;
 	}
 </style>
 
@@ -74,15 +75,15 @@
 					</div>
 					<div class="col-md-4 mb-2 mt-2 text-center">
 						<MudText Typo="Typo.body1">บัญชี เข้า-ออกธนาคาร</MudText>
-						<MudText Typo="Typo.body1">ยอดคงเหลือ <span style="@green">: 44,001</span></MudText>
+						<MudText Typo="Typo.body1">ยอดคงเหลือ <span style="@green">: @accountRemain.ToString("N0")</span></MudText>
 					</div>
 					<div class="col-md-4 mb-2 mt-2 text-center">
 						<MudText Typo="Typo.body1">บัญชี รายรับ-รายจ่าย</MudText>
-						<MudText Typo="Typo.body1">ยอดคงเหลือ <span style="@green">: 44,001</span></MudText>
+						<MudText Typo="Typo.body1">ยอดคงเหลือ <span style="@green">: @cashRemain.ToString("N0")</span></MudText>
 					</div>
 					<div class="col-md-4 mb-2 mt-2 text-center">
 						<MudText Typo="Typo.body1">บัญชี สรุปรวมยอด</MudText>
-						<MudText Typo="Typo.body1">เก็บ <span style="@green">: 497,001</span> / ปล่อยกู้ <span style="@green">: 650,000</span></MudText>
+						<MudText Typo="Typo.body1">เก็บ <span style="@green">: @savings.ToString("N0")</span> / ปล่อยกู้ <span style="@green">: @loans.ToString("N0")</span></MudText>
 					</div>
 
 					<div class="col-md-12">
@@ -110,7 +111,7 @@
 											<tr>
 												<th scope="row">@(DateTime.Parse(reportDetails.transactiondate).ToString("dd MMM yy HH:mm"))</th>
 												<td><span style="@green">@reportDetails.status_transfer</span> @transferDetailTitle <span style="@blue">@transferDetailBranch</span></td>
-												<td><span style="@green">@reportDetails.amount</span></td>
+												<td><span style="@green">@reportDetails.amount.ToString("N2")</span></td>
 												<td><span style="@black">@reportDetails.ref_tranfer</span></td>
 												<td>@(DateTime.Parse(reportDetails.transactiondate_accept).ToString("dd MMM yy HH:mm"))</td>
 												<td><span style="@black">@reportDetails.respond_by</span></td>
@@ -167,6 +168,12 @@
 	Report? report = new Report();
 	SingsiamdbContext db = new SingsiamdbContext();
 
+	private decimal accountRemain = 0;
+	private decimal cashRemain = 0;
+
+	private decimal savings = 0;
+	private decimal loans = 0;
+
 	private async Task Initialize(bool first = false)
 	{
 		selectedYear = DateTime.Now.Year;
@@ -190,19 +197,59 @@
 	protected override async Task OnInitializedAsync()
 	{
 		await Initialize(true);
-		Search();
+		await FetchRemain();
+		await Search();
 	}
 
-	private void Search()
+	private async Task Search()
 	{
 		monthYearText = new DateTime(selectedYear, selectedMonth, 1).ToString("Y");
 		string monthText = selectedMonth.ToString().PadLeft(2, '0');
-		report = db.Reports.Where((report) => report.ReportType == REPORT_NUMBER && report.TransactionDate != null && report.TransactionDate.Contains($"{selectedYear}-{monthText}-")).FirstOrDefault();
+		report = await db.Reports.Where((report) => report.ReportType == REPORT_NUMBER && report.TransactionDate != null && report.TransactionDate.Contains($"{selectedYear}-{monthText}-")).FirstOrDefaultAsync();
+
+		await FetchAccountSummary();
 	}
 
 	private async Task Reset()
 	{
 		await Initialize();
-		Search();
+		await Search();
+	}
+
+	private async Task FetchRemain()
+	{
+		var list_transection = await db.TransactionHistories.Include(s => s.Subject).Include(s => s.Login).Where(s => s.BranchId == branch.Id).AsNoTracking().OrderByDescending(s => s.CreateAt).ToListAsync();
+
+		var to_calulate = list_transection.Where(s => !(s.SubjectId == 21 && s.ConfirmTransection == false) && s.Subject.SubjectType != 34).ToList();
+		var total_income = to_calulate.Where(s => s.Subject.SubjectType == 1);
+		var total_expent = to_calulate.Where(s => s.Subject.SubjectType == 2);
+		var false_confirm = total_expent.Where(s => s.SubjectId == 4 && s.ConfirmTransection == false).ToList();
+		var deposit = to_calulate.Where(s => s.Subject.SubjectType == 4).Sum(s => s.Price); //ฝาก
+		var withdraw = to_calulate.Where(s => s.Subject.SubjectType == 3).Sum(s => s.Price); //ถอน
+
+		accountRemain = total_income.Where(s => s.PaymentMethod == 2).Sum(s => s.Price) - total_expent.Where(s => s.PaymentMethod == 2).Sum(s => s.Price) + false_confirm.Sum(s => s.Price) + deposit - withdraw; //ยอดคงเหลือในบัญชี
+		cashRemain = total_income.Where(s => s.PaymentMethod == 1).Sum(s => s.Price) - total_expent.Where(s => s.PaymentMethod == 1).Sum(s => s.Price) + withdraw - deposit; //ยอดคงเหลือเงินสด
+	}
+
+	private async Task FetchAccountSummary()
+	{
+		string monthText = selectedMonth.ToString().PadLeft(2, '0');
+		var reports = await db.Reports.Where((report) => report.ReportType == 3 && report.TransactionDate != null && report.TransactionDate.Contains($"{selectedYear}-{monthText}-")).ToListAsync();
+		decimal savings = 0;
+		decimal loans = 0;
+		foreach (Report report in reports)
+		{
+			if (report.JsonData == null || report.TransactionDate == null) continue;
+			jsonModel3? json = JsonSerializer.Deserialize<jsonModel3>(report.JsonData);
+
+			@if (json == null || json.report3_Summary_Of_Months == null) continue;
+			foreach (var summary in json.report3_Summary_Of_Months)
+			{
+				savings += summary.total_sum_amount;
+				loans += summary.total_promise;
+			}
+		}
+		this.savings = savings;
+		this.loans = loans;
 	}
 }
