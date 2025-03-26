@@ -354,11 +354,13 @@ namespace AutoGenReports.TimeBaseChecker
             {
                 return;
             }
-            DateTime specificDate = new DateTime(2024, 10, 17);
-            var transaction_date = specificDate;
-
-            //DateTime firstDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-            DateTime firstDay = new DateTime(specificDate.Year, specificDate.Month, 1);
+            //DateTime specificDate = new DateTime(2024, 10, 17);
+            //var transaction_date = specificDate;
+            // DateTime firstDay = new DateTime(specificDate.Year, specificDate.Month, 1);
+            string branch_name = db.Branches.Where(s => s.Id == branch_id).FirstOrDefault().BranchName;
+            var transaction_date = DateTime.Now;
+            DateTime firstDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+          
             var fd = firstDay.ToString("yyyyMMdd");
             var list_transaction_history_receivetotal = db.Receipttrans.AsNoTracking().Include(s => s.Receiptdescs).Include(s => s.Branch).Where(s => s.BranchId == branch_id && string.Compare(s.Tdateformat, firstDay.ToString("yyyyMMdd")) >= 0 &&
                 string.Compare(s.Tdateformat, transaction_date.ToString("yyyyMMdd")) <= 0).ToList();
@@ -378,7 +380,7 @@ namespace AutoGenReports.TimeBaseChecker
                 {
                     transaction_date = DateTime.Now,
                     branch_id = branch_id,
-                    branch_name = list_transaction_history_receive.FirstOrDefault().Branch.BranchName,
+                    branch_name = branch_name,
                     report_type = 3,
                     transaction_date_format = transaction_date.ToString("yyyy-MM-dd"),
                     report3_Summary_Of_Months = new List<report3_summary_of_month>()
@@ -423,7 +425,7 @@ namespace AutoGenReports.TimeBaseChecker
             }
             else
             {
-                var branch_name = db.Branches.AsNoTracking().Where(s => s.Id == branch_id).FirstOrDefault().BranchName;
+              
                 var json_head3 = new jsonModel3
                 {
                     transaction_date = DateTime.Now,

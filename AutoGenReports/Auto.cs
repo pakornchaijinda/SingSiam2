@@ -15,43 +15,30 @@ namespace AutoGenReports
         {
             Models.singsiamdbContext db = new Models.singsiamdbContext();
             #region Auto Report 
-            //try
-            //{
+            try
+            {
 
-            //    var all_branch = db.Branches.AsNoTracking().ToList();
-            //    foreach (var branch in all_branch) 
-            //    {
-            //        await TimeBaseChecker.ReportsSignSiam.Report1(branch.Id);
-            //    }
-               
-            //    Console.WriteLine("Update autoReport1 is completed " + DateTime.Now);
-            //}
-            //catch (Exception ex) { Console.WriteLine("Update autoReport1 is error " + ex, ToString()); }
-            //try
-            //{
+                var all_branch = db.Branches.AsNoTracking().ToList();
+                foreach (var branch in all_branch)
+                {
+                    await TimeBaseChecker.ReportsSignSiam.Report1(branch.Id);
+                }
 
-            //    var all_branch = db.Branches.AsNoTracking().ToList();
-            //    foreach (var branch in all_branch)
-            //    {
-            //        await TimeBaseChecker.ReportsSignSiam.Report2(branch.Id);
-            //    }
+                Console.WriteLine("Update autoReport1 is completed " + DateTime.Now);
+            }
+            catch (Exception ex) { Console.WriteLine("Update autoReport1 is error " + ex, ToString()); }
+            try
+            {
 
-            //    Console.WriteLine("Update autoReport2 is completed " + DateTime.Now);
-            //}
-            //catch (Exception ex) { Console.WriteLine("Update autoReport2 is error " + ex, ToString()); }
-            //try
-            //{
+                var all_branch = db.Branches.AsNoTracking().ToList();
+                foreach (var branch in all_branch)
+                {
+                    await TimeBaseChecker.ReportsSignSiam.Report2(branch.Id);
+                }
 
-            //    var all_branch = db.Branches.AsNoTracking().ToList();
-            //    foreach (var branch in all_branch)
-            //    {
-            //        await TimeBaseChecker.ReportsSignSiam.Report6(branch.Id);
-            //    }
-
-            //    Console.WriteLine("Update autoReport6 is completed " + DateTime.Now);
-            //}
-            //catch (Exception ex) { Console.WriteLine("Update autoReport6 is error " + ex, ToString()); }
-
+                Console.WriteLine("Update autoReport2 is completed " + DateTime.Now);
+            }
+            catch (Exception ex) { Console.WriteLine("Update autoReport2 is error " + ex, ToString()); }
             try
             {
 
@@ -61,9 +48,35 @@ namespace AutoGenReports
                     await TimeBaseChecker.ReportsSignSiam.Report3(branch.Id);
                 }
 
+                Console.WriteLine("Update autoReport3 is completed " + DateTime.Now);
+            }
+            catch (Exception ex) { Console.WriteLine("Update autoReport4 is error " + ex, ToString()); }
+            try
+            {
+
+                var all_branch = db.Branches.AsNoTracking().ToList();
+                foreach (var branch in all_branch)
+                {
+                    await TimeBaseChecker.ReportsSignSiam.Report4(branch.Id);
+                }
+
                 Console.WriteLine("Update autoReport4 is completed " + DateTime.Now);
             }
             catch (Exception ex) { Console.WriteLine("Update autoReport4 is error " + ex, ToString()); }
+            try
+            {
+
+                var all_branch = db.Branches.AsNoTracking().ToList();
+                foreach (var branch in all_branch)
+                {
+                    await TimeBaseChecker.ReportsSignSiam.Report6(branch.Id);
+                }
+
+                Console.WriteLine("Update autoReport6 is completed " + DateTime.Now);
+            }
+            catch (Exception ex) { Console.WriteLine("Update autoReport6 is error " + ex, ToString()); }
+
+           
             #endregion
         }
 
