@@ -82,4 +82,6 @@ public partial class Config
     public int? Latecap { get; set; }
 
     public int? Cutflat { get; set; }
+
+    public int? Editdate { get; set; }
 }

@@ -83,7 +83,7 @@
     <div class="container-fluid mt-4 mb-4">
         <div class="card outer">
             <div class="card-header" style="@tableheader">
-                <MudText Typo="Typo.body1">ข้อมูลหลักประกัน : <MudChip Variant="Variant.Filled" Color="Color.Info">@detailPromise.Name</MudChip></MudText>
+                <MudText Typo="Typo.body1">ข้อมูลหลักประกัน : <MudChip Variant="Variant.Filled" Color="Color.Info">@detailPromise.ProductName</MudChip></MudText>
                 @*  @if (collateral_type == 1)
                 {
                 <MudText Typo="Typo.body1">ข้อมูลหลักประกัน : <MudChip Variant="Variant.Filled" Color="Color.Info">รกจักรยานยนต์</MudChip></MudText>
@@ -271,7 +271,7 @@
                             <MudTextField ReadOnly Style="@field_box" @bind-Value="detailPromise.Periods" Label="จำนวนงวด" Placeholder="ระบุจำนวนงวด" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
                         </div>
                         <div class="col-md-4 pb-3">
-                            <MudTextField ReadOnly Style="@field_box" @bind-Value=" detailPromise.Interestofmonth" Label="ดอกเบี้ย" Placeholder="ระบุดอกเบี้ย" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+                            <MudTextField ReadOnly Style="@field_box" @bind-Value=" detailPromise.Intrate" Label="ดอกเบี้ย" Placeholder="ระบุดอกเบี้ย" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
                         </div>
                         <div class="col-md-4 pb-3">
                             <MudTextField ReadOnly Style="@field_box" @bind-Value="detailPromise.Amount" Label="งวดละ" Placeholder="ระบุจำนวนที่ชำระต่องวด" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>

@@ -356,18 +356,11 @@
                                                                                 <td>@items.Capital.Value.ToString("N0")</td>
                                                                                 <td>@items.Amount.Value.ToString("N0")</td>
                                                                                 <td>@items.BranchName</td>
-                                                                                @if (items.Status == 2)
-                                                                                {
+                                                                              
                                                                                     <td>
-                                                                                        <MudChip T="string" Color="Color.Success">ปิดสัญญา</MudChip>
+                                                                                        <MudChip T="string" Color="Color.Success">@items.Status</MudChip>
                                                                                     </td>
-                                                                                }
-                                                                                else
-                                                                                {
-                                                                                    <td>
-                                                                                        <MudChip T="string" Color="Color.Secondary">อยู่ในระหว่างสัญญา</MudChip>
-                                                                                    </td>
-                                                                                }
+                                                                         
 
                                                                                 <td class="text-end">
                                                                                     <MudStack Row="true" Class="mt-2">

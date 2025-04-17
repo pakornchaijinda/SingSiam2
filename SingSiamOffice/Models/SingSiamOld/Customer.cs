@@ -46,4 +46,6 @@ public partial class Customer
     public int? Status { get; set; }
 
     public double? Arbalance { get; set; }
+
+    public string? Birthdate { get; set; }
 }

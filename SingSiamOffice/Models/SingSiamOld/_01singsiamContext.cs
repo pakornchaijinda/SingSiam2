@@ -27,8 +27,6 @@ public partial class _01singsiamContext : DbContext
 
     public virtual DbSet<Customer> Customers { get; set; }
 
-    public virtual DbSet<DetailPromise> DetailPromises { get; set; }
-
     public virtual DbSet<Expincome> Expincomes { get; set; }
 
     public virtual DbSet<Externalar> Externalars { get; set; }
@@ -39,7 +37,7 @@ public partial class _01singsiamContext : DbContext
 
     public virtual DbSet<Lateconfig> Lateconfigs { get; set; }
 
-    public virtual DbSet<ListPromise> ListPromises { get; set; }
+    public virtual DbSet<Listpromise> Listpromises { get; set; }
 
     public virtual DbSet<Logfile201301> Logfile201301s { get; set; }
 
@@ -215,9 +213,13 @@ public partial class _01singsiamContext : DbContext
 
     public virtual DbSet<Logfile202412> Logfile202412s { get; set; }
 
-    public virtual DbSet<Periodtran> Periodtrans { get; set; }
+    public virtual DbSet<Logfile202501> Logfile202501s { get; set; }
 
-    public virtual DbSet<PeriodtranContract> PeriodtranContracts { get; set; }
+    public virtual DbSet<Logfile202502> Logfile202502s { get; set; }
+
+    public virtual DbSet<Logfile202503> Logfile202503s { get; set; }
+
+    public virtual DbSet<Periodtran> Periodtrans { get; set; }
 
     public virtual DbSet<Product> Products { get; set; }
 
@@ -244,6 +246,344 @@ public partial class _01singsiamContext : DbContext
     public virtual DbSet<Userfile> Userfiles { get; set; }
 
     public virtual DbSet<Userreport> Userreports { get; set; }
+
+    public virtual DbSet<ZzRaw0Ca> ZzRaw0Cas { get; set; }
+
+    public virtual DbSet<ZzRaw0Cb> ZzRaw0Cbs { get; set; }
+
+    public virtual DbSet<ZzRaw0Cc> ZzRaw0Ccs { get; set; }
+
+    public virtual DbSet<ZzRaw0Cd> ZzRaw0Cds { get; set; }
+
+    public virtual DbSet<ZzRaw0Ce> ZzRaw0Ces { get; set; }
+
+    public virtual DbSet<ZzRaw0Cf> ZzRaw0Cfs { get; set; }
+
+    public virtual DbSet<ZzRaw0Cg> ZzRaw0Cgs { get; set; }
+
+    public virtual DbSet<ZzRaw0Ch> ZzRaw0Ches { get; set; }
+
+    public virtual DbSet<ZzRaw0Ci> ZzRaw0Cis { get; set; }
+
+    public virtual DbSet<ZzRaw0Ck> ZzRaw0Cks { get; set; }
+
+    public virtual DbSet<ZzRaw0Cl> ZzRaw0Cls { get; set; }
+
+    public virtual DbSet<ZzRaw0Cm> ZzRaw0Cms { get; set; }
+
+    public virtual DbSet<ZzRaw0Cn> ZzRaw0Cns { get; set; }
+
+    public virtual DbSet<ZzRaw0Co> ZzRaw0Cos { get; set; }
+
+    public virtual DbSet<ZzRaw0Cp> ZzRaw0Cps { get; set; }
+
+    public virtual DbSet<ZzRaw0Pa> ZzRaw0Pas { get; set; }
+
+    public virtual DbSet<ZzRaw0Pb> ZzRaw0Pbs { get; set; }
+
+    public virtual DbSet<ZzRaw1Ca> ZzRaw1Cas { get; set; }
+
+    public virtual DbSet<ZzRaw1Cb> ZzRaw1Cbs { get; set; }
+
+    public virtual DbSet<ZzRaw1Cc> ZzRaw1Ccs { get; set; }
+
+    public virtual DbSet<ZzRaw1Cd> ZzRaw1Cds { get; set; }
+
+    public virtual DbSet<ZzRaw1Ce> ZzRaw1Ces { get; set; }
+
+    public virtual DbSet<ZzRaw1Cf> ZzRaw1Cfs { get; set; }
+
+    public virtual DbSet<ZzRaw1Cg> ZzRaw1Cgs { get; set; }
+
+    public virtual DbSet<ZzRaw1Ch> ZzRaw1Ches { get; set; }
+
+    public virtual DbSet<ZzRaw1Ci> ZzRaw1Cis { get; set; }
+
+    public virtual DbSet<ZzRaw1Ck> ZzRaw1Cks { get; set; }
+
+    public virtual DbSet<ZzRaw1Cl> ZzRaw1Cls { get; set; }
+
+    public virtual DbSet<ZzRaw1Cm> ZzRaw1Cms { get; set; }
+
+    public virtual DbSet<ZzRaw1Cn> ZzRaw1Cns { get; set; }
+
+    public virtual DbSet<ZzRaw1Co> ZzRaw1Cos { get; set; }
+
+    public virtual DbSet<ZzRaw1Cp> ZzRaw1Cps { get; set; }
+
+    public virtual DbSet<ZzRaw1Cq> ZzRaw1Cqs { get; set; }
+
+    public virtual DbSet<ZzRaw1Pa> ZzRaw1Pas { get; set; }
+
+    public virtual DbSet<ZzRaw1Pb> ZzRaw1Pbs { get; set; }
+
+    public virtual DbSet<ZzRaw1Pc> ZzRaw1Pcs { get; set; }
+
+    public virtual DbSet<ZzRaw2Ca> ZzRaw2Cas { get; set; }
+
+    public virtual DbSet<ZzRaw2Cb> ZzRaw2Cbs { get; set; }
+
+    public virtual DbSet<ZzRaw2Cc> ZzRaw2Ccs { get; set; }
+
+    public virtual DbSet<ZzRaw2Cd> ZzRaw2Cds { get; set; }
+
+    public virtual DbSet<ZzRaw2Ce> ZzRaw2Ces { get; set; }
+
+    public virtual DbSet<ZzRaw2Cf> ZzRaw2Cfs { get; set; }
+
+    public virtual DbSet<ZzRaw2Cg> ZzRaw2Cgs { get; set; }
+
+    public virtual DbSet<ZzRaw2Ch> ZzRaw2Ches { get; set; }
+
+    public virtual DbSet<ZzRaw2Ci> ZzRaw2Cis { get; set; }
+
+    public virtual DbSet<ZzRaw2Ck> ZzRaw2Cks { get; set; }
+
+    public virtual DbSet<ZzRaw2Cl> ZzRaw2Cls { get; set; }
+
+    public virtual DbSet<ZzRaw2Cm> ZzRaw2Cms { get; set; }
+
+    public virtual DbSet<ZzRaw2Cn> ZzRaw2Cns { get; set; }
+
+    public virtual DbSet<ZzRaw2Co> ZzRaw2Cos { get; set; }
+
+    public virtual DbSet<ZzRaw2Cp> ZzRaw2Cps { get; set; }
+
+    public virtual DbSet<ZzRaw2Cq> ZzRaw2Cqs { get; set; }
+
+    public virtual DbSet<ZzRaw2Pa> ZzRaw2Pas { get; set; }
+
+    public virtual DbSet<ZzRaw2Pb> ZzRaw2Pbs { get; set; }
+
+    public virtual DbSet<ZzRaw2Pc> ZzRaw2Pcs { get; set; }
+
+    public virtual DbSet<ZzRaw3Ca> ZzRaw3Cas { get; set; }
+
+    public virtual DbSet<ZzRaw3Cb> ZzRaw3Cbs { get; set; }
+
+    public virtual DbSet<ZzRaw3Cc> ZzRaw3Ccs { get; set; }
+
+    public virtual DbSet<ZzRaw3Cd> ZzRaw3Cds { get; set; }
+
+    public virtual DbSet<ZzRaw3Ce> ZzRaw3Ces { get; set; }
+
+    public virtual DbSet<ZzRaw3Cf> ZzRaw3Cfs { get; set; }
+
+    public virtual DbSet<ZzRaw3Cg> ZzRaw3Cgs { get; set; }
+
+    public virtual DbSet<ZzRaw3Ch> ZzRaw3Ches { get; set; }
+
+    public virtual DbSet<ZzRaw3Ci> ZzRaw3Cis { get; set; }
+
+    public virtual DbSet<ZzRaw3Ck> ZzRaw3Cks { get; set; }
+
+    public virtual DbSet<ZzRaw3Cl> ZzRaw3Cls { get; set; }
+
+    public virtual DbSet<ZzRaw3Cm> ZzRaw3Cms { get; set; }
+
+    public virtual DbSet<ZzRaw3Cn> ZzRaw3Cns { get; set; }
+
+    public virtual DbSet<ZzRaw3Co> ZzRaw3Cos { get; set; }
+
+    public virtual DbSet<ZzRaw3Cp> ZzRaw3Cps { get; set; }
+
+    public virtual DbSet<ZzRaw3Cq> ZzRaw3Cqs { get; set; }
+
+    public virtual DbSet<ZzRaw3Pa> ZzRaw3Pas { get; set; }
+
+    public virtual DbSet<ZzRaw3Pb> ZzRaw3Pbs { get; set; }
+
+    public virtual DbSet<ZzRaw3Pc> ZzRaw3Pcs { get; set; }
+
+    public virtual DbSet<ZzRaw4Ca> ZzRaw4Cas { get; set; }
+
+    public virtual DbSet<ZzRaw4Cb> ZzRaw4Cbs { get; set; }
+
+    public virtual DbSet<ZzRaw4Cc> ZzRaw4Ccs { get; set; }
+
+    public virtual DbSet<ZzRaw4Cd> ZzRaw4Cds { get; set; }
+
+    public virtual DbSet<ZzRaw4Ce> ZzRaw4Ces { get; set; }
+
+    public virtual DbSet<ZzRaw4Cf> ZzRaw4Cfs { get; set; }
+
+    public virtual DbSet<ZzRaw4Cg> ZzRaw4Cgs { get; set; }
+
+    public virtual DbSet<ZzRaw4Ch> ZzRaw4Ches { get; set; }
+
+    public virtual DbSet<ZzRaw4Ci> ZzRaw4Cis { get; set; }
+
+    public virtual DbSet<ZzRaw4Ck> ZzRaw4Cks { get; set; }
+
+    public virtual DbSet<ZzRaw4Cl> ZzRaw4Cls { get; set; }
+
+    public virtual DbSet<ZzRaw4Cm> ZzRaw4Cms { get; set; }
+
+    public virtual DbSet<ZzRaw4Cn> ZzRaw4Cns { get; set; }
+
+    public virtual DbSet<ZzRaw4Co> ZzRaw4Cos { get; set; }
+
+    public virtual DbSet<ZzRaw4Cp> ZzRaw4Cps { get; set; }
+
+    public virtual DbSet<ZzRaw4Cq> ZzRaw4Cqs { get; set; }
+
+    public virtual DbSet<ZzRaw4Pa> ZzRaw4Pas { get; set; }
+
+    public virtual DbSet<ZzRaw4Pb> ZzRaw4Pbs { get; set; }
+
+    public virtual DbSet<ZzRaw4Pc> ZzRaw4Pcs { get; set; }
+
+    public virtual DbSet<ZzRaw5Ca> ZzRaw5Cas { get; set; }
+
+    public virtual DbSet<ZzRaw5Cb> ZzRaw5Cbs { get; set; }
+
+    public virtual DbSet<ZzRaw5Cc> ZzRaw5Ccs { get; set; }
+
+    public virtual DbSet<ZzRaw5Cd> ZzRaw5Cds { get; set; }
+
+    public virtual DbSet<ZzRaw5Ce> ZzRaw5Ces { get; set; }
+
+    public virtual DbSet<ZzRaw5Cf> ZzRaw5Cfs { get; set; }
+
+    public virtual DbSet<ZzRaw5Cg> ZzRaw5Cgs { get; set; }
+
+    public virtual DbSet<ZzRaw5Ch> ZzRaw5Ches { get; set; }
+
+    public virtual DbSet<ZzRaw5Ci> ZzRaw5Cis { get; set; }
+
+    public virtual DbSet<ZzRaw5Ck> ZzRaw5Cks { get; set; }
+
+    public virtual DbSet<ZzRaw5Cl> ZzRaw5Cls { get; set; }
+
+    public virtual DbSet<ZzRaw5Cm> ZzRaw5Cms { get; set; }
+
+    public virtual DbSet<ZzRaw5Cn> ZzRaw5Cns { get; set; }
+
+    public virtual DbSet<ZzRaw5Co> ZzRaw5Cos { get; set; }
+
+    public virtual DbSet<ZzRaw5Cp> ZzRaw5Cps { get; set; }
+
+    public virtual DbSet<ZzRaw5Cq> ZzRaw5Cqs { get; set; }
+
+    public virtual DbSet<ZzRaw5Pa> ZzRaw5Pas { get; set; }
+
+    public virtual DbSet<ZzRaw5Pb> ZzRaw5Pbs { get; set; }
+
+    public virtual DbSet<ZzRaw5Pc> ZzRaw5Pcs { get; set; }
+
+    public virtual DbSet<ZzRaw6Ca> ZzRaw6Cas { get; set; }
+
+    public virtual DbSet<ZzRaw6Cb> ZzRaw6Cbs { get; set; }
+
+    public virtual DbSet<ZzRaw6Cc> ZzRaw6Ccs { get; set; }
+
+    public virtual DbSet<ZzRaw6Cd> ZzRaw6Cds { get; set; }
+
+    public virtual DbSet<ZzRaw6Ce> ZzRaw6Ces { get; set; }
+
+    public virtual DbSet<ZzRaw6Cf> ZzRaw6Cfs { get; set; }
+
+    public virtual DbSet<ZzRaw6Cg> ZzRaw6Cgs { get; set; }
+
+    public virtual DbSet<ZzRaw6Ch> ZzRaw6Ches { get; set; }
+
+    public virtual DbSet<ZzRaw6Ci> ZzRaw6Cis { get; set; }
+
+    public virtual DbSet<ZzRaw6Ck> ZzRaw6Cks { get; set; }
+
+    public virtual DbSet<ZzRaw6Cl> ZzRaw6Cls { get; set; }
+
+    public virtual DbSet<ZzRaw6Cm> ZzRaw6Cms { get; set; }
+
+    public virtual DbSet<ZzRaw6Cn> ZzRaw6Cns { get; set; }
+
+    public virtual DbSet<ZzRaw6Co> ZzRaw6Cos { get; set; }
+
+    public virtual DbSet<ZzRaw6Cp> ZzRaw6Cps { get; set; }
+
+    public virtual DbSet<ZzRaw6Cq> ZzRaw6Cqs { get; set; }
+
+    public virtual DbSet<ZzRaw6Pa> ZzRaw6Pas { get; set; }
+
+    public virtual DbSet<ZzRaw6Pb> ZzRaw6Pbs { get; set; }
+
+    public virtual DbSet<ZzRaw6Pc> ZzRaw6Pcs { get; set; }
+
+    public virtual DbSet<ZzRaw7Ca> ZzRaw7Cas { get; set; }
+
+    public virtual DbSet<ZzRaw7Cb> ZzRaw7Cbs { get; set; }
+
+    public virtual DbSet<ZzRaw7Cc> ZzRaw7Ccs { get; set; }
+
+    public virtual DbSet<ZzRaw7Cd> ZzRaw7Cds { get; set; }
+
+    public virtual DbSet<ZzRaw7Ce> ZzRaw7Ces { get; set; }
+
+    public virtual DbSet<ZzRaw7Cf> ZzRaw7Cfs { get; set; }
+
+    public virtual DbSet<ZzRaw7Cg> ZzRaw7Cgs { get; set; }
+
+    public virtual DbSet<ZzRaw7Ch> ZzRaw7Ches { get; set; }
+
+    public virtual DbSet<ZzRaw7Ci> ZzRaw7Cis { get; set; }
+
+    public virtual DbSet<ZzRaw7Ck> ZzRaw7Cks { get; set; }
+
+    public virtual DbSet<ZzRaw7Cl> ZzRaw7Cls { get; set; }
+
+    public virtual DbSet<ZzRaw7Cm> ZzRaw7Cms { get; set; }
+
+    public virtual DbSet<ZzRaw7Cn> ZzRaw7Cns { get; set; }
+
+    public virtual DbSet<ZzRaw7Co> ZzRaw7Cos { get; set; }
+
+    public virtual DbSet<ZzRaw7Cp> ZzRaw7Cps { get; set; }
+
+    public virtual DbSet<ZzRaw7Cq> ZzRaw7Cqs { get; set; }
+
+    public virtual DbSet<ZzRaw7Pa> ZzRaw7Pas { get; set; }
+
+    public virtual DbSet<ZzRaw7Pb> ZzRaw7Pbs { get; set; }
+
+    public virtual DbSet<ZzRaw7Pc> ZzRaw7Pcs { get; set; }
+
+    public virtual DbSet<ZzRepCa> ZzRepCas { get; set; }
+
+    public virtual DbSet<ZzRepCb> ZzRepCbs { get; set; }
+
+    public virtual DbSet<ZzRepCc> ZzRepCcs { get; set; }
+
+    public virtual DbSet<ZzRepCd> ZzRepCds { get; set; }
+
+    public virtual DbSet<ZzRepCe> ZzRepCes { get; set; }
+
+    public virtual DbSet<ZzRepCf> ZzRepCfs { get; set; }
+
+    public virtual DbSet<ZzRepCg> ZzRepCgs { get; set; }
+
+    public virtual DbSet<ZzRepCh> ZzRepChes { get; set; }
+
+    public virtual DbSet<ZzRepCi> ZzRepCis { get; set; }
+
+    public virtual DbSet<ZzRepCk> ZzRepCks { get; set; }
+
+    public virtual DbSet<ZzRepCl> ZzRepCls { get; set; }
+
+    public virtual DbSet<ZzRepCm> ZzRepCms { get; set; }
+
+    public virtual DbSet<ZzRepCn> ZzRepCns { get; set; }
+
+    public virtual DbSet<ZzRepCo> ZzRepCos { get; set; }
+
+    public virtual DbSet<ZzRepCp> ZzRepCps { get; set; }
+
+    public virtual DbSet<ZzRepCq> ZzRepCqs { get; set; }
+
+    public virtual DbSet<ZzRepPa> ZzRepPas { get; set; }
+
+    public virtual DbSet<ZzRepPb> ZzRepPbs { get; set; }
+
+    public virtual DbSet<ZzRepPc> ZzRepPcs { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
@@ -419,6 +759,10 @@ public partial class _01singsiamContext : DbContext
                 .HasDefaultValueSql("'0'")
                 .HasColumnType("int(1)")
                 .HasColumnName("disablemanual");
+            entity.Property(e => e.Editdate)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("editdate");
             entity.Property(e => e.Editfee)
                 .HasDefaultValueSql("'0'")
                 .HasColumnType("int(1)")
@@ -550,6 +894,10 @@ public partial class _01singsiamContext : DbContext
                 .HasDefaultValueSql("'0.00'")
                 .HasColumnType("double(10,2)")
                 .HasColumnName("arbalance");
+            entity.Property(e => e.Birthdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("birthdate");
             entity.Property(e => e.Cardexpire)
                 .HasMaxLength(20)
                 .HasDefaultValueSql("'-'")
@@ -622,426 +970,6 @@ public partial class _01singsiamContext : DbContext
                 .HasMaxLength(100)
                 .HasDefaultValueSql("'-'")
                 .HasColumnName("telephone");
-        });
-
-        modelBuilder.Entity<DetailPromise>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToView("detail_promise");
-
-            entity.Property(e => e.Amount)
-                .HasDefaultValueSql("'0'")
-                .HasColumnType("double(10,0)")
-                .HasColumnName("amount");
-            entity.Property(e => e.Branch)
-                .HasMaxLength(10)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("branch")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.BranchName)
-                .HasMaxLength(100)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("branch_name")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Cancelno)
-                .HasDefaultValueSql("'0'")
-                .HasColumnType("int(5)")
-                .HasColumnName("cancelno");
-            entity.Property(e => e.Capital)
-                .HasDefaultValueSql("'0'")
-                .HasColumnType("double(10,0)")
-                .HasColumnName("capital");
-            entity.Property(e => e.Capitalofmonth)
-                .HasDefaultValueSql("'0'")
-                .HasColumnType("double(10,0)")
-                .HasColumnName("capitalofmonth");
-            entity.Property(e => e.Chargeamt)
-                .HasDefaultValueSql("'0'")
-                .HasColumnType("double(10,0)")
-                .HasColumnName("chargeamt");
-            entity.Property(e => e.Clientno)
-                .HasMaxLength(5)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("clientno")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Closecase)
-                .HasMaxLength(20)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("closecase")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Closedocno)
-                .HasMaxLength(20)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("closedocno")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Closeresult)
-                .HasDefaultValueSql("'0'")
-                .HasColumnType("double(10,0)")
-                .HasColumnName("closeresult");
-            entity.Property(e => e.Coldata1)
-                .HasMaxLength(50)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("coldata1")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Coldata2)
-                .HasMaxLength(50)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("coldata2")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Coldata3)
-                .HasMaxLength(50)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("coldata3")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Coldata4)
-                .HasMaxLength(50)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("coldata4")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Coldata5)
-                .HasMaxLength(50)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("coldata5")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Coldata6)
-                .HasMaxLength(50)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("coldata6")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Coldata7)
-                .HasMaxLength(50)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("coldata7")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Coldata8)
-                .HasMaxLength(50)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("coldata8")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Coldata9)
-                .HasMaxLength(50)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("coldata9")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Colname1)
-                .HasMaxLength(50)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("colname1")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Colname2)
-                .HasMaxLength(50)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("colname2")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Colname3)
-                .HasMaxLength(50)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("colname3")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Colname4)
-                .HasMaxLength(50)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("colname4")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Colname5)
-                .HasMaxLength(50)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("colname5")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Colname6)
-                .HasMaxLength(50)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("colname6")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Colname7)
-                .HasMaxLength(50)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("colname7")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Colname8)
-                .HasMaxLength(50)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("colname8")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Colname9)
-                .HasMaxLength(50)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("colname9")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Compromise)
-                .HasDefaultValueSql("'0'")
-                .HasColumnType("int(1)")
-                .HasColumnName("compromise");
-            entity.Property(e => e.Customer)
-                .HasMaxLength(20)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("customer")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Dateclose)
-                .HasMaxLength(10)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("dateclose")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Dateclosecal)
-                .HasMaxLength(10)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("dateclosecal")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Dateclosecalformat)
-                .HasMaxLength(10)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("dateclosecalformat")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Datecloseformat)
-                .HasMaxLength(10)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("datecloseformat")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Datewarn)
-                .HasMaxLength(10)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("datewarn")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Datewarnformat)
-                .HasMaxLength(10)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("datewarnformat")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Daypaid)
-                .HasMaxLength(10)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("daypaid")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Deposit)
-                .HasDefaultValueSql("'0'")
-                .HasColumnType("double(10,0)")
-                .HasColumnName("deposit");
-            entity.Property(e => e.Downamount)
-                .HasDefaultValueSql("'0.00'")
-                .HasColumnType("double(10,2)")
-                .HasColumnName("downamount");
-            entity.Property(e => e.Firstdate)
-                .HasMaxLength(10)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("firstdate")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Id)
-                .HasColumnType("int(10)")
-                .HasColumnName("id");
-            entity.Property(e => e.Insurance)
-                .HasDefaultValueSql("'0'")
-                .HasColumnType("double(10,0)")
-                .HasColumnName("insurance");
-            entity.Property(e => e.Insurance1)
-                .HasMaxLength(20)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("insurance1")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Insurance1relation)
-                .HasMaxLength(150)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("insurance1relation")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Insurance2)
-                .HasMaxLength(20)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("insurance2")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Insurance2relation)
-                .HasMaxLength(150)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("insurance2relation")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Interestofmonth)
-                .HasDefaultValueSql("'0'")
-                .HasColumnType("double(10,0)")
-                .HasColumnName("interestofmonth");
-            entity.Property(e => e.Intrate)
-                .HasDefaultValueSql("'0.00'")
-                .HasColumnType("double(10,2)")
-                .HasColumnName("intrate");
-            entity.Property(e => e.Latepc)
-                .HasDefaultValueSql("'0.00'")
-                .HasColumnType("double(10,2)")
-                .HasColumnName("latepc");
-            entity.Property(e => e.Name)
-                .HasMaxLength(100)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("name")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Nampa)
-                .HasDefaultValueSql("'0'")
-                .HasColumnType("double(10,0)")
-                .HasColumnName("nampa");
-            entity.Property(e => e.Periods)
-                .HasDefaultValueSql("'0'")
-                .HasColumnType("int(5)")
-                .HasColumnName("periods");
-            entity.Property(e => e.Person1)
-                .HasMaxLength(20)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("person1")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Person2)
-                .HasMaxLength(20)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("person2")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Person3)
-                .HasMaxLength(20)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("person3")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Person4)
-                .HasMaxLength(20)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("person4")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Person5)
-                .HasMaxLength(20)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("person5")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Prddesc)
-                .HasMaxLength(100)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("prddesc")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Product)
-                .HasMaxLength(10)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("product")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Promiseno)
-                .HasMaxLength(20)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("promiseno")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Ptype)
-                .HasDefaultValueSql("'0'")
-                .HasColumnType("int(1)")
-                .HasColumnName("ptype");
-            entity.Property(e => e.Refcode)
-                .HasMaxLength(25)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("refcode")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Service)
-                .HasDefaultValueSql("'0'")
-                .HasColumnType("double(10,0)")
-                .HasColumnName("service");
-            entity.Property(e => e.Serviceofmonth)
-                .HasDefaultValueSql("'0'")
-                .HasColumnType("double(10,0)")
-                .HasColumnName("serviceofmonth");
-            entity.Property(e => e.Specialtaxpromise)
-                .HasDefaultValueSql("'0'")
-                .HasColumnType("int(1)")
-                .HasColumnName("specialtaxpromise");
-            entity.Property(e => e.Status)
-                .HasDefaultValueSql("'0'")
-                .HasColumnType("int(1)")
-                .HasColumnName("status");
-            entity.Property(e => e.Stockcode)
-                .HasMaxLength(10)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("stockcode")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Sumcharge1)
-                .HasDefaultValueSql("'0.00'")
-                .HasColumnType("double(10,2)")
-                .HasColumnName("sumcharge1");
-            entity.Property(e => e.Sumcharge2)
-                .HasDefaultValueSql("'0.00'")
-                .HasColumnType("double(10,2)")
-                .HasColumnName("sumcharge2");
-            entity.Property(e => e.Sumstatus)
-                .HasDefaultValueSql("'0'")
-                .HasColumnType("int(1)")
-                .HasColumnName("sumstatus");
-            entity.Property(e => e.Taxpromise)
-                .HasDefaultValueSql("'0'")
-                .HasColumnType("int(1)")
-                .HasColumnName("taxpromise");
-            entity.Property(e => e.Tdate)
-                .HasMaxLength(10)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("tdate")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Tdateformat)
-                .HasMaxLength(10)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("tdateformat")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Tdatetime)
-                .HasDefaultValueSql("'0000-00-00 00:00:00'")
-                .HasColumnName("tdatetime");
-            entity.Property(e => e.Totaldown)
-                .HasDefaultValueSql("'0.00'")
-                .HasColumnType("double(10,2)")
-                .HasColumnName("totaldown");
-            entity.Property(e => e.Usercode)
-                .HasMaxLength(20)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("usercode")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Warndesc)
-                .HasMaxLength(150)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("warndesc")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
         });
 
         modelBuilder.Entity<Expincome>(entity =>
@@ -1266,11 +1194,11 @@ public partial class _01singsiamContext : DbContext
                 .HasColumnName("rangeto");
         });
 
-        modelBuilder.Entity<ListPromise>(entity =>
+        modelBuilder.Entity<Listpromise>(entity =>
         {
             entity
                 .HasNoKey()
-                .ToView("list_promise");
+                .ToView("listpromises");
 
             entity.Property(e => e.Amount)
                 .HasDefaultValueSql("'0'")
@@ -1279,13 +1207,24 @@ public partial class _01singsiamContext : DbContext
             entity.Property(e => e.BranchName)
                 .HasMaxLength(100)
                 .HasDefaultValueSql("'-'")
-                .HasColumnName("branch_name")
                 .UseCollation("utf8_general_ci")
                 .HasCharSet("utf8");
             entity.Property(e => e.Capital)
                 .HasDefaultValueSql("'0'")
                 .HasColumnType("double(10,0)")
                 .HasColumnName("capital");
+            entity.Property(e => e.Closecase)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("closecase")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
+            entity.Property(e => e.Closedocno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("closedocno")
+                .UseCollation("utf8_general_ci")
+                .HasCharSet("utf8");
             entity.Property(e => e.Code)
                 .HasMaxLength(10)
                 .HasDefaultValueSql("'-'")
@@ -1317,15 +1256,15 @@ public partial class _01singsiamContext : DbContext
                 .UseCollation("utf8_general_ci")
                 .HasCharSet("utf8");
             entity.Property(e => e.Status)
-                .HasDefaultValueSql("'0'")
-                .HasColumnType("int(1)")
-                .HasColumnName("status");
+                .HasMaxLength(18)
+                .HasColumnName("status")
+                .UseCollation("utf8mb4_general_ci")
+                .HasCharSet("utf8mb4");
             entity.Property(e => e.Tdatetime)
                 .HasDefaultValueSql("'0000-00-00 00:00:00'")
                 .HasColumnName("tdatetime");
             entity.Property(e => e.Type)
                 .HasMaxLength(12)
-                .HasColumnName("type")
                 .UseCollation("utf8mb4_general_ci")
                 .HasCharSet("utf8mb4");
         });
@@ -5593,6 +5532,153 @@ public partial class _01singsiamContext : DbContext
                 .HasColumnName("usercode");
         });
 
+        modelBuilder.Entity<Logfile202501>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity
+                .ToTable("logfile_202501")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.HasIndex(e => e.Branch, "batchno");
+
+            entity.HasIndex(e => e.Usercode, "usercode");
+
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("id");
+            entity.Property(e => e.Action)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("action");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(5)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("branch");
+            entity.Property(e => e.Section)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("section");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdate");
+            entity.Property(e => e.Tdateformat)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdateformat");
+            entity.Property(e => e.Tdatetime)
+                .HasDefaultValueSql("'0000-00-00 00:00:00'")
+                .HasColumnName("tdatetime");
+            entity.Property(e => e.Tdesc)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdesc");
+            entity.Property(e => e.Usercode)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("usercode");
+        });
+
+        modelBuilder.Entity<Logfile202502>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity
+                .ToTable("logfile_202502")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.HasIndex(e => e.Branch, "batchno");
+
+            entity.HasIndex(e => e.Usercode, "usercode");
+
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("id");
+            entity.Property(e => e.Action)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("action");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(5)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("branch");
+            entity.Property(e => e.Section)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("section");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdate");
+            entity.Property(e => e.Tdateformat)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdateformat");
+            entity.Property(e => e.Tdatetime)
+                .HasDefaultValueSql("'0000-00-00 00:00:00'")
+                .HasColumnName("tdatetime");
+            entity.Property(e => e.Tdesc)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdesc");
+            entity.Property(e => e.Usercode)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("usercode");
+        });
+
+        modelBuilder.Entity<Logfile202503>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity
+                .ToTable("logfile_202503")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.HasIndex(e => e.Branch, "batchno");
+
+            entity.HasIndex(e => e.Usercode, "usercode");
+
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("id");
+            entity.Property(e => e.Action)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("action");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(5)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("branch");
+            entity.Property(e => e.Section)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("section");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdate");
+            entity.Property(e => e.Tdateformat)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdateformat");
+            entity.Property(e => e.Tdatetime)
+                .HasDefaultValueSql("'0000-00-00 00:00:00'")
+                .HasColumnName("tdatetime");
+            entity.Property(e => e.Tdesc)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdesc");
+            entity.Property(e => e.Usercode)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("usercode");
+        });
+
         modelBuilder.Entity<Periodtran>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
@@ -5715,36 +5801,6 @@ public partial class _01singsiamContext : DbContext
                 .HasMaxLength(20)
                 .HasDefaultValueSql("'-'")
                 .HasColumnName("usercode");
-        });
-
-        modelBuilder.Entity<PeriodtranContract>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToView("periodtran_contract");
-
-            entity.Property(e => e.Amount)
-                .HasDefaultValueSql("'0'")
-                .HasColumnType("double(10,0)")
-                .HasColumnName("amount");
-            entity.Property(e => e.Capital)
-                .HasDefaultValueSql("'0'")
-                .HasColumnType("double(10,0)")
-                .HasColumnName("capital");
-            entity.Property(e => e.Interest)
-                .HasDefaultValueSql("'0'")
-                .HasColumnType("double(10,0)")
-                .HasColumnName("interest");
-            entity.Property(e => e.Promiseno)
-                .HasMaxLength(20)
-                .HasDefaultValueSql("'-'")
-                .HasColumnName("promiseno")
-                .UseCollation("utf8_general_ci")
-                .HasCharSet("utf8");
-            entity.Property(e => e.Service)
-                .HasDefaultValueSql("'0'")
-                .HasColumnType("double(10,0)")
-                .HasColumnName("service");
         });
 
         modelBuilder.Entity<Product>(entity =>
@@ -7198,6 +7254,14169 @@ public partial class _01singsiamContext : DbContext
                 .HasMaxLength(10)
                 .HasDefaultValueSql("'-'")
                 .HasColumnName("menucode");
+        });
+
+        modelBuilder.Entity<ZzRaw0Ca>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw0_ca")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw0Cb>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw0_cb")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw0Cc>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw0_cc")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw0Cd>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw0_cd")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw0Ce>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw0_ce")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw0Cf>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw0_cf")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw0Cg>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw0_cg")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw0Ch>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw0_ch")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw0Ci>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw0_ci")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw0Ck>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw0_ck")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw0Cl>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw0_cl")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw0Cm>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw0_cm")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw0Cn>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw0_cn")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw0Co>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw0_co")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw0Cp>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw0_cp")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw0Pa>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw0_pa")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw0Pb>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw0_pb")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw1Ca>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw1_ca")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw1Cb>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw1_cb")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("amount");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("capital");
+            entity.Property(e => e.Cappaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("cappaid");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("id");
+            entity.Property(e => e.Insurance)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("insurance");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("interest");
+            entity.Property(e => e.Intpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("intpaid");
+            entity.Property(e => e.Paidamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("paidamount");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)")
+                .HasColumnName("period");
+            entity.Property(e => e.Promiseno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("promiseno");
+            entity.Property(e => e.Service)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("service");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdate");
+        });
+
+        modelBuilder.Entity<ZzRaw1Cc>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw1_cc")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw1Cd>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw1_cd")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("amount");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("capital");
+            entity.Property(e => e.Cappaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("cappaid");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("id");
+            entity.Property(e => e.Insurance)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("insurance");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("interest");
+            entity.Property(e => e.Intpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("intpaid");
+            entity.Property(e => e.Paidamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("paidamount");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)")
+                .HasColumnName("period");
+            entity.Property(e => e.Promiseno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("promiseno");
+            entity.Property(e => e.Service)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("service");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdate");
+        });
+
+        modelBuilder.Entity<ZzRaw1Ce>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw1_ce")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw1Cf>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw1_cf")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw1Cg>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw1_cg")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.PaidAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)");
+            entity.Property(e => e.Periods)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.SrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+        });
+
+        modelBuilder.Entity<ZzRaw1Ch>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw1_ch")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw1Ci>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw1_ci")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.PaidAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)");
+            entity.Property(e => e.Periods)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.SrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+        });
+
+        modelBuilder.Entity<ZzRaw1Ck>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw1_ck")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw1Cl>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw1_cl")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.PaidAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)");
+            entity.Property(e => e.Periods)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.SrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+        });
+
+        modelBuilder.Entity<ZzRaw1Cm>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw1_cm")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw1Cn>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw1_cn")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("amount");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("capital");
+            entity.Property(e => e.Cappaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("cappaid");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("id");
+            entity.Property(e => e.Insurance)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("insurance");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("interest");
+            entity.Property(e => e.Intpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("intpaid");
+            entity.Property(e => e.Paidamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("paidamount");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)")
+                .HasColumnName("period");
+            entity.Property(e => e.Promiseno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("promiseno");
+            entity.Property(e => e.Service)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("service");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdate");
+        });
+
+        modelBuilder.Entity<ZzRaw1Co>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw1_co")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.PaidAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)");
+            entity.Property(e => e.Periods)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.SrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+        });
+
+        modelBuilder.Entity<ZzRaw1Cp>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw1_cp")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("amount");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("branch");
+            entity.Property(e => e.Cancelno)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)")
+                .HasColumnName("cancelno");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("capital");
+            entity.Property(e => e.Chargeamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("chargeamt");
+            entity.Property(e => e.Clientno)
+                .HasMaxLength(5)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("clientno");
+            entity.Property(e => e.Closecase)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("closecase");
+            entity.Property(e => e.Closedocno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("closedocno");
+            entity.Property(e => e.Closeresult)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("closeresult");
+            entity.Property(e => e.Coldata1)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata1");
+            entity.Property(e => e.Coldata2)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata2");
+            entity.Property(e => e.Coldata3)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata3");
+            entity.Property(e => e.Coldata4)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata4");
+            entity.Property(e => e.Coldata5)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata5");
+            entity.Property(e => e.Coldata6)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata6");
+            entity.Property(e => e.Coldata7)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata7");
+            entity.Property(e => e.Coldata8)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata8");
+            entity.Property(e => e.Coldata9)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata9");
+            entity.Property(e => e.Colname1)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname1");
+            entity.Property(e => e.Colname2)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname2");
+            entity.Property(e => e.Colname3)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname3");
+            entity.Property(e => e.Colname4)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname4");
+            entity.Property(e => e.Colname5)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname5");
+            entity.Property(e => e.Colname6)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname6");
+            entity.Property(e => e.Colname7)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname7");
+            entity.Property(e => e.Colname8)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname8");
+            entity.Property(e => e.Colname9)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname9");
+            entity.Property(e => e.Compromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("compromise");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("customer");
+            entity.Property(e => e.Dateclose)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("dateclose");
+            entity.Property(e => e.Dateclosecal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("dateclosecal");
+            entity.Property(e => e.Dateclosecalformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("dateclosecalformat");
+            entity.Property(e => e.Datecloseformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("datecloseformat");
+            entity.Property(e => e.Datewarn)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("datewarn");
+            entity.Property(e => e.Datewarnformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("datewarnformat");
+            entity.Property(e => e.Daypaid)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("daypaid");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("deposit");
+            entity.Property(e => e.Downamount)
+                .HasDefaultValueSql("'0.00'")
+                .HasColumnType("double(10,2)")
+                .HasColumnName("downamount");
+            entity.Property(e => e.Firstdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("firstdate");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("id");
+            entity.Property(e => e.Insurance)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("insurance");
+            entity.Property(e => e.Insurance1)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("insurance1");
+            entity.Property(e => e.Insurance1relation)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("insurance1relation");
+            entity.Property(e => e.Insurance2)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("insurance2");
+            entity.Property(e => e.Insurance2relation)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("insurance2relation");
+            entity.Property(e => e.Intrate)
+                .HasDefaultValueSql("'0.00'")
+                .HasColumnType("double(10,2)")
+                .HasColumnName("intrate");
+            entity.Property(e => e.Latepc)
+                .HasDefaultValueSql("'0.00'")
+                .HasColumnType("double(10,2)")
+                .HasColumnName("latepc");
+            entity.Property(e => e.Nampa)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("nampa");
+            entity.Property(e => e.Periods)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)")
+                .HasColumnName("periods");
+            entity.Property(e => e.Person1)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("person1");
+            entity.Property(e => e.Person2)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("person2");
+            entity.Property(e => e.Person3)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("person3");
+            entity.Property(e => e.Person4)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("person4");
+            entity.Property(e => e.Person5)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("person5");
+            entity.Property(e => e.Prddesc)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("prddesc");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.Promiseno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("promiseno");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("ptype");
+            entity.Property(e => e.Refcode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("refcode");
+            entity.Property(e => e.Service)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("service");
+            entity.Property(e => e.Specialtaxpromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("specialtaxpromise");
+            entity.Property(e => e.Status)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("status");
+            entity.Property(e => e.Stockcode)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("stockcode");
+            entity.Property(e => e.Sumcharge1)
+                .HasDefaultValueSql("'0.00'")
+                .HasColumnType("double(10,2)")
+                .HasColumnName("sumcharge1");
+            entity.Property(e => e.Sumcharge2)
+                .HasDefaultValueSql("'0.00'")
+                .HasColumnType("double(10,2)")
+                .HasColumnName("sumcharge2");
+            entity.Property(e => e.Sumstatus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("sumstatus");
+            entity.Property(e => e.Taxpromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("taxpromise");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdate");
+            entity.Property(e => e.Tdateformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdateformat");
+            entity.Property(e => e.Tdatetime)
+                .HasDefaultValueSql("'0000-00-00 00:00:00'")
+                .HasColumnName("tdatetime");
+            entity.Property(e => e.Totaldown)
+                .HasDefaultValueSql("'0.00'")
+                .HasColumnType("double(10,2)")
+                .HasColumnName("totaldown");
+            entity.Property(e => e.Usercode)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("usercode");
+            entity.Property(e => e.Warndesc)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("warndesc");
+        });
+
+        modelBuilder.Entity<ZzRaw1Cq>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw1_cq")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("amount");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("branch");
+            entity.Property(e => e.Cancelno)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)")
+                .HasColumnName("cancelno");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("capital");
+            entity.Property(e => e.Chargeamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("chargeamt");
+            entity.Property(e => e.Clientno)
+                .HasMaxLength(5)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("clientno");
+            entity.Property(e => e.Closecase)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("closecase");
+            entity.Property(e => e.Closedocno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("closedocno");
+            entity.Property(e => e.Closeresult)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("closeresult");
+            entity.Property(e => e.Coldata1)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata1");
+            entity.Property(e => e.Coldata2)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata2");
+            entity.Property(e => e.Coldata3)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata3");
+            entity.Property(e => e.Coldata4)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata4");
+            entity.Property(e => e.Coldata5)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata5");
+            entity.Property(e => e.Coldata6)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata6");
+            entity.Property(e => e.Coldata7)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata7");
+            entity.Property(e => e.Coldata8)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata8");
+            entity.Property(e => e.Coldata9)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata9");
+            entity.Property(e => e.Colname1)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname1");
+            entity.Property(e => e.Colname2)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname2");
+            entity.Property(e => e.Colname3)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname3");
+            entity.Property(e => e.Colname4)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname4");
+            entity.Property(e => e.Colname5)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname5");
+            entity.Property(e => e.Colname6)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname6");
+            entity.Property(e => e.Colname7)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname7");
+            entity.Property(e => e.Colname8)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname8");
+            entity.Property(e => e.Colname9)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname9");
+            entity.Property(e => e.Compromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("compromise");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("customer");
+            entity.Property(e => e.Dateclose)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("dateclose");
+            entity.Property(e => e.Dateclosecal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("dateclosecal");
+            entity.Property(e => e.Dateclosecalformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("dateclosecalformat");
+            entity.Property(e => e.Datecloseformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("datecloseformat");
+            entity.Property(e => e.Datewarn)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("datewarn");
+            entity.Property(e => e.Datewarnformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("datewarnformat");
+            entity.Property(e => e.Daypaid)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("daypaid");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("deposit");
+            entity.Property(e => e.Downamount)
+                .HasDefaultValueSql("'0.00'")
+                .HasColumnType("double(10,2)")
+                .HasColumnName("downamount");
+            entity.Property(e => e.Firstdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("firstdate");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("id");
+            entity.Property(e => e.Insurance)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("insurance");
+            entity.Property(e => e.Insurance1)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("insurance1");
+            entity.Property(e => e.Insurance1relation)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("insurance1relation");
+            entity.Property(e => e.Insurance2)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("insurance2");
+            entity.Property(e => e.Insurance2relation)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("insurance2relation");
+            entity.Property(e => e.Intrate)
+                .HasDefaultValueSql("'0.00'")
+                .HasColumnType("double(10,2)")
+                .HasColumnName("intrate");
+            entity.Property(e => e.Latepc)
+                .HasDefaultValueSql("'0.00'")
+                .HasColumnType("double(10,2)")
+                .HasColumnName("latepc");
+            entity.Property(e => e.Nampa)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("nampa");
+            entity.Property(e => e.Periods)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)")
+                .HasColumnName("periods");
+            entity.Property(e => e.Person1)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("person1");
+            entity.Property(e => e.Person2)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("person2");
+            entity.Property(e => e.Person3)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("person3");
+            entity.Property(e => e.Person4)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("person4");
+            entity.Property(e => e.Person5)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("person5");
+            entity.Property(e => e.Prddesc)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("prddesc");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.Promiseno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("promiseno");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("ptype");
+            entity.Property(e => e.Refcode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("refcode");
+            entity.Property(e => e.Service)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("service");
+            entity.Property(e => e.Specialtaxpromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("specialtaxpromise");
+            entity.Property(e => e.Status)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("status");
+            entity.Property(e => e.Stockcode)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("stockcode");
+            entity.Property(e => e.Sumcharge1)
+                .HasDefaultValueSql("'0.00'")
+                .HasColumnType("double(10,2)")
+                .HasColumnName("sumcharge1");
+            entity.Property(e => e.Sumcharge2)
+                .HasDefaultValueSql("'0.00'")
+                .HasColumnType("double(10,2)")
+                .HasColumnName("sumcharge2");
+            entity.Property(e => e.Sumstatus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("sumstatus");
+            entity.Property(e => e.Taxpromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("taxpromise");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdate");
+            entity.Property(e => e.Tdateformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdateformat");
+            entity.Property(e => e.Tdatetime)
+                .HasDefaultValueSql("'0000-00-00 00:00:00'")
+                .HasColumnName("tdatetime");
+            entity.Property(e => e.Totaldown)
+                .HasDefaultValueSql("'0.00'")
+                .HasColumnType("double(10,2)")
+                .HasColumnName("totaldown");
+            entity.Property(e => e.Usercode)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("usercode");
+            entity.Property(e => e.Warndesc)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("warndesc");
+        });
+
+        modelBuilder.Entity<ZzRaw1Pa>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw1_pa")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.PaidAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)");
+            entity.Property(e => e.Periods)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.SrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+        });
+
+        modelBuilder.Entity<ZzRaw1Pb>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw1_pb")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("amount");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("branch");
+            entity.Property(e => e.Cancelno)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)")
+                .HasColumnName("cancelno");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("capital");
+            entity.Property(e => e.Chargeamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("chargeamt");
+            entity.Property(e => e.Clientno)
+                .HasMaxLength(5)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("clientno");
+            entity.Property(e => e.Closecase)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("closecase");
+            entity.Property(e => e.Closedocno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("closedocno");
+            entity.Property(e => e.Closeresult)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("closeresult");
+            entity.Property(e => e.Coldata1)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata1");
+            entity.Property(e => e.Coldata2)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata2");
+            entity.Property(e => e.Coldata3)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata3");
+            entity.Property(e => e.Coldata4)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata4");
+            entity.Property(e => e.Coldata5)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata5");
+            entity.Property(e => e.Coldata6)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata6");
+            entity.Property(e => e.Coldata7)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata7");
+            entity.Property(e => e.Coldata8)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata8");
+            entity.Property(e => e.Coldata9)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata9");
+            entity.Property(e => e.Colname1)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname1");
+            entity.Property(e => e.Colname2)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname2");
+            entity.Property(e => e.Colname3)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname3");
+            entity.Property(e => e.Colname4)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname4");
+            entity.Property(e => e.Colname5)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname5");
+            entity.Property(e => e.Colname6)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname6");
+            entity.Property(e => e.Colname7)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname7");
+            entity.Property(e => e.Colname8)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname8");
+            entity.Property(e => e.Colname9)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname9");
+            entity.Property(e => e.Compromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("compromise");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("customer");
+            entity.Property(e => e.Dateclose)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("dateclose");
+            entity.Property(e => e.Dateclosecal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("dateclosecal");
+            entity.Property(e => e.Dateclosecalformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("dateclosecalformat");
+            entity.Property(e => e.Datecloseformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("datecloseformat");
+            entity.Property(e => e.Datewarn)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("datewarn");
+            entity.Property(e => e.Datewarnformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("datewarnformat");
+            entity.Property(e => e.Daypaid)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("daypaid");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("deposit");
+            entity.Property(e => e.Downamount)
+                .HasDefaultValueSql("'0.00'")
+                .HasColumnType("double(10,2)")
+                .HasColumnName("downamount");
+            entity.Property(e => e.Firstdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("firstdate");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("id");
+            entity.Property(e => e.Insurance)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("insurance");
+            entity.Property(e => e.Insurance1)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("insurance1");
+            entity.Property(e => e.Insurance1relation)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("insurance1relation");
+            entity.Property(e => e.Insurance2)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("insurance2");
+            entity.Property(e => e.Insurance2relation)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("insurance2relation");
+            entity.Property(e => e.Intrate)
+                .HasDefaultValueSql("'0.00'")
+                .HasColumnType("double(10,2)")
+                .HasColumnName("intrate");
+            entity.Property(e => e.Latepc)
+                .HasDefaultValueSql("'0.00'")
+                .HasColumnType("double(10,2)")
+                .HasColumnName("latepc");
+            entity.Property(e => e.Nampa)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("nampa");
+            entity.Property(e => e.Periods)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)")
+                .HasColumnName("periods");
+            entity.Property(e => e.Person1)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("person1");
+            entity.Property(e => e.Person2)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("person2");
+            entity.Property(e => e.Person3)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("person3");
+            entity.Property(e => e.Person4)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("person4");
+            entity.Property(e => e.Person5)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("person5");
+            entity.Property(e => e.Prddesc)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("prddesc");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.Promiseno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("promiseno");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("ptype");
+            entity.Property(e => e.Refcode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("refcode");
+            entity.Property(e => e.Service)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("service");
+            entity.Property(e => e.Specialtaxpromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("specialtaxpromise");
+            entity.Property(e => e.Status)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("status");
+            entity.Property(e => e.Stockcode)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("stockcode");
+            entity.Property(e => e.Sumcharge1)
+                .HasDefaultValueSql("'0.00'")
+                .HasColumnType("double(10,2)")
+                .HasColumnName("sumcharge1");
+            entity.Property(e => e.Sumcharge2)
+                .HasDefaultValueSql("'0.00'")
+                .HasColumnType("double(10,2)")
+                .HasColumnName("sumcharge2");
+            entity.Property(e => e.Sumstatus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("sumstatus");
+            entity.Property(e => e.Taxpromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("taxpromise");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdate");
+            entity.Property(e => e.Tdateformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdateformat");
+            entity.Property(e => e.Tdatetime)
+                .HasDefaultValueSql("'0000-00-00 00:00:00'")
+                .HasColumnName("tdatetime");
+            entity.Property(e => e.Totaldown)
+                .HasDefaultValueSql("'0.00'")
+                .HasColumnType("double(10,2)")
+                .HasColumnName("totaldown");
+            entity.Property(e => e.Usercode)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("usercode");
+            entity.Property(e => e.Warndesc)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("warndesc");
+        });
+
+        modelBuilder.Entity<ZzRaw1Pc>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw1_pc")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.PaidAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)");
+            entity.Property(e => e.Periods)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.SrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+        });
+
+        modelBuilder.Entity<ZzRaw2Ca>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw2_ca")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw2Cb>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw2_cb")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Charge1amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("charge1amt");
+            entity.Property(e => e.Charge2amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("charge2amt");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("closefee");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("discount");
+            entity.Property(e => e.Intdiscamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("intdiscamt");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("intplus");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("netamount");
+            entity.Property(e => e.Pamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("pamount");
+            entity.Property(e => e.Pcappaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("pcappaid");
+            entity.Property(e => e.Pdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("pdate");
+            entity.Property(e => e.Pintpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("pintpaid");
+            entity.Property(e => e.Receiptno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("receiptno");
+        });
+
+        modelBuilder.Entity<ZzRaw2Cc>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw2_cc")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw2Cd>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw2_cd")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Charge1amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("charge1amt");
+            entity.Property(e => e.Charge2amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("charge2amt");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("closefee");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("discount");
+            entity.Property(e => e.Intdiscamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("intdiscamt");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("intplus");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("netamount");
+            entity.Property(e => e.Pamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("pamount");
+            entity.Property(e => e.Pcappaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("pcappaid");
+            entity.Property(e => e.Pdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("pdate");
+            entity.Property(e => e.Pintpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("pintpaid");
+            entity.Property(e => e.Receiptno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("receiptno");
+        });
+
+        modelBuilder.Entity<ZzRaw2Ce>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw2_ce")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw2Cf>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw2_cf")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw2Cg>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw2_cg")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)");
+            entity.Property(e => e.Periods)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.SrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw2Ch>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw2_ch")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw2Ci>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw2_ci")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)");
+            entity.Property(e => e.Periods)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.SrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw2Ck>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw2_ck")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw2Cl>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw2_cl")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)");
+            entity.Property(e => e.Periods)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.SrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw2Cm>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw2_cm")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw2Cn>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw2_cn")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Charge1amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("charge1amt");
+            entity.Property(e => e.Charge2amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("charge2amt");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("closefee");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("discount");
+            entity.Property(e => e.Intdiscamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("intdiscamt");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("intplus");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("netamount");
+            entity.Property(e => e.Pamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("pamount");
+            entity.Property(e => e.Pcappaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("pcappaid");
+            entity.Property(e => e.Pdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("pdate");
+            entity.Property(e => e.Pintpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("pintpaid");
+            entity.Property(e => e.Receiptno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("receiptno");
+        });
+
+        modelBuilder.Entity<ZzRaw2Co>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw2_co")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)");
+            entity.Property(e => e.Periods)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.SrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw2Cp>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw2_cp")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("amount");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("branch");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("capital");
+            entity.Property(e => e.Cappaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("cappaid");
+            entity.Property(e => e.Clientno)
+                .HasMaxLength(5)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("clientno");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("customer");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("deposit");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("id");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.Insurance)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("insurance");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("interest");
+            entity.Property(e => e.Intpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("intpaid");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Paidamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("paidamount");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)")
+                .HasColumnName("period");
+            entity.Property(e => e.Periods)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)")
+                .HasColumnName("periods");
+            entity.Property(e => e.Promiseno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("promiseno");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("ptype");
+            entity.Property(e => e.Refcode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("refcode");
+            entity.Property(e => e.Service)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("service");
+            entity.Property(e => e.Specialtaxpromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("specialtaxpromise");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.Status)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("status");
+            entity.Property(e => e.Taxpromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("taxpromise");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdate");
+            entity.Property(e => e.Tdateformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdateformat");
+            entity.Property(e => e.Usercode)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("usercode");
+        });
+
+        modelBuilder.Entity<ZzRaw2Cq>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw2_cq")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("amount");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("branch");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("capital");
+            entity.Property(e => e.Cappaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("cappaid");
+            entity.Property(e => e.Clientno)
+                .HasMaxLength(5)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("clientno");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("customer");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("deposit");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("id");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.Insurance)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("insurance");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("interest");
+            entity.Property(e => e.Intpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("intpaid");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Paidamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("paidamount");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)")
+                .HasColumnName("period");
+            entity.Property(e => e.Periods)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)")
+                .HasColumnName("periods");
+            entity.Property(e => e.Promiseno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("promiseno");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("ptype");
+            entity.Property(e => e.Refcode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("refcode");
+            entity.Property(e => e.Service)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("service");
+            entity.Property(e => e.Specialtaxpromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("specialtaxpromise");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.Status)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("status");
+            entity.Property(e => e.Taxpromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("taxpromise");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdate");
+            entity.Property(e => e.Tdateformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdateformat");
+            entity.Property(e => e.Usercode)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("usercode");
+        });
+
+        modelBuilder.Entity<ZzRaw2Pa>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw2_pa")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)");
+            entity.Property(e => e.Periods)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.SrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw2Pb>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw2_pb")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("amount");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("branch");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("capital");
+            entity.Property(e => e.Cappaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("cappaid");
+            entity.Property(e => e.Clientno)
+                .HasMaxLength(5)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("clientno");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("customer");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("deposit");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("id");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.Insurance)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("insurance");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("interest");
+            entity.Property(e => e.Intpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("intpaid");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Paidamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("paidamount");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)")
+                .HasColumnName("period");
+            entity.Property(e => e.Periods)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)")
+                .HasColumnName("periods");
+            entity.Property(e => e.Promiseno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("promiseno");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("ptype");
+            entity.Property(e => e.Refcode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("refcode");
+            entity.Property(e => e.Service)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("service");
+            entity.Property(e => e.Specialtaxpromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("specialtaxpromise");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.Status)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("status");
+            entity.Property(e => e.Taxpromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("taxpromise");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdate");
+            entity.Property(e => e.Tdateformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdateformat");
+            entity.Property(e => e.Usercode)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("usercode");
+        });
+
+        modelBuilder.Entity<ZzRaw2Pc>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw2_pc")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)");
+            entity.Property(e => e.Periods)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.SrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw3Ca>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw3_ca")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw3Cb>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw3_cb")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Chargeamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("chargeamt");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("deposit");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("id");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.Lateamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("lateamt");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Promiseno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("promiseno");
+            entity.Property(e => e.Ramount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("ramount");
+            entity.Property(e => e.Rcappaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("rcappaid");
+            entity.Property(e => e.Rdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("rdate");
+            entity.Property(e => e.Receiptno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("receiptno");
+            entity.Property(e => e.Rintpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("rintpaid");
+            entity.Property(e => e.Rperiod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)")
+                .HasColumnName("rperiod");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+        });
+
+        modelBuilder.Entity<ZzRaw3Cc>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw3_cc")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw3Cd>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw3_cd")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Chargeamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("chargeamt");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("deposit");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("id");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.Lateamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("lateamt");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Promiseno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("promiseno");
+            entity.Property(e => e.Ramount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("ramount");
+            entity.Property(e => e.Rcappaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("rcappaid");
+            entity.Property(e => e.Rdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("rdate");
+            entity.Property(e => e.Receiptno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("receiptno");
+            entity.Property(e => e.Rintpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("rintpaid");
+            entity.Property(e => e.Rperiod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)")
+                .HasColumnName("rperiod");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+        });
+
+        modelBuilder.Entity<ZzRaw3Ce>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw3_ce")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw3Cf>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw3_cf")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw3Cg>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw3_cg")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)");
+            entity.Property(e => e.Periods)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.SrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw3Ch>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw3_ch")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw3Ci>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw3_ci")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)");
+            entity.Property(e => e.Periods)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.SrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw3Ck>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw3_ck")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw3Cl>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw3_cl")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)");
+            entity.Property(e => e.Periods)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.SrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw3Cm>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw3_cm")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw3Cn>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw3_cn")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Chargeamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("chargeamt");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("deposit");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("id");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.Lateamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("lateamt");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Promiseno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("promiseno");
+            entity.Property(e => e.Ramount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("ramount");
+            entity.Property(e => e.Rcappaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("rcappaid");
+            entity.Property(e => e.Rdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("rdate");
+            entity.Property(e => e.Receiptno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("receiptno");
+            entity.Property(e => e.Rintpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("rintpaid");
+            entity.Property(e => e.Rperiod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)")
+                .HasColumnName("rperiod");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+        });
+
+        modelBuilder.Entity<ZzRaw3Co>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw3_co")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)");
+            entity.Property(e => e.Periods)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.SrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw3Cp>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw3_cp")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)");
+            entity.Property(e => e.Periods)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.SrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw3Cq>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw3_cq")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)");
+            entity.Property(e => e.Periods)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.SrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw3Pa>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw3_pa")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)");
+            entity.Property(e => e.Periods)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.SrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw3Pb>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw3_pb")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Chargeamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("chargeamt");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("deposit");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("id");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.Lateamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("lateamt");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Promiseno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("promiseno");
+            entity.Property(e => e.Ramount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("ramount");
+            entity.Property(e => e.Rcappaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("rcappaid");
+            entity.Property(e => e.Rdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("rdate");
+            entity.Property(e => e.Receiptno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("receiptno");
+            entity.Property(e => e.Rintpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("rintpaid");
+            entity.Property(e => e.Rperiod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)")
+                .HasColumnName("rperiod");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+        });
+
+        modelBuilder.Entity<ZzRaw3Pc>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw3_pc")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)");
+            entity.Property(e => e.Periods)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.SrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw4Ca>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw4_ca")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw4Cb>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw4_cb")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("amount");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("capital");
+            entity.Property(e => e.Cappaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("cappaid");
+            entity.Property(e => e.Chargeamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("chargeamt");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("deposit");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("interest");
+            entity.Property(e => e.Intpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("intpaid");
+            entity.Property(e => e.Lateamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("lateamt");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Paidamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("paidamount");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)")
+                .HasColumnName("period");
+            entity.Property(e => e.Pid)
+                .HasColumnType("int(10)")
+                .HasColumnName("pid");
+            entity.Property(e => e.Promiseno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("promiseno");
+            entity.Property(e => e.Ramount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("ramount");
+            entity.Property(e => e.Rcappaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("rcappaid");
+            entity.Property(e => e.Rdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("rdate");
+            entity.Property(e => e.Receiptno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("receiptno");
+            entity.Property(e => e.Rintpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("rintpaid");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdate");
+        });
+
+        modelBuilder.Entity<ZzRaw4Cc>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw4_cc")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw4Cd>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw4_cd")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("amount");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("capital");
+            entity.Property(e => e.Cappaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("cappaid");
+            entity.Property(e => e.Chargeamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("chargeamt");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("deposit");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("interest");
+            entity.Property(e => e.Intpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("intpaid");
+            entity.Property(e => e.Lateamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("lateamt");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Paidamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("paidamount");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)")
+                .HasColumnName("period");
+            entity.Property(e => e.Pid)
+                .HasColumnType("int(10)")
+                .HasColumnName("pid");
+            entity.Property(e => e.Promiseno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("promiseno");
+            entity.Property(e => e.Ramount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("ramount");
+            entity.Property(e => e.Rcappaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("rcappaid");
+            entity.Property(e => e.Rdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("rdate");
+            entity.Property(e => e.Receiptno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("receiptno");
+            entity.Property(e => e.Rintpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("rintpaid");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdate");
+        });
+
+        modelBuilder.Entity<ZzRaw4Ce>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw4_ce")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw4Cf>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw4_cf")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw4Cg>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw4_cg")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.InsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)");
+            entity.Property(e => e.Periods)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.SrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw4Ch>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw4_ch")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw4Ci>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw4_ci")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.InsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)");
+            entity.Property(e => e.Periods)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.SrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw4Ck>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw4_ck")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw4Cl>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw4_cl")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.InsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)");
+            entity.Property(e => e.Periods)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.SrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw4Cm>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw4_cm")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw4Cn>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw4_cn")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("amount");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("capital");
+            entity.Property(e => e.Cappaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("cappaid");
+            entity.Property(e => e.Chargeamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("chargeamt");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("deposit");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("interest");
+            entity.Property(e => e.Intpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("intpaid");
+            entity.Property(e => e.Lateamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("lateamt");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Paidamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("paidamount");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)")
+                .HasColumnName("period");
+            entity.Property(e => e.Pid)
+                .HasColumnType("int(10)")
+                .HasColumnName("pid");
+            entity.Property(e => e.Promiseno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("promiseno");
+            entity.Property(e => e.Ramount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("ramount");
+            entity.Property(e => e.Rcappaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("rcappaid");
+            entity.Property(e => e.Rdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("rdate");
+            entity.Property(e => e.Receiptno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("receiptno");
+            entity.Property(e => e.Rintpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("rintpaid");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdate");
+        });
+
+        modelBuilder.Entity<ZzRaw4Co>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw4_co")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.InsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)");
+            entity.Property(e => e.Periods)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.SrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw4Cp>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw4_cp")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.InsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)");
+            entity.Property(e => e.Periods)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.SrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw4Cq>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw4_cq")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.InsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)");
+            entity.Property(e => e.Periods)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.SrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw4Pa>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw4_pa")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.InsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)");
+            entity.Property(e => e.Periods)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.SrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw4Pb>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw4_pb")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("amount");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("capital");
+            entity.Property(e => e.Cappaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("cappaid");
+            entity.Property(e => e.Chargeamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("chargeamt");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("deposit");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("interest");
+            entity.Property(e => e.Intpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("intpaid");
+            entity.Property(e => e.Lateamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("lateamt");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Paidamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("paidamount");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)")
+                .HasColumnName("period");
+            entity.Property(e => e.Pid)
+                .HasColumnType("int(10)")
+                .HasColumnName("pid");
+            entity.Property(e => e.Promiseno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("promiseno");
+            entity.Property(e => e.Ramount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("ramount");
+            entity.Property(e => e.Rcappaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("rcappaid");
+            entity.Property(e => e.Rdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("rdate");
+            entity.Property(e => e.Receiptno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("receiptno");
+            entity.Property(e => e.Rintpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("rintpaid");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdate");
+        });
+
+        modelBuilder.Entity<ZzRaw4Pc>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw4_pc")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.InsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)");
+            entity.Property(e => e.Periods)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.SrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw5Ca>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw5_ca")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanMinus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanPlus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllSrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.MaxPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.MinPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw5Cb>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw5_cb")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanMinus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanPlus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllSrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.MaxPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.MinPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw5Cc>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw5_cc")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanMinus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanPlus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllSrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.MaxPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.MinPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw5Cd>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw5_cd")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanMinus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanPlus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllSrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.MaxPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.MinPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw5Ce>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw5_ce")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanMinus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanPlus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllSrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.MaxPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.MinPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw5Cf>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw5_cf")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanMinus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanPlus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllSrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.MaxPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.MinPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw5Cg>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw5_cg")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllAmount).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllCap).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInt).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllSrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Period).HasColumnType("bigint(21)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw5Ch>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw5_ch")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanMinus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanPlus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllSrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.MaxPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.MinPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw5Ci>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw5_ci")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllAmount).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllCap).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInt).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllSrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Period).HasColumnType("bigint(21)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw5Ck>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw5_ck")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanMinus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanPlus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllSrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.MaxPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.MinPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw5Cl>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw5_cl")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllAmount).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllCap).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInt).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllSrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Period).HasColumnType("bigint(21)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw5Cm>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw5_cm")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanMinus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanPlus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllSrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.MaxPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.MinPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw5Cn>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw5_cn")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanMinus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanPlus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllSrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.MaxPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.MinPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw5Co>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw5_co")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllAmount).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllCap).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInt).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllSrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Period).HasColumnType("bigint(21)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw5Cp>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw5_cp")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllAmount).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllCap).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInt).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllSrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Period).HasColumnType("bigint(21)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw5Cq>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw5_cq")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllAmount).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllCap).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInt).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllSrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Period).HasColumnType("bigint(21)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw5Pa>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw5_pa")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllAmount).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllCap).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInt).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllSrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Period).HasColumnType("bigint(21)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw5Pb>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw5_pb")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllAmount).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllCap).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInt).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllSrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Period).HasColumnType("bigint(21)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw5Pc>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw5_pc")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllAmount).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllCap).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInt).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllSrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Period).HasColumnType("bigint(21)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw6Ca>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw6_ca")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanMinus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanPlus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllSrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.MaxPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.MinPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Pname)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("PName");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw6Cb>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw6_cb")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanMinus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanPlus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllSrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.MaxPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.MinPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Pname)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("PName");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw6Cc>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw6_cc")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanMinus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanPlus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllSrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.MaxPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.MinPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Pname)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("PName");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw6Cd>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw6_cd")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanMinus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanPlus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllSrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.MaxPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.MinPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Pname)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("PName");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw6Ce>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw6_ce")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanMinus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanPlus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllSrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.MaxPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.MinPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Pname)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("PName");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw6Cf>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw6_cf")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanMinus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanPlus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllSrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.MaxPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.MinPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Pname)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("PName");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw6Cg>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw6_cg")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.CapPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.InsPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.PaidAmount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Period1)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.Period2)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.Periodamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("periodamt");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.SrvPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.SrvPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw6Ch>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw6_ch")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanMinus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanPlus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllSrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.MaxPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.MinPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Pname)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("PName");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw6Ci>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw6_ci")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanMinus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanPlus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllSrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.MaxPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.MinPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Pname)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("PName");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw6Ck>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw6_ck")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanMinus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanPlus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllSrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.MaxPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.MinPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Pname)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("PName");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw6Cl>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw6_cl")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanMinus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanPlus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllSrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.MaxPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.MinPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Pname)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("PName");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw6Cm>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw6_cm")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanMinus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanPlus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllSrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.MaxPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.MinPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Pname)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("PName");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw6Cn>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw6_cn")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanMinus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanPlus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllSrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.MaxPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.MinPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Pname)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("PName");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw6Co>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw6_co")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.CapPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.InsPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.PaidAmount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Period1)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.Period2)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.Periodamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("periodamt");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.SrvPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.SrvPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw6Cp>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw6_cp")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.CapPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.InsPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.PaidAmount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Period1)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.Period2)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.Periodamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("periodamt");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.SrvPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.SrvPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw6Cq>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw6_cq")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.CapPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.InsPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.PaidAmount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Period1)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.Period2)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.Periodamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("periodamt");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.SrvPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.SrvPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw6Pa>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw6_pa")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanMinus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanPlus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllSrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.MaxPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.MinPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Pname)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("PName");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRaw6Pb>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw6_pb")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.CapPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.InsPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.PaidAmount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Period1)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.Period2)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.Periodamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("periodamt");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.SrvPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.SrvPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw6Pc>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw6_pc")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.CapPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.InsPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.PaidAmount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Period1)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.Period2)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.Periodamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("periodamt");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.SrvPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.SrvPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw7Ca>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw7_ca")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.CapPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.InsPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.PaidAmount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Period1)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.Period2)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.PeriodAmt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.SrvPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.SrvPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw7Cb>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw7_cb")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.CapPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.InsPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.PaidAmount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Period1)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.Period2)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.PeriodAmt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.SrvPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.SrvPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw7Cc>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw7_cc")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.CapPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.InsPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.PaidAmount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Period1)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.Period2)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.PeriodAmt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.SrvPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.SrvPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw7Cd>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw7_cd")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.CapPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.InsPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.PaidAmount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Period1)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.Period2)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.PeriodAmt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.SrvPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.SrvPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw7Ce>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw7_ce")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.CapPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.InsPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.PaidAmount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Period1)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.Period2)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.PeriodAmt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.SrvPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.SrvPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw7Cf>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw7_cf")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.CapPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.InsPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.PaidAmount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Period1)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.Period2)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.PeriodAmt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.SrvPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.SrvPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw7Cg>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw7_cg")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.CapPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.InsPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.PaidAmount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Period1)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.Period2)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.PeriodAmt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.SrvPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.SrvPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw7Ch>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw7_ch")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.CapPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.InsPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.PaidAmount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Period1)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.Period2)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.PeriodAmt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.SrvPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.SrvPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw7Ci>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw7_ci")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.CapPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.InsPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.PaidAmount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Period1)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.Period2)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.PeriodAmt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.SrvPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.SrvPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw7Ck>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw7_ck")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.CapPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.InsPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.PaidAmount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Period1)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.Period2)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.PeriodAmt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.SrvPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.SrvPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw7Cl>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw7_cl")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.CapPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.InsPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.PaidAmount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Period1)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.Period2)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.PeriodAmt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.SrvPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.SrvPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw7Cm>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw7_cm")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.CapPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.InsPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.PaidAmount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Period1)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.Period2)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.PeriodAmt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.SrvPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.SrvPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw7Cn>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw7_cn")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.CapPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.InsPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.PaidAmount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Period1)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.Period2)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.PeriodAmt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.SrvPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.SrvPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw7Co>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw7_co")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.CapPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.InsPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.PaidAmount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Period1)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.Period2)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.PeriodAmt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.SrvPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.SrvPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw7Cp>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw7_cp")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.CapPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.InsPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.PaidAmount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Period1)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.Period2)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.PeriodAmt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.SrvPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.SrvPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw7Cq>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw7_cq")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.CapPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.InsPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.PaidAmount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Period1)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.Period2)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.PeriodAmt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.SrvPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.SrvPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw7Pa>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw7_pa")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.CapPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.InsPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.PaidAmount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Period1)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.Period2)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.PeriodAmt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.SrvPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.SrvPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw7Pb>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw7_pb")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.CapPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.InsPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.PaidAmount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Period1)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.Period2)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.PeriodAmt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.SrvPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.SrvPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRaw7Pc>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_raw7_pc")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CapPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.CapPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Capital2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.InsPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.InsPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.IntPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest1).HasColumnType("double(17,0)");
+            entity.Property(e => e.Interest2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PaidAmount1).HasColumnType("double(17,0)");
+            entity.Property(e => e.PaidAmount2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Period1)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.Period2)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("bigint(21)");
+            entity.Property(e => e.PeriodAmt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.SrvPaid1).HasColumnType("double(17,0)");
+            entity.Property(e => e.SrvPaid2).HasColumnType("double(17,0)");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRepCa>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_rep_ca")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Accno)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("accno");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("branch");
+            entity.Property(e => e.Clientno)
+                .HasMaxLength(5)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("clientno");
+            entity.Property(e => e.Docno)
+                .HasMaxLength(255)
+                .HasDefaultValueSql("'10'")
+                .HasColumnName("docno");
+            entity.Property(e => e.Expense)
+                .HasDefaultValueSql("'0.00'")
+                .HasColumnType("double(10,2)")
+                .HasColumnName("expense");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
+            entity.Property(e => e.Income)
+                .HasDefaultValueSql("'0.00'")
+                .HasColumnType("double(10,2)")
+                .HasColumnName("income");
+            entity.Property(e => e.Promiseno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("promiseno");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdate");
+            entity.Property(e => e.Tdateformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdateformat");
+            entity.Property(e => e.Tdesc)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdesc");
+            entity.Property(e => e.Usercode)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("usercode");
+        });
+
+        modelBuilder.Entity<ZzRepCb>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_rep_cb")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("amount");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("branch");
+            entity.Property(e => e.Cappaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("cappaid");
+            entity.Property(e => e.Chargeamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("chargeamt");
+            entity.Property(e => e.Clientbranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("clientbranch");
+            entity.Property(e => e.Clientno)
+                .HasMaxLength(5)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("clientno");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("customer");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("deposit");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("id");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.Intpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("intpaid");
+            entity.Property(e => e.Lateamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("lateamt");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Newint)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("newint");
+            entity.Property(e => e.Oldint)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("oldint");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)")
+                .HasColumnName("period");
+            entity.Property(e => e.Periodchg)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("periodchg");
+            entity.Property(e => e.Perioddate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("perioddate");
+            entity.Property(e => e.Promiseno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("promiseno");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("ptype");
+            entity.Property(e => e.Receiptno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("receiptno");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdate");
+            entity.Property(e => e.Tdatecal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdatecal");
+            entity.Property(e => e.Tdatecalformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdatecalformat");
+            entity.Property(e => e.Tdateformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdateformat");
+            entity.Property(e => e.Usercode)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("usercode");
+        });
+
+        modelBuilder.Entity<ZzRepCc>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_rep_cc")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("amount");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("branch");
+            entity.Property(e => e.Cappaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("cappaid");
+            entity.Property(e => e.Chargeamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("chargeamt");
+            entity.Property(e => e.Clientbranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("clientbranch");
+            entity.Property(e => e.Clientno)
+                .HasMaxLength(5)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("clientno");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("customer");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("deposit");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("id");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.Intpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("intpaid");
+            entity.Property(e => e.Lateamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("lateamt");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Newint)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("newint");
+            entity.Property(e => e.Oldint)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("oldint");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)")
+                .HasColumnName("period");
+            entity.Property(e => e.Periodchg)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("periodchg");
+            entity.Property(e => e.Perioddate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("perioddate");
+            entity.Property(e => e.Promiseno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("promiseno");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("ptype");
+            entity.Property(e => e.Receiptno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("receiptno");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdate");
+            entity.Property(e => e.Tdatecal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdatecal");
+            entity.Property(e => e.Tdatecalformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdatecalformat");
+            entity.Property(e => e.Tdateformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdateformat");
+            entity.Property(e => e.Usercode)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("usercode");
+        });
+
+        modelBuilder.Entity<ZzRepCd>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity
+                .ToTable("zz_rep_cd")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("amount");
+            entity.Property(e => e.Balance)
+                .HasDefaultValueSql("'0.00'")
+                .HasColumnType("double(10,2)")
+                .HasColumnName("balance");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("capital");
+            entity.Property(e => e.Cappaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("cappaid");
+            entity.Property(e => e.Charge1amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("charge1amt");
+            entity.Property(e => e.Charge2amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("charge2amt");
+            entity.Property(e => e.Chargeamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("chargeamt");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("closefee");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("deposit");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("discount");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.Intdiscamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("intdiscamt");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("interest");
+            entity.Property(e => e.Intpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("intpaid");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("intplus");
+            entity.Property(e => e.Lateamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("lateamt");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("netamount");
+            entity.Property(e => e.Paidamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("paidamount");
+            entity.Property(e => e.Pamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("pamount");
+            entity.Property(e => e.Pcappaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("pcappaid");
+            entity.Property(e => e.Pdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("pdate");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)")
+                .HasColumnName("period");
+            entity.Property(e => e.Pintpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("pintpaid");
+            entity.Property(e => e.Promiseno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("promiseno");
+            entity.Property(e => e.Ramount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("ramount");
+            entity.Property(e => e.Rcappaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("rcappaid");
+            entity.Property(e => e.Rdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("rdate");
+            entity.Property(e => e.Receiptno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("receiptno");
+            entity.Property(e => e.Rintpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("rintpaid");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdate");
+        });
+
+        modelBuilder.Entity<ZzRepCe>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_rep_ce")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("amount");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("branch");
+            entity.Property(e => e.Cappaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("cappaid");
+            entity.Property(e => e.Chargeamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("chargeamt");
+            entity.Property(e => e.Clientbranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("clientbranch");
+            entity.Property(e => e.Clientno)
+                .HasMaxLength(5)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("clientno");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("customer");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("deposit");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("id");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.Intpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("intpaid");
+            entity.Property(e => e.Lateamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("lateamt");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Newint)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("newint");
+            entity.Property(e => e.Oldint)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("oldint");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)")
+                .HasColumnName("period");
+            entity.Property(e => e.Periodchg)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("periodchg");
+            entity.Property(e => e.Perioddate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("perioddate");
+            entity.Property(e => e.Promiseno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("promiseno");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("ptype");
+            entity.Property(e => e.Receiptno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("receiptno");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdate");
+            entity.Property(e => e.Tdatecal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdatecal");
+            entity.Property(e => e.Tdatecalformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdatecalformat");
+            entity.Property(e => e.Tdateformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdateformat");
+            entity.Property(e => e.Usercode)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("usercode");
+        });
+
+        modelBuilder.Entity<ZzRepCf>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_rep_cf")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("amount");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("branch");
+            entity.Property(e => e.Cappaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("cappaid");
+            entity.Property(e => e.Chargeamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("chargeamt");
+            entity.Property(e => e.Clientbranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("clientbranch");
+            entity.Property(e => e.Clientno)
+                .HasMaxLength(5)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("clientno");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("customer");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("deposit");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("id");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.Intpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("intpaid");
+            entity.Property(e => e.Lateamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("lateamt");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Newint)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("newint");
+            entity.Property(e => e.Oldint)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("oldint");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)")
+                .HasColumnName("period");
+            entity.Property(e => e.Periodchg)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("periodchg");
+            entity.Property(e => e.Perioddate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("perioddate");
+            entity.Property(e => e.Promiseno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("promiseno");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("ptype");
+            entity.Property(e => e.Receiptno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("receiptno");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdate");
+            entity.Property(e => e.Tdatecal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdatecal");
+            entity.Property(e => e.Tdatecalformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdatecalformat");
+            entity.Property(e => e.Tdateformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdateformat");
+            entity.Property(e => e.Usercode)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("usercode");
+        });
+
+        modelBuilder.Entity<ZzRepCg>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_rep_cg")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("amount");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("branch");
+            entity.Property(e => e.Cappaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("cappaid");
+            entity.Property(e => e.Chargeamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("chargeamt");
+            entity.Property(e => e.Clientbranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("clientbranch");
+            entity.Property(e => e.Clientno)
+                .HasMaxLength(5)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("clientno");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("customer");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("deposit");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("id");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.Intpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("intpaid");
+            entity.Property(e => e.Lateamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("lateamt");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Newint)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("newint");
+            entity.Property(e => e.Oldint)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("oldint");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)")
+                .HasColumnName("period");
+            entity.Property(e => e.Periodchg)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("periodchg");
+            entity.Property(e => e.Perioddate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("perioddate");
+            entity.Property(e => e.Promiseno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("promiseno");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("ptype");
+            entity.Property(e => e.Receiptno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("receiptno");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdate");
+            entity.Property(e => e.Tdatecal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdatecal");
+            entity.Property(e => e.Tdatecalformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdatecalformat");
+            entity.Property(e => e.Tdateformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdateformat");
+            entity.Property(e => e.Usercode)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("usercode");
+        });
+
+        modelBuilder.Entity<ZzRepCh>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_rep_ch")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("amount");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("branch");
+            entity.Property(e => e.Cappaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("cappaid");
+            entity.Property(e => e.Chargeamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("chargeamt");
+            entity.Property(e => e.Clientbranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("clientbranch");
+            entity.Property(e => e.Clientno)
+                .HasMaxLength(5)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("clientno");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("customer");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("deposit");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("id");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.Intpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("intpaid");
+            entity.Property(e => e.Lateamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("lateamt");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Newint)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("newint");
+            entity.Property(e => e.Oldint)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("oldint");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)")
+                .HasColumnName("period");
+            entity.Property(e => e.Periodchg)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("periodchg");
+            entity.Property(e => e.Perioddate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("perioddate");
+            entity.Property(e => e.Promiseno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("promiseno");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("ptype");
+            entity.Property(e => e.Receiptno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("receiptno");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdate");
+            entity.Property(e => e.Tdatecal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdatecal");
+            entity.Property(e => e.Tdatecalformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdatecalformat");
+            entity.Property(e => e.Tdateformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdateformat");
+            entity.Property(e => e.Usercode)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("usercode");
+        });
+
+        modelBuilder.Entity<ZzRepCi>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_rep_ci")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllAmount).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllCap).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInt).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllSrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Period).HasColumnType("bigint(21)");
+            entity.Property(e => e.Pname)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("PName");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRepCk>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_rep_ck")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("amount");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("branch");
+            entity.Property(e => e.Cappaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("cappaid");
+            entity.Property(e => e.Chargeamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("chargeamt");
+            entity.Property(e => e.Clientbranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("clientbranch");
+            entity.Property(e => e.Clientno)
+                .HasMaxLength(5)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("clientno");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("customer");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("deposit");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("id");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.Intpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("intpaid");
+            entity.Property(e => e.Lateamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("lateamt");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Newint)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("newint");
+            entity.Property(e => e.Oldint)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("oldint");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)")
+                .HasColumnName("period");
+            entity.Property(e => e.Periodchg)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("periodchg");
+            entity.Property(e => e.Perioddate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("perioddate");
+            entity.Property(e => e.Promiseno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("promiseno");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("ptype");
+            entity.Property(e => e.Receiptno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("receiptno");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdate");
+            entity.Property(e => e.Tdatecal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdatecal");
+            entity.Property(e => e.Tdatecalformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdatecalformat");
+            entity.Property(e => e.Tdateformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdateformat");
+            entity.Property(e => e.Usercode)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("usercode");
+        });
+
+        modelBuilder.Entity<ZzRepCl>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_rep_cl")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllAmount).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllCap).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInt).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllSrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Period).HasColumnType("bigint(21)");
+            entity.Property(e => e.Pname)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("PName");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+        });
+
+        modelBuilder.Entity<ZzRepCm>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_rep_cm")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Address)
+                .HasMaxLength(200)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("address");
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanMinus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllLoanPlus).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllSrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.CashPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Charge1Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Charge2Amt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ClientBranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Closefee)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.CurrentPeriod)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(3)");
+            entity.Property(e => e.CusName)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Discount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("ID");
+            entity.Property(e => e.Intplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.MaxPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.MinPeriod).HasColumnType("int(5)");
+            entity.Property(e => e.Netamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.OtherPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Pname)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("PName");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("product");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.ReceiptDesc)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ReceiptNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.ResultAmount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+            entity.Property(e => e.TdateCal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCal");
+            entity.Property(e => e.TdateCalFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateCalFormat");
+            entity.Property(e => e.TdateFormat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDateFormat");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("telephone");
+            entity.Property(e => e.TransferPaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+        });
+
+        modelBuilder.Entity<ZzRepCn>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_rep_cn")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("amount");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("branch");
+            entity.Property(e => e.Cappaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("cappaid");
+            entity.Property(e => e.Chargeamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("chargeamt");
+            entity.Property(e => e.Clientbranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("clientbranch");
+            entity.Property(e => e.Clientno)
+                .HasMaxLength(5)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("clientno");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("customer");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("deposit");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("id");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.Intpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("intpaid");
+            entity.Property(e => e.Lateamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("lateamt");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Newint)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("newint");
+            entity.Property(e => e.Oldint)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("oldint");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)")
+                .HasColumnName("period");
+            entity.Property(e => e.Periodchg)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("periodchg");
+            entity.Property(e => e.Perioddate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("perioddate");
+            entity.Property(e => e.Promiseno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("promiseno");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("ptype");
+            entity.Property(e => e.Receiptno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("receiptno");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdate");
+            entity.Property(e => e.Tdatecal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdatecal");
+            entity.Property(e => e.Tdatecalformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdatecalformat");
+            entity.Property(e => e.Tdateformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdateformat");
+            entity.Property(e => e.Usercode)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("usercode");
+        });
+
+        modelBuilder.Entity<ZzRepCo>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_rep_co")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("amount");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("branch");
+            entity.Property(e => e.Cappaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("cappaid");
+            entity.Property(e => e.Chargeamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("chargeamt");
+            entity.Property(e => e.Clientbranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("clientbranch");
+            entity.Property(e => e.Clientno)
+                .HasMaxLength(5)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("clientno");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("customer");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("deposit");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("id");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.Intpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("intpaid");
+            entity.Property(e => e.Lateamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("lateamt");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Newint)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("newint");
+            entity.Property(e => e.Oldint)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("oldint");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)")
+                .HasColumnName("period");
+            entity.Property(e => e.Periodchg)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("periodchg");
+            entity.Property(e => e.Perioddate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("perioddate");
+            entity.Property(e => e.Promiseno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("promiseno");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("ptype");
+            entity.Property(e => e.Receiptno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("receiptno");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdate");
+            entity.Property(e => e.Tdatecal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdatecal");
+            entity.Property(e => e.Tdatecalformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdatecalformat");
+            entity.Property(e => e.Tdateformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdateformat");
+            entity.Property(e => e.Usercode)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("usercode");
+        });
+
+        modelBuilder.Entity<ZzRepCp>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_rep_cp")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Cap)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ChargeAmt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Coldata1)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata1");
+            entity.Property(e => e.Coldata2)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata2");
+            entity.Property(e => e.Coldata3)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata3");
+            entity.Property(e => e.Coldata4)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata4");
+            entity.Property(e => e.Coldata5)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata5");
+            entity.Property(e => e.Coldata6)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata6");
+            entity.Property(e => e.Coldata7)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata7");
+            entity.Property(e => e.Coldata8)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata8");
+            entity.Property(e => e.Coldata9)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata9");
+            entity.Property(e => e.Colname1)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname1");
+            entity.Property(e => e.Colname2)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname2");
+            entity.Property(e => e.Colname3)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname3");
+            entity.Property(e => e.Colname4)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname4");
+            entity.Property(e => e.Colname5)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname5");
+            entity.Property(e => e.Colname6)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname6");
+            entity.Property(e => e.Colname7)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname7");
+            entity.Property(e => e.Colname8)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname8");
+            entity.Property(e => e.Colname9)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname9");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.DayPaid)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.DownAmount)
+                .HasDefaultValueSql("'0.00'")
+                .HasColumnType("double(10,2)");
+            entity.Property(e => e.FirstDate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Insur)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Insurance)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Insurance1)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Insurance2)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.IntRate)
+                .HasDefaultValueSql("'0.00'")
+                .HasColumnType("double(10,2)");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Pamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("PAmount");
+            entity.Property(e => e.Pdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("PDate");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)");
+            entity.Property(e => e.Periods)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Serv)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Service)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+        });
+
+        modelBuilder.Entity<ZzRepCq>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_rep_cq")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Cap)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Capital)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.ChargeAmt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Coldata1)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata1");
+            entity.Property(e => e.Coldata2)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata2");
+            entity.Property(e => e.Coldata3)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata3");
+            entity.Property(e => e.Coldata4)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata4");
+            entity.Property(e => e.Coldata5)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata5");
+            entity.Property(e => e.Coldata6)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata6");
+            entity.Property(e => e.Coldata7)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata7");
+            entity.Property(e => e.Coldata8)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata8");
+            entity.Property(e => e.Coldata9)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("coldata9");
+            entity.Property(e => e.Colname1)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname1");
+            entity.Property(e => e.Colname2)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname2");
+            entity.Property(e => e.Colname3)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname3");
+            entity.Property(e => e.Colname4)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname4");
+            entity.Property(e => e.Colname5)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname5");
+            entity.Property(e => e.Colname6)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname6");
+            entity.Property(e => e.Colname7)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname7");
+            entity.Property(e => e.Colname8)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname8");
+            entity.Property(e => e.Colname9)
+                .HasMaxLength(50)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("colname9");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.DayPaid)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.DownAmount)
+                .HasDefaultValueSql("'0.00'")
+                .HasColumnType("double(10,2)");
+            entity.Property(e => e.FirstDate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Insur)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Insurance)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Insurance1)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Insurance2)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.IntRate)
+                .HasDefaultValueSql("'0.00'")
+                .HasColumnType("double(10,2)");
+            entity.Property(e => e.Interest)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Pamount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("PAmount");
+            entity.Property(e => e.Pdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("PDate");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(10)");
+            entity.Property(e => e.Periods)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Serv)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Service)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.TaxPromise)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("TDate");
+        });
+
+        modelBuilder.Entity<ZzRepPa>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_rep_pa")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("amount");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("branch");
+            entity.Property(e => e.Cappaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("cappaid");
+            entity.Property(e => e.Chargeamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("chargeamt");
+            entity.Property(e => e.Clientbranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("clientbranch");
+            entity.Property(e => e.Clientno)
+                .HasMaxLength(5)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("clientno");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("customer");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("deposit");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("id");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.Intpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("intpaid");
+            entity.Property(e => e.Lateamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("lateamt");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Newint)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("newint");
+            entity.Property(e => e.Oldint)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("oldint");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)")
+                .HasColumnName("period");
+            entity.Property(e => e.Periodchg)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("periodchg");
+            entity.Property(e => e.Perioddate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("perioddate");
+            entity.Property(e => e.Promiseno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("promiseno");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("ptype");
+            entity.Property(e => e.Receiptno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("receiptno");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdate");
+            entity.Property(e => e.Tdatecal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdatecal");
+            entity.Property(e => e.Tdatecalformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdatecalformat");
+            entity.Property(e => e.Tdateformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdateformat");
+            entity.Property(e => e.Usercode)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("usercode");
+        });
+
+        modelBuilder.Entity<ZzRepPb>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_rep_pb")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.Amount)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("amount");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("branch");
+            entity.Property(e => e.Cappaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("cappaid");
+            entity.Property(e => e.Chargeamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("chargeamt");
+            entity.Property(e => e.Clientbranch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("clientbranch");
+            entity.Property(e => e.Clientno)
+                .HasMaxLength(5)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("clientno");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("customer");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("deposit");
+            entity.Property(e => e.Id)
+                .HasColumnType("int(10)")
+                .HasColumnName("id");
+            entity.Property(e => e.Inspaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("inspaid");
+            entity.Property(e => e.Intpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("intpaid");
+            entity.Property(e => e.Lateamt)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("lateamt");
+            entity.Property(e => e.Loanminus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanminus");
+            entity.Property(e => e.Loanplus)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("loanplus");
+            entity.Property(e => e.Newint)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("newint");
+            entity.Property(e => e.Oldint)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("oldint");
+            entity.Property(e => e.Period)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(5)")
+                .HasColumnName("period");
+            entity.Property(e => e.Periodchg)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("periodchg");
+            entity.Property(e => e.Perioddate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("perioddate");
+            entity.Property(e => e.Promiseno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("promiseno");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("ptype");
+            entity.Property(e => e.Receiptno)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("receiptno");
+            entity.Property(e => e.Srvpaid)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)")
+                .HasColumnName("srvpaid");
+            entity.Property(e => e.Tdate)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdate");
+            entity.Property(e => e.Tdatecal)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdatecal");
+            entity.Property(e => e.Tdatecalformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdatecalformat");
+            entity.Property(e => e.Tdateformat)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("tdateformat");
+            entity.Property(e => e.Usercode)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("usercode");
+        });
+
+        modelBuilder.Entity<ZzRepPc>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("zz_rep_pc")
+                .HasCharSet("utf8")
+                .UseCollation("utf8_general_ci");
+
+            entity.Property(e => e.AllAmount).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllCap).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllCapPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInsPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllInt).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllIntPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.AllSrvPaid).HasColumnType("double(17,0)");
+            entity.Property(e => e.Branch)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Customer)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Deposit)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("double(10,0)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(150)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Period).HasColumnType("bigint(21)");
+            entity.Property(e => e.Pname)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'")
+                .HasColumnName("PName");
+            entity.Property(e => e.Product)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.PromiseNo)
+                .HasMaxLength(20)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Ptype)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(1)")
+                .HasColumnName("PType");
+            entity.Property(e => e.RefCode)
+                .HasMaxLength(25)
+                .HasDefaultValueSql("'-'");
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("'-'");
         });
 
         OnModelCreatingPartial(modelBuilder);

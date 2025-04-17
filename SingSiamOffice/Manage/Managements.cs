@@ -28,14 +28,17 @@ namespace SingSiamOffice.Manage
             }
             return data;
         }
-        public async Task<List<Models.SingSiamOld.ListPromise>> GetPromiseNVbyCustomerId(string customer_natId)
+        public async Task<List<Models.SingSiamOld.Listpromise>> GetPromiseNVbyCustomerId(string customer_natid)
         {
-            var list_data = db_nv.ListPromises.Where(s => s.Customer == customer_natId).ToList();
+            var list_data = db_nv.Listpromises.Where(s => s.Customer == customer_natid).ToList();
+
             return list_data;
         }
-        public async Task<Models.SingSiamOld.DetailPromise> GetPromiseDetailNVbyPermiseNo(string permiseNo)
+        public async Task<Models.SingSiamOld.Promise> GetPromiseDetailNVbyPermiseNo(string permiseNo)
         {
-            var list_data = db_nv.DetailPromises.Where(s => s.Promiseno == permiseNo).FirstOrDefault();
+            var list_data = db_nv.Promises.Where(s => s.Promiseno == permiseNo).FirstOrDefault();
+        
+          list_data.ProductName = db_nv.Products.Where(s => s.Code == list_data.Product).FirstOrDefault().Name;
             return list_data;
         }
         public async Task<Models.Promise> GetPromisebyPromiseId(int promise_id)

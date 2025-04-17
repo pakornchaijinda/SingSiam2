@@ -47,7 +47,7 @@ namespace SingSiamOffice.Pages.Contracts
         SingsiamdbContext db = new SingsiamdbContext();
         Models.SingSiamOld._01singsiamContext _01SingsiamContextdb = new Models.SingSiamOld._01singsiamContext();   
         private Models.Customer customer_data = new Models.Customer();
-        private Models.SingSiamOld.DetailPromise detailPromise = new Models.SingSiamOld.DetailPromise();
+        private Models.SingSiamOld.Promise detailPromise = new Models.SingSiamOld.Promise();
         protected override async void OnInitialized()
         {
             var uri = navigationManager.ToAbsoluteUri(navigationManager.Uri);

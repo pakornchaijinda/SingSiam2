@@ -50,7 +50,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.CustomerInfo
 
 
         private List<Promise> lst_Promises = new List<Promise>();
-        private List<Models.SingSiamOld.ListPromise> lst_promiseold_nv = new List<Models.SingSiamOld.ListPromise>();
+        private List<Models.SingSiamOld.Listpromise> lst_promiseold_nv = new List<Models.SingSiamOld.Listpromise>();
         async private void remove(int cus_id)
         {
             var confirm = await JSRuntime.InvokeAsync<bool>("confirmdelete");
@@ -151,7 +151,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.CustomerInfo
         {
             navigationManager.NavigateTo($"/view-contract/{branch_id}/{cus_id}/{promise_id}");
         }
-        private void viewContractOld_NV(int cus_id, string promise_no, string branch_code)
+        private void viewContractOld_NV(int cus_id, string promise_no, string? branch_code = null)
         {
             promise_no = promise_no.Replace("#", "_");
             navigationManager.NavigateTo($"/view-contract_nv/{branch_code}/{cus_id}?promiseno="+ promise_no);
