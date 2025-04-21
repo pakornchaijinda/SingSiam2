@@ -8,6 +8,9 @@ namespace SingSiamOffice.Models.SingSiamOld
             [NotMapped]
             public string ProductName { get; set; }
 
-        }
+        [NotMapped]
+        public string CustomerNmae { get; set; }
+
+    }
     
 }

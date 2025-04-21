@@ -191,5 +191,10 @@ namespace SingSiamOffice.Pages.CustomerManagement.CustomerInfo
         {
             navigationManager.NavigateTo($"/paymentlist/{branch_id}/{cus_id}/{promise_id}");
         }
+        private void goPayment_NV(int cus_id, string promise_no, string? branch_code = null)
+        {
+            promise_no = promise_no.Replace("#", "_");
+            navigationManager.NavigateTo($"/paymentnv/{branch_code}/{cus_id}?promiseno=" + promise_no);
+        }
     }
 }
