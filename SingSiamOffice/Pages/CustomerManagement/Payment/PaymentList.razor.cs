@@ -172,10 +172,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
         //ยอดรับฝากเงิน
         public string? total_deposit { get; set; }
 
-
         public int cash_transfer { get; set; } = 1;
-
-
 
         private string ReceiptNo { get; set; } = "";
         int activeIndex = 0;

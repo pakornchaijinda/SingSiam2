@@ -34,7 +34,7 @@
 
                     </div>
                     <div class="col-lg-5 col-md-5  col-sm-12 pb-3">
-                        <MudAutocomplete T="Customer" Label="กรอกเลขบัตรหรือชื่อที่ต้องการค้นหา" @bind-Value="selectCustomer" Margin="Margin.Dense" ToStringFunc="@(e=> e==null?null : $"{e.NatId} | {e.FullName} | สาขา: {e.Branch.Code}")" SearchFunc="@SearchValue" Variant="Variant.Outlined" />
+                        <MudAutocomplete T="Customer" Label="กรอกเลขบัตรหรือชื่อที่ต้องการค้นหา" @bind-Value="selectCustomer" Margin="Margin.Dense" ToStringFunc="@(e=> e==null?null : $"{e.NatId} | {e.FullName} | สาขา: {e.Branch.BranchName}")" SearchFunc="@SearchValue" Variant="Variant.Outlined" />
 
                     </div>
          
@@ -381,24 +381,24 @@
                                                                                             <button id="paymentdropdown" type="button" style="@buttoncolor1" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                                                                                 ชำระค่างวด
                                                                                             </button>
-                                                                                           @*  <ul class="dropdown-menu" aria-labelledby="paymentdropdown">
-                                                                                                @if (items.Status != 2)
+                                                                                            <ul class="dropdown-menu" aria-labelledby="paymentdropdown">
+                                                                                                @if (items.Status != "ปิดสัญญา")
                                                                                                 {
-                                                                                                    <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>goPayment(items.CustomerId,items.Id,items.BranchId)">ชำระค่างวด</a></li>
+                                                                                                    <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>goPayment_NV(data.CustomerId,items.Promiseno,items.Code)">ชำระค่างวด</a></li>
                                                                                                 }
-                                                                                                @if (items.Status == 2)
+                                                                                               @*  @if (items.Status == 2)
                                                                                                 {
                                                                                                     <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>receipt(items.Id,type_p)"> พิมพ์ใบเสร็จปิดสัญญา</a></li>
-                                                                                                }
+                                                                                                } *@
 
-                                                                                                <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>printPaymentDetail(items.Id)">พิมพ์รายละเอียด</a></li>
+                                                                                             @*    <li><a style="cursor:pointer;" class="dropdown-item" @onclick="()=>printPaymentDetail(items.Id)">พิมพ์รายละเอียด</a></li>
                                                                                                 @if (userLogin.RoleId != 3 && items.Status != 2)
                                                                                                 {
                                                                                                     <li><a style="cursor:pointer; background-color:red; color:#fff;" class="dropdown-item" @onclick="()=>canclePayment(items.Id)">ยกเลิกใบเสร็จ</a></li>
-                                                                                                }
+                                                                                                } *@
 
 
-                                                                                            </ul> *@
+                                                                                            </ul>
                                                                                         </div>
                                                                                       @*   <MudButton Variant="Variant.Outlined" Size="Size.Large" Style="@buttoncolor2" @onclick="()=>goCustomerDept(data.CustomerId,items.Id)">หนี้อื่นๆ ยอดค้าง @items.Sum_Externalar.ToString("N0") บาท</MudButton>
                                                                                        *@
