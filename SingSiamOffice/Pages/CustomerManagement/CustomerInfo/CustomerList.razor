@@ -155,7 +155,7 @@
                                                     <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Edit" Size="Size.Large" Color="Color.Error" @onclick="()=>editCustomer(data.CustomerId)">แก้ไขข้อมูลส่วนตัว</MudButton>
                                                     @if(!isBlacklisted)
                                                     {
-                                                        <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.PostAdd" Size="Size.Large" Color="Color.Error" @onclick="()=>addContract(data.CustomerId,b_id)" Disabled="ck_customer_branch">เพิ่มสัญญา</MudButton>
+                                                        <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.PostAdd" Size="Size.Large" Color="Color.Error" @onclick="()=>addContract(data.CustomerId,b_id)">เพิ่มสัญญา</MudButton>
                                                     }else{}
                                                  
                                                      @if (userLogin.RoleId != 3)
