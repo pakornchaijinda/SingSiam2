@@ -102,4 +102,19 @@ namespace SingSiamOffice.Models.SingSiamOld
 
     }
 
+    public partial class Receiptdesc
+    {
+        [NotMapped]
+        public string receipt_desc { get; set; }
+        [NotMapped]
+        public decimal pending_amount { get; set; }
+    }
+    public partial class Receipttran
+    {
+        [NotMapped]
+        public List<Periodtran> peroidtrans_info { get; set; }
+        //ค่าปรับ
+        [NotMapped]
+        public decimal charage_origin { get; set; }
+    }
 }

@@ -7,21 +7,35 @@ public partial class ZzRaw2Cgv
 {
     public string? PromiseNo { get; set; }
 
-    public long Period1 { get; set; }
+    public string? Branch { get; set; }
 
-    public double? Capital1 { get; set; }
+    public int? Ptype { get; set; }
 
-    public double? Interest1 { get; set; }
+    public string? Customer { get; set; }
 
-    public double? Amount1 { get; set; }
+    public string? Name { get; set; }
 
-    public double? CapPaid1 { get; set; }
+    public string? Telephone { get; set; }
 
-    public double? IntPaid1 { get; set; }
+    public int? Period { get; set; }
 
-    public double? SrvPaid1 { get; set; }
+    public int? Periods { get; set; }
 
-    public double? InsPaid1 { get; set; }
+    public string? Tdate { get; set; }
 
-    public double? PaidAmount1 { get; set; }
+    public double? Capital { get; set; }
+
+    public double? Interest { get; set; }
+
+    public double? Amount { get; set; }
+
+    public double? CapPaid { get; set; }
+
+    public double? IntPaid { get; set; }
+
+    public double? SrvPaid { get; set; }
+
+    public double? InsPaid { get; set; }
+
+    public double? PaidAmount { get; set; }
 }

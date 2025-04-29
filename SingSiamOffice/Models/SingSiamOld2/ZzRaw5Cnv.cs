@@ -5,17 +5,9 @@ namespace SingSiamOffice.Models.SingSiamOld2;
 
 public partial class ZzRaw5Cnv
 {
-    public int Id { get; set; }
-
     public string? PromiseNo { get; set; }
 
-    public string? RefCode { get; set; }
-
-    public string? Branch { get; set; }
-
-    public string BranchName { get; set; } = null!;
-
-    public string? Tdate { get; set; }
+    public int? Ptype { get; set; }
 
     public string? Customer { get; set; }
 
@@ -23,31 +15,43 @@ public partial class ZzRaw5Cnv
 
     public string? Telephone { get; set; }
 
-    public string? Product { get; set; }
+    public long? Period1 { get; set; }
 
-    public string? PrdDesc { get; set; }
+    public double? Capital1 { get; set; }
 
-    public int? Ptype { get; set; }
+    public double? Interest1 { get; set; }
 
-    public double? Capital { get; set; }
+    public double? Amount1 { get; set; }
 
-    public double? IntRate { get; set; }
+    public double? CapPaid1 { get; set; }
 
-    public int? Periods { get; set; }
+    public double? IntPaid1 { get; set; }
 
-    public double? Amount { get; set; }
+    public double? SrvPaid1 { get; set; }
 
-    public string? DayPaid { get; set; }
+    public double? InsPaid1 { get; set; }
 
-    public string? FirstDate { get; set; }
+    public double? PaidAmount1 { get; set; }
 
-    public double? ChargeAmt { get; set; }
+    public long? Period2 { get; set; }
 
-    public double? Nampa { get; set; }
+    public double? Capital2 { get; set; }
 
-    public double? AllInterest { get; set; }
+    public double? Interest2 { get; set; }
 
-    public double? AllService { get; set; }
+    public double? Amount2 { get; set; }
 
-    public double? Insurance { get; set; }
+    public double? CapPaid2 { get; set; }
+
+    public double? IntPaid2 { get; set; }
+
+    public double? SrvPaid2 { get; set; }
+
+    public double? InsPaid2 { get; set; }
+
+    public double? PaidAmount2 { get; set; }
+
+    public double? AllCapPaid { get; set; }
+
+    public double? AllIntPaid { get; set; }
 }

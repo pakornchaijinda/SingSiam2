@@ -3,12 +3,15 @@ using Newtonsoft.Json;
 using SingSiamOffice.Models;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
+using static MudBlazor.CategoryTypes;
 
 namespace SingSiamOffice.Manage
 {
     public class PromiseManagement
     {
         SingsiamdbContext db = new SingsiamdbContext();
+        Models.SingSiamOld._01singsiamContext db_nv = new Models.SingSiamOld._01singsiamContext();
+        Models.SingSiamOld2._02singsiamContext db_v = new Models.SingSiamOld2._02singsiamContext();
         public async Task<Promise> addPromise(Promise promise) 
         {
        
@@ -183,6 +186,7 @@ namespace SingSiamOffice.Manage
                     db.Receipttrans.Add(receipttrans);
                     await db.SaveChangesAsync();
 
+
                 return receipttrans;
 
 
@@ -269,6 +273,121 @@ namespace SingSiamOffice.Manage
 
         }
 
+
+        public async Task addReceipdesc_nv(List<Models.SingSiamOld.Receiptdesc> receiptdesc)
+        {
+            try
+            {
+
+                foreach (var items in receiptdesc)
+                {
+                    db_nv.Receiptdescs.Add(items);
+                    await db_nv.SaveChangesAsync();
+
+
+                    decimal amount_receipdesc = 0;
+                    decimal amount_remain = 0;
+                    var to_edit = db_nv.Periodtrans.Where(s => s.Promiseno == items.Promiseno && s.Period == items.Period).FirstOrDefault();
+                  
+                    if (to_edit != null)
+                    {
+                        if (items.receipt_desc != "รับฝากเงินล่วงหน้า")
+                        {
+                            to_edit.Cappaid = (double)items.Cappaid;
+                            to_edit.Intpaid = (double)items.Intpaid;
+                            to_edit.Paidamount = (double)items.Amount;
+
+                            if (to_edit.Amount == ((items.Amount) * -1))
+                            { 
+                                to_edit.ck_paid = true;
+                                to_edit.Status = 0;
+                            }
+                            else
+                            {
+                                to_edit.ck_paid = false;
+                            }
+
+
+                         //   to_edit.Paidremain = items.pending_amount;
+                        }
+                        else
+                        {
+                            to_edit.Deposit = to_edit.Deposit + items.Deposit;
+                        }
+
+
+                        db_nv.Entry(to_edit).State = EntityState.Modified;
+                        await db_nv.SaveChangesAsync();
+
+                    }
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
+        }
+        public async Task addReceipdesc_v(List<Models.SingSiamOld2.Receiptdesc> receiptdesc)
+        {
+            try
+            {
+
+                foreach (var items in receiptdesc)
+                {
+                    db_v.Receiptdescs.Add(items);
+                    await db_v.SaveChangesAsync();
+
+
+                    decimal amount_receipdesc = 0;
+                    decimal amount_remain = 0;
+                    var to_edit = db_v.Periodtrans.Where(s => s.Promiseno == items.Promiseno && s.Period == items.Period).FirstOrDefault();
+
+                    if (to_edit != null)
+                    {
+                        if (items.receipt_desc != "รับฝากเงินล่วงหน้า")
+                        {
+                            to_edit.Cappaid = (double)items.Cappaid;
+                            to_edit.Intpaid = (double)items.Intpaid;
+                            to_edit.Paidamount = (double)items.Amount;
+
+                            if (to_edit.Amount == ((items.Amount) * -1))
+                            {
+                                to_edit.ck_paid = true;
+                                to_edit.Status = 0;
+                            }
+                            else
+                            {
+                                to_edit.ck_paid = false;
+                            }
+
+
+                            //   to_edit.Paidremain = items.pending_amount;
+                        }
+                        else
+                        {
+                            to_edit.Deposit = to_edit.Deposit + items.Deposit;
+                        }
+
+
+                        db_v.Entry(to_edit).State = EntityState.Modified;
+                        await db_v.SaveChangesAsync();
+
+                    }
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
+        }
         public async Task updateClosePromise(int promiseId) 
         {
             var data = db.Periodtrans.AsNoTracking().Include(s=>s.Promise).Where(s => s.PromiseId == promiseId).ToList();
@@ -295,6 +414,153 @@ namespace SingSiamOffice.Manage
 
             }
         }
+        public async Task updateClosePromiseNV(string promise_no)
+        {
+            var data = db_nv.Periodtrans.AsNoTracking().Where(s => s.Promiseno == promise_no).ToList();
+            var cnt_finish = data.Where(s => s.ck_paid == true).Count();
+            var cnt_period = data.FirstOrDefault().Periods;
+            if (cnt_period == cnt_finish)
+            {
+                var toEdit = db_nv.Promises.Where(s => s.Promiseno == promise_no).FirstOrDefault();
+                toEdit.Status = 2;
+             
+                foreach (var periodTrans in data)
+                {
+                    periodTrans.Status = 2;
+                }
+
+                db_nv.Entry(toEdit).State = EntityState.Modified;
+
+
+                foreach (var periodTrans in data)
+                {
+                    db_nv.Entry(periodTrans).State = EntityState.Modified;
+                }
+                await db_nv.SaveChangesAsync();
+
+            }
+        }
+        public async Task updateClosePromiseV(string promise_no)
+        {
+            var data = db_v.Periodtrans.AsNoTracking().Where(s => s.Promiseno == promise_no).ToList();
+            var cnt_finish = data.Where(s => s.ck_paid == true).Count();
+            var cnt_period = data.FirstOrDefault().Periods;
+            if (cnt_period == cnt_finish)
+            {
+                var toEdit = db_v.Promises.Where(s => s.Promiseno == promise_no).FirstOrDefault();
+                toEdit.Status = 2;
+
+                foreach (var periodTrans in data)
+                {
+                    periodTrans.Status = 2;
+                }
+
+                db_v.Entry(toEdit).State = EntityState.Modified;
+
+
+                foreach (var periodTrans in data)
+                {
+                    db_v.Entry(periodTrans).State = EntityState.Modified;
+                }
+                await db_v.SaveChangesAsync();
+
+            }
+        }
+
+        #region addReceipttrans no vat
+
+        public async Task<Models.SingSiamOld.Receipttran> addReceipttran_nv(Models.SingSiamOld.Receipttran receipttrans)
+        {
+            try
+            {
+
+                db_nv.Receipttrans.Add(receipttrans);
+                await db_nv.SaveChangesAsync();
+
+                var branchId = db.Branches.AsNoTracking().Where(s => s.BranchCode == receipttrans.Branch).FirstOrDefault().Id;
+                int payment_method = 0;
+                 if (receipttrans.Cashpaid == 1)
+                {
+                    payment_method = 1;
+                }
+                else if (receipttrans.Transferpaid == 1)
+                {
+                    payment_method = 2;
+                }
+               
+                TransactionHistory Add_expren = new TransactionHistory()
+                {
+                    BranchId = branchId,
+                    TransectionRef = receipttrans.Receiptno,
+                    SubjectId = 31,
+                    Price = (int)receipttrans.Amount,
+                    CreateAt = DateTime.Now,
+                    Receiptname = receipttrans.Usercode,
+                 
+                    Detial = receipttrans.Receiptno,
+                    PaymentMethod = payment_method,
+                };
+                db.TransactionHistories.Add(Add_expren);
+                await db.SaveChangesAsync();
+
+                return receipttrans;
+
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+
+        }
+        public async Task<Models.SingSiamOld2.Receipttran> addReceipttran_v(Models.SingSiamOld2.Receipttran receipttrans)
+        {
+            try
+            {
+
+                db_v.Receipttrans.Add(receipttrans);
+                await db_v.SaveChangesAsync();
+
+                var branchId = db.Branches.AsNoTracking().Where(s => s.BranchCode == receipttrans.Branch).FirstOrDefault().Id;
+                int payment_method = 0;
+                if (receipttrans.Cashpaid == 1)
+                {
+                    payment_method = 1;
+                }
+                else if (receipttrans.Transferpaid == 1)
+                {
+                    payment_method = 2;
+                }
+
+                TransactionHistory Add_expren = new TransactionHistory()
+                {
+                    BranchId = branchId,
+                    TransectionRef = receipttrans.Receiptno,
+                    SubjectId = 31,
+                    Price = (int)receipttrans.Amount,
+                    CreateAt = DateTime.Now,
+                    Receiptname = receipttrans.Usercode,
+
+                    Detial = receipttrans.Receiptno,
+                    PaymentMethod = payment_method,
+                };
+                db.TransactionHistories.Add(Add_expren);
+                await db.SaveChangesAsync();
+
+                return receipttrans;
+
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+
+        }
+
+        #endregion
         #region DeletePayment
         public async Task<bool> delete_receiptdesc(int receipttransId) 
         {
@@ -349,7 +615,59 @@ namespace SingSiamOffice.Manage
                 return false;   
             }
         }
+        //public async Task<bool> delete_receiptdescNV(string receipttransno)
+        //{
+        //    try
+        //    {
 
+
+        //        var toEdit = db_nv.Receiptdescs.Where(s => s.Receiptno == receipttransno).ToList();
+        //        foreach (var item in toEdit)
+        //        {
+        //            if (item.ReceipttranId != null)
+        //            {
+        //                update_periodtrans(item.Id, item.PeriodtranId);
+        //                Models.ReceiptdescCancle toAdd = new ReceiptdescCancle();
+        //                toAdd.PromiseId = item.PromiseId;
+        //                toAdd.BranchId = item.BranchId;
+        //                toAdd.CustomerId = item.CustomerId;
+        //                toAdd.Receiptno = item.Receiptno;
+        //                toAdd.Tdate = item.Tdate;
+        //                toAdd.Tdateformat = item.Tdateformat;
+        //                toAdd.Tdatecal = item.Tdatecal;
+        //                toAdd.Tdatecalformat = item.Tdatecalformat;
+        //                toAdd.Period = item.Period;
+        //                toAdd.Perioddate = item.Perioddate;
+        //                toAdd.Cappaid = item.Cappaid;
+        //                toAdd.Intpaid = item.Intpaid;
+        //                toAdd.Amount = item.Amount;
+        //                toAdd.Usercode = item.Usercode;
+        //                toAdd.Clientno = item.Clientno;
+        //                toAdd.Clientbranch = item.Clientbranch;
+        //                toAdd.Loanplus = item.Loanplus;
+        //                toAdd.Loanminus = item.Loanminus;
+        //                toAdd.Oldint = item.Oldint;
+        //                toAdd.Newint = item.Newint;
+        //                toAdd.Periodchg = item.Periodchg;
+        //                toAdd.Deposit = item.Deposit;
+        //                toAdd.Chargeamt = item.Chargeamt;
+        //                toAdd.Lateamt = item.Lateamt;
+        //                toAdd.Srvpaid = item.Srvpaid;
+        //                toAdd.Inspaid = item.Inspaid;
+        //                db.ReceiptdescCancles.Add(toAdd);
+        //                // await db.SaveChangesAsync();
+        //            }
+        //        }
+        //        db.Receiptdescs.RemoveRange(toEdit);
+        //        await db.SaveChangesAsync();
+
+        //        return true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return false;
+        //    }
+        //}
         public async Task<bool> delete_receipttrans(int receipttransId) 
         {
             try
@@ -457,6 +775,39 @@ namespace SingSiamOffice.Manage
             db.Entry(toEdit).State = EntityState.Modified;
           //  await db.SaveChangesAsync();
         }
+
+        //public async Task update_periodtrans_nv(string promiseno ,int period)
+        //{
+           
+
+        //    var toEdit = db_nv.Periodtrans.Where(s => s.Promiseno == promiseno && s.Period == period).FirstOrDefault();
+
+
+
+        //    toEdit.Cappaid = Receipttran_info.Sum(s => s.Cappaid) * -1;
+
+
+        //    toEdit.Intpaid = Receipttran_info.Sum(s => s.Intpaid) * -1;
+
+
+        //    toEdit.Deposit = Receipttran_info.Sum(s => s.Deposit);
+
+
+        //    var paidamount = Receipttran_info.Sum(s => s.Amount);
+
+        //    if (paidamount != toEdit.Amount)
+        //    {
+        //        toEdit.Status = 0;
+        //        toEdit.Ispaid = false;
+        //        toEdit.Paidamount = 0;
+        //    }
+
+
+
+
+        //    db.Entry(toEdit).State = EntityState.Modified;
+        //    //  await db.SaveChangesAsync();
+        //}
 
         #endregion
     }

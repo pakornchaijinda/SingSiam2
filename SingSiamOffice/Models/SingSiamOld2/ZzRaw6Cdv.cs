@@ -58,4 +58,8 @@ public partial class ZzRaw6Cdv
     public double? InsPaid2 { get; set; }
 
     public double? PaidAmount2 { get; set; }
+
+    public double? AllCapPaid { get; set; }
+
+    public double? AllIntPaid { get; set; }
 }

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using SingSiamOffice.Helpers;
 using SingSiamOffice.Models;
 using SingSiamOffice.Models.SingSiamOld;
+using SingSiamOffice.Models.SingSiamOld2;
 using System.ComponentModel;
 using System.Globalization;
 using static MudBlazor.CategoryTypes;
@@ -13,6 +14,7 @@ namespace SingSiamOffice.Manage
     {
         SingsiamdbContext db = new SingsiamdbContext();
         _01singsiamContext db_nv = new _01singsiamContext();
+        _02singsiamContext db_v = new _02singsiamContext();
         NumberToText text = new NumberToText();
         public async Task<List<Models.Promise>> GetPromisebyCustomerId(int customer_id)
         {
@@ -35,11 +37,24 @@ namespace SingSiamOffice.Manage
 
             return list_data;
         }
+        public async Task<List<Models.SingSiamOld2.Listpromise>> GetPromiseVbyCustomerId(string customer_natid)
+        {
+            var list_data = db_v.Listpromises.Where(s => s.Customer == customer_natid).ToList();
+
+            return list_data;
+        }
         public async Task<Models.SingSiamOld.Promise> GetPromiseDetailNVbyPermiseNo(string permiseNo)
         {
             var list_data = db_nv.Promises.Where(s => s.Promiseno == permiseNo).FirstOrDefault();
         
           list_data.ProductName = db_nv.Products.Where(s => s.Code == list_data.Product).FirstOrDefault().Name;
+            return list_data;
+        }
+        public async Task<Models.SingSiamOld2.Promise> GetPromiseDetailVbyPermiseNo(string permiseNo)
+        {
+            var list_data = db_v.Promises.Where(s => s.Promiseno == permiseNo).FirstOrDefault();
+
+            list_data.ProductName = db_nv.Products.Where(s => s.Code == list_data.Product).FirstOrDefault().Name;
             return list_data;
         }
         public async Task<List<Models.SingSiamOld.Periodtran>> GetPromiseDetailNVbyPermiseNoDetail(string permiseNo)
@@ -78,6 +93,67 @@ namespace SingSiamOffice.Manage
 
             return data;
         }
+
+        #region SingSiamOld
+        public async Task<int?> GetPeriodNumber(List<Models.SingSiamOld.Periodtran> periods, DateTime paymentDate)
+        {
+            foreach (var period in periods)
+            {
+                if (DateTime.TryParseExact(period.Tdateformat, "yyyyMMdd", null, System.Globalization.DateTimeStyles.None, out DateTime periodDate))
+                {
+                    if (paymentDate >= periodDate)
+                    {
+                        return period.Period;
+                    }
+                }
+                else
+                {
+                    // กรณี parse ไม่ได้ จะทำยังไงดี? (เช่น Log error ไว้)
+                }
+            }
+
+            return 0; // ถ้าไม่เจอให้อยู่ก่อนงวดแรก
+        }
+        public async Task<int?> GetPeriodNumberV(List<Models.SingSiamOld2.Periodtran> periods, DateTime paymentDate)
+        {
+            foreach (var period in periods)
+            {
+                if (DateTime.TryParseExact(period.Tdateformat, "yyyyMMdd", null, System.Globalization.DateTimeStyles.None, out DateTime periodDate))
+                {
+                    if (paymentDate >= periodDate)
+                    {
+                        return period.Period;
+                    }
+                }
+                else
+                {
+                    // กรณี parse ไม่ได้ จะทำยังไงดี? (เช่น Log error ไว้)
+                }
+            }
+
+            return 0; // ถ้าไม่เจอให้อยู่ก่อนงวดแรก
+        }
+        public async Task<int?> Calarperiod(string promise_on)
+        {
+            var datetopay = db_nv.Periodtrans.AsNoTracking().Where(s => s.ck_paid == true).LastOrDefault().Tdate;
+            var Paymentduedate = DateTime.ParseExact(datetopay, "yyyyMMdd", null);
+            var currentdate = DateTime.ParseExact(DateTime.Now.ToString("yyyyMMdd"), "yyyyMMdd", null);
+            TimeSpan diffdate = currentdate - Paymentduedate;
+           
+            return diffdate.Days;
+        }
+        public async Task<int?> Calperiodremain(string promise_on,decimal totalpay)
+        {
+            var amount = db_nv.Periodtrans.AsNoTracking().Where(s => s.ck_paid == true).LastOrDefault().Amount;
+            var totalremain = db_nv.Periodtrans.AsNoTracking().Where(s => s.ck_paid == false).Count();
+            decimal cal_period_pay = totalpay / (decimal)amount;
+            var period_pay_qty = (int)Math.Ceiling(cal_period_pay);
+
+            int remainingInstallments = (int)totalremain - (int)Math.Floor(cal_period_pay);
+
+            return remainingInstallments;
+        }
+        #endregion
         public async Task<int?> GetCurrentPeriod(int promise_id) 
         {
             var data = db.Promises.AsNoTracking().Include(s => s.Customer).Include(s => s.Branch).Include(s => s.Product).Include(s => s.Periodtrans).Include(s => s.Province)
@@ -94,6 +170,16 @@ namespace SingSiamOffice.Manage
 
             return data;
         }
+        public async Task<List<Models.SingSiamOld.Receipttran>> GetReceipttranNV(string promise_no)
+        {
+            var data = db_nv.Receipttrans.Where(s => s.Promiseno == promise_no).AsNoTracking().OrderByDescending(s => s.Id).ToList();
+            return data;
+        }
+        public async Task<List<Models.SingSiamOld2.Receipttran>> GetReceipttranV(string promise_no)
+        {
+            var data = db_v.Receipttrans.Where(s => s.Promiseno == promise_no).AsNoTracking().OrderByDescending(s => s.Id).ToList();
+            return data;
+        }
         public async Task<List<Models.Receipttran>> GetReceipttran_ById(int Receipttran_Id)
         {
             var data = db.Receipttrans.Include(s => s.Promise).ThenInclude(s => s.Customer).Include(s => s.Branch).Where(s => s.Id == Receipttran_Id).AsNoTracking().OrderByDescending(s => s.Id).ToList();
@@ -104,6 +190,16 @@ namespace SingSiamOffice.Manage
 
             var data = db.Receipttrans.Include(s => s.Promise).ThenInclude(s=> s.Periodtrans).ThenInclude(s => s.Customer).Include(s => s.Branch).Where(s => s.PromiseId == promiseId).AsNoTracking().OrderByDescending(s => s.Id).FirstOrDefault();
             
+            return data;
+        }
+        public async Task<Models.SingSiamOld.Receipttran?> GetReceipttranNV_bypromiseNo(string promise_no)
+        {
+            var data = db_nv.Receipttrans.AsNoTracking().Where(s=>s.Promiseno == promise_no).OrderByDescending(s => s.Id).FirstOrDefault();
+            return data;
+        }
+        public async Task<Models.SingSiamOld2.Receipttran?> GetReceipttranV_bypromiseNo(string promise_no)
+        {
+            var data = db_v.Receipttrans.AsNoTracking().Where(s => s.Promiseno == promise_no).OrderByDescending(s => s.Id).FirstOrDefault();
             return data;
         }
         public async Task<List<Models.Periodtran>> GetPeriodtransbyPromiseId(int promise_id)
@@ -306,6 +402,109 @@ namespace SingSiamOffice.Manage
             }
             return data;
         }
+
+        public async Task<List<Models.SingSiamOld2.Periodtran>> GetPeriodtransbyPromise_V(string promise_no)
+        {
+            var config = db_v.Configs.AsNoTracking().Where(s => s.Id == 3).FirstOrDefault();
+            var data = db_v.Periodtrans.AsNoTracking().Where(s => s.Promiseno == promise_no && s.Status != 2).ToList();
+            var receipt = db_v.Receipttrans.AsNoTracking().Where(s => s.Promiseno == promise_no).ToList();
+            var receipt_desc = db_v.Receiptdescs.AsNoTracking().Where(s => s.Promiseno == promise_no).ToList();
+            int cnt_overpayment = 0;
+            foreach (var periodtran in data)
+            {
+                //  periodtran.amount_remain = (decimal)periodtran.Amount - (decimal)periodtran.Paidamount;
+                periodtran.tdate_pay = DateTime.ParseExact(periodtran.Tdateformat, "yyyyMMdd", null);
+                periodtran.currentdate = DateTime.ParseExact(DateTime.Now.ToString("yyyyMMdd"), "yyyyMMdd", null);
+                periodtran.ck_receipt = receipt.Any(s => s.Promiseno == periodtran.Promiseno);
+
+                if (periodtran.Deposit != 0)
+                { periodtran.ck_deposit = true; }
+                else
+                {
+                    periodtran.ck_deposit = false;
+                }
+                if (periodtran.Cappaid != 0 && periodtran.Intpaid != 0)
+                {
+                    periodtran.style_color = "color: blue;";
+                    periodtran.ck_paid = true;
+                    // periodtran.amount_remain = (decimal)periodtran.Amount - (decimal)periodtran.Paidamount;
+
+                }
+                else
+                {
+                    if (periodtran.currentdate > periodtran.tdate_pay)
+                    {
+                        periodtran.amount_remain = (decimal)periodtran.Amount - (decimal)periodtran.Paidamount;
+                        TimeSpan diffdate = periodtran.currentdate.Date - periodtran.tdate_pay;
+                        periodtran.latedate = diffdate.Days;
+                        if (periodtran.latedate > config.Daylate)
+                        {
+                            periodtran.total_fee = (decimal)CalculateAmountFee((decimal)periodtran.amount_remain, periodtran.latedate, (decimal)config.Taxrate);
+                        }
+                        periodtran.style_color = "color: red;";
+                        periodtran.ck_paid = false;
+                        periodtran.check_overpay = true;
+
+                        cnt_overpayment += 1;
+                        periodtran.OverPayQty = cnt_overpayment;
+
+                        if (periodtran.latedate >= 30)
+                        {
+                            if (cnt_overpayment > 0)
+                            {
+                                //  periodtran.total_charge_follow = (decimal)config.Followamt;
+                                periodtran.total_charge_follow = 100;
+                            }
+
+                        }
+                        periodtran.total_amount_per_period = (decimal)periodtran.Amount + periodtran.total_fee + periodtran.total_charge_follow;
+
+
+                    }
+                    else
+                    {
+                        periodtran.latedate = 0;
+                        periodtran.style_color = "color: black;";
+                        periodtran.check_overpay = false;
+                        periodtran.ck_paid = false;
+                    }
+
+                    //try
+                    //{
+                    //    if (receipt.Any(s => s.PeriodtranId == periodtran.Id))
+                    //    {
+                    //        periodtran.Paidremain = receipt.Where(s => s.PeriodtranId == periodtran.Id).FirstOrDefault().Amount;
+                    //        //var total_follow_charge = (decimal)receipt.Where(s => s.PeriodtranId == periodtran.Id).Select(s => s.Receipttran.Charge2amt).FirstOrDefault();
+                    //        //var total_fee = (decimal)receipt.Where(s => s.PeriodtranId == periodtran.Id).Select(s => s.Receipttran.Charge1amt).FirstOrDefault();
+
+                    //        //if (periodtran.total_charge_follow != 0 && periodtran.total_fee != 0)
+                    //        //{
+                    //        //    periodtran.total_charge_follow = periodtran.total_charge_follow - total_follow_charge;
+                    //        //    periodtran.total_fee = periodtran.total_fee - total_fee;
+                    //        //}
+
+
+                    //    }
+
+                    //}
+                    //catch (Exception ex) { periodtran.Paidremain = 0; }
+
+                    //if (periodtran.Paidremain != 0)
+                    //{
+                    //    periodtran.amount_remain = ((decimal)periodtran.Amount + (decimal)periodtran.Paidremain) - (decimal)periodtran.Deposit;
+                    //    periodtran.total_deptAmount = (decimal)periodtran.amount_remain;
+
+                    //    periodtran.Paidamount = (decimal)periodtran.Deposit + ((decimal)periodtran.Paidremain * -1);
+
+
+                    //}
+
+
+                }
+                periodtran.Receiptdescs = db_v.Receiptdescs.Where(s => s.Promiseno == periodtran.Promiseno && s.Period == periodtran.Period).ToList();
+            }
+            return data;
+        }
         public async Task<List<Models.Receiptdesc>> GetReceipttran(int peroidtran_id,string type) 
         {
             int receiptran_id = 0;
@@ -445,6 +644,19 @@ namespace SingSiamOffice.Manage
             // var next_no = db.RunningNos.AsNoTracking().Where(s => s.BranchId == branch_id && s.Type == type).FirstOrDefault().NextNo;
             var stationno = db_nv.Branches.AsNoTracking().Where(s => s.Code == branch_code).FirstOrDefault();
             var branch = db_nv.Stations.AsNoTracking().Where(s => s.Branch == stationno.Name).FirstOrDefault();
+            //   var branch_province = branch.ProvinceNavigation.ProvinceShortEn;
+            var next_no = branch.Receiptno + 1;
+            int nextNo = Convert.ToInt32(next_no);
+            string numberPart = nextNo.ToString("D7");
+            string prefix = branch.Stationno.Trim() + "-";
+            var receipt_no = prefix + numberPart;
+            return receipt_no;
+        }
+        public async Task<string> Get_Receipt_No_V(string branch_code, string type)
+        {
+            // var next_no = db.RunningNos.AsNoTracking().Where(s => s.BranchId == branch_id && s.Type == type).FirstOrDefault().NextNo;
+            var stationno = db_v.Branches.AsNoTracking().Where(s => s.Code == branch_code).FirstOrDefault();
+            var branch = db_v.Stations.AsNoTracking().Where(s => s.Branch == stationno.Name).FirstOrDefault();
             //   var branch_province = branch.ProvinceNavigation.ProvinceShortEn;
             var next_no = branch.Receiptno + 1;
             int nextNo = Convert.ToInt32(next_no);

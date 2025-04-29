@@ -9,17 +9,13 @@ public partial class ZzRepCov
 
     public string? Branch { get; set; }
 
-    public string BranchName { get; set; } = null!;
-
     public string? Tdate { get; set; }
 
-    public string? TdateFormat { get; set; }
+    public string? Tdateformat { get; set; }
 
-    public string? DocNo { get; set; }
+    public string? Docno { get; set; }
 
-    public string? AccNo { get; set; }
-
-    public string? Name { get; set; }
+    public string? Accno { get; set; }
 
     public string? Tdesc { get; set; }
 
@@ -27,5 +23,9 @@ public partial class ZzRepCov
 
     public double? Expense { get; set; }
 
-    public string? PromiseNo { get; set; }
+    public string? Promiseno { get; set; }
+
+    public string? Usercode { get; set; }
+
+    public string? Clientno { get; set; }
 }

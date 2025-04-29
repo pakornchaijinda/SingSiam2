@@ -51,6 +51,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.CustomerInfo
 
         private List<Promise> lst_Promises = new List<Promise>();
         private List<Models.SingSiamOld.Listpromise> lst_promiseold_nv = new List<Models.SingSiamOld.Listpromise>();
+        private List<Models.SingSiamOld2.Listpromise> lst_promiseold_v = new List<Models.SingSiamOld2.Listpromise>();
         async private void remove(int cus_id)
         {
             var confirm = await JSRuntime.InvokeAsync<bool>("confirmdelete");
@@ -156,6 +157,11 @@ namespace SingSiamOffice.Pages.CustomerManagement.CustomerInfo
             promise_no = promise_no.Replace("#", "_");
             navigationManager.NavigateTo($"/view-contract_nv/{branch_code}/{cus_id}?promiseno="+ promise_no);
         }
+        private void viewContractOld_V(int cus_id, string promise_no, string? branch_code = null)
+        {
+            promise_no = promise_no.Replace("#", "_");
+            navigationManager.NavigateTo($"/view-contract_nv/{branch_code}/{cus_id}?promiseno=" + promise_no);
+        }
         private void canclePayment(int promise_id)
         {
             navigationManager.NavigateTo($"/deletepayment/{promise_id}");
@@ -195,6 +201,11 @@ namespace SingSiamOffice.Pages.CustomerManagement.CustomerInfo
         {
             promise_no = promise_no.Replace("#", "_");
             navigationManager.NavigateTo($"/paymentlistnv/{branch_code}/{cus_id}?promiseno=" + promise_no);
+        }
+        private void goPayment_V(int cus_id, string promise_no, string? branch_code = null)
+        {
+            promise_no = promise_no.Replace("#", "_");
+            navigationManager.NavigateTo($"/paymentlistv/{branch_code}/{cus_id}?promiseno=" + promise_no);
         }
     }
 }

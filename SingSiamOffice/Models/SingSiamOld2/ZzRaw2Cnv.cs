@@ -5,25 +5,23 @@ namespace SingSiamOffice.Models.SingSiamOld2;
 
 public partial class ZzRaw2Cnv
 {
-    public int Id { get; set; }
-
-    public string? Branch { get; set; }
-
-    public string? Tdate { get; set; }
-
-    public string? TdateFormat { get; set; }
-
-    public string? DocNo { get; set; }
-
-    public string? AccNo { get; set; }
-
-    public string? Name { get; set; }
-
-    public string? Tdesc { get; set; }
-
-    public double? Income { get; set; }
-
-    public double? Expense { get; set; }
-
     public string? PromiseNo { get; set; }
+
+    public long Period1 { get; set; }
+
+    public double? Capital1 { get; set; }
+
+    public double? Interest1 { get; set; }
+
+    public double? Amount1 { get; set; }
+
+    public double? CapPaid1 { get; set; }
+
+    public double? IntPaid1 { get; set; }
+
+    public double? SrvPaid1 { get; set; }
+
+    public double? InsPaid1 { get; set; }
+
+    public double? PaidAmount1 { get; set; }
 }
