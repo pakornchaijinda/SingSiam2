@@ -5,11 +5,29 @@ namespace SingSiamOffice.Models.SingSiamOld;
 
 public partial class ZzRaw4Pb
 {
-    public int Pid { get; set; }
+    public string? PromiseNo { get; set; }
 
-    public string? Promiseno { get; set; }
+    public string? RefCode { get; set; }
+
+    public double? Deposit { get; set; }
+
+    public string? Product { get; set; }
+
+    public string? Branch { get; set; }
+
+    public string BranchName { get; set; } = null!;
+
+    public int? Ptype { get; set; }
+
+    public string? Customer { get; set; }
+
+    public string? Name { get; set; }
+
+    public string? Telephone { get; set; }
 
     public int? Period { get; set; }
+
+    public int? Periods { get; set; }
 
     public string? Tdate { get; set; }
 
@@ -19,33 +37,13 @@ public partial class ZzRaw4Pb
 
     public double? Amount { get; set; }
 
-    public double? Cappaid { get; set; }
+    public double? CapPaid { get; set; }
 
-    public double? Intpaid { get; set; }
+    public double? IntPaid { get; set; }
 
-    public double? Paidamount { get; set; }
+    public double? SrvPaid { get; set; }
 
-    public string? Rdate { get; set; }
+    public double? InsPaid { get; set; }
 
-    public string? Receiptno { get; set; }
-
-    public double? Rcappaid { get; set; }
-
-    public double? Rintpaid { get; set; }
-
-    public double? Ramount { get; set; }
-
-    public double? Deposit { get; set; }
-
-    public double? Loanplus { get; set; }
-
-    public double? Loanminus { get; set; }
-
-    public double? Chargeamt { get; set; }
-
-    public double? Lateamt { get; set; }
-
-    public double? Srvpaid { get; set; }
-
-    public double? Inspaid { get; set; }
+    public double? PaidAmount { get; set; }
 }

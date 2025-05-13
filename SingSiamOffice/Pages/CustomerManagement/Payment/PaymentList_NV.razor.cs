@@ -80,6 +80,10 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
             promiseno = query["promiseno"];
             promiseno = promiseno.Replace('_', '#').ToString();
             customer_data = await managements.GetCustomerbyId(cus_id);
+
+            _promise = new Models.SingSiamOld.Promise();
+            _Periodtrans = new List<Models.SingSiamOld.Periodtran>();
+
             _promise = await managements.GetPromiseDetailNVbyPermiseNo(promiseno);
             _Periodtrans = await managements.GetPeriodtransbyPromise_NV(promiseno);
 
@@ -581,9 +585,9 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                                 }
 
                                 await promiseManagement.addReceipdesc_nv(lst_receiptdescs);
-
+                                await Task.Delay(1000);
                                 await JSRuntime.InvokeVoidAsync("paymentsuccess");
-                                await Task.Delay(100);
+                                await Task.Delay(2000);
 
                                 //    navigationManager.NavigateTo($"/paymentlist/{branch_id}/{c_id}/{promise_id}");
                                 var p_no = _promise.Promiseno.Replace("#", "_");
@@ -775,9 +779,9 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
 
                                 //Check Close Promise 
                                 await promiseManagement.updateClosePromiseNV(_promise.Promiseno);
-                                await Task.Delay(1000);
+                                await Task.Delay(2000);
                                 await JSRuntime.InvokeVoidAsync("paymentsuccess");
-                                await Task.Delay(100);
+                                await Task.Delay(1000);
 
 
                                 var p_no = _promise.Promiseno.Replace("#", "_");

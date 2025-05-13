@@ -50,8 +50,8 @@ namespace SingSiamOffice.Pages.CustomerManagement.CustomerInfo
 
 
         private List<Promise> lst_Promises = new List<Promise>();
-        private List<Models.SingSiamOld.Listpromise> lst_promiseold_nv = new List<Models.SingSiamOld.Listpromise>();
-        private List<Models.SingSiamOld2.Listpromise> lst_promiseold_v = new List<Models.SingSiamOld2.Listpromise>();
+        private List<Models.SingSiamOld.Getpromise> lst_promiseold_nv = new List<Models.SingSiamOld.Getpromise>();
+        private List<Models.SingSiamOld2.Getpromise> lst_promiseold_v = new List<Models.SingSiamOld2.Getpromise>();
         async private void remove(int cus_id)
         {
             var confirm = await JSRuntime.InvokeAsync<bool>("confirmdelete");

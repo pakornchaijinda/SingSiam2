@@ -9,7 +9,7 @@ public partial class Listpromise
 
     public DateTime? Tdatetime { get; set; }
 
-    public string? Type { get; set; }
+    public int? Type { get; set; }
 
     public string? Refcode { get; set; }
 

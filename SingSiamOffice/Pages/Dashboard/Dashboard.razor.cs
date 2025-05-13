@@ -11,7 +11,8 @@ namespace SingSiamOffice.Pages.Dashboard
         IJSRuntime JSRuntime { get; set; }
         [Inject]
         NavigationManager navigationManager { get; set; }
-
+        [Inject]
+        Manage.Managements Managements { get; set; }
 
         private string role { get; set; } = "employee";
 

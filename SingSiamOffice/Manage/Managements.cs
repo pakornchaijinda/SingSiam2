@@ -14,7 +14,7 @@ namespace SingSiamOffice.Manage
     {
         SingsiamdbContext db = new SingsiamdbContext();
         _01singsiamContext db_nv = new _01singsiamContext();
-        _02singsiamContext db_v = new _02singsiamContext();
+        _02singsiamContext db_v = new _02singsiamContext(); 
         NumberToText text = new NumberToText();
         public async Task<List<Models.Promise>> GetPromisebyCustomerId(int customer_id)
         {
@@ -31,15 +31,15 @@ namespace SingSiamOffice.Manage
             }
             return data;
         }
-        public async Task<List<Models.SingSiamOld.Listpromise>> GetPromiseNVbyCustomerId(string customer_natid)
+        public async Task<List<Models.SingSiamOld.Getpromise>> GetPromiseNVbyCustomerId(string customer_natid)
         {
-            var list_data = db_nv.Listpromises.Where(s => s.Customer == customer_natid).ToList();
+            var list_data = db_nv.Getpromises.Where(s => s.Customer == customer_natid).ToList();
 
             return list_data;
         }
-        public async Task<List<Models.SingSiamOld2.Listpromise>> GetPromiseVbyCustomerId(string customer_natid)
+        public async Task<List<Models.SingSiamOld2.Getpromise>> GetPromiseVbyCustomerId(string customer_natid)
         {
-            var list_data = db_v.Listpromises.Where(s => s.Customer == customer_natid).ToList();
+            var list_data = db_v.Getpromises.Where(s => s.Customer == customer_natid).ToList();
 
             return list_data;
         }
@@ -320,84 +320,169 @@ namespace SingSiamOffice.Manage
                 {
                     periodtran.ck_deposit = false;
                 }
-                if (periodtran.Cappaid != 0 && periodtran.Intpaid != 0)
+                if (periodtran.Ptype == 2)
                 {
-                    periodtran.style_color = "color: blue;";
-                    periodtran.ck_paid = true;
-                   // periodtran.amount_remain = (decimal)periodtran.Amount - (decimal)periodtran.Paidamount;
-
-                }
-                else
-                {
-                    if (periodtran.currentdate > periodtran.tdate_pay)
+                    if (periodtran.Intpaid != 0)
                     {
-                        periodtran.amount_remain = (decimal)periodtran.Amount - (decimal)periodtran.Paidamount;
-                        TimeSpan diffdate = periodtran.currentdate.Date - periodtran.tdate_pay;
-                        periodtran.latedate = diffdate.Days;
-                        if (periodtran.latedate > config.Daylate)
-                        {
-                            periodtran.total_fee = (decimal)CalculateAmountFee((decimal)periodtran.amount_remain, periodtran.latedate, (decimal)config.Taxrate);
-                        }
-                        periodtran.style_color = "color: red;";
-                        periodtran.ck_paid = false;
-                        periodtran.check_overpay = true;
-                       
-                        cnt_overpayment += 1;
-                        periodtran.OverPayQty = cnt_overpayment;
-
-                        if (periodtran.latedate >= 30)
-                        {
-                            if (cnt_overpayment > 0)
-                            {
-                              //  periodtran.total_charge_follow = (decimal)config.Followamt;
-                                periodtran.total_charge_follow = 100;
-                            }
-
-                        }
-                        periodtran.total_amount_per_period = (decimal)periodtran.Amount + periodtran.total_fee + periodtran.total_charge_follow;
-
+                        periodtran.style_color = "color: blue;";
+                        periodtran.ck_paid = true;
+                        // periodtran.amount_remain = (decimal)periodtran.Amount - (decimal)periodtran.Paidamount;
 
                     }
                     else
                     {
-                        periodtran.latedate = 0;
-                        periodtran.style_color = "color: black;";
-                        periodtran.check_overpay = false;
-                        periodtran.ck_paid = false;
+                        if (periodtran.currentdate > periodtran.tdate_pay)
+                        {
+                            periodtran.amount_remain = (decimal)periodtran.Amount - (decimal)periodtran.Paidamount;
+                            TimeSpan diffdate = periodtran.currentdate.Date - periodtran.tdate_pay;
+                            periodtran.latedate = diffdate.Days;
+                            if (periodtran.latedate > config.Daylate)
+                            {
+                                periodtran.total_fee = (decimal)CalculateAmountFee((decimal)periodtran.amount_remain, periodtran.latedate, (decimal)config.Taxrate);
+                            }
+                            periodtran.style_color = "color: red;";
+                            periodtran.ck_paid = false;
+                            periodtran.check_overpay = true;
+
+                            cnt_overpayment += 1;
+                            periodtran.OverPayQty = cnt_overpayment;
+
+                            if (periodtran.latedate >= 30)
+                            {
+                                if (cnt_overpayment > 0)
+                                {
+                                    //  periodtran.total_charge_follow = (decimal)config.Followamt;
+                                    periodtran.total_charge_follow = 100;
+                                }
+
+                            }
+                            periodtran.total_amount_per_period = (decimal)periodtran.Amount + periodtran.total_fee + periodtran.total_charge_follow;
+
+
+                        }
+                        else
+                        {
+                            periodtran.latedate = 0;
+                            periodtran.style_color = "color: black;";
+                            periodtran.check_overpay = false;
+                            periodtran.ck_paid = false;
+                        }
+
+                        //try
+                        //{
+                        //    if (receipt.Any(s => s.PeriodtranId == periodtran.Id))
+                        //    {
+                        //        periodtran.Paidremain = receipt.Where(s => s.PeriodtranId == periodtran.Id).FirstOrDefault().Amount;
+                        //        //var total_follow_charge = (decimal)receipt.Where(s => s.PeriodtranId == periodtran.Id).Select(s => s.Receipttran.Charge2amt).FirstOrDefault();
+                        //        //var total_fee = (decimal)receipt.Where(s => s.PeriodtranId == periodtran.Id).Select(s => s.Receipttran.Charge1amt).FirstOrDefault();
+
+                        //        //if (periodtran.total_charge_follow != 0 && periodtran.total_fee != 0)
+                        //        //{
+                        //        //    periodtran.total_charge_follow = periodtran.total_charge_follow - total_follow_charge;
+                        //        //    periodtran.total_fee = periodtran.total_fee - total_fee;
+                        //        //}
+
+
+                        //    }
+
+                        //}
+                        //catch (Exception ex) { periodtran.Paidremain = 0; }
+
+                        //if (periodtran.Paidremain != 0)
+                        //{
+                        //    periodtran.amount_remain = ((decimal)periodtran.Amount + (decimal)periodtran.Paidremain) - (decimal)periodtran.Deposit;
+                        //    periodtran.total_deptAmount = (decimal)periodtran.amount_remain;
+
+                        //    periodtran.Paidamount = (decimal)periodtran.Deposit + ((decimal)periodtran.Paidremain * -1);
+
+
+                        //}
+
+
                     }
-
-                    //try
-                    //{
-                    //    if (receipt.Any(s => s.PeriodtranId == periodtran.Id))
-                    //    {
-                    //        periodtran.Paidremain = receipt.Where(s => s.PeriodtranId == periodtran.Id).FirstOrDefault().Amount;
-                    //        //var total_follow_charge = (decimal)receipt.Where(s => s.PeriodtranId == periodtran.Id).Select(s => s.Receipttran.Charge2amt).FirstOrDefault();
-                    //        //var total_fee = (decimal)receipt.Where(s => s.PeriodtranId == periodtran.Id).Select(s => s.Receipttran.Charge1amt).FirstOrDefault();
-
-                    //        //if (periodtran.total_charge_follow != 0 && periodtran.total_fee != 0)
-                    //        //{
-                    //        //    periodtran.total_charge_follow = periodtran.total_charge_follow - total_follow_charge;
-                    //        //    periodtran.total_fee = periodtran.total_fee - total_fee;
-                    //        //}
-
-
-                    //    }
-
-                    //}
-                    //catch (Exception ex) { periodtran.Paidremain = 0; }
-
-                    //if (periodtran.Paidremain != 0)
-                    //{
-                    //    periodtran.amount_remain = ((decimal)periodtran.Amount + (decimal)periodtran.Paidremain) - (decimal)periodtran.Deposit;
-                    //    periodtran.total_deptAmount = (decimal)periodtran.amount_remain;
-
-                    //    periodtran.Paidamount = (decimal)periodtran.Deposit + ((decimal)periodtran.Paidremain * -1);
-
-
-                    //}
-         
-                  
                 }
+                else 
+                {
+                    if (periodtran.Cappaid != 0 && periodtran.Intpaid != 0)
+                    {
+                        periodtran.style_color = "color: blue;";
+                        periodtran.ck_paid = true;
+                        // periodtran.amount_remain = (decimal)periodtran.Amount - (decimal)periodtran.Paidamount;
+
+                    }
+                    else
+                    {
+                        if (periodtran.currentdate > periodtran.tdate_pay)
+                        {
+                            periodtran.amount_remain = (decimal)periodtran.Amount - (decimal)periodtran.Paidamount;
+                            TimeSpan diffdate = periodtran.currentdate.Date - periodtran.tdate_pay;
+                            periodtran.latedate = diffdate.Days;
+                            if (periodtran.latedate > config.Daylate)
+                            {
+                                periodtran.total_fee = (decimal)CalculateAmountFee((decimal)periodtran.amount_remain, periodtran.latedate, (decimal)config.Taxrate);
+                            }
+                            periodtran.style_color = "color: red;";
+                            periodtran.ck_paid = false;
+                            periodtran.check_overpay = true;
+
+                            cnt_overpayment += 1;
+                            periodtran.OverPayQty = cnt_overpayment;
+
+                            if (periodtran.latedate >= 30)
+                            {
+                                if (cnt_overpayment > 0)
+                                {
+                                    //  periodtran.total_charge_follow = (decimal)config.Followamt;
+                                    periodtran.total_charge_follow = 100;
+                                }
+
+                            }
+                            periodtran.total_amount_per_period = (decimal)periodtran.Amount + periodtran.total_fee + periodtran.total_charge_follow;
+
+
+                        }
+                        else
+                        {
+                            periodtran.latedate = 0;
+                            periodtran.style_color = "color: black;";
+                            periodtran.check_overpay = false;
+                            periodtran.ck_paid = false;
+                        }
+
+                        //try
+                        //{
+                        //    if (receipt.Any(s => s.PeriodtranId == periodtran.Id))
+                        //    {
+                        //        periodtran.Paidremain = receipt.Where(s => s.PeriodtranId == periodtran.Id).FirstOrDefault().Amount;
+                        //        //var total_follow_charge = (decimal)receipt.Where(s => s.PeriodtranId == periodtran.Id).Select(s => s.Receipttran.Charge2amt).FirstOrDefault();
+                        //        //var total_fee = (decimal)receipt.Where(s => s.PeriodtranId == periodtran.Id).Select(s => s.Receipttran.Charge1amt).FirstOrDefault();
+
+                        //        //if (periodtran.total_charge_follow != 0 && periodtran.total_fee != 0)
+                        //        //{
+                        //        //    periodtran.total_charge_follow = periodtran.total_charge_follow - total_follow_charge;
+                        //        //    periodtran.total_fee = periodtran.total_fee - total_fee;
+                        //        //}
+
+
+                        //    }
+
+                        //}
+                        //catch (Exception ex) { periodtran.Paidremain = 0; }
+
+                        //if (periodtran.Paidremain != 0)
+                        //{
+                        //    periodtran.amount_remain = ((decimal)periodtran.Amount + (decimal)periodtran.Paidremain) - (decimal)periodtran.Deposit;
+                        //    periodtran.total_deptAmount = (decimal)periodtran.amount_remain;
+
+                        //    periodtran.Paidamount = (decimal)periodtran.Deposit + ((decimal)periodtran.Paidremain * -1);
+
+
+                        //}
+
+
+                    }
+                }
+              
                 periodtran.Receiptdescs = db_nv.Receiptdescs.Where(s => s.Promiseno == periodtran.Promiseno && s.Period == periodtran.Period).ToList();
             }
             return data;
@@ -423,83 +508,167 @@ namespace SingSiamOffice.Manage
                 {
                     periodtran.ck_deposit = false;
                 }
-                if (periodtran.Cappaid != 0 && periodtran.Intpaid != 0)
+                if (periodtran.Ptype == 2)
                 {
-                    periodtran.style_color = "color: blue;";
-                    periodtran.ck_paid = true;
-                    // periodtran.amount_remain = (decimal)periodtran.Amount - (decimal)periodtran.Paidamount;
-
-                }
-                else
-                {
-                    if (periodtran.currentdate > periodtran.tdate_pay)
+                    if (periodtran.Intpaid != 0)
                     {
-                        periodtran.amount_remain = (decimal)periodtran.Amount - (decimal)periodtran.Paidamount;
-                        TimeSpan diffdate = periodtran.currentdate.Date - periodtran.tdate_pay;
-                        periodtran.latedate = diffdate.Days;
-                        if (periodtran.latedate > config.Daylate)
-                        {
-                            periodtran.total_fee = (decimal)CalculateAmountFee((decimal)periodtran.amount_remain, periodtran.latedate, (decimal)config.Taxrate);
-                        }
-                        periodtran.style_color = "color: red;";
-                        periodtran.ck_paid = false;
-                        periodtran.check_overpay = true;
-
-                        cnt_overpayment += 1;
-                        periodtran.OverPayQty = cnt_overpayment;
-
-                        if (periodtran.latedate >= 30)
-                        {
-                            if (cnt_overpayment > 0)
-                            {
-                                //  periodtran.total_charge_follow = (decimal)config.Followamt;
-                                periodtran.total_charge_follow = 100;
-                            }
-
-                        }
-                        periodtran.total_amount_per_period = (decimal)periodtran.Amount + periodtran.total_fee + periodtran.total_charge_follow;
-
+                        periodtran.style_color = "color: blue;";
+                        periodtran.ck_paid = true;
+                        // periodtran.amount_remain = (decimal)periodtran.Amount - (decimal)periodtran.Paidamount;
 
                     }
                     else
                     {
-                        periodtran.latedate = 0;
-                        periodtran.style_color = "color: black;";
-                        periodtran.check_overpay = false;
-                        periodtran.ck_paid = false;
+                        if (periodtran.currentdate > periodtran.tdate_pay)
+                        {
+                            periodtran.amount_remain = (decimal)periodtran.Amount - (decimal)periodtran.Paidamount;
+                            TimeSpan diffdate = periodtran.currentdate.Date - periodtran.tdate_pay;
+                            periodtran.latedate = diffdate.Days;
+                            if (periodtran.latedate > config.Daylate)
+                            {
+                                periodtran.total_fee = (decimal)CalculateAmountFee((decimal)periodtran.amount_remain, periodtran.latedate, (decimal)config.Taxrate);
+                            }
+                            periodtran.style_color = "color: red;";
+                            periodtran.ck_paid = false;
+                            periodtran.check_overpay = true;
+
+                            cnt_overpayment += 1;
+                            periodtran.OverPayQty = cnt_overpayment;
+
+                            if (periodtran.latedate >= 30)
+                            {
+                                if (cnt_overpayment > 0)
+                                {
+                                    //  periodtran.total_charge_follow = (decimal)config.Followamt;
+                                    periodtran.total_charge_follow = 100;
+                                }
+
+                            }
+                            periodtran.total_amount_per_period = (decimal)periodtran.Amount + periodtran.total_fee + periodtran.total_charge_follow;
+
+
+                        }
+                        else
+                        {
+                            periodtran.latedate = 0;
+                            periodtran.style_color = "color: black;";
+                            periodtran.check_overpay = false;
+                            periodtran.ck_paid = false;
+                        }
+
+                        //try
+                        //{
+                        //    if (receipt.Any(s => s.PeriodtranId == periodtran.Id))
+                        //    {
+                        //        periodtran.Paidremain = receipt.Where(s => s.PeriodtranId == periodtran.Id).FirstOrDefault().Amount;
+                        //        //var total_follow_charge = (decimal)receipt.Where(s => s.PeriodtranId == periodtran.Id).Select(s => s.Receipttran.Charge2amt).FirstOrDefault();
+                        //        //var total_fee = (decimal)receipt.Where(s => s.PeriodtranId == periodtran.Id).Select(s => s.Receipttran.Charge1amt).FirstOrDefault();
+
+                        //        //if (periodtran.total_charge_follow != 0 && periodtran.total_fee != 0)
+                        //        //{
+                        //        //    periodtran.total_charge_follow = periodtran.total_charge_follow - total_follow_charge;
+                        //        //    periodtran.total_fee = periodtran.total_fee - total_fee;
+                        //        //}
+
+
+                        //    }
+
+                        //}
+                        //catch (Exception ex) { periodtran.Paidremain = 0; }
+
+                        //if (periodtran.Paidremain != 0)
+                        //{
+                        //    periodtran.amount_remain = ((decimal)periodtran.Amount + (decimal)periodtran.Paidremain) - (decimal)periodtran.Deposit;
+                        //    periodtran.total_deptAmount = (decimal)periodtran.amount_remain;
+
+                        //    periodtran.Paidamount = (decimal)periodtran.Deposit + ((decimal)periodtran.Paidremain * -1);
+
+
+                        //}
+
+
                     }
+                }
+                else
+                {
+                    if (periodtran.Cappaid != 0 && periodtran.Intpaid != 0)
+                    {
+                        periodtran.style_color = "color: blue;";
+                        periodtran.ck_paid = true;
+                        // periodtran.amount_remain = (decimal)periodtran.Amount - (decimal)periodtran.Paidamount;
 
-                    //try
-                    //{
-                    //    if (receipt.Any(s => s.PeriodtranId == periodtran.Id))
-                    //    {
-                    //        periodtran.Paidremain = receipt.Where(s => s.PeriodtranId == periodtran.Id).FirstOrDefault().Amount;
-                    //        //var total_follow_charge = (decimal)receipt.Where(s => s.PeriodtranId == periodtran.Id).Select(s => s.Receipttran.Charge2amt).FirstOrDefault();
-                    //        //var total_fee = (decimal)receipt.Where(s => s.PeriodtranId == periodtran.Id).Select(s => s.Receipttran.Charge1amt).FirstOrDefault();
+                    }
+                    else
+                    {
+                        if (periodtran.currentdate > periodtran.tdate_pay)
+                        {
+                            periodtran.amount_remain = (decimal)periodtran.Amount - (decimal)periodtran.Paidamount;
+                            TimeSpan diffdate = periodtran.currentdate.Date - periodtran.tdate_pay;
+                            periodtran.latedate = diffdate.Days;
+                            if (periodtran.latedate > config.Daylate)
+                            {
+                                periodtran.total_fee = (decimal)CalculateAmountFee((decimal)periodtran.amount_remain, periodtran.latedate, (decimal)config.Taxrate);
+                            }
+                            periodtran.style_color = "color: red;";
+                            periodtran.ck_paid = false;
+                            periodtran.check_overpay = true;
 
-                    //        //if (periodtran.total_charge_follow != 0 && periodtran.total_fee != 0)
-                    //        //{
-                    //        //    periodtran.total_charge_follow = periodtran.total_charge_follow - total_follow_charge;
-                    //        //    periodtran.total_fee = periodtran.total_fee - total_fee;
-                    //        //}
+                            cnt_overpayment += 1;
+                            periodtran.OverPayQty = cnt_overpayment;
+
+                            if (periodtran.latedate >= 30)
+                            {
+                                if (cnt_overpayment > 0)
+                                {
+                                    //  periodtran.total_charge_follow = (decimal)config.Followamt;
+                                    periodtran.total_charge_follow = 100;
+                                }
+
+                            }
+                            periodtran.total_amount_per_period = (decimal)periodtran.Amount + periodtran.total_fee + periodtran.total_charge_follow;
 
 
-                    //    }
+                        }
+                        else
+                        {
+                            periodtran.latedate = 0;
+                            periodtran.style_color = "color: black;";
+                            periodtran.check_overpay = false;
+                            periodtran.ck_paid = false;
+                        }
 
-                    //}
-                    //catch (Exception ex) { periodtran.Paidremain = 0; }
+                        //try
+                        //{
+                        //    if (receipt.Any(s => s.PeriodtranId == periodtran.Id))
+                        //    {
+                        //        periodtran.Paidremain = receipt.Where(s => s.PeriodtranId == periodtran.Id).FirstOrDefault().Amount;
+                        //        //var total_follow_charge = (decimal)receipt.Where(s => s.PeriodtranId == periodtran.Id).Select(s => s.Receipttran.Charge2amt).FirstOrDefault();
+                        //        //var total_fee = (decimal)receipt.Where(s => s.PeriodtranId == periodtran.Id).Select(s => s.Receipttran.Charge1amt).FirstOrDefault();
 
-                    //if (periodtran.Paidremain != 0)
-                    //{
-                    //    periodtran.amount_remain = ((decimal)periodtran.Amount + (decimal)periodtran.Paidremain) - (decimal)periodtran.Deposit;
-                    //    periodtran.total_deptAmount = (decimal)periodtran.amount_remain;
-
-                    //    periodtran.Paidamount = (decimal)periodtran.Deposit + ((decimal)periodtran.Paidremain * -1);
-
-
-                    //}
+                        //        //if (periodtran.total_charge_follow != 0 && periodtran.total_fee != 0)
+                        //        //{
+                        //        //    periodtran.total_charge_follow = periodtran.total_charge_follow - total_follow_charge;
+                        //        //    periodtran.total_fee = periodtran.total_fee - total_fee;
+                        //        //}
 
 
+                        //    }
+
+                        //}
+                        //catch (Exception ex) { periodtran.Paidremain = 0; }
+
+                        //if (periodtran.Paidremain != 0)
+                        //{
+                        //    periodtran.amount_remain = ((decimal)periodtran.Amount + (decimal)periodtran.Paidremain) - (decimal)periodtran.Deposit;
+                        //    periodtran.total_deptAmount = (decimal)periodtran.amount_remain;
+
+                        //    periodtran.Paidamount = (decimal)periodtran.Deposit + ((decimal)periodtran.Paidremain * -1);
+
+
+                        //}
+
+
+                    }
                 }
                 periodtran.Receiptdescs = db_v.Receiptdescs.Where(s => s.Promiseno == periodtran.Promiseno && s.Period == periodtran.Period).ToList();
             }
@@ -614,6 +783,42 @@ namespace SingSiamOffice.Manage
 
             return ck;
         }
+        //อัพเดทเงินสด
+        public async Task<bool> Update_Cash(int branch_id,CashLog cashLogs)
+        {
+            var toedit = db.CashLogs.Where(s => s.BranchId == branch_id && s.DateCreate.Date == DateTime.Now.Date).FirstOrDefault();
+
+            if (toedit == null)
+            {
+
+                db.CashLogs.Add(cashLogs);
+                await db.SaveChangesAsync();
+               
+            }
+            else 
+            {
+                toedit.Log1000 = cashLogs.Log1000;
+                toedit.Log500 = cashLogs.Log500;
+                toedit.Log100 = cashLogs.Log100;
+                toedit.Log50 = cashLogs.Log50;
+                toedit.Log20 = cashLogs.Log20;
+                toedit.Log10 = cashLogs.Log10;
+                toedit.Log5 = cashLogs.Log5;
+                toedit.Log2 = cashLogs.Log2;
+                toedit.Log1 = cashLogs.Log1;
+                toedit.DateCreate = DateTime.Now;
+
+                db.CashLogs.Update(toedit);
+                await db.SaveChangesAsync();
+              
+            }
+            return true;
+        }
+        public async Task<CashLog> Get_Cash(int branch_id)
+        {
+            var cash = db.CashLogs.AsNoTracking().Where(s => s.BranchId == branch_id && s.DateCreate.Date == DateTime.Now.Date).FirstOrDefault();
+            return cash;
+        }
         public async Task<string> Get_Promise_No(int branch_id, string type)
         {
             //var next_no = db.RunningNos.AsNoTracking().Where(s => s.BranchId == branch_id && s.Type == type).FirstOrDefault().NextNo;
@@ -643,7 +848,7 @@ namespace SingSiamOffice.Manage
         {
             // var next_no = db.RunningNos.AsNoTracking().Where(s => s.BranchId == branch_id && s.Type == type).FirstOrDefault().NextNo;
             var stationno = db_nv.Branches.AsNoTracking().Where(s => s.Code == branch_code).FirstOrDefault();
-            var branch = db_nv.Stations.AsNoTracking().Where(s => s.Branch == stationno.Name).FirstOrDefault();
+            var branch = db_nv.Stations.AsNoTracking().Where(s => s.Branch.Contains(stationno.Name)).FirstOrDefault();
             //   var branch_province = branch.ProvinceNavigation.ProvinceShortEn;
             var next_no = branch.Receiptno + 1;
             int nextNo = Convert.ToInt32(next_no);
@@ -656,7 +861,7 @@ namespace SingSiamOffice.Manage
         {
             // var next_no = db.RunningNos.AsNoTracking().Where(s => s.BranchId == branch_id && s.Type == type).FirstOrDefault().NextNo;
             var stationno = db_v.Branches.AsNoTracking().Where(s => s.Code == branch_code).FirstOrDefault();
-            var branch = db_v.Stations.AsNoTracking().Where(s => s.Branch == stationno.Name).FirstOrDefault();
+            var branch = db_v.Stations.AsNoTracking().Where(s => s.Branch.Contains(stationno.Name)).FirstOrDefault();
             //   var branch_province = branch.ProvinceNavigation.ProvinceShortEn;
             var next_no = branch.Receiptno + 1;
             int nextNo = Convert.ToInt32(next_no);

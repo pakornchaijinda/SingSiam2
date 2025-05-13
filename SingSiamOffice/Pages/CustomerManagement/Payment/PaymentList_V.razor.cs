@@ -81,6 +81,10 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
             promiseno = query["promiseno"];
             promiseno = promiseno.Replace('_', '#').ToString();
             customer_data = await managements.GetCustomerbyId(cus_id);
+
+            _promise = new Models.SingSiamOld2.Promise();
+            _Periodtrans = new List<Models.SingSiamOld2.Periodtran>();
+
             _promise = await managements.GetPromiseDetailVbyPermiseNo(promiseno);
             _Periodtrans = await managements.GetPeriodtransbyPromise_V(promiseno);
 
@@ -221,11 +225,11 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                         await promiseManagement.addReceipdesc_v(_Receiptdescs);
 
                         await JSRuntime.InvokeVoidAsync("paymentsuccess");
-                        await Task.Delay(100);
+                        await Task.Delay(1000);
 
                         //    navigationManager.NavigateTo($"/paymentlist/{branch_id}/{c_id}/{promise_id}");
                         var p_no = _promise.Promiseno.Replace("#", "_");
-                        navigationManager.NavigateTo($"/paymentlistnv/{branch_code}/{cus_id}?promiseno=" + p_no, forceLoad: true);
+                        navigationManager.NavigateTo($"/paymentlistv/{branch_code}/{cus_id}?promiseno=" + p_no, forceLoad: true);
                     }
                     else
                     {
@@ -384,9 +388,24 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                                         //ค่าติดตาม ค่าทวงถาม
                                         _receipttran_toAdd.Charge2amt = Convert.ToDouble(p.total_Charge_follow);
 
-                                        var lastPeriodtrans = _Periodtrans.Where(s => s.ck_paid == true).OrderByDescending(s => s.Period).FirstOrDefault();
-                                        var tdate_pay = lastPeriodtrans.tdate_pay;
-                                        TimeSpan diffdate = DateTime.Now - tdate_pay;
+                                        var lastPeriodtrans = _Periodtrans?.Where(s => s.ck_paid == true)
+                                      .OrderByDescending(s => s.Period)
+                                      .FirstOrDefault();
+
+                                        TimeSpan diffdate;
+
+                                        if (lastPeriodtrans == null || lastPeriodtrans.tdate_pay == null)
+                                        {
+                                            // If no paid transaction exists or tdate_pay is null, set diffdate to zero
+                                            diffdate = TimeSpan.Zero;
+                                        }
+                                        else
+                                        {
+                                            // Calculate the difference between now and the last payment date
+                                            diffdate = DateTime.Now - lastPeriodtrans.tdate_pay;
+                                        }
+
+
 
                                         var cnt_remainpay = diffdate.Days;
                                         p.temp_total_deptAmount = ((decimal)(_Periodtrans.FirstOrDefault().Amount * cnt_remainpay)) + totalFee + Convert.ToDecimal(p.total_Charge_follow);
@@ -585,11 +604,11 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                                 await promiseManagement.addReceipdesc_v(lst_receiptdescs);
 
                                 await JSRuntime.InvokeVoidAsync("paymentsuccess");
-                                await Task.Delay(100);
+                                await Task.Delay(2000);
 
                                 //    navigationManager.NavigateTo($"/paymentlist/{branch_id}/{c_id}/{promise_id}");
                                 var p_no = _promise.Promiseno.Replace("#", "_");
-                                navigationManager.NavigateTo($"/paymentlistnv/{branch_code}/{cus_id}?promiseno=" + p_no, forceLoad: true);
+                                navigationManager.NavigateTo($"/paymentlistv/{branch_code}/{cus_id}?promiseno=" + p_no, forceLoad: true);
                             }
                             else
                             {
@@ -777,13 +796,13 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
 
                                 //Check Close Promise 
                                 await promiseManagement.updateClosePromiseV(_promise.Promiseno);
-                                await Task.Delay(1000);
+                                await Task.Delay(2000);
                                 await JSRuntime.InvokeVoidAsync("paymentsuccess");
-                                await Task.Delay(100);
+                                await Task.Delay(1000);
 
 
                                 var p_no = _promise.Promiseno.Replace("#", "_");
-                                navigationManager.NavigateTo($"/paymentlistnv/{branch_code}/{cus_id}?promiseno=" + p_no, forceLoad: true);
+                                navigationManager.NavigateTo($"/paymentlistv/{branch_code}/{cus_id}?promiseno=" + p_no, forceLoad: true);
                                 //if (activeIndex == 0)
                                 //{
                                 //    var p_no = _promise.Promiseno.Replace("#", "_");
