@@ -601,14 +601,33 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
 
                                 }
 
-                                await promiseManagement.addReceipdesc_v(lst_receiptdescs);
+                               
 
-                                await JSRuntime.InvokeVoidAsync("paymentsuccess");
-                                await Task.Delay(2000);
+                              
 
-                                //    navigationManager.NavigateTo($"/paymentlist/{branch_id}/{c_id}/{promise_id}");
-                                var p_no = _promise.Promiseno.Replace("#", "_");
-                                navigationManager.NavigateTo($"/paymentlistv/{branch_code}/{cus_id}?promiseno=" + p_no, forceLoad: true);
+
+
+                                if (await promiseManagement.addReceipdesc_v(lst_receiptdescs))
+                                {
+                                    await JSRuntime.InvokeVoidAsync("paymentsuccess");
+                                    await Task.Delay(2000);
+
+                                    //    navigationManager.NavigateTo($"/paymentlist/{branch_id}/{c_id}/{promise_id}");
+                                    var p_no = _promise.Promiseno.Replace("#", "_");
+                                    navigationManager.NavigateTo($"/paymentlistv/{branch_code}/{cus_id}?promiseno=" + p_no, forceLoad: true);
+                                }
+                                else
+                                {
+                                   // await promiseManagement.addReceipdesc_v(lst_receiptdescs);
+                                    await Task.Delay(2000);
+                                    await JSRuntime.InvokeVoidAsync("alert", "ชำระเงินไม่สำเร็จ!");
+                                    await Task.Delay(1000);
+                                    await Task.Delay(2000);
+
+                                    //    navigationManager.NavigateTo($"/paymentlist/{branch_id}/{c_id}/{promise_id}");
+                                    var p_no = _promise.Promiseno.Replace("#", "_");
+                                    navigationManager.NavigateTo($"/paymentlistv/{branch_code}/{cus_id}?promiseno=" + p_no, forceLoad: true);
+                                }
                             }
                             else
                             {
@@ -791,28 +810,36 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                                 }
 
                                 //บันทึกลงใน Table [dbo].[receiptdesc]
-                                await promiseManagement.addReceipdesc_v(lst_receiptdescs);
+                                //await promiseManagement.addReceipdesc_v(lst_receiptdescs);
 
 
                                 //Check Close Promise 
-                                await promiseManagement.updateClosePromiseV(_promise.Promiseno);
-                                await Task.Delay(2000);
-                                await JSRuntime.InvokeVoidAsync("paymentsuccess");
-                                await Task.Delay(1000);
+                               
 
 
-                                var p_no = _promise.Promiseno.Replace("#", "_");
-                                navigationManager.NavigateTo($"/paymentlistv/{branch_code}/{cus_id}?promiseno=" + p_no, forceLoad: true);
-                                //if (activeIndex == 0)
-                                //{
-                                //    var p_no = _promise.Promiseno.Replace("#", "_");
-                                //    navigationManager.NavigateTo($"/paymentlistnv/{branch_code}/{cus_id}?promiseno=" + p_no, forceLoad: true);
-                                //}
-                                //else
-                                //{
-                                //   // navigationManager.NavigateTo($"/customerlist/{}/{c_id}", forceLoad: true);
-                                //}
+                                if (await promiseManagement.addReceipdesc_v(lst_receiptdescs))
+                                {
+                                    await promiseManagement.updateClosePromiseV(_promise.Promiseno);
+                                    await Task.Delay(2000);
+                                    await JSRuntime.InvokeVoidAsync("paymentsuccess");
+                                    await Task.Delay(1000);
 
+
+                                    var p_no = _promise.Promiseno.Replace("#", "_");
+                                    navigationManager.NavigateTo($"/paymentlistv/{branch_code}/{cus_id}?promiseno=" + p_no, forceLoad: true);
+                                }
+                                else
+                                {
+                                    //await promiseManagement.addReceipdesc_v(lst_receiptdescs);
+                                    //await promiseManagement.updateClosePromiseV(_promise.Promiseno);
+                                    await Task.Delay(2000);
+                                    await JSRuntime.InvokeVoidAsync("alert", "ชำระเงินไม่สำเร็จ!");
+                                    await Task.Delay(1000);
+
+
+                                    var p_no = _promise.Promiseno.Replace("#", "_");
+                                    navigationManager.NavigateTo($"/paymentlistv/{branch_code}/{cus_id}?promiseno=" + p_no, forceLoad: true);
+                                }
                             }
                             else
                             {

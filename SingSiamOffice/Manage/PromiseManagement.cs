@@ -271,7 +271,7 @@ namespace SingSiamOffice.Manage
         }
 
 
-        public async Task addReceipdesc_nv(List<Models.SingSiamOld.Receiptdesc> receiptdesc)
+        public async Task<bool> addReceipdesc_nv(List<Models.SingSiamOld.Receiptdesc> receiptdesc)
         {
             try
             {
@@ -290,9 +290,9 @@ namespace SingSiamOffice.Manage
                     {
                         if (items.receipt_desc != "รับฝากเงินล่วงหน้า")
                         {
-                            to_edit.Cappaid = (double)items.Cappaid;
-                            to_edit.Intpaid = (double)items.Intpaid;
-                            to_edit.Paidamount = (double)items.Amount;
+                            to_edit.Cappaid = (double)items.Cappaid * -1;
+                            to_edit.Intpaid = (double)items.Intpaid * -1;
+                            to_edit.Paidamount = (double)items.Amount * -1;
 
                             if (to_edit.Amount == ((items.Amount) * -1))
                             { 
@@ -319,16 +319,16 @@ namespace SingSiamOffice.Manage
                     }
                 }
 
-
+                return true;
             }
             catch (Exception ex)
             {
-
+                return false;
             }
 
 
         }
-        public async Task addReceipdesc_v(List<Models.SingSiamOld2.Receiptdesc> receiptdesc)
+        public async Task<bool> addReceipdesc_v(List<Models.SingSiamOld2.Receiptdesc> receiptdesc)
         {
             try
             {
@@ -347,9 +347,9 @@ namespace SingSiamOffice.Manage
                     {
                         if (items.receipt_desc != "รับฝากเงินล่วงหน้า")
                         {
-                            to_edit.Cappaid = (double)items.Cappaid;
-                            to_edit.Intpaid = (double)items.Intpaid;
-                            to_edit.Paidamount = (double)items.Amount;
+                            to_edit.Cappaid = (double)items.Cappaid * -1;
+                            to_edit.Intpaid = (double)items.Intpaid * -1;
+                            to_edit.Paidamount = (double)items.Amount * -1;
 
                             if (to_edit.Amount == ((items.Amount) * -1))
                             {
@@ -376,11 +376,11 @@ namespace SingSiamOffice.Manage
                     }
                 }
 
-
+                return true;
             }
             catch (Exception ex)
             {
-
+                return false;
             }
 
 
