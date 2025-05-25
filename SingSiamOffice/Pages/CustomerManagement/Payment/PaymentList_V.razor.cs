@@ -647,7 +647,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                                 _receipttran_toAdd.Branch = _promise.Branch;
                                 _receipttran_toAdd.Customer = _promise.Customer;
                                 _receipttran_toAdd.Receiptno = p.receipt_no;
-
+                                _receipttran_toAdd.Ptype = _promise.Ptype;
                                 if (payment_method == 1 || payment_method == 2 || payment_method == 3)
                                 {
                                     _receipttran_toAdd.Amount = 0;
@@ -675,9 +675,20 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                                     var tdate_pay = lastPeriodtrans.tdate_pay;
                                     TimeSpan diffdate = DateTime.Now - tdate_pay;
                                     var cnt_remainpay = diffdate.Days;
+
+                                    var Tdate = _Periodtrans.Select(s => s.Tdateformat).ToList();
+                                    List<DateTime> dueDates = new List<DateTime>();
+                                    foreach (var s in Tdate)
+                                    {
+                                        DateTime dt = DateTime.ParseExact(s, "yyyyMMdd", CultureInfo.InvariantCulture);
+                                        dueDates.Add(dt);
+                                    }
+                                    int missedPeriods = dueDates
+    .Where(d => d > tdate_pay && d < DateTime.Now)
+    .Count();
                                     p.temp_total_deptAmount = ((decimal)(_Periodtrans.FirstOrDefault().Amount * cnt_remainpay)) + totalFee + Convert.ToDecimal(p.total_Charge_follow);
                                     p.Arbalance = p.temp_total_deptAmount;
-                                    _receipttran_toAdd.Arperiod = cnt_remainpay;
+                                    _receipttran_toAdd.Arperiod = missedPeriods;
                                     _receipttran_toAdd.Cappaid = 0;
                                     _receipttran_toAdd.Intpaid = 0;
                                     _receipttran_toAdd.Intplus = (double)intplus;
@@ -824,9 +835,16 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                                     await JSRuntime.InvokeVoidAsync("paymentsuccess");
                                     await Task.Delay(1000);
 
-
-                                    var p_no = _promise.Promiseno.Replace("#", "_");
-                                    navigationManager.NavigateTo($"/paymentlistv/{branch_code}/{cus_id}?promiseno=" + p_no, forceLoad: true);
+                                    if (activeIndex == 0)
+                                    {
+                                        var p_no = _promise.Promiseno.Replace("#", "_");
+                                        navigationManager.NavigateTo($"/paymentlistv/{branch_code}/{cus_id}?promiseno=" + p_no, forceLoad: true);
+                                    }
+                                    else
+                                    {
+                                        navigationManager.NavigateTo($"/customerlist/{globalData.branch_id}/{cus_id}", forceLoad: true);
+                                    }
+                                  
                                 }
                                 else
                                 {

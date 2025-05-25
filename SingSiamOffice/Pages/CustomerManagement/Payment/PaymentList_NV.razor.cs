@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
+using Microsoft.VisualBasic;
 using MudBlazor;
 using SingSiamOffice.Manage;
 using SingSiamOffice.Models;
@@ -108,8 +109,14 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
 
             }
 
-
-            p.total_Charge_follow = _Periodtrans.Where(s=>s.ck_paid == false).FirstOrDefault().total_charge_follow.ToString("N0");
+            try 
+            {
+                p.total_Charge_follow = _Periodtrans.Where(s => s.ck_paid == false).FirstOrDefault().total_charge_follow.ToString("N0");
+            }
+            catch(Exception ex) 
+            {
+            
+            }
 
             if (p.overpay_qty > 0)
             {
@@ -652,7 +659,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                                 _receipttran_toAdd.Tdatecal = DateTime.Now.AddYears(543).ToString("dd/MM/yyyy");
                                 _receipttran_toAdd.Tdatecalformat = DateTime.Now.ToString("yyyyMMdd");
                                 _receipttran_toAdd.peroidtrans_info = _Periodtrans.Where(s => s.ck_paid == false).ToList();
-
+                                _receipttran_toAdd.Ptype = (int)_promise.Ptype;
                                 if (p.p_close_type_status == null)
                                 {
                                     _receipttran_toAdd.Closecase = "-";
@@ -667,9 +674,20 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                                     var tdate_pay = lastPeriodtrans.tdate_pay;
                                     TimeSpan diffdate = DateTime.Now - tdate_pay;
                                     var cnt_remainpay = diffdate.Days;
+
+                                    var Tdate = _Periodtrans.Select(s => s.Tdateformat).ToList();
+                                    List<DateTime> dueDates = new List<DateTime>();
+                                    foreach (var s in Tdate)
+                                    {
+                                        DateTime dt = DateTime.ParseExact(s, "yyyyMMdd", CultureInfo.InvariantCulture);
+                                        dueDates.Add(dt);
+                                    }
+                                    int missedPeriods = dueDates
+    .Where(d => d > tdate_pay && d < DateTime.Now)
+    .Count();
                                     p.temp_total_deptAmount = ((decimal)(_Periodtrans.FirstOrDefault().Amount * cnt_remainpay)) + totalFee + Convert.ToDecimal(p.total_Charge_follow);
                                     p.Arbalance = p.temp_total_deptAmount;
-                                    _receipttran_toAdd.Arperiod = cnt_remainpay;
+                                    _receipttran_toAdd.Arperiod = missedPeriods;
                                     _receipttran_toAdd.Cappaid = 0;
                                     _receipttran_toAdd.Intpaid = 0;
                                     _receipttran_toAdd.Intplus = (double)intplus;
@@ -814,9 +832,16 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                                     await JSRuntime.InvokeVoidAsync("paymentsuccess");
                                     await Task.Delay(1000);
 
-
-                                    var p_no = _promise.Promiseno.Replace("#", "_");
-                                    navigationManager.NavigateTo($"/paymentlistnv/{branch_code}/{cus_id}?promiseno=" + p_no, forceLoad: true);
+                                    if (activeIndex == 0)
+                                    {
+                                        var p_no = _promise.Promiseno.Replace("#", "_");
+                                        navigationManager.NavigateTo($"/paymentlistnv/{branch_code}/{cus_id}?promiseno=" + p_no, forceLoad: true);
+                                    }
+                                    else
+                                    {
+                                        navigationManager.NavigateTo($"/customerlist/{globalData.branch_id}/{cus_id}", forceLoad: true);
+                                    }
+                                   
                                 }
                                 else
                                 {
