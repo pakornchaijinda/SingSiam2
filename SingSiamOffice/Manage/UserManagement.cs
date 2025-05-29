@@ -1,192 +1,100 @@
-﻿
-using Microsoft.EntityFrameworkCore;
-using System.Net.Sockets;
-using System.Numerics;
-using System.Xml.Linq;
-using System.Net;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using System.Text;
-using static MudBlazor.Colors;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using SingSiamOffice.Models;
-using SingSiamOffice.Manage;
-using Microsoft.AspNetCore.Mvc;
-
 
 namespace SingSiamOffice.Manage
 {
     public class UserManagement
     {
-        public SingsiamdbContext db  = new SingsiamdbContext();
-        private List<Role> list_role =  new List<Role>();
-        private List<Login> list_all_userlogin = new List<Login>();
-        private Login get_userlogin = new Login();
-      
-        public string generateSalt(int maxSize = 10)
+        private readonly SingsiamdbContext db = new SingsiamdbContext();
+
+        public string GenerateSalt(int maxSize = 10)
         {
-            char[] chars = new char[62];
-            chars =
-            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".ToCharArray();
-            byte[] data = new byte[1];
-            using (RNGCryptoServiceProvider crypto = new RNGCryptoServiceProvider())
+            const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+            var data = new byte[maxSize];
+            using (var crypto = new RNGCryptoServiceProvider())
             {
-                crypto.GetNonZeroBytes(data);
-                data = new byte[maxSize];
-                crypto.GetNonZeroBytes(data);
+                crypto.GetBytes(data);
             }
-            StringBuilder result = new StringBuilder(maxSize);
-            foreach (byte b in data)
+            var result = new StringBuilder(maxSize);
+            foreach (var b in data)
             {
-                result.Append(chars[b % (chars.Length)]);
+                result.Append(chars[b % chars.Length]);
             }
             return result.ToString();
         }
-        public string hashPassword(string inputPassword, string salt)
+
+        public string HashPassword(string inputPassword, string salt)
         {
-            byte[] buffer = Encoding.UTF8.GetBytes($"{inputPassword}{salt}");
-            byte[] key = Encoding.UTF8.GetBytes(salt);
-            HMACSHA256 hmac = new HMACSHA256(key);
-            string hash = Convert.ToBase64String(hmac.ComputeHash(buffer)).Replace("-", "");
-            return hash;
+            using var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(salt));
+            var buffer = Encoding.UTF8.GetBytes($"{inputPassword}{salt}");
+            return Convert.ToBase64String(hmac.ComputeHash(buffer)).Replace("-", "");
         }
-        public async Task<List<Role>> List_all_role() 
+
+        public async Task<List<Role>> ListAllRolesAsync()
         {
-            list_role = db.Roles.AsNoTracking().Where(s=>s.IsActive == true).ToList();
-            return list_role;
+            return await db.Roles.AsNoTracking().Where(s => s.IsActive).ToListAsync();
         }
-        public async Task<List<Login>> List_all_user()
+
+        public async Task<List<Login>> ListAllUsersAsync()
         {
-            List<Login> list_user = new List<Login>();
-            list_user = db.Logins.Include(s=>s.Branch).Include(s => s.Role).AsNoTracking().ToList();
-            return list_user;
+            return await db.Logins.Include(s => s.Branch).Include(s => s.Role).AsNoTracking().ToListAsync();
         }
-      
-        public async Task<Login> GetUserLogin(Login input) 
+
+        public async Task<Login> GetUserLoginAsync(Login input)
         {
-            get_userlogin = db.Logins.Include(s=>s.Role).Where(s=>s.Username == input.Username && s.Dob == input.Dob).FirstOrDefault(); // 
-            return get_userlogin;
+            return await db.Logins.Include(s => s.Role)
+                .FirstOrDefaultAsync(s => s.Username == input.Username && s.Dob == input.Dob);
         }
-        public async Task<int> GetUserId(string usernaem)
+
+        public async Task<int> GetUserIdAsync(string username)
         {
-           var data = db.Logins.Include(s => s.Role).Where(s => s.Username == usernaem).AsNoTracking().FirstOrDefault(); //
-                                                                                                           //
+            var data = await db.Logins.AsNoTracking()
+                .FirstOrDefaultAsync(s => s.Username == username);
             return data.Id;
         }
-        public async Task<bool> CheckUserLoginActive(UserLogin input)
+
+        public async Task<bool> CheckUserLoginActiveAsync(UserLogin input)
         {
-            var data = db.Logins.Where(s => s.Username == input.UserName).Select(s=>s.IsActive).FirstOrDefault();
-            return data;
+            return await db.Logins.Where(s => s.Username == input.UserName)
+                .Select(s => s.IsActive).FirstOrDefaultAsync();
         }
-        public async Task<bool> CheckUserLoginPass(UserLogin input)
+
+        public async Task<bool> CheckUserLoginPassAsync(UserLogin input)
         {
-            var data = db.Logins.Where(s => s.Username == input.UserName).FirstOrDefault();
-            if (data == null)
-            {
-                return false;//ไม่มี user นี้
-            }
-            string hashedPWD = hashPassword(input.Password, data.Salt);
-            if (hashedPWD == data.Password)
-            {
-                return true;
-            }
-            else
-            {
-                return false;//password ผิด
-            }
+            var data = await db.Logins.FirstOrDefaultAsync(s => s.Username == input.UserName);
+            if (data == null) return false;
+
+            var hashedPWD = HashPassword(input.Password, data.Salt);
+            return hashedPWD == data.Password;
         }
-        public async Task<bool> Add_UserLogin(Login input)
+
+        public async Task<bool> AddUserLoginAsync(Login input)
         {
-            var Salt = generateSalt();
-            try 
+            var salt = GenerateSalt();
+            var login = new Login
             {
-                Login login_ = new Login
-                {
-                    Username = input.Username,
-                    Salt = Salt,
-                    Password = hashPassword(input.Password, Salt),
-                    Fullname = input.Fullname,
-                    Email = input.Email,
-                    RoleId = input.RoleId,
-                    IsActive = true,
-                    CreatedAt = DateTime.Now,
-                    Phone = input.Phone,
-                    Dob = input.Dob,
-                    BranchId = input.BranchId,
-                    EmNickname = input.EmNickname,
-                    Code = input.Code,
-                    Img = input.Img,
-                    Address = input.Address,
+                Username = input.Username,
+                Salt = salt,
+                Password = HashPassword(input.Password, salt),
+                Fullname = input.Fullname,
+                Email = input.Email,
+                RoleId = input.RoleId,
+                IsActive = true,
+                CreatedAt = DateTime.Now,
+                Phone = input.Phone,
+                Dob = input.Dob,
+                BranchId = input.BranchId,
+                EmNickname = input.EmNickname,
+                Code = input.Code,
+                Img = input.Img,
+                Address = input.Address
+            };
 
-                   
-
-                };
-                db.Logins.Add(login_);
-                await db.SaveChangesAsync ();
-
-                return true;
-            }catch(Exception ex) { return false; }
-       
-
-        }
-        public async Task<bool> Edit_UserLogin(Login input)
-        {
-            var to_Edit = db.Logins.Where(s=>s.Id == input.Id).FirstOrDefault();
-            if (to_Edit != null)
-            {
-                try
-                {
-                    to_Edit.Username = input.Username;
-                    to_Edit.Password = hashPassword(input.Password, to_Edit.Salt);
-                    to_Edit.Fullname= input.Fullname;
-                    to_Edit.Email = input.Email;
-                    to_Edit.RoleId = input.RoleId;
-                    to_Edit.IsActive = input.IsActive;
-                    to_Edit.CreatedAt = DateTime.Now;
-                    to_Edit.Phone = input.Phone;
-                    to_Edit.Dob = input.Dob;
-                    to_Edit.BranchId = input.BranchId;
-                    to_Edit.EmNickname = input.EmNickname;
-                    to_Edit.Img = input.Img; 
-                    to_Edit.Address = input.Address;
-                   
-
-                    db.Entry(to_Edit).State = EntityState.Modified;
-                    await db.SaveChangesAsync();
-
-                    return true;
-                }
-                catch (Exception ex) { return false; }
-            }
-            else { return false; }
-        }
-        public async Task<bool> Del_UserLogin(Login input)
-        {
-            var to_Edit = db.Logins.Where(s => s.Id == input.Id).FirstOrDefault();
-            if (to_Edit != null)
-            {
-                try
-                {
-                   
-                    to_Edit.IsActive = false;
-                   
-                    db.Entry(to_Edit).State = EntityState.Modified;
-                    await db.SaveChangesAsync();
-
-                    return true;
-                }
-                catch (Exception ex) { return false; }
-            }
-            else { return false; }
-        }
-        public async Task<bool> Changepassword_UserLogin(Login input)
-        {
-            return true;
-        }
-        public async Task<bool> AddEventLog(SingSiamOffice.Models.EventLog toAdd)
-        {
             try
             {
-                db.EventLogs.Add(toAdd);
+                await db.Logins.AddAsync(login);
                 await db.SaveChangesAsync();
                 return true;
             }
@@ -194,8 +102,69 @@ namespace SingSiamOffice.Manage
             {
                 return false;
             }
-
         }
 
+        public async Task<bool> EditUserLoginAsync(Login input)
+        {
+            var toEdit = await db.Logins.FirstOrDefaultAsync(s => s.Id == input.Id);
+            if (toEdit == null) return false;
+
+            try
+            {
+                toEdit.Username = input.Username;
+                toEdit.Password = HashPassword(input.Password, toEdit.Salt);
+                toEdit.Fullname = input.Fullname;
+                toEdit.Email = input.Email;
+                toEdit.RoleId = input.RoleId;
+                toEdit.IsActive = input.IsActive;
+                toEdit.CreatedAt = DateTime.Now;
+                toEdit.Phone = input.Phone;
+                toEdit.Dob = input.Dob;
+                toEdit.BranchId = input.BranchId;
+                toEdit.EmNickname = input.EmNickname;
+                toEdit.Img = input.Img;
+                toEdit.Address = input.Address;
+
+                db.Entry(toEdit).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> DeleteUserLoginAsync(Login input)
+        {
+            var toEdit = await db.Logins.FirstOrDefaultAsync(s => s.Id == input.Id);
+            if (toEdit == null) return false;
+
+            try
+            {
+                toEdit.IsActive = false;
+                db.Entry(toEdit).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> AddEventLogAsync(SingSiamOffice.Models.EventLog toAdd)
+        {
+            try
+            {
+                await db.EventLogs.AddAsync(toAdd);
+                await db.SaveChangesAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

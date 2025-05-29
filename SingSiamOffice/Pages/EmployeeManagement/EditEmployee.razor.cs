@@ -236,7 +236,7 @@ namespace SingSiamOffice.Pages.EmployeeManagement
             {
                 toadd.Password = password;
             }
-            if (await _Manage.Edit_UserLogin(toadd))
+            if (await _Manage.EditUserLoginAsync(toadd))
             {
                 return true;
             }

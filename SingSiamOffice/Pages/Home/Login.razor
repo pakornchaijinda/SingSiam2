@@ -2,19 +2,26 @@
 @page "/login"
 @layout BlankLayout
 @using SingSiamOffice.Authentication
-@inject UserAccountService userAccountService
-@inject AuthenticationStateProvider authStateProvider
-@inject AuthenticationStateProvider AuthenticationStateProvider
 @using SingSiamOffice.Manage
-@using Models;
-@using Microsoft.EntityFrameworkCore;
+@using Models
+@using Microsoft.EntityFrameworkCore
 @using System.Security.Claims
 @using Blazored.LocalStorage
+@inject UserAccountService userAccountService
+@inject AuthenticationStateProvider authStateProvider
 @inject ILocalStorageService localStorage
+@inject NavigationManager NavManager
+@inject IJSRuntime JSRuntime
+@inject IAuthenticationService AuthenticationService
+@inject Manage.GlobalData globalData
+@inject Manage.UserManagement _userManager
+@inject Manage.EventLog eventLog
+@inject Manage.BranchService branchService
+@inject SingsiamdbContext db
+
 <head>
     <link rel="stylesheet" href="../Pages/Home/Login.razor.css">
 </head>
-
 
 <!-- Sign In Start -->
 <div class="container-fluid">
@@ -22,211 +29,118 @@
         <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
             <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
                 <div class="text-center mb-3">
-                        <img class="rounded-circle" src="img/icons/icon.svg" alt="" style="width:20rem;">
-                    @* <h3>Sign In</h3> *@
+                    <img class="rounded-circle" src="img/icons/icon.svg" alt="" style="width:20rem;">
                 </div>
                 <div class="form-floating mb-3">
                     <MudTextField id="username" @bind-Value="username" Label="ชื่อผู้ใช้งาน" Variant="Variant.Outlined"></MudTextField>
-  
                 </div>
                 <div class="form-floating mb-4">
-                    <MudTextField @bind-Value="password" Label="รหัสผ่าน" Variant="Variant.Outlined" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ShowPassword" AdornmentAriaLabel="Show Password"></MudTextField>
-                 
+                    <MudTextField @bind-Value="password" Label="รหัสผ่าน" Variant="Variant.Outlined" InputType="@PasswordInput"
+                                  Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="TogglePasswordVisibility"
+                                  AdornmentAriaLabel="Show Password"></MudTextField>
                 </div>
-
-                <button type="submit" style="@button" class="btn btn-primary py-3 w-100 mb-4" @onclick="()=>Submit()">ลงชื่อเข้าใช้งาน</button>
-            
+                <button type="submit" style="@buttonStyle" class="btn btn-primary py-3 w-100 mb-4" @onclick="Submit">ลงชื่อเข้าใช้งาน</button>
             </div>
         </div>
     </div>
 </div>
 <!-- Sign In End -->
-
 @code {
+    private string username { get; set; }
+    private string password { get; set; }
+    private string buttonStyle = "background-color:#840012; color:#ffff;";
+    private bool isPasswordVisible;
+    private InputType PasswordInput = InputType.Password;
+    private string PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
 
-    [Inject]
-    NavigationManager NavManager { get; set; }
-    [Inject]
-    IJSRuntime JSRuntime { get; set; }
-    [Inject]
-    IAuthenticationService AuthenticationService { get; set; }
-    [Inject]
-    Manage.GlobalData globalData { get; set; }
-    public string username { get; set; }
-    public string password { get; set; }
-
-    string button = "background-color:#840012; color:#ffff;";
-
-    bool isShow;
-    InputType PasswordInput = InputType.Password;
-    string PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
-
-
-
-    [CascadingParameter]
-    private Task<AuthenticationState> authenticationStateTasks { get; set; }
-    AuthenticationState auth;
-    SingsiamdbContext db = new SingsiamdbContext();
-    [Inject]
-    Manage.UserManagement _userManager { get; set; }
-    [Inject]
-    Manage.EventLog eventLog { get; set; }
-    [Inject]
-    Manage.BranchService branchService { get; set; }
-    void ShowPassword()
+    private void TogglePasswordVisibility()
     {
-        @if (isShow)
-        {
-            isShow = false;
-            PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
-            PasswordInput = InputType.Password;
-        }
-        else
-        {
-            isShow = true;
-            PasswordInputIcon = Icons.Material.Filled.Visibility;
-            PasswordInput = InputType.Text;
-        }
+        isPasswordVisible = !isPasswordVisible;
+        PasswordInput = isPasswordVisible ? InputType.Text : InputType.Password;
+        PasswordInputIcon = isPasswordVisible ? Icons.Material.Filled.Visibility : Icons.Material.Filled.VisibilityOff;
     }
 
     protected override async Task OnInitializedAsync()
     {
-
         try
         {
-
             var userLogin = await localStorage.GetItemAsync<string>("authToken");
-            if (userLogin != null)
+            if (!string.IsNullOrEmpty(userLogin))
             {
-                try
+                var branch = await db.Logins
+                    .Where(s => s.Username == userLogin)
+                    .Include(s => s.Branch)
+                    .FirstOrDefaultAsync();
+
+                if (branch != null)
                 {
-
-
-                    var brach = db.Logins.Where(s => s.Username == userLogin).Include(s => s.Branch).FirstOrDefault();
                     globalData.username = username;
-                    globalData.fullname = brach.Fullname;
-                    globalData.branch_name = brach.Branch.BranchName;
-                 
-                    branchService.branch_ID = brach.Branch.Id;
-                    globalData.login_id = brach.Id;
-                    eventLog.Update_by = await _userManager.GetUserId(userLogin);
-                    SingSiamOffice.Models.EventLog toAdd = new SingSiamOffice.Models.EventLog
+                    globalData.fullname = branch.Fullname;
+                    globalData.branch_name = branch.Branch.BranchName;
+                    branchService.branch_ID = branch.Branch.Id;
+                    globalData.login_id = branch.Id;
+                    eventLog.Update_by = await _userManager.GetUserIdAsync(userLogin);
+
+                    var eventLogEntry = new SingSiamOffice.Models.EventLog
                         {
                             Uuid = Guid.NewGuid(),
                             TableName = "login",
                             Opertation = "Online",
                             UpdateBy = eventLog.Update_by
-
                         };
 
-                    await _userManager.AddEventLog(toAdd);
+                    await _userManager.AddEventLogAsync(eventLogEntry);
                 }
-                catch
-                {
-                }
-
-
-
-
-            }
-            else
-            {
-
             }
         }
-        catch
+        catch (Exception ex)
         {
-
+            Console.WriteLine($"Error during initialization: {ex.Message}");
         }
-
     }
 
-    async Task Submit()
+    private async Task Submit()
     {
-        // if (username == null || password == null)
-        // {
-        //     await JSRuntime.InvokeVoidAsync("alert_login_fail");
-        //     return;
-        // }
-        // var userAccount = userAccountService.GetByUserName(username, password);
-        // if (userAccount == null)
-        // {
-        //     await JSRuntime.InvokeVoidAsync("alert_login_fail");
-        //     return;
-        // }
-
-
-        // var customAuthStateProvider = (CustomAuthenticationStateProvider)authStateProvider;
-        // await customAuthStateProvider.UpdateAuthenticationState(new UserSession
-        //     {
-        //         UserName = userAccount.Username,
-        //         Role = userAccount.Role.RoleName
-        //     });
-        // eventLog.Update_by = await _userManager.GetUserId(username);
-
-        // if (userAccount.Role.RoleName == "Admin")
-        // {
-
-        //     NavManager.NavigateTo("/dashboard-admin", true);
-        // }
-        // else
-        // {
-
-        //     branchService.branch_ID = userAccount.BranchId.Value;
-
-
-        //     NavManager.NavigateTo("/dashboard/" + userAccount.BranchId.ToString(), true);
-        // }
-
-
-        if (!String.IsNullOrEmpty(username) && !String.IsNullOrEmpty(password))
+        if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
         {
-            var result = await AuthenticationService.Login(new AuthenticationUserModel { UserName = username, Password = password });
+            await JSRuntime.InvokeVoidAsync("alert_error");
+            return;
+        }
 
-            if (result == null)
-            {
-                await JSRuntime.InvokeVoidAsync("alert_login_fail");
-                return;
-            }
-            else
-            {
+        var result = await AuthenticationService.Login(new AuthenticationUserModel { UserName = username, Password = password });
 
-            }
-            if (result.RoleName == "Admin" || result.RoleName == "หัวหน้า chief")
-            {
-                eventLog.Update_by = await _userManager.GetUserId(username);
-                NavManager.NavigateTo("/dashboard-admin", true);
-            }
-            else
-            {
-                     eventLog.Update_by = await _userManager.GetUserId(username);
-                var brach = db.Logins.Where(s => s.Username == username).Include(s => s.Branch).FirstOrDefault();
-                globalData.username = username;
-                globalData.branch_name = brach.Branch.BranchName;
-                branchService.branch_ID = brach.BranchId;
-                if (brach.IsActive == false)
-                {
-                    await JSRuntime.InvokeVoidAsync("alert","สาขา"+ brach.Branch.BranchName + "ปิดกิจการ");
-                }
+        if (result == null)
+        {
+            await JSRuntime.InvokeVoidAsync("alert_login_fail");
+            return;
+        }
 
-                NavManager.NavigateTo("/dashboard/" + brach.BranchId.ToString(), true);
-            }
+        eventLog.Update_by = await _userManager.GetUserIdAsync(username);
 
+        if (result.RoleName == "Admin" || result.RoleName == "หัวหน้า chief")
+        {
+            NavManager.NavigateTo("/dashboard-admin", true);
         }
         else
         {
-            await JSRuntime.InvokeVoidAsync("alert_error");
+            var branch = await db.Logins
+                .Where(s => s.Username == username)
+                .Include(s => s.Branch)
+                .FirstOrDefaultAsync();
+
+            if (branch != null)
+            {
+                globalData.username = username;
+                globalData.branch_name = branch.Branch.BranchName;
+                branchService.branch_ID = branch.BranchId;
+
+                if (!branch.IsActive)
+                {
+                    await JSRuntime.InvokeVoidAsync("alert", $"สาขา {branch.Branch.BranchName} ปิดกิจการ");
+                }
+
+                NavManager.NavigateTo($"/dashboard/{branch.BranchId}", true);
+            }
         }
-
     }
-
-    // protected override async Task OnAfterRenderAsync(bool firstRender)
-    // {
-    //     if (firstRender)
-    //     {
-    //         await JSRuntime.InvokeVoidAsync("rememberUser");
-          
-    //     }
-    // }
-
 }

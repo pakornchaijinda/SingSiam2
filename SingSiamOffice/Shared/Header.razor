@@ -47,7 +47,7 @@
                 UpdateBy = eventLog.Update_by
             };
 
-        await management.AddEventLog(toAdd);
+        await management.AddEventLogAsync(toAdd);
 
         var customAuthStateProvider = (CustomAuthenticationStateProvider)authStateProvider;
         await customAuthStateProvider.UpdateAuthenticationState(null);

@@ -253,7 +253,7 @@ namespace SingSiamOffice.Pages.EmployeeManagement
             toadd.RoleId = role_id;
             toadd.BranchId = bracth_id;
             toadd.Img = base64data;
-            if (await _Manage.Add_UserLogin(toadd))
+            if (await _Manage.AddUserLoginAsync(toadd))
             {
                 return true;
             }
