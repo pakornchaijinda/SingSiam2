@@ -548,13 +548,21 @@ namespace SingSiamOffice.Manage
                 {
                     payment_method = 2;
                 }
-
+                int totalAmount = 0;
+                if (receipttrans.Receiptdesc == "ปิดสัญญาก่อนกำหนด")
+                {
+                    totalAmount = (int)receipttrans.Netamount;
+                }
+                else
+                {
+                    totalAmount = (int)receipttrans.Amount;
+                }
                 TransactionHistory Add_expren = new TransactionHistory()
                 {
                     BranchId = branchId,
                     TransectionRef = receipttrans.Receiptno,
                     SubjectId = 31,
-                    Price = (int)receipttrans.Amount,
+                    Price = totalAmount,
                     CreateAt = DateTime.Now,
                     Receiptname = receipttrans.Usercode,
 
