@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Diagnostics;
 using MudBlazor.Services;
 using SingSiamOffice.Authentication;
 using SingSiamOffice.Data;
@@ -21,26 +22,26 @@ builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();//ad
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
-builder.Services.AddSingleton<UserAccountService>();
+builder.Services.AddScoped<UserAccountService>();
 builder.Services.AddScoped<ProtectedSessionStorage>();
-builder.Services.AddSingleton<SingSiamOffice.Services.ReadNatID_Service>();
-builder.Services.AddSingleton<SingSiamOffice.Manage.EventLog>();
-builder.Services.AddSingleton<SingSiamOffice.Manage.UserManagement>();
-builder.Services.AddSingleton<SingSiamOffice.Manage.Managements>();
-builder.Services.AddSingleton<SingSiamOffice.Manage.PromiseManagement>();
-builder.Services.AddSingleton<SingSiamOffice.Manage.GlobalData>();
-builder.Services.AddSingleton<SingSiamOffice.Manage.CalculatePaymentPeriod>();
-builder.Services.AddSingleton<SingSiamOffice.Manage.Collateral1>();
-builder.Services.AddSingleton<SingSiamOffice.Manage.Collateral2>();
-builder.Services.AddSingleton<SingSiamOffice.Manage.Collateral3>();
-builder.Services.AddSingleton<SingSiamOffice.Helpers.NumberToText>();
-builder.Services.AddSingleton<SingSiamOffice.Helpers.calamount>();
+builder.Services.AddScoped<SingSiamOffice.Services.ReadNatID_Service>();
+builder.Services.AddScoped<SingSiamOffice.Manage.EventLog>();
+builder.Services.AddScoped<SingSiamOffice.Manage.UserManagement>();
+builder.Services.AddScoped<SingSiamOffice.Manage.Managements>();
+builder.Services.AddScoped<SingSiamOffice.Manage.PromiseManagement>();
+builder.Services.AddScoped<SingSiamOffice.Manage.GlobalData>();
+builder.Services.AddScoped<SingSiamOffice.Manage.CalculatePaymentPeriod>();
+builder.Services.AddScoped<SingSiamOffice.Manage.Collateral1>();
+builder.Services.AddScoped<SingSiamOffice.Manage.Collateral2>();
+builder.Services.AddScoped<SingSiamOffice.Manage.Collateral3>();
+builder.Services.AddScoped<SingSiamOffice.Helpers.NumberToText>();
+builder.Services.AddScoped<SingSiamOffice.Helpers.calamount>();
 
 builder.Services.AddDbContext<SingSiamOffice.Models.SingsiamdbContext>();
 builder.Services.AddDbContext<SingSiamOffice.Models.SingSiamOld._01singsiamContext>();
 builder.Services.AddDbContext<SingSiamOffice.Models.SingSiamOld2._02singsiamContext>();
 builder.Services.AddScoped<UserLoginService>();
-builder.Services.AddSingleton<SingSiamOffice.Manage.BranchService>();
+builder.Services.AddScoped<SingSiamOffice.Manage.BranchService>();
 builder.Services.AddHttpClient();
 
 if (builder.Environment.IsDevelopment())
@@ -57,8 +58,23 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseExceptionHandler(errorApp =>
+    {
+        errorApp.Run(async context =>
+        {
+            context.Response.StatusCode = 500;
+            context.Response.ContentType = "text/plain";
+
+            var exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerPathFeature>();
+            var exception = exceptionHandlerPathFeature?.Error;
+
+            // Log error ?????? ?????????????, ?????????????????, ?????????????? service
+            Console.Error.WriteLine($"Unhandled exception: {exception?.Message}");
+
+            await context.Response.WriteAsync("An unexpected server error occurred.");
+        });
+    });
+
     app.UseHsts();
 }
 
