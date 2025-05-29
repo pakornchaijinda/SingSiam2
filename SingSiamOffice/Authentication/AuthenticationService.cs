@@ -16,8 +16,7 @@ namespace SingSiamOffice.Authentication
         private readonly HttpClient client;
         private readonly AuthenticationStateProvider authStateProvider;
         private readonly ILocalStorageService localStorage;
-        private Models.SingsiamdbContext db = new Models.SingsiamdbContext();
-
+     
         UserAccountService UserAccountService = new UserAccountService();
         public AuthenticationService(HttpClient client, AuthenticationStateProvider authStateProvider, ILocalStorageService localStorage)
         {
@@ -28,12 +27,6 @@ namespace SingSiamOffice.Authentication
 
         public async Task<AuthenticatedUserModel> Login(AuthenticationUserModel userForAuthentication)
         {
-            //var data = new FormUrlEncodedContent(new[]
-            //{
-            //    new KeyValuePair<string, string>("grant_Type", "password"),
-            //    new KeyValuePair<string, string>("username", userForAuthentication.UserName),
-            //    new KeyValuePair<string, string>("password", userForAuthentication.Password)
-            //});
             var userinfo = await UserAccountService.GetByUserName(userForAuthentication.UserName,userForAuthentication.Password);
           
             if (userinfo != null)

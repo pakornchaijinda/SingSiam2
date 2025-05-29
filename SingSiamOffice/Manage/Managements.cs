@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoGenReports.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using SingSiamOffice.Helpers;
 using SingSiamOffice.Models;
@@ -144,8 +145,35 @@ namespace SingSiamOffice.Manage
         }
         public async Task<int?> Calperiodremain(string promise_on,decimal totalpay)
         {
+           
             var amount = db_nv.Periodtrans.AsNoTracking().Where(s => s.ck_paid == true).LastOrDefault().Amount;
             var totalremain = db_nv.Periodtrans.AsNoTracking().Where(s => s.ck_paid == false).Count();
+            decimal cal_period_pay = totalpay / (decimal)amount;
+            var period_pay_qty = (int)Math.Ceiling(cal_period_pay);
+
+            int remainingInstallments = (int)totalremain - (int)Math.Floor(cal_period_pay);
+
+            return remainingInstallments;
+        }
+        public async Task<int?> CalperiodremainNV(string promise_on, decimal totalpay)
+        {
+            List<SingSiamOffice.Models.SingSiamOld.Periodtran> periodtrans = new List<Models.SingSiamOld.Periodtran>();
+            periodtrans = await GetPeriodtransbyPromise_NV(promise_on);
+            var amount = periodtrans.Where(s => s.ck_paid == true).LastOrDefault().Amount;
+            var totalremain = periodtrans.Where(s => s.ck_paid == false).Count();
+            decimal cal_period_pay = totalpay / (decimal)amount;
+            var period_pay_qty = (int)Math.Ceiling(cal_period_pay);
+
+            int remainingInstallments = (int)totalremain - (int)Math.Floor(cal_period_pay);
+
+            return remainingInstallments;
+        }
+        public async Task<int?> CalperiodremainV(string promise_on, decimal totalpay)
+        {
+            List<SingSiamOffice.Models.SingSiamOld2.Periodtran> periodtrans = new List<Models.SingSiamOld2.Periodtran>();
+            periodtrans = await GetPeriodtransbyPromise_V(promise_on);
+            var amount = periodtrans.Where(s => s.ck_paid == true).LastOrDefault().Amount;
+            var totalremain = periodtrans.Where(s => s.ck_paid == false).Count();
             decimal cal_period_pay = totalpay / (decimal)amount;
             var period_pay_qty = (int)Math.Ceiling(cal_period_pay);
 
@@ -303,7 +331,7 @@ namespace SingSiamOffice.Manage
         public async Task<List<Models.SingSiamOld.Periodtran>> GetPeriodtransbyPromise_NV(string promise_no)
         {
             var config = db_nv.Configs.AsNoTracking().Where(s => s.Id == 3).FirstOrDefault();
-            var data = db_nv.Periodtrans.AsNoTracking().Where(s => s.Promiseno == promise_no && s.Status != 2).ToList();
+            var data = db_nv.Periodtrans.AsNoTracking().Where(s => s.Promiseno == promise_no && s.Status != 2).OrderBy(s=>s.Id).ToList();
             var receipt = db_nv.Receipttrans.AsNoTracking().Where(s => s.Promiseno == promise_no).ToList();
             var receipt_desc = db_nv.Receiptdescs.AsNoTracking().Where(s => s.Promiseno == promise_no).ToList();
             int cnt_overpayment = 0;
@@ -753,7 +781,7 @@ namespace SingSiamOffice.Manage
             var result = RoundToNearest((decimal)b);
             return result;
         }
-        public async Task<List<Guarantor>> GetGurantorbyPromiseId(int promise_id)
+        public async Task<List<SingSiamOffice.Models.Guarantor>> GetGurantorbyPromiseId(int promise_id)
         {
             var data = db.Guarantors.AsNoTracking().Where(s => s.PromiseId == promise_id).ToList();
             return data;
@@ -784,7 +812,7 @@ namespace SingSiamOffice.Manage
             return ck;
         }
         //อัพเดทเงินสด
-        public async Task<bool> Update_Cash(int branch_id,CashLog cashLogs)
+        public async Task<bool> Update_Cash(int branch_id,SingSiamOffice.Models.CashLog cashLogs)
         {
             var toedit = db.CashLogs.Where(s => s.BranchId == branch_id && s.DateCreate.Date == DateTime.Now.Date).FirstOrDefault();
 
@@ -814,7 +842,7 @@ namespace SingSiamOffice.Manage
             }
             return true;
         }
-        public async Task<CashLog> Get_Cash(int branch_id)
+        public async Task<SingSiamOffice.Models.CashLog> Get_Cash(int branch_id)
         {
             var cash = db.CashLogs.AsNoTracking().Where(s => s.BranchId == branch_id && s.DateCreate.Date == DateTime.Now.Date).FirstOrDefault();
             return cash;
@@ -922,7 +950,7 @@ namespace SingSiamOffice.Manage
 
             return result;
         }
-        public async Task<BlackList> GetBlackList(int cus_id)
+        public async Task<SingSiamOffice.Models.BlackList> GetBlackList(int cus_id)
         {
             var info = db.BlackLists.AsNoTracking().Where(s => s.CustomerId == cus_id).FirstOrDefault();
             return info;
@@ -932,12 +960,12 @@ namespace SingSiamOffice.Manage
             var info = db.Customers.AsNoTracking().Where(s => s.CustomerId == cus_id).FirstOrDefault();
             return info;
         }
-        public async Task<List<Province>> GetProvince()
+        public async Task<List<SingSiamOffice.Models.Province>> GetProvince()
         {
             var province_info = db.Provinces.AsNoTracking().ToList();
             return province_info;
         }
-        public async Task<List<Collateral>> GetCollaterals()
+        public async Task<List<SingSiamOffice.Models.Collateral>> GetCollaterals()
         {
             var collaterals = db.Collaterals.AsNoTracking().ToList();
             return collaterals;

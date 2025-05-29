@@ -174,7 +174,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
 
                         var lastPeriodpay = _Periodtrans.Where(s => s.ck_paid == true).OrderByDescending(s => s.Period).FirstOrDefault().Period;
                         _receipttran_toAdd.Periodchg = lastPeriodpay + 1;
-                        _receipttran_toAdd.Periodremain = await managements.Calperiodremain(_promise.Promiseno, Convert.ToDecimal(p.customerPayAmount));
+                        _receipttran_toAdd.Periodremain = await managements.CalperiodremainV(_promise.Promiseno, Convert.ToDecimal(p.customerPayAmount));
                         _receipttran_toAdd.Usercode = globalData.fullname;
                         if (cash_transfer == 1)
                         {

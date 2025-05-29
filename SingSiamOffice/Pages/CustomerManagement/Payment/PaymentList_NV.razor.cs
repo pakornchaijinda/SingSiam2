@@ -179,7 +179,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                        
                        var lastPeriodpay = _Periodtrans.Where(s => s.ck_paid == true).OrderByDescending(s => s.Period).FirstOrDefault().Period;
                         _receipttran_toAdd.Periodchg = lastPeriodpay + 1;
-                        _receipttran_toAdd.Periodremain = await managements.Calperiodremain(_promise.Promiseno,Convert.ToDecimal(p.customerPayAmount));
+                        _receipttran_toAdd.Periodremain = await managements.CalperiodremainNV(_promise.Promiseno,Convert.ToDecimal(p.customerPayAmount));
                         _receipttran_toAdd.Usercode = globalData.fullname;
                         if (cash_transfer == 1)
                         {
@@ -192,7 +192,8 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                         
                         DateTime today = DateTime.Today;
                         _receipttran_toAdd.Currentperiod = await managements.GetPeriodNumber(_Periodtrans,today);
-
+                        _receipttran_toAdd.Amount = Convert.ToDouble(p.customerPayAmount);
+                        
                         await promiseManagement.addReceipttran_nv(_receipttran_toAdd);
 
                         //ยอดที่ชำระ
