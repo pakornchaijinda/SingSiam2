@@ -161,10 +161,24 @@ namespace SingSiamOffice.Manage
             }
             catch (Exception ex) { return false; }
         }
-        public async Task UpdateRunningNo(int branchId,string type)
+        //public async Task UpdateRunningNo(int branchId,string type)
+        //{
+        //    var toEdit = db.RunningNos.Where(s => s.BranchId == branchId && s.Type == type).FirstOrDefault();
+        //    if (toEdit != null) 
+        //    {
+        //        toEdit.CurrentNo = toEdit.NextNo;
+        //        toEdit.NextNo = toEdit.NextNo + 1;
+        //        db.Entry(toEdit).State = EntityState.Modified;
+        //        await db.SaveChangesAsync();
+        //    }
+        //}
+        public async Task UpdateRunningNo(int branchId, string type)
         {
-            var toEdit = db.RunningNos.Where(s => s.BranchId == branchId && s.Type == type).FirstOrDefault();
-            if (toEdit != null) 
+            var toEdit = await db.RunningNos
+                .Where(s => s.BranchId == branchId && s.Type == type)
+                .FirstOrDefaultAsync();
+
+            if (toEdit != null)
             {
                 toEdit.CurrentNo = toEdit.NextNo;
                 toEdit.NextNo = toEdit.NextNo + 1;
@@ -172,7 +186,8 @@ namespace SingSiamOffice.Manage
                 await db.SaveChangesAsync();
             }
         }
-       
+
+
 
 
         public async Task<Receipttran> addReceipttran(Receipttran receipttrans)
@@ -195,44 +210,117 @@ namespace SingSiamOffice.Manage
 
    
         }
+        //public async Task addReceipdesc(List<Receiptdesc> receiptdesc)
+        //{
+        //    try
+        //    {
+
+        //        foreach(var items in receiptdesc) 
+        //        {
+        //            db.Receiptdescs.Add(items);
+        //            await db.SaveChangesAsync();
+
+
+        //            decimal amount_receipdesc = 0;
+        //            decimal amount_remain = 0;
+        //           var  to_edit = db.Periodtrans.Include(s => s.Receiptdescs).Where(s => s.Id == items.PeriodtranId).FirstOrDefault();
+        //            if (to_edit != null)
+        //            {
+        //                if (items.payment_method != 4)
+        //                {
+        //                    if (to_edit.Receiptdescs.Count > 0)
+        //                    {
+        //                        var amountPaid = to_edit.Receiptdescs.OrderByDescending(s => s.Id).ToList();
+        //                        amount_receipdesc = (decimal)amountPaid.Sum(s => s.Amount) * -1;
+
+        //                         amount_remain = (decimal)items.Periodtran.Amount;
+        //                    }
+        //                    else 
+        //                    {
+        //                        amount_receipdesc = (decimal)to_edit.Amount *-1;
+        //                        amount_remain = (decimal)items.Amount;
+        //                    }
+
+
+        //                    if (amount_receipdesc == (amount_remain))
+        //                    {
+
+        //                        to_edit.Cappaid = Math.Abs((decimal)to_edit.Receiptdescs.Sum(s=>s.Cappaid));
+        //                        to_edit.Intpaid = Math.Abs((decimal)to_edit.Receiptdescs.Sum(s => s.Intpaid));
+        //                        to_edit.Paidamount = Math.Abs((decimal)to_edit.Receiptdescs.Sum(s => s.Amount));
+        //                        to_edit.Ispaid = true;
+        //                        to_edit.Status = 1;
+        //                    }
+        //                    else
+        //                    {
+        //                        to_edit.Cappaid = Math.Abs((decimal)items.Cappaid);
+        //                        to_edit.Intpaid = Math.Abs((decimal)items.Intpaid);
+        //                        to_edit.Paidamount = Math.Abs((decimal)items.Amount);
+        //                        to_edit.Ispaid = false;
+        //                    }
+
+
+        //                    to_edit.Paidremain = items.pending_amount;
+        //                }
+        //                else 
+        //                {
+        //                    to_edit.Deposit = to_edit.Deposit + items.Deposit;
+        //                    to_edit.Paidremain = items.pending_amount;
+        //                }
+
+
+        //                db.Entry(to_edit).State = EntityState.Modified;
+        //                await db.SaveChangesAsync();
+
+        //            }
+        //        }
+
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //    }
+
+
+        //}
+
         public async Task addReceipdesc(List<Receiptdesc> receiptdesc)
         {
             try
             {
-               
-                foreach(var items in receiptdesc) 
+                foreach (var items in receiptdesc)
                 {
                     db.Receiptdescs.Add(items);
-                    await db.SaveChangesAsync();
-
 
                     decimal amount_receipdesc = 0;
                     decimal amount_remain = 0;
-                   var  to_edit = db.Periodtrans.Include(s => s.Receiptdescs).Where(s => s.Id == items.PeriodtranId).FirstOrDefault();
+                    var to_edit = await db.Periodtrans
+                        .Include(s => s.Receiptdescs)
+                        .FirstOrDefaultAsync(s => s.Id == items.PeriodtranId);
+
                     if (to_edit != null)
                     {
                         if (items.payment_method != 4)
                         {
-                            if (to_edit.Receiptdescs.Count > 0)
+                            var receiptdescs = to_edit.Receiptdescs ?? new List<Receiptdesc>();
+                            if (receiptdescs.Count > 0)
                             {
-                                var amountPaid = to_edit.Receiptdescs.OrderByDescending(s => s.Id).ToList();
+                                var amountPaid = receiptdescs.OrderByDescending(s => s.Id).ToList();
                                 amount_receipdesc = (decimal)amountPaid.Sum(s => s.Amount) * -1;
-
-                                 amount_remain = (decimal)items.Periodtran.Amount;
+                                amount_remain = (decimal)items.Periodtran.Amount;
                             }
-                            else 
+                            else
                             {
-                                amount_receipdesc = (decimal)to_edit.Amount *-1;
+                                amount_receipdesc = (decimal)to_edit.Amount * -1;
                                 amount_remain = (decimal)items.Amount;
                             }
-                           
-                           
-                            if (amount_receipdesc == (amount_remain))
+
+                            if (amount_receipdesc == amount_remain)
                             {
-                                
-                                to_edit.Cappaid = Math.Abs((decimal)to_edit.Receiptdescs.Sum(s=>s.Cappaid));
-                                to_edit.Intpaid = Math.Abs((decimal)to_edit.Receiptdescs.Sum(s => s.Intpaid));
-                                to_edit.Paidamount = Math.Abs((decimal)to_edit.Receiptdescs.Sum(s => s.Amount));
+                                to_edit.Cappaid = Math.Abs((decimal)receiptdescs.Sum(s => s.Cappaid));
+                                to_edit.Intpaid = Math.Abs((decimal)receiptdescs.Sum(s => s.Intpaid));
+                                to_edit.Paidamount = Math.Abs((decimal)receiptdescs.Sum(s => s.Amount));
                                 to_edit.Ispaid = true;
                                 to_edit.Status = 1;
                             }
@@ -244,31 +332,26 @@ namespace SingSiamOffice.Manage
                                 to_edit.Ispaid = false;
                             }
 
-                      
                             to_edit.Paidremain = items.pending_amount;
                         }
-                        else 
+                        else
                         {
                             to_edit.Deposit = to_edit.Deposit + items.Deposit;
                             to_edit.Paidremain = items.pending_amount;
                         }
-                     
-                     
-                        db.Entry(to_edit).State = EntityState.Modified;
-                        await db.SaveChangesAsync();
 
+                        db.Entry(to_edit).State = EntityState.Modified;
                     }
                 }
-               
 
+                await db.SaveChangesAsync();
             }
             catch (Exception ex)
             {
-               
+                // Consider logging the exception here
             }
-
-
         }
+
 
 
         public async Task<bool> addReceipdesc_nv(List<Models.SingSiamOld.Receiptdesc> receiptdesc)

@@ -778,7 +778,49 @@ namespace SingSiamOffice.Pages.Contracts
                 else 
                 {
                     var b = await promiseManagement.addPromise(PromiseInfo);
+                    if (b == null)
+                    {
+                        await JSRuntime.InvokeVoidAsync("alert_error");
+                        return;
+                    }
+                    RefAccNoCode = await Managements.Get_Ref_AccCode(b.BranchId);
 
+                    string TaxDetail = _customer.FullName + " " + b.Refcode + ":" + b.Warndesc;
+                    var test_loginid = userLogin;
+                    TransactionHistory toAdd = new TransactionHistory()
+                    {
+                        Price = Convert.ToInt32(b.Chargeamt),
+                        BranchId = branch_id,
+                        Detial = TaxDetail,
+                        Receiptname = receipt_name,
+                        LoginId = userLogin,
+                        TransectionRef = RefAccNoCode,
+                        refcodetrans = b.Refcode,
+                        promise_id = b.Id,
+                    };
+                    var tests = toAdd;
+                    var transactionhistory = await promiseManagement.addTaxPromise(toAdd);
+
+                    if (transactionhistory)
+                    {
+                        TransactionHistory toAdd2 = new TransactionHistory()
+                        {
+                            Price = Convert.ToInt32(b.Capital),
+                            BranchId = branch_id,
+                            Detial = TaxDetail,
+                            Receiptname = receipt_name,
+                            LoginId = userLogin,
+                            refcodetrans = b.Refcode,
+                            promise_id = b.Id,
+                        };
+                        await promiseManagement.AddPromiseTransaction(toAdd2);
+                    }
+                    else
+                    {
+
+                    }
+
+                    //เพิ่มผู้ค้ำประกัน
                     if (guarantor == 1)
                     {
                         Models.Guarantor g = new Guarantor();
@@ -807,36 +849,12 @@ namespace SingSiamOffice.Pages.Contracts
                         await promiseManagement.addGuarantor(List_Guarantors);
                     }
 
-                    RefAccNoCode = await Managements.Get_Ref_AccCode(b.BranchId);
-                    string TaxDetail = _customer.FullName + " " + b.Refcode + ":" + b.Warndesc;
-                    TransactionHistory toAdd = new TransactionHistory()
-                    {
-                        Price = Convert.ToInt32(b.Chargeamt),
-                        BranchId = branch_id,
-                        Detial = TaxDetail,
-                        Receiptname = receipt_name,
-                        LoginId = userLogin,
-                        TransectionRef = RefAccNoCode,
-                        refcodetrans = b.Refcode,
-                        promise_id = b.Id,
-                    };
+
+                   
 
 
-                    TransactionHistory toAdd2 = new TransactionHistory()
-                    {
-                        Price = Convert.ToInt32(b.Capital),
-                        BranchId = branch_id,
-                        Detial = TaxDetail,
-                        Receiptname = receipt_name,
-                        LoginId = userLogin,
-                        refcodetrans = b.Refcode,
-                        promise_id = b.Id,
-                    };
-
-
-
-                    var transactionhistory = await promiseManagement.addTaxPromise(toAdd);
-                    await promiseManagement.AddPromiseTransaction(toAdd2);
+                    //เพิ่มรายละเอียด สัญญา
+                   
                     var periodtran = await Managements.Add_Periodtrans(b, contract_type);
                     var ck_save = await promiseManagement.addPeriodtran(periodtran);
 

@@ -195,10 +195,18 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
 
             p.overpay_qty = _periodtran.Where(s => s.OverPayQty > 0).Count();
 
-            p.total_deposit = _periodtran.Where(s => s.Ispaid == false).Sum(p => p.Deposit).Value.ToString("N0");
-            p.origin_fine = _periodtran.Sum(p => p.total_fee).ToString("N0");
-            p.custom_fine = _periodtran.Sum(p => p.total_fee).ToString("N0");
-            totalFee = Convert.ToDecimal(p.origin_fine);
+            //p.total_deposit = _periodtran.Where(s => s.Ispaid == false).Sum(p => p.Deposit).Value.ToString("N0");
+            p.total_deposit = _periodtran.Where(s => s.Ispaid == false).Sum(s => (decimal?)s.Deposit)?.ToString("N0") ?? "0";
+            //p.origin_fine = _periodtran.Sum(p => p.total_fee).ToString("N0");
+            //p.custom_fine = _periodtran.Sum(p => p.total_fee).ToString("N0");
+            //totalFee = Convert.ToDecimal(p.origin_fine);
+
+            // Calculate the sum safely, handling empty or null _periodtran
+            decimal originFineSum = _periodtran?.Sum(x => x.total_fee) ?? 0m;
+            p.origin_fine = originFineSum.ToString("N0");
+            p.custom_fine = originFineSum.ToString("N0");
+            totalFee = originFineSum;
+
             //p.Minimumfine = _periodtran.Where(s => s.check_overpay == true).Where(s => s.OverPayQty > 0).FirstOrDefault().total_fee;
             try
             {

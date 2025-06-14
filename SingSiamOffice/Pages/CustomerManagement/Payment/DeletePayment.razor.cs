@@ -284,7 +284,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
         }
 
 
-        private void CalculateStandardDimensions(ChangeEventArgs args)
+        private void CalculaandardDimensions(ChangeEventArgs args)
         {
             var amount = args.Value.ToString();
             if (amount == "")

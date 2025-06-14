@@ -133,6 +133,7 @@
                 globalData.username = username;
                 globalData.branch_name = branch.Branch.BranchName;
                 branchService.branch_ID = branch.BranchId;
+                globalData.login_id = branch.Id;
 
                 if (!branch.IsActive)
                 {

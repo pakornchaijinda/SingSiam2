@@ -56,8 +56,9 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
             {
                 receipt.paidby_deposit = await GetNumberToText.Paid_By(2);
             }
-           
-            receipt.total_amount = receipttran.Amount.ToString();
+
+            receipt.total_amount = receipttran.Amount?.ToString("N0") ?? "0";
+
             receipt.amount_text = await GetNumberToText.ConvertNumberToThaiWords(Convert.ToInt32(receipttran.Amount));
             var period_remain_qty = lst_receiptdescs.Select(s => s.Promise).FirstOrDefault();
             var max_period = period_remain_qty.Periods;

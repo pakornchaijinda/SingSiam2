@@ -29,7 +29,7 @@ builder.Services.AddScoped<SingSiamOffice.Manage.EventLog>();
 builder.Services.AddScoped<SingSiamOffice.Manage.UserManagement>();
 builder.Services.AddScoped<SingSiamOffice.Manage.Managements>();
 builder.Services.AddScoped<SingSiamOffice.Manage.PromiseManagement>();
-builder.Services.AddScoped<SingSiamOffice.Manage.GlobalData>();
+builder.Services.AddSingleton<SingSiamOffice.Manage.GlobalData>();
 builder.Services.AddScoped<SingSiamOffice.Manage.CalculatePaymentPeriod>();
 builder.Services.AddScoped<SingSiamOffice.Manage.Collateral1>();
 builder.Services.AddScoped<SingSiamOffice.Manage.Collateral2>();
@@ -41,7 +41,7 @@ builder.Services.AddDbContext<SingSiamOffice.Models.SingsiamdbContext>();
 builder.Services.AddDbContext<SingSiamOffice.Models.SingSiamOld._01singsiamContext>();
 builder.Services.AddDbContext<SingSiamOffice.Models.SingSiamOld2._02singsiamContext>();
 builder.Services.AddScoped<UserLoginService>();
-builder.Services.AddScoped<SingSiamOffice.Manage.BranchService>();
+builder.Services.AddSingleton<SingSiamOffice.Manage.BranchService>();
 builder.Services.AddHttpClient();
 
 if (builder.Environment.IsDevelopment())

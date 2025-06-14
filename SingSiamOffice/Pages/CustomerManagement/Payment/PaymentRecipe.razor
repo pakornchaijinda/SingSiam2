@@ -373,24 +373,24 @@
             </tr>
         </thead>
         <tbody>
+
             @foreach (var items in lst_receiptdescs)
             {
                 <tr class="noBorder">
-                    <th scope="row">@items.Periodtran.Period/@items.Promise.Periods</th>
-                    <td class="headerSubTitle">@items.Receipttran.Receiptdesc</td>
-                    @if(items.Deposit != 0 )
+                    <th scope="row">@items.Periodtran?.Period/@items.Promise?.Periods</th>
+                    <td class="headerSubTitle">@items.Receipttran?.Receiptdesc</td>
+                    @if ((items.Deposit ?? 0) != 0)
                     {
-
-                        <td class="headerSubTitle">@items.Deposit </td>
+                        <td class="headerSubTitle">@((items.Deposit ?? 0).ToString("N0"))</td>
                     }
                     else
                     {
-
-                        <td class="headerSubTitle">@items.Amount </td>
+                        <td class="headerSubTitle">@((items.Amount ?? 0).ToString("N0"))</td>
                     }
-
                 </tr>
             }
+
+
            
          
          
