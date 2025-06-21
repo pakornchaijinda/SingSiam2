@@ -230,7 +230,9 @@
 @* view Dialog *@
 <MudDialog @bind-IsVisible="viewExpense" Options="dialogOptions">
     <TitleContent>
-        <MudText Typo="Typo.h5" Style="@headertext"><img class="rounded-circle" src="img/icons/research.svg" alt="" style="width:3rem;"> ดูข้อมูลรายการ</MudText>
+        <MudText Typo="Typo.h5" Style="@headertext">
+            <img class="rounded-circle" src="img/icons/research.svg" alt="" style="width:3rem;"> ดูข้อมูลรายการ
+        </MudText>
     </TitleContent>
     <DialogContent>
         <div class="container-fluid mt-4 mb-4">
@@ -238,32 +240,78 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12 mt-3 mb-3">
-                            <MudList>
-                                <MudListItem><MudText Typo="Typo.body1" Style="@imporText">เลขที่ธุรกรรม : <span style="@detailtext">@to_view.TransectionRef</span></MudText></MudListItem>                               
-                                <MudListItem><MudText Typo="Typo.body1" Style="@imporText">รายการธุรกรรม : <span style="@detailtext">@to_view.Subject.SubjectCode | @to_view.Subject.SubjectName</span></MudText></MudListItem>
-                                <MudListItem><MudText Typo="Typo.body1" Style="@imporText">จำนวนเงิน : <span style="@detailtext">@to_view.Price</span></MudText></MudListItem>
-                                <MudListItem><MudText Typo="Typo.body1" Style="@imporText">คำอธิบาย : <span style="@detailtext">@to_view.Detial</span></MudText></MudListItem>
-                                <MudListItem><MudText Typo="Typo.body1" Style="@imporText">วันที่ทำรายการ : <span style="@detailtext">@to_view.CreateAt.ToString("dd/MM/yyyy hh:mm:ss")</span></MudText></MudListItem>
-                                <MudListItem><MudText Typo="Typo.body1" Style="@imporText">ผู้ทำรายการ : <span style="@detailtext">@to_view.Login.Fullname</span></MudText></MudListItem>
-                            </MudList>
+                            @if (to_view != null)
+                            {
+                                <MudList>
+                                    <MudListItem>
+                                        <MudText Typo="Typo.body1" Style="@imporText">
+                                            เลขที่ธุรกรรม : <span style="@detailtext">@to_view?.TransectionRef</span>
+                                        </MudText>
+                                    </MudListItem>
+
+                                    <MudListItem>
+                                        <MudText Typo="Typo.body1" Style="@imporText">
+                                            รายการธุรกรรม :
+                                            <span style="@detailtext">
+                                                @(to_view?.Subject != null
+                                                    ? $"{to_view.Subject.SubjectCode} | {to_view.Subject.SubjectName}"
+                                                    : "-")
+                                            </span>
+                                        </MudText>
+                                    </MudListItem>
+
+                                    <MudListItem>
+                                        <MudText Typo="Typo.body1" Style="@imporText">
+                                            จำนวนเงิน : <span style="@detailtext">@to_view?.Price</span>
+                                        </MudText>
+                                    </MudListItem>
+
+                                    <MudListItem>
+                                        <MudText Typo="Typo.body1" Style="@imporText">
+                                            คำอธิบาย : <span style="@detailtext">@to_view?.Detial</span>
+                                        </MudText>
+                                    </MudListItem>
+
+                                    <MudListItem>
+                                        <MudText Typo="Typo.body1" Style="@imporText">
+                                            วันที่ทำรายการ :
+                                            <span style="@detailtext">
+                                                @(to_view?.CreateAt != null
+                                                    ? to_view.CreateAt.ToString("dd/MM/yyyy HH:mm:ss")
+                                                    : "-")
+                                            </span>
+                                        </MudText>
+                                    </MudListItem>
+
+                                    <MudListItem>
+                                        <MudText Typo="Typo.body1" Style="@imporText">
+                                            ผู้ทำรายการ :
+                                            <span style="@detailtext">@to_view?.Login?.Fullname</span>
+                                        </MudText>
+                                    </MudListItem>
+                                </MudList>
+                            }
+                            else
+                            {
+                                <MudText Typo="Typo.body1" Color="Color.Error">
+                                    ไม่พบข้อมูลรายการ
+                                </MudText>
+                            }
                         </div>
-                        @if(to_view.SlipUrl != null){
+
+                        @if (!string.IsNullOrWhiteSpace(to_view?.SlipUrl))
+                        {
                             <div class="col-12 mt-3 text-center">
-                                <img src="@to_view.SlipUrl" style="width:70%;"/>
+                                <img src="@to_view.SlipUrl" style="width:70%;" />
                             </div>
-
                         }
-                      
-
-
                     </div>
                 </div>
             </div>
-         
         </div>
     </DialogContent>
-
 </MudDialog>
+
 
 
 

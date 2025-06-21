@@ -499,52 +499,85 @@ namespace SingSiamOffice.Manage
             var data = db_nv.Periodtrans.AsNoTracking().Where(s => s.Promiseno == promise_no).ToList();
             var cnt_finish = data.Where(s => s.ck_paid == true).Count();
             var cnt_period = data.FirstOrDefault().Periods;
-            if (cnt_period == cnt_finish)
+            var toEdit = db_nv.Promises.Where(s => s.Promiseno == promise_no).FirstOrDefault();
+            toEdit.Status = 2;
+
+            foreach (var periodTrans in data)
             {
-                var toEdit = db_nv.Promises.Where(s => s.Promiseno == promise_no).FirstOrDefault();
-                toEdit.Status = 2;
-             
-                foreach (var periodTrans in data)
-                {
-                    periodTrans.Status = 2;
-                }
-
-                db_nv.Entry(toEdit).State = EntityState.Modified;
-
-
-                foreach (var periodTrans in data)
-                {
-                    db_nv.Entry(periodTrans).State = EntityState.Modified;
-                }
-                await db_nv.SaveChangesAsync();
-
+                periodTrans.Status = 2;
             }
+
+            db_nv.Entry(toEdit).State = EntityState.Modified;
+
+
+            foreach (var periodTrans in data)
+            {
+                db_nv.Entry(periodTrans).State = EntityState.Modified;
+            }
+            await db_nv.SaveChangesAsync();
+            //if (cnt_period == cnt_finish)
+            //{
+            //    var toEdit = db_nv.Promises.Where(s => s.Promiseno == promise_no).FirstOrDefault();
+            //    toEdit.Status = 2;
+             
+            //    foreach (var periodTrans in data)
+            //    {
+            //        periodTrans.Status = 2;
+            //    }
+
+            //    db_nv.Entry(toEdit).State = EntityState.Modified;
+
+
+            //    foreach (var periodTrans in data)
+            //    {
+            //        db_nv.Entry(periodTrans).State = EntityState.Modified;
+            //    }
+            //    await db_nv.SaveChangesAsync();
+
+            //}
         }
         public async Task updateClosePromiseV(string promise_no)
         {
             var data = db_v.Periodtrans.AsNoTracking().Where(s => s.Promiseno == promise_no).ToList();
             var cnt_finish = data.Where(s => s.ck_paid == true).Count();
             var cnt_period = data.FirstOrDefault().Periods;
-            if (cnt_period == cnt_finish)
+
+            var toEdit = db_v.Promises.Where(s => s.Promiseno == promise_no).FirstOrDefault();
+            toEdit.Status = 2;
+
+            foreach (var periodTrans in data)
             {
-                var toEdit = db_v.Promises.Where(s => s.Promiseno == promise_no).FirstOrDefault();
-                toEdit.Status = 2;
-
-                foreach (var periodTrans in data)
-                {
-                    periodTrans.Status = 2;
-                }
-
-                db_v.Entry(toEdit).State = EntityState.Modified;
-
-
-                foreach (var periodTrans in data)
-                {
-                    db_v.Entry(periodTrans).State = EntityState.Modified;
-                }
-                await db_v.SaveChangesAsync();
-
+                periodTrans.Status = 2;
             }
+
+            db_v.Entry(toEdit).State = EntityState.Modified;
+
+
+            foreach (var periodTrans in data)
+            {
+                db_v.Entry(periodTrans).State = EntityState.Modified;
+            }
+            await db_v.SaveChangesAsync();
+            //if (cnt_period == cnt_finish)
+            //{
+            //    var toEdit = db_v.Promises.Where(s => s.Promiseno == promise_no).FirstOrDefault();
+            //    toEdit.Status = 2;
+
+            //    foreach (var periodTrans in data)
+            //    {
+            //        periodTrans.Status = 2;
+            //    }
+
+            //    db_v.Entry(toEdit).State = EntityState.Modified;
+
+
+            //    foreach (var periodTrans in data)
+            //    {
+            //        db_v.Entry(periodTrans).State = EntityState.Modified;
+            //    }
+            //    await db_v.SaveChangesAsync();
+
+            //}
         }
 
         #region addReceipttrans no vat
