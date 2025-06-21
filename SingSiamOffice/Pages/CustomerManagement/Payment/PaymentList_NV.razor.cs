@@ -180,7 +180,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                        var lastPeriodpay = _Periodtrans.Where(s => s.ck_paid == true).OrderByDescending(s => s.Period).FirstOrDefault().Period;
                         _receipttran_toAdd.Periodchg = lastPeriodpay + 1;
                         _receipttran_toAdd.Periodremain = await managements.CalperiodremainNV(_promise.Promiseno,Convert.ToDecimal(p.customerPayAmount));
-                        _receipttran_toAdd.Usercode = globalData.fullname;
+                        _receipttran_toAdd.Usercode = globalData.username;
                         if (cash_transfer == 1)
                         {
                             _receipttran_toAdd.Cashpaid = 1;
@@ -340,7 +340,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                                 //รายการงวดที่จ่าบ
                                 _receipttran_toAdd.peroidtrans_info = _Periodtrans.Where(s => s.ck_paid == false).Take(period_pay_qty).ToList();
 
-                                _receipttran_toAdd.Usercode = globalData.fullname;
+                                _receipttran_toAdd.Usercode = globalData.username;
 
                                 if (payment_method == 1)
                                 {
@@ -599,7 +599,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                                     //  _receiptdesc_toAdd.pending_amount = globalData.RemainingPaid;
                                     //_receiptdesc_toAdd.Chargeamt = _receipttran_toAdd.peroidtrans_info[i].total_fee;
                                     _receiptdesc_toAdd.receipt_desc = _receipttran_toAdd.Receiptdesc;
-                                    _receiptdesc_toAdd.Usercode = globalData.fullname;
+                                    _receiptdesc_toAdd.Usercode = globalData.username;
                                     lst_receiptdescs.Add(_receiptdesc_toAdd);
 
                                 }
@@ -736,7 +736,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
 
 
 
-                                _receipttran_toAdd.Usercode = globalData.fullname;
+                                _receipttran_toAdd.Usercode = globalData.username;
 
                                 if (payment_method == 1)
                                 {
@@ -813,7 +813,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                                         _receiptdesc_toAdd.Cappaid = _receipttran_toAdd.peroidtrans_info[i].Capital * -1;
                                     }
                                     _receiptdesc_toAdd.Amount = (((double)_receipttran_toAdd.peroidtrans_info[i].Capital + (double)_receipttran_toAdd.peroidtrans_info[i].Interest) - ((double)_receipttran_toAdd.peroidtrans_info[i].Paidamount * -1)) * -1;
-                                    _receiptdesc_toAdd.Usercode = globalData.fullname;
+                                    _receiptdesc_toAdd.Usercode = globalData.username;
                                     _receiptdesc_toAdd.Chargeamt = (double)totalFee;
 
                                     lst_receiptdescs.Add(_receiptdesc_toAdd);

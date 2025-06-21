@@ -358,7 +358,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
                         current_periods = await managements.GetCurrentPeriod(promise_id);
                         _receipttran_toAdd.Periodchg = current_periods;
                         _receipttran_toAdd.Periodremain = _promise.Periods - 1;
-                        _receipttran_toAdd.Usercode = globalData.fullname;
+                        _receipttran_toAdd.Usercode = globalData.username;
                         _receipttran_toAdd.Otherpaid = 1;
                         _receipttran_toAdd.PaidBy = 4;
                         _receipttran_toAdd.Currentperiod = _periodtran.Where(s => s.Ispaid == false).Select(s => s.Period).FirstOrDefault();
@@ -528,7 +528,7 @@ namespace SingSiamOffice.Pages.CustomerManagement.Payment
 
 
 
-                            _receipttran_toAdd.Usercode = globalData.fullname;
+                            _receipttran_toAdd.Usercode = globalData.username;
 
                             if (payment_method == 1)
                             {
