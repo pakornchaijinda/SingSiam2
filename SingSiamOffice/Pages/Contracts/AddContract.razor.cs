@@ -617,175 +617,464 @@ namespace SingSiamOffice.Pages.Contracts
             RefAccNoCode = await Managements.Get_Ref_AccCode(branch_id);
             
         }
+        //private async Task submit()
+        //{
+        //    try
+        //    {
+        //        List<Guarantor> check = db.Guarantors.Include(s => s.Promise).Where(s => s.CustomerId == selectCustomer.CustomerId).ToList();
+        //        var view_status_active = check.Where(s => s.Promise.Status != 2).Count();
+        //        if (view_status_active != 0 && selectCustomer != null)
+        //        {
+        //            JSRuntime.InvokeVoidAsync("alert", "ไม่สามารถใช้ผู้ค้ำประกันนี้ได้เนื่องจากได้ทำรายการอื่นอยู่ โปรดเปลี่ยนผู้ค้ำประกันใหม่");
+        //            return;
+        //        }
+        //        else
+        //        {
+
+        //        }
+        //    }
+        //    catch 
+        //    {
+
+        //    }
+
+        //    CultureInfo thaiCulture = new CultureInfo("th-TH");
+        //    thaiCulture.DateTimeFormat.Calendar = new ThaiBuddhistCalendar();
+        //    if (select_collateral.Id == 1) 
+        //    {
+        //        PromiseInfo.Prddesc = vehicle_brand + "/" + vehicle_color + "/" + chassisNo + "/" + vehicle_ver + "/" + plate + "/" + machineNo + "/" + vehicle_yr + "/" + tax_issue;
+        //        collateral1.vehicle_brand = vehicle_brand;
+        //        collateral1.vehicle_color = vehicle_color;
+        //        collateral1.chassisNo = chassisNo;
+        //        collateral1.vehicle_ver = vehicle_ver;
+        //        collateral1.plate = plate;  
+        //        collateral1.machineNo = machineNo;
+        //        collateral1.vehicle_yr = vehicle_yr;
+        //        collateral1.tax_issue = tax_issue;
+        //        string json_data = Newtonsoft.Json.JsonConvert.SerializeObject(collateral1);
+        //        PromiseInfo.JsonPrddesc = json_data;
+        //    }
+        //    if (select_collateral.Id == 2)
+        //    {
+        //        PromiseInfo.Prddesc = vehicle_brand + "/" + vehicle_color + "/" + chassisNo + "/" + vehicle_ver + "/" + plate + "/" + machineNo + "/" + vehicle_yr + "/" + tax_issue;
+        //        collateral1.vehicle_brand = vehicle_brand;
+        //        collateral1.vehicle_color = vehicle_color;
+        //        collateral1.chassisNo = chassisNo;
+        //        collateral1.vehicle_ver = vehicle_ver;
+        //        collateral1.plate = plate;
+        //        collateral1.machineNo = machineNo;
+        //        collateral1.vehicle_yr = vehicle_yr;
+        //        collateral1.tax_issue = tax_issue;
+        //        string json_data = Newtonsoft.Json.JsonConvert.SerializeObject(collateral1);
+        //        PromiseInfo.JsonPrddesc = json_data;
+        //    }
+        //    if (select_collateral.Id == 3)
+        //    {
+        //        PromiseInfo.Prddesc = deedType + "/" + deedNo + "/" + landType + "/" + mapsheet + "/" + parcelNo + "/" + volumn + "/" + page + "/" + pageInspect + "/"+ landAmount;
+        //        collateral2.deedType = deedType;
+        //        collateral2.deedNo = deedNo;    
+        //        collateral2.landType = landType;
+        //        collateral2.mapsheet = mapsheet;
+        //        collateral2.parcelNo = parcelNo;
+        //        collateral2.volumn = volumn;    
+        //        collateral2.page = page;
+        //        collateral2.pageInspect = pageInspect;
+        //        collateral2.landAmount = landAmount;
+        //        string json_data2 = Newtonsoft.Json.JsonConvert.SerializeObject(collateral2);
+        //        PromiseInfo.JsonPrddesc = json_data2;
+        //    }
+        //    if (select_collateral.Id == 4)
+        //    {
+        //        PromiseInfo.Prddesc = vehicle_brand + "/" + vehicle_color + "/" + chassisNo + "/" + vehicle_ver + "/" + plate + "/" + machineNo + "/" + vehicle_yr + "/" + tax_issue;
+        //        collateral1.vehicle_brand = vehicle_brand;
+        //        collateral1.vehicle_color = vehicle_color;
+        //        collateral1.chassisNo = chassisNo;
+        //        collateral1.vehicle_ver = vehicle_ver;
+        //        collateral1.plate = plate;
+        //        collateral1.machineNo = machineNo;
+        //        collateral1.vehicle_yr = vehicle_yr;
+        //        collateral1.tax_issue = tax_issue;
+        //        string json_data = Newtonsoft.Json.JsonConvert.SerializeObject(collateral1);
+        //        PromiseInfo.JsonPrddesc = json_data;
+        //    }
+        //    if (select_collateral.Id == 5)
+        //    {
+        //        PromiseInfo.Prddesc = bookNo + "/" + farmerCode + "/" + fregisDate + "/" + docRight + "/" + fHolding + "/" + fActivity + "/" + fArea + "/" + fProduct +"/" + fLocate;
+        //        collateral3.bookNo = bookNo;
+        //        collateral3.farmerCode = farmerCode;
+        //        collateral3.fregisDate = fregisDate;
+        //        collateral3.docRight = docRight;
+        //        collateral3.fHolding = fHolding;
+        //        collateral3.fActivity = fActivity;
+        //        collateral3.fArea = fArea;
+        //        collateral3.fProduct = fProduct;    
+        //        collateral3.fLocate = fLocate;
+        //        string json_data3 = Newtonsoft.Json.JsonConvert.SerializeObject(collateral3);
+        //        PromiseInfo.JsonPrddesc = json_data3;
+        //    }
+        //    try 
+        //    {
+        //        PromiseInfo.ProvinceId = select_province.Id;
+        //    }
+        //    catch(Exception ex){  }
+
+        //    PromiseInfo.Daypaid = paymentTerm.Value.Date.ToString();
+        //    PromiseInfo.Firstdate = paymentTerm.Value.ToString("yyyy-MM-dd");
+        //    PromiseInfo.Tdatetime = DateTime.Now;
+        //    PromiseInfo.Tdate = DateTime.Now.ToString("yyyy/MM/dd",thaiCulture);
+        //    PromiseInfo.Tdateformat = DateTime.Now.ToString("yyyyMMdd");
+        //    PromiseInfo.CustomerId = c_id;
+        //    PromiseInfo.Ptype = vat;
+        //    PromiseInfo.Chargeamt = c.chargement;
+
+
+        //    PromiseInfo.Intrate =Convert.ToDecimal(interest);
+        //    PromiseInfo.Service =Convert.ToDecimal(serviceCharge);
+        //    PromiseInfo.Periods = Convert.ToInt32(installmentsTerm);
+        //    if (contract_type == 1)
+        //    {
+        //        PromiseInfo.Amount = c.total_amount;
+        //        PromiseInfo.Capital = Convert.ToDecimal(paymentContract);
+        //    }
+        //    if (contract_type == 2)
+        //    {
+        //        PromiseInfo.Amount = c.amount_Ptype2;
+        //        PromiseInfo.Capital = Convert.ToDecimal(principle);
+        //    }
+        //    PromiseInfo.Daypaid = paymentTerm.Value.Day.ToString();
+        //    PromiseInfo.Firstdate = paymentTerm.Value.ToString("dd/MM/yyyy",thaiCulture);
+        //    PromiseInfo.FirstDatePay = paymentTerm.Value;
+
+        //    PromiseInfo.Status = 0;
+        //    PromiseInfo.Insurance1 = guarantorNameA;
+        //    PromiseInfo.Insurance2 = guarantorNameB;
+        //    PromiseInfo.Insurance1relation  = relationA + "/" +phoneA + "/"+addressA;
+        //    PromiseInfo.Insurance2relation = relationB + "/" +phoneB + "/"+addressB;
+        //    PromiseInfo.BranchId = branch_id;
+        //    PromiseInfo.Usercode = username;
+        //    PromiseInfo.Person1 = username;
+        //    PromiseInfo.Interest_Service = (c.total_interate_service > 0)?c.total_interate_service : c.interate;
+        //    PromiseInfo.CapitalCal = c.capital;
+        //    PromiseInfo.ContractType = contract_type;
+        //    PromiseInfo.Warndesc = customer_desc;
+        //    if (guarantor == 1)
+        //    {
+        //        PromiseInfo.Guarantor = true;
+        //    }
+        //    if(guarantor == 2) 
+        //    {
+        //        PromiseInfo.Guarantor = false;
+        //    }
+
+
+        //    var confirm = await JSRuntime.InvokeAsync<bool>("confirmSaveData");
+        //    if (confirm)
+        //    {
+
+        //        if (guarantor == 1 && selectCustomer == null)
+        //        {
+        //            await JSRuntime.InvokeVoidAsync("alert_error");
+        //        }
+        //        else 
+        //        {
+        //            var b = await promiseManagement.addPromise(PromiseInfo);
+        //            if (b == null)
+        //            {
+        //                await JSRuntime.InvokeVoidAsync("alert_error");
+        //                return;
+        //            }
+        //            RefAccNoCode = await Managements.Get_Ref_AccCode(b.BranchId);
+
+        //            string TaxDetail = _customer.FullName + " " + b.Refcode + ":" + b.Warndesc;
+        //            var test_loginid = userLogin;
+        //            TransactionHistory toAdd = new TransactionHistory()
+        //            {
+        //                Price = Convert.ToInt32(b.Chargeamt),
+        //                BranchId = branch_id,
+        //                Detial = TaxDetail,
+        //                Receiptname = receipt_name,
+        //                LoginId = userLogin,
+        //                TransectionRef = RefAccNoCode,
+        //                refcodetrans = b.Refcode,
+        //                promise_id = b.Id,
+        //            };
+        //            var tests = toAdd;
+        //            var transactionhistory = await promiseManagement.addTaxPromise(toAdd);
+
+        //            if (transactionhistory)
+        //            {
+        //                TransactionHistory toAdd2 = new TransactionHistory()
+        //                {
+        //                    Price = Convert.ToInt32(b.Capital),
+        //                    BranchId = branch_id,
+        //                    Detial = TaxDetail,
+        //                    Receiptname = receipt_name,
+        //                    LoginId = userLogin,
+        //                    refcodetrans = b.Refcode,
+        //                    promise_id = b.Id,
+        //                };
+        //                await promiseManagement.AddPromiseTransaction(toAdd2);
+        //            }
+        //            else
+        //            {
+
+        //            }
+
+        //            //เพิ่มผู้ค้ำประกัน
+        //            if (guarantor == 1)
+        //            {
+        //                Models.Guarantor g = new Guarantor();
+        //                g.GuarantorName = selectCustomer.FullName;
+        //                g.GuarantorNatId = selectCustomer.NatId;
+        //                g.GuarantorRelation = relationA == null ? "-" : relationA;
+        //                g.Phone = selectCustomer.Phone == null ? "-" : selectCustomer.Phone;
+        //                g.Address = selectCustomer.Address == null ? "-" : selectCustomer.Address;
+        //                g.CustomerId = selectCustomer.CustomerId;
+        //                g.PromiseId = b.Id;
+        //                List_Guarantors.Add(g);
+
+        //                if (addGuarantor == true)
+        //                {
+        //                    Guarantor gg = new Guarantor();
+
+        //                    gg.GuarantorName = guarantorNameB;
+        //                    gg.GuarantorNatId = guarantorBNatId;
+        //                    gg.GuarantorRelation = relationB == null ? "-" : relationB;
+        //                    gg.Phone = phoneB == null ? "-" : phoneB; ;
+        //                    gg.Address = addressB == null ? "-" : addressB;
+        //                    gg.PromiseId = b.Id;
+        //                    List_Guarantors.Add(gg);
+
+        //                }
+        //                await promiseManagement.addGuarantor(List_Guarantors);
+        //            }
+
+
+
+
+
+        //            //เพิ่มรายละเอียด สัญญา
+
+        //            var periodtran = await Managements.Add_Periodtrans(b, contract_type);
+        //            var ck_save = await promiseManagement.addPeriodtran(periodtran);
+
+        //            if (ck_save)
+        //            {
+        //                await JSRuntime.InvokeVoidAsync("confirm");
+
+        //                await Task.Delay(100);
+
+        //                navigationManager.NavigateTo($"/customerlist/{_customer.BranchId}/{_customer.CustomerId}");
+        //            }
+        //        }
+
+
+
+
+
+        //    }
+        //    else
+        //    {
+        //        //await JSRuntime.InvokeVoidAsync("alert_error");
+        //    }
+        //}
+
         private async Task submit()
         {
             try
             {
-                List<Guarantor> check = db.Guarantors.Include(s => s.Promise).Where(s => s.CustomerId == selectCustomer.CustomerId).ToList();
-                var view_status_active = check.Where(s => s.Promise.Status != 2).Count();
-                if (view_status_active != 0 && selectCustomer != null)
+                if (db == null)
                 {
-                    JSRuntime.InvokeVoidAsync("alert", "ไม่สามารถใช้ผู้ค้ำประกันนี้ได้เนื่องจากได้ทำรายการอื่นอยู่ โปรดเปลี่ยนผู้ค้ำประกันใหม่");
+                    await JSRuntime.InvokeVoidAsync("alert", "Database is not available.");
                     return;
                 }
-                else
-                {
 
+                if(guarantor != 2)
+                {
+                    List<Guarantor> check = db.Guarantors
+                .Include(s => s.Promise)
+                .Where(s => s.CustomerId == selectCustomer.CustomerId)
+                .ToList();
+
+                    var view_status_active = check.Where(s => s.Promise != null && s.Promise.Status != 2).Count();
+                    if (view_status_active != 0)
+                    {
+                        await JSRuntime.InvokeVoidAsync("alert", "ไม่สามารถใช้ผู้ค้ำประกันนี้ได้เนื่องจากได้ทำรายการอื่นอยู่ โปรดเปลี่ยนผู้ค้ำประกันใหม่");
+                        return;
+                    }
                 }
-            }
-            catch 
-            {
             
             }
-           
+            catch
+            {
+                // Consider logging the exception
+            }
+
             CultureInfo thaiCulture = new CultureInfo("th-TH");
             thaiCulture.DateTimeFormat.Calendar = new ThaiBuddhistCalendar();
-            if (select_collateral.Id == 1) 
+
+            if (select_collateral == null)
             {
-                PromiseInfo.Prddesc = vehicle_brand + "/" + vehicle_color + "/" + chassisNo + "/" + vehicle_ver + "/" + plate + "/" + machineNo + "/" + vehicle_yr + "/" + tax_issue;
-                collateral1.vehicle_brand = vehicle_brand;
-                collateral1.vehicle_color = vehicle_color;
-                collateral1.chassisNo = chassisNo;
-                collateral1.vehicle_ver = vehicle_ver;
-                collateral1.plate = plate;  
-                collateral1.machineNo = machineNo;
-                collateral1.vehicle_yr = vehicle_yr;
-                collateral1.tax_issue = tax_issue;
-                string json_data = Newtonsoft.Json.JsonConvert.SerializeObject(collateral1);
-                PromiseInfo.JsonPrddesc = json_data;
+                await JSRuntime.InvokeVoidAsync("alert", "กรุณาเลือกหลักประกัน");
+                return;
             }
-            if (select_collateral.Id == 2)
+
+            if (PromiseInfo == null)
             {
-                PromiseInfo.Prddesc = vehicle_brand + "/" + vehicle_color + "/" + chassisNo + "/" + vehicle_ver + "/" + plate + "/" + machineNo + "/" + vehicle_yr + "/" + tax_issue;
-                collateral1.vehicle_brand = vehicle_brand;
-                collateral1.vehicle_color = vehicle_color;
-                collateral1.chassisNo = chassisNo;
-                collateral1.vehicle_ver = vehicle_ver;
-                collateral1.plate = plate;
-                collateral1.machineNo = machineNo;
-                collateral1.vehicle_yr = vehicle_yr;
-                collateral1.tax_issue = tax_issue;
-                string json_data = Newtonsoft.Json.JsonConvert.SerializeObject(collateral1);
-                PromiseInfo.JsonPrddesc = json_data;
+                await JSRuntime.InvokeVoidAsync("alert", "PromiseInfo is not initialized.");
+                return;
             }
-            if (select_collateral.Id == 3)
+
+            // Collateral details
+            switch (select_collateral.Id)
             {
-                PromiseInfo.Prddesc = deedType + "/" + deedNo + "/" + landType + "/" + mapsheet + "/" + parcelNo + "/" + volumn + "/" + page + "/" + pageInspect + "/"+ landAmount;
-                collateral2.deedType = deedType;
-                collateral2.deedNo = deedNo;    
-                collateral2.landType = landType;
-                collateral2.mapsheet = mapsheet;
-                collateral2.parcelNo = parcelNo;
-                collateral2.volumn = volumn;    
-                collateral2.page = page;
-                collateral2.pageInspect = pageInspect;
-                collateral2.landAmount = landAmount;
-                string json_data2 = Newtonsoft.Json.JsonConvert.SerializeObject(collateral2);
-                PromiseInfo.JsonPrddesc = json_data2;
+                case 1:
+                case 2:
+                case 4:
+                    if (collateral1 == null)
+                    {
+                        await JSRuntime.InvokeVoidAsync("alert", "Collateral1 is not initialized.");
+                        return;
+                    }
+                    PromiseInfo.Prddesc = $"{vehicle_brand}/{vehicle_color}/{chassisNo}/{vehicle_ver}/{plate}/{machineNo}/{vehicle_yr}/{tax_issue}";
+                    collateral1.vehicle_brand = vehicle_brand;
+                    collateral1.vehicle_color = vehicle_color;
+                    collateral1.chassisNo = chassisNo;
+                    collateral1.vehicle_ver = vehicle_ver;
+                    collateral1.plate = plate;
+                    collateral1.machineNo = machineNo;
+                    collateral1.vehicle_yr = vehicle_yr;
+                    collateral1.tax_issue = tax_issue;
+                    PromiseInfo.JsonPrddesc = Newtonsoft.Json.JsonConvert.SerializeObject(collateral1);
+                    break;
+                case 3:
+                    if (collateral2 == null)
+                    {
+                        await JSRuntime.InvokeVoidAsync("alert", "Collateral2 is not initialized.");
+                        return;
+                    }
+                    PromiseInfo.Prddesc = $"{deedType}/{deedNo}/{landType}/{mapsheet}/{parcelNo}/{volumn}/{page}/{pageInspect}/{landAmount}";
+                    collateral2.deedType = deedType;
+                    collateral2.deedNo = deedNo;
+                    collateral2.landType = landType;
+                    collateral2.mapsheet = mapsheet;
+                    collateral2.parcelNo = parcelNo;
+                    collateral2.volumn = volumn;
+                    collateral2.page = page;
+                    collateral2.pageInspect = pageInspect;
+                    collateral2.landAmount = landAmount;
+                    PromiseInfo.JsonPrddesc = Newtonsoft.Json.JsonConvert.SerializeObject(collateral2);
+                    break;
+                case 5:
+                    if (collateral3 == null)
+                    {
+                        await JSRuntime.InvokeVoidAsync("alert", "Collateral3 is not initialized.");
+                        return;
+                    }
+                    PromiseInfo.Prddesc = $"{bookNo}/{farmerCode}/{fregisDate}/{docRight}/{fHolding}/{fActivity}/{fArea}/{fProduct}/{fLocate}";
+                    collateral3.bookNo = bookNo;
+                    collateral3.farmerCode = farmerCode;
+                    collateral3.fregisDate = fregisDate;
+                    collateral3.docRight = docRight;
+                    collateral3.fHolding = fHolding;
+                    collateral3.fActivity = fActivity;
+                    collateral3.fArea = fArea;
+                    collateral3.fProduct = fProduct;
+                    collateral3.fLocate = fLocate;
+                    PromiseInfo.JsonPrddesc = Newtonsoft.Json.JsonConvert.SerializeObject(collateral3);
+                    break;
             }
-            if (select_collateral.Id == 4)
+
+            try
             {
-                PromiseInfo.Prddesc = vehicle_brand + "/" + vehicle_color + "/" + chassisNo + "/" + vehicle_ver + "/" + plate + "/" + machineNo + "/" + vehicle_yr + "/" + tax_issue;
-                collateral1.vehicle_brand = vehicle_brand;
-                collateral1.vehicle_color = vehicle_color;
-                collateral1.chassisNo = chassisNo;
-                collateral1.vehicle_ver = vehicle_ver;
-                collateral1.plate = plate;
-                collateral1.machineNo = machineNo;
-                collateral1.vehicle_yr = vehicle_yr;
-                collateral1.tax_issue = tax_issue;
-                string json_data = Newtonsoft.Json.JsonConvert.SerializeObject(collateral1);
-                PromiseInfo.JsonPrddesc = json_data;
+                if (select_province != null)
+                    PromiseInfo.ProvinceId = select_province.Id;
             }
-            if (select_collateral.Id == 5)
+            catch (Exception)
             {
-                PromiseInfo.Prddesc = bookNo + "/" + farmerCode + "/" + fregisDate + "/" + docRight + "/" + fHolding + "/" + fActivity + "/" + fArea + "/" + fProduct +"/" + fLocate;
-                collateral3.bookNo = bookNo;
-                collateral3.farmerCode = farmerCode;
-                collateral3.fregisDate = fregisDate;
-                collateral3.docRight = docRight;
-                collateral3.fHolding = fHolding;
-                collateral3.fActivity = fActivity;
-                collateral3.fArea = fArea;
-                collateral3.fProduct = fProduct;    
-                collateral3.fLocate = fLocate;
-                string json_data3 = Newtonsoft.Json.JsonConvert.SerializeObject(collateral3);
-                PromiseInfo.JsonPrddesc = json_data3;
+                // Consider logging the exception
             }
-            try 
+
+            if (paymentTerm == null)
             {
-                PromiseInfo.ProvinceId = select_province.Id;
+                await JSRuntime.InvokeVoidAsync("alert", "กรุณากำหนดวันชำระเงิน");
+                return;
             }
-            catch(Exception ex){  }
-          
+
             PromiseInfo.Daypaid = paymentTerm.Value.Date.ToString();
             PromiseInfo.Firstdate = paymentTerm.Value.ToString("yyyy-MM-dd");
             PromiseInfo.Tdatetime = DateTime.Now;
-            PromiseInfo.Tdate = DateTime.Now.ToString("yyyy/MM/dd",thaiCulture);
+            PromiseInfo.Tdate = DateTime.Now.ToString("yyyy/MM/dd", thaiCulture);
             PromiseInfo.Tdateformat = DateTime.Now.ToString("yyyyMMdd");
             PromiseInfo.CustomerId = c_id;
             PromiseInfo.Ptype = vat;
-            PromiseInfo.Chargeamt = c.chargement;
+            PromiseInfo.Chargeamt = c?.chargement ?? 0;
 
-          
-            PromiseInfo.Intrate =Convert.ToDecimal(interest);
-            PromiseInfo.Service =Convert.ToDecimal(serviceCharge);
+            PromiseInfo.Intrate = Convert.ToDecimal(interest);
+            PromiseInfo.Service = Convert.ToDecimal(serviceCharge);
             PromiseInfo.Periods = Convert.ToInt32(installmentsTerm);
+
             if (contract_type == 1)
             {
-                PromiseInfo.Amount = c.total_amount;
+                PromiseInfo.Amount = c?.total_amount ?? 0;
                 PromiseInfo.Capital = Convert.ToDecimal(paymentContract);
             }
             if (contract_type == 2)
             {
-                PromiseInfo.Amount = c.amount_Ptype2;
+                PromiseInfo.Amount = c?.amount_Ptype2 ?? 0;
                 PromiseInfo.Capital = Convert.ToDecimal(principle);
             }
+
             PromiseInfo.Daypaid = paymentTerm.Value.Day.ToString();
-            PromiseInfo.Firstdate = paymentTerm.Value.ToString("dd/MM/yyyy",thaiCulture);
+            PromiseInfo.Firstdate = paymentTerm.Value.ToString("dd/MM/yyyy", thaiCulture);
             PromiseInfo.FirstDatePay = paymentTerm.Value;
-           
+
             PromiseInfo.Status = 0;
             PromiseInfo.Insurance1 = guarantorNameA;
             PromiseInfo.Insurance2 = guarantorNameB;
-            PromiseInfo.Insurance1relation  = relationA + "/" +phoneA + "/"+addressA;
-            PromiseInfo.Insurance2relation = relationB + "/" +phoneB + "/"+addressB;
+            PromiseInfo.Insurance1relation = $"{relationA ?? "-"} / {phoneA ?? "-"} / {addressA ?? "-"}";
+            PromiseInfo.Insurance2relation = $"{relationB ?? "-"} / {phoneB ?? "-"} / {addressB ?? "-"}";
             PromiseInfo.BranchId = branch_id;
             PromiseInfo.Usercode = username;
             PromiseInfo.Person1 = username;
-            PromiseInfo.Interest_Service = (c.total_interate_service > 0)?c.total_interate_service : c.interate;
-            PromiseInfo.CapitalCal = c.capital;
+            PromiseInfo.Interest_Service = (c?.total_interate_service > 0 ? c.total_interate_service : c?.interate) ?? 0;
+            PromiseInfo.CapitalCal = c?.capital ?? 0;
             PromiseInfo.ContractType = contract_type;
             PromiseInfo.Warndesc = customer_desc;
-            if (guarantor == 1)
-            {
-                PromiseInfo.Guarantor = true;
-            }
-            if(guarantor == 2) 
-            {
-                PromiseInfo.Guarantor = false;
-            }
-
+            PromiseInfo.Guarantor = guarantor == 1;
 
             var confirm = await JSRuntime.InvokeAsync<bool>("confirmSaveData");
             if (confirm)
             {
-
                 if (guarantor == 1 && selectCustomer == null)
                 {
                     await JSRuntime.InvokeVoidAsync("alert_error");
+                    return;
                 }
-                else 
+                else
                 {
+                    //if (promiseManagement == null)
+                    //{
+                    //    await JSRuntime.InvokeVoidAsync("alert", "PromiseManagement is not available.");
+                    //    return;
+                    //}
+
                     var b = await promiseManagement.addPromise(PromiseInfo);
                     if (b == null)
                     {
                         await JSRuntime.InvokeVoidAsync("alert_error");
                         return;
                     }
+
+                    if (Managements == null)
+                    {
+                        await JSRuntime.InvokeVoidAsync("alert", "Managements is not available.");
+                        return;
+                    }
+
                     RefAccNoCode = await Managements.Get_Ref_AccCode(b.BranchId);
 
-                    string TaxDetail = _customer.FullName + " " + b.Refcode + ":" + b.Warndesc;
+                    string TaxDetail = (_customer?.FullName ?? "") + " " + b.Refcode + ":" + (b.Warndesc ?? "");
                     var test_loginid = userLogin;
                     TransactionHistory toAdd = new TransactionHistory()
                     {
@@ -798,7 +1087,7 @@ namespace SingSiamOffice.Pages.Contracts
                         refcodetrans = b.Refcode,
                         promise_id = b.Id,
                     };
-                    var tests = toAdd;
+
                     var transactionhistory = await promiseManagement.addTaxPromise(toAdd);
 
                     if (transactionhistory)
@@ -815,69 +1104,64 @@ namespace SingSiamOffice.Pages.Contracts
                         };
                         await promiseManagement.AddPromiseTransaction(toAdd2);
                     }
-                    else
-                    {
 
-                    }
-
-                    //เพิ่มผู้ค้ำประกัน
+                    // เพิ่มผู้ค้ำประกัน
                     if (guarantor == 1)
                     {
-                        Models.Guarantor g = new Guarantor();
-                        g.GuarantorName = selectCustomer.FullName;
-                        g.GuarantorNatId = selectCustomer.NatId;
-                        g.GuarantorRelation = relationA == null ? "-" : relationA;
-                        g.Phone = selectCustomer.Phone == null ? "-" : selectCustomer.Phone;
-                        g.Address = selectCustomer.Address == null ? "-" : selectCustomer.Address;
-                        g.CustomerId = selectCustomer.CustomerId;
-                        g.PromiseId = b.Id;
-                        List_Guarantors.Add(g);
+                        if (List_Guarantors == null)
+                            List_Guarantors = new List<Guarantor>();
 
-                        if (addGuarantor == true)
+                        if (selectCustomer != null)
                         {
-                            Guarantor gg = new Guarantor();
+                            Models.Guarantor g = new Guarantor
+                            {
+                                GuarantorName = selectCustomer.FullName,
+                                GuarantorNatId = selectCustomer.NatId,
+                                GuarantorRelation = relationA ?? "-",
+                                Phone = selectCustomer.Phone ?? "-",
+                                Address = selectCustomer.Address ?? "-",
+                                CustomerId = selectCustomer.CustomerId,
+                                PromiseId = b.Id
+                            };
+                            List_Guarantors.Add(g);
+                        }
 
-                            gg.GuarantorName = guarantorNameB;
-                            gg.GuarantorNatId = guarantorBNatId;
-                            gg.GuarantorRelation = relationB == null ? "-" : relationB;
-                            gg.Phone = phoneB == null ? "-" : phoneB; ;
-                            gg.Address = addressB == null ? "-" : addressB;
-                            gg.PromiseId = b.Id;
+                        if (addGuarantor)
+                        {
+                            Guarantor gg = new Guarantor
+                            {
+                                GuarantorName = guarantorNameB,
+                                GuarantorNatId = guarantorBNatId,
+                                GuarantorRelation = relationB ?? "-",
+                                Phone = phoneB ?? "-",
+                                Address = addressB ?? "-",
+                                PromiseId = b.Id
+                            };
                             List_Guarantors.Add(gg);
-
                         }
                         await promiseManagement.addGuarantor(List_Guarantors);
                     }
 
-
-                   
-
-
-                    //เพิ่มรายละเอียด สัญญา
-                   
+                    // เพิ่มรายละเอียด สัญญา
                     var periodtran = await Managements.Add_Periodtrans(b, contract_type);
                     var ck_save = await promiseManagement.addPeriodtran(periodtran);
 
                     if (ck_save)
                     {
                         await JSRuntime.InvokeVoidAsync("confirm");
-
                         await Task.Delay(100);
 
-                        navigationManager.NavigateTo($"/customerlist/{_customer.BranchId}/{_customer.CustomerId}");
+                        if (_customer != null)
+                            navigationManager.NavigateTo($"/customerlist/{_customer.BranchId}/{_customer.CustomerId}");
                     }
                 }
-
-              
-
-              
-
             }
             else
             {
                 //await JSRuntime.InvokeVoidAsync("alert_error");
             }
         }
+
         private void goBack()
         {
             navigationManager.NavigateTo("/customerlist/" + _customer.BranchId.ToString()+"/"+ c_id.ToString());
